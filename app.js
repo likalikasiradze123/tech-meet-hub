@@ -1,15 +1,23 @@
-// JSON ფაილიდან მონაცემების წამოღება
+let allEvents = [];
+
+// JSON-იდან მონაცემების წამოღება
 fetch('src/data/events.json')
   .then(response => response.json())
   .then(data => {
-    displayEvents(data);
+    allEvents = data;
+    displayEvents(allEvents);
   })
   .catch(error => console.error('შეცდომა მონაცემების წამოღებისას:', error));
 
-// ივენთების ბადეში (Grid) გამოჩენა
+// ივენთების გამოჩენის ფუნქცია
 function displayEvents(events) {
   const container = document.getElementById('events-grid');
   container.innerHTML = '';
+
+  if (events.length === 0) {
+    container.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">ღონისძიება ვერ მოიძებნა.</p>';
+    return;
+  }
 
   events.forEach(event => {
     const card = document.createElement('div');
@@ -32,3 +40,21 @@ function displayEvents(events) {
     container.appendChild(card);
   });
 }
+
+// ფილტრაციის ლოგიკა
+function filterEvents() {
+  const selectedCategory = document.getElementById('category-filter').value;
+  const selectedFormat = document.getElementById('format-filter').value;
+
+  const filtered = allEvents.filter(event => {
+    const categoryMatch = selectedCategory === 'all' || event.category === selectedCategory;
+    const formatMatch = selectedFormat === 'all' || event.format === selectedFormat;
+    return categoryMatch && formatMatch;
+  });
+
+  displayEvents(filtered);
+}
+
+// Event Listeners ფილტრებისთვის
+document.getElementById('category-filter').addEventListener('change', filterEvents);
+document.getElementById('format-filter').addEventListener('change', filterEvents);

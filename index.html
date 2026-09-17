@@ -12,7 +12,28 @@
     <h1>🚀 Tech Meet & Greet Hub</h1>
     <p>იპოვეთ და დაჯავშნეთ ტექნოლოგიური ღონისძიებები, ჰაკათონები და ვორქშოფები</p>
   </header>
+<!-- ფილტრაციის სექცია -->
+  <section style="display: flex; justify-content: center; gap: 20px; margin-bottom: 30px;">
+    <div>
+      <label for="category-filter"><b>ტექნოლოგია:</b></label>
+      <select id="category-filter" style="padding: 8px; border-radius: 5px;">
+        <option value="all">ყველა</option>
+        <option value="AI">AI</option>
+        <option value="Web Dev">Web Dev</option>
+        <option value="Cybersecurity">Cybersecurity</option>
+      </select>
+    </div>
 
+    <div>
+      <label for="format-filter"><b>ფორმატი:</b></label>
+      <select id="format-filter" style="padding: 8px; border-radius: 5px;">
+        <option value="all">ყველა</option>
+        <option value="Online">Online</option>
+        <option value="In-person">In-person</option>
+        <option value="Hybrid">Hybrid</option>
+      </select>
+    </div>
+  </section>
   <main class="events-grid" id="events-grid">
     <!-- აქ ჩაჯდება ივენთები app.js-ის დახმარებით -->
   </main>
