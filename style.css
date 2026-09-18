@@ -51,11 +51,28 @@ body {
   font-weight: bold;
 }
 
+.event-title {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.speaker, .event-details {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
 .card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 15px;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #22c55e;
 }
 
 .btn-details {
@@ -65,4 +82,8 @@ body {
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.btn-details:hover {
+  background: #4338ca;
 }
