@@ -7,7 +7,7 @@
     "speaker": "გიორგი ბერიძე",
     "date": "2026-10-20",
     "location": "Tbilisi Tech Hub",
-    "price": 45,
+    "price": 120,
     "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500"
   },
   {
@@ -18,7 +18,7 @@
     "speaker": "ნიტა ქავთარაძე",
     "date": "2026-11-05",
     "location": "Zoom Meeting",
-    "price": 25,
+    "price": 70,
     "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500"
   },
   {
@@ -29,7 +29,7 @@
     "speaker": "დავით ჩხეიძე",
     "date": "2026-11-12",
     "location": "Ozurgeti TechnoPark / Online",
-    "price": 60,
+    "price": 160,
     "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500"
   }
 ]

@@ -1,4 +1,5 @@
 let allEvents = [];
+const USD_RATE = 2.7; // 1 USD = 2.7 GEL
 
 // JSON-იდან მონაცემების წამოღება
 fetch('src/data/events.json')
@@ -12,6 +13,7 @@ fetch('src/data/events.json')
 // ივენთების გამოჩენის ფუნქცია
 function displayEvents(events) {
   const container = document.getElementById('events-grid');
+  const currency = document.getElementById('currency-select').value;
   container.innerHTML = '';
 
   if (events.length === 0) {
@@ -23,6 +25,15 @@ function displayEvents(events) {
     const card = document.createElement('div');
     card.className = 'event-card';
 
+    // ფასის დათვლა არჩეული ვალუტის მიხედვით (JSON-ში ფასი GEL-შია)
+    let formattedPrice = '';
+    if (currency === 'USD') {
+      const usdPrice = (event.price / USD_RATE).toFixed(0);
+      formattedPrice = `$${usdPrice}`;
+    } else {
+      formattedPrice = `${event.price} ₾`;
+    }
+
     card.innerHTML = `
       <img src="${event.image}" alt="${event.title}">
       <div class="event-info">
@@ -31,7 +42,7 @@ function displayEvents(events) {
         <p class="speaker">🎤 ${event.speaker}</p>
         <p class="event-details">📅 ${event.date} | 📍 ${event.location}</p>
         <div class="card-footer">
-          <span class="price">$${event.price}</span>
+          <span class="price">${formattedPrice}</span>
           <button class="btn-details">დაჯავშნა</button>
         </div>
       </div>
@@ -62,10 +73,11 @@ function filterEvents() {
   displayEvents(filtered);
 }
 
-// Event Listeners ფილტრებისა და ძებნისთვის
+// Event Listeners ფილტრების, ძებნისა და ვალუტისთვის
 document.getElementById('category-filter').addEventListener('change', filterEvents);
 document.getElementById('format-filter').addEventListener('change', filterEvents);
 document.getElementById('search-input').addEventListener('input', filterEvents);
+document.getElementById('currency-select').addEventListener('change', filterEvents);
 
 // Modal-ისა და დაჯავშნის ლოგიკა
 const modal = document.getElementById('booking-modal');
