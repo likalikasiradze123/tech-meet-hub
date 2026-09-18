@@ -1,38 +1,35 @@
 [
   {
-    "id": "tech-101",
+    "id": 1,
     "title": "AI & Future Tech Summit",
-    "speaker": "გიორგი ბერიძე",
     "category": "AI",
     "format": "In-person",
-    "price": 45,
+    "speaker": "გიორგი ბერიძე",
     "date": "2026-10-20",
     "location": "Tbilisi Tech Hub",
-    "image": "https://via.placeholder.com/300x200",
-    "description": "გენერაციული ხელოვნური ინტელექტის და Large Language Models-ის მომავალი."
+    "price": 45,
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500"
   },
   {
-    "id": "tech-102",
+    "id": 2,
     "title": "React & Next.js Workshop",
-    "speaker": "ნიტა ქავთარაძე",
     "category": "Web Dev",
     "format": "Online",
-    "price": 25,
+    "speaker": "ნიტა ქავთარაძე",
     "date": "2026-11-05",
     "location": "Zoom Meeting",
-    "image": "https://via.placeholder.com/300x200",
-    "description": "თანამედროვე ვებ-აპლიკაციების აწყობა დინამიკური მარშრუტებითა და State Management-ით."
+    "price": 25,
+    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500"
   },
   {
-    "id": "tech-103",
+    "id": 3,
     "title": "Cybersecurity & Ethical Hacking",
-    "speaker": "დავით ჩხეიძე",
     "category": "Cybersecurity",
     "format": "Hybrid",
-    "price": 60,
+    "speaker": "დავით ჩხეიძე",
     "date": "2026-11-12",
     "location": "Ozurgeti TechnoPark / Online",
-    "image": "https://via.placeholder.com/300x200",
-    "description": "უსაფრთხოების აუდიტი და სისტემების დაცვა თანამედროვე საფრთხეებისგან."
+    "price": 60,
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500"
   }
 ]
