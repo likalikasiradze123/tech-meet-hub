@@ -58,3 +58,31 @@ function filterEvents() {
 // Event Listeners ფილტრებისთვის
 document.getElementById('category-filter').addEventListener('change', filterEvents);
 document.getElementById('format-filter').addEventListener('change', filterEvents);
+
+// Modal-ისა და დაჯავშნის ლოგიკა
+const modal = document.getElementById('booking-modal');
+const closeModalBtn = document.getElementById('close-modal');
+const bookingForm = document.getElementById('booking-form');
+
+// ღილაკზე დაჭერისას Modal-ის გახსნა
+document.getElementById('events-grid').addEventListener('click', (e) => {
+  if (e.target.classList.contains('btn-details')) {
+    const card = e.target.closest('.event-card');
+    const title = card.querySelector('.event-title').textContent;
+    document.getElementById('modal-event-title').textContent = `დაჯავშნა: ${title}`;
+    modal.style.display = 'flex';
+  }
+});
+
+// Modal-ის დახურვა X-ზე დაჭერისას
+closeModalBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+// ფორმის გაგზავნა
+bookingForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('ადგილი წარმატებით დარეგისტრირდა!');
+  modal.style.display = 'none';
+  bookingForm.reset();
+});
