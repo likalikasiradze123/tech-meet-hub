@@ -303,19 +303,43 @@ body {
   font-weight: bold;
 }
 
-/* 🤖 სუპერ-რობოტის სტილები */
+/* 🔌 კედლის როზეტის სტილი */
+.wall-socket {
+  position: fixed;
+  bottom: 25px;
+  right: 15px;
+  width: 24px;
+  height: 28px;
+  background: #e2e8f0;
+  border: 2px solid #94a3b8;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  z-index: 998;
+}
+
+.socket-hole {
+  width: 4px;
+  height: 8px;
+  background: #475569;
+  border-radius: 2px;
+}
+
+/* 🤖 რობოტი */
 .robot-container {
   position: fixed;
-  bottom: 15px;
-  right: 30px;
+  bottom: 20px;
+  right: 50px;
   z-index: 999;
   cursor: pointer;
-  transition: transform 0.2s linear, left 0.5s ease;
+  transition: transform 0.3s ease, right 1.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .robot-speech-bubble {
   position: absolute;
-  bottom: 100px;
+  bottom: 105px;
   right: -10px;
   background: #38bdf8;
   color: #0f172a;
@@ -339,13 +363,24 @@ body {
 }
 
 .robot-body {
-  width: 65px;
-  height: 85px;
+  width: 70px;
+  height: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 }
+
+.robot-ear {
+  width: 6px;
+  height: 10px;
+  background: #38bdf8;
+  position: absolute;
+  top: 18px;
+  border-radius: 3px;
+}
+.robot-ear.left { left: 4px; }
+.robot-ear.right { right: 4px; }
 
 .robot-antenna {
   width: 4px;
@@ -366,133 +401,137 @@ body {
 }
 
 .robot-head {
-  width: 50px;
-  height: 36px;
-  background: #0f172a;
+  width: 52px;
+  height: 38px;
+  background: linear-gradient(145deg, #1e293b, #0f172a);
   border: 2px solid #38bdf8;
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 0 6px;
   position: relative;
-  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
 }
 
 .robot-eye {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   background: #38bdf8;
   border-radius: 50%;
   animation: blinkEye 4s infinite;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 8px;
+  box-shadow: 0 0 6px #38bdf8;
 }
 
 .robot-mouth {
   position: absolute;
   bottom: 4px;
-  width: 14px;
-  height: 2px;
+  width: 16px;
+  height: 3px;
   background: #38bdf8;
   border-radius: 2px;
-  transition: all 0.2s ease;
 }
 
 .robot-torso {
-  width: 40px;
-  height: 28px;
-  background: #334155;
-  border-radius: 6px;
+  width: 44px;
+  height: 30px;
+  background: linear-gradient(145deg, #475569, #334155);
+  border-radius: 8px;
   margin-top: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #f59e0b;
-  font-size: 14px;
+  font-size: 15px;
   position: relative;
 }
 
 #robot-hand-item {
   position: absolute;
-  right: -12px;
+  right: -14px;
   top: 4px;
   font-size: 16px;
 }
 
 .robot-legs {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   margin-top: 2px;
 }
 
 .robot-leg {
-  width: 6px;
-  height: 12px;
+  width: 7px;
+  height: 14px;
   background: #64748b;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
-/* ანიმაციური რეჟიმები */
-/* 1. სირბილი / სიარული */
+/* ანიმაციები */
 .robot-walking .robot-leg.left {
-  animation: legWalk 0.3s infinite alternate;
+  animation: legWalk 0.25s infinite alternate;
 }
 .robot-walking .robot-leg.right {
-  animation: legWalk 0.3s infinite alternate-reverse;
+  animation: legWalk 0.25s infinite alternate-reverse;
 }
 
 @keyframes legWalk {
   from { transform: translateY(0); }
-  to { transform: translateY(-6px); }
+  to { transform: translateY(-7px); }
 }
 
-/* 2. ⚡ დენის დარტყმა */
-.robot-shock {
-  animation: shockShake 0.1s infinite !important;
+/* 🔌 დატენვის ანიმაცია */
+.robot-charging {
+  animation: chargePulse 0.4s infinite alternate !important;
 }
-.robot-shock .robot-head {
-  background: #f59e0b !important;
-  border-color: #ef4444 !important;
+.robot-charging .robot-head {
+  border-color: #22c55e !important;
+  box-shadow: 0 0 12px #22c55e !important;
 }
-.robot-shock .robot-eye {
-  background: #ef4444 !important;
-}
-
-@keyframes shockShake {
-  0% { transform: translate(2px, 2px) rotate(0deg); }
-  25% { transform: translate(-2px, -2px) rotate(-5deg); }
-  50% { transform: translate(-2px, 2px) rotate(5deg); }
-  75% { transform: translate(2px, -2px) rotate(0deg); }
-  100% { transform: translate(2px, 2px) rotate(0deg); }
+.robot-charging .robot-eye {
+  background: #22c55e !important;
+  box-shadow: 0 0 8px #22c55e !important;
 }
 
-/* 3. ❤️ გულები თვალებში */
+@keyframes chargePulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+/* 🧹 დალაგების ანიმაცია */
+.robot-cleaning {
+  animation: cleanSweep 0.3s infinite alternate !important;
+}
+
+@keyframes cleanSweep {
+  from { transform: rotate(-5deg); }
+  to { transform: rotate(5deg); }
+}
+
+/* ❤️ გულები */
 .robot-hearts .robot-eye {
   background: transparent !important;
+  box-shadow: none !important;
 }
 .robot-hearts .robot-eye::after {
   content: '❤️';
-  font-size: 10px;
+  font-size: 11px;
 }
 .robot-hearts {
-  animation: heartJump 0.5s ease infinite alternate;
+  animation: heartJump 0.4s ease infinite alternate;
 }
 
 @keyframes heartJump {
   from { transform: translateY(0); }
-  to { transform: translateY(-15px); }
+  to { transform: translateY(-12px); }
 }
 
-/* 4. 😴 ძილი */
 .robot-sleeping .robot-eye {
   height: 2px !important;
   background: #64748b !important;
-}
-.robot-sleeping .robot-torso {
-  opacity: 0.6;
+  box-shadow: none !important;
 }
 
 @keyframes pulseAntenna {
