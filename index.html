@@ -11,24 +11,29 @@
   <header class="header">
     <div class="top-bar">
       <h1>🚀 Tech Meet & Greet Hub</h1>
-      <div class="user-control">
-        <button id="profile-btn" class="btn-profile">👤 პირადი კაბინეთი</button>
+      <div class="user-control" style="display: flex; gap: 10px; align-items: center;">
+        <!-- ენის გადამრთველი -->
+        <select id="language-select" style="padding: 6px; border-radius: 15px; border: 1px solid #ccc; font-weight: bold; cursor: pointer;">
+          <option value="ka">🇬🇪 GE</option>
+          <option value="en">🇺🇸 EN</option>
+        </select>
+        <button id="profile-btn" class="btn-profile">👤 <span data-i18n="profileBtn">პირადი კაბინეთი</span></button>
       </div>
     </div>
-    <p>იპოვეთ, დაჯავშნეთ და მიიღეთ ექსკლუზიური შეტყობინებები ტექნოლოგიურ ივენთებზე</p>
+    <p data-i18n="headerSubtitle">იპოვეთ, დაჯავშნეთ და მიიღეთ ექსკლუზიური შეტყობინებები ტექნოლოგიურ ივენთებზე</p>
   </header>
 
   <!-- ფილტრაციისა და ძებნის სექცია -->
   <section class="controls-section">
     <div>
-      <label for="search-input"><b>ძებნა:</b></label>
-      <input type="text" id="search-input" placeholder="მოძებნეთ ივენთი ან სპიკერი...">
+      <label for="search-input"><b data-i18n="labelSearch">ძებნა:</b></label>
+      <input type="text" id="search-input" data-i18n-placeholder="searchPlaceholder" placeholder="მოძებნეთ ივენთი ან სპიკერი...">
     </div>
 
     <div>
-      <label for="category-filter"><b>ტექნოლოგია:</b></label>
+      <label for="category-filter"><b data-i18n="labelCategory">ტექნოლოგია:</b></label>
       <select id="category-filter">
-        <option value="all">ყველა</option>
+        <option value="all" data-i18n="optAll">ყველა</option>
         <option value="AI">AI</option>
         <option value="Web Dev">Web Dev</option>
         <option value="Cybersecurity">Cybersecurity</option>
@@ -36,9 +41,9 @@
     </div>
 
     <div>
-      <label for="format-filter"><b>ფორმატი:</b></label>
+      <label for="format-filter"><b data-i18n="labelFormat">ფორმატი:</b></label>
       <select id="format-filter">
-        <option value="all">ყველა</option>
+        <option value="all" data-i18n="optAll">ყველა</option>
         <option value="Online">Online</option>
         <option value="In-person">In-person</option>
         <option value="Hybrid">Hybrid</option>
@@ -46,7 +51,7 @@
     </div>
 
     <div>
-      <label for="currency-select"><b>ვალუტა:</b></label>
+      <label for="currency-select"><b data-i18n="labelCurrency">ვალუტა:</b></label>
       <select id="currency-select">
         <option value="GEL">GEL (₾)</option>
         <option value="USD">USD ($)</option>
@@ -54,15 +59,15 @@
     </div>
 
     <div>
-      <button id="show-favorites-btn" class="btn-secondary">❤️ მაინტერესებს (<span id="fav-count">0</span>)</button>
+      <button id="show-favorites-btn" class="btn-secondary">❤️ <span data-i18n="btnInterested">მაინტერესებს</span> (<span id="fav-count">0</span>)</button>
     </div>
   </section>
 
   <!-- პრემიუმ გამოწერის ბანერი -->
   <section class="subscription-banner">
-    <h2>🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
-    <p>შეიტყვეთ დაგეგმილი ივენთებისა და ტრენინგების შესახებ ყველაზე ადრე და დაჯავშნეთ ადგილები პრიორიტეტულად.</p>
-    <button id="subscribe-plan-btn" class="btn-subscribe-banner">💎 პაკეტების ნახვა</button>
+    <h2 data-i18n="bannerTitle">🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
+    <p data-i18n="bannerDesc">შეიტყვეთ დაგეგმილი ივენთებისა და ტრენინგების შესახებ ყველაზე ადრე და დაჯავშნეთ ადგილები პრიორიტეტულად.</p>
+    <button id="subscribe-plan-btn" class="btn-subscribe-banner" data-i18n="btnViewPackages">💎 პაკეტების ნახვა</button>
   </section>
 
   <main class="events-grid" id="events-grid">
@@ -73,15 +78,15 @@
   <div id="booking-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-booking">&times;</span>
-      <h2 id="modal-event-title">ღონისძიების დაჯავშნა</h2>
+      <h2 id="modal-event-title" data-i18n="modalBookingTitle">ღონისძიების დაჯავშნა</h2>
       <form id="booking-form">
-        <label for="user-name">სახელი, გვარი:</label>
-        <input type="text" id="user-name" required placeholder="მაგ: გიორგი ბერიძე">
+        <label for="user-name" data-i18n="labelFullName">სახელი, გვარი:</label>
+        <input type="text" id="user-name" required data-i18n-placeholder="phFullName" placeholder="მაგ: გიორგი ბერიძე">
 
-        <label for="user-email">ელ-ფოსტა:</label>
+        <label for="user-email" data-i18n="labelEmail">ელ-ფოსტა:</label>
         <input type="email" id="user-email" required placeholder="example@mail.com">
 
-        <button type="submit" class="btn-submit">დადასტურება</button>
+        <button type="submit" class="btn-submit" data-i18n="btnConfirm">დადასტურება</button>
       </form>
     </div>
   </div>
@@ -90,10 +95,10 @@
   <div id="profile-modal" class="modal">
     <div class="modal-content profile-content">
       <span class="close-btn" id="close-profile">&times;</span>
-      <h2>👤 პირადი კაბინეთი</h2>
+      <h2 data-i18n="profileTitle">👤 პირადი კაბინეთი</h2>
       
       <div class="avatar-section">
-        <p><b>აირჩიეთ ავატარი:</b></p>
+        <p><b data-i18n="chooseAvatar">აირჩიეთ ავატარი:</b></p>
         <div class="avatar-options">
           <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Felix" class="avatar-img selected" data-avatar="Felix">
           <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Aria" class="avatar-img" data-avatar="Aria">
@@ -103,17 +108,17 @@
       </div>
 
       <form id="profile-form">
-        <label for="profile-name">თქვენი სახელი:</label>
-        <input type="text" id="profile-name" placeholder="შეიყვანეთ სახელი">
+        <label for="profile-name" data-i18n="yourName">თქვენი სახელი:</label>
+        <input type="text" id="profile-name" data-i18n-placeholder="phEnterName" placeholder="შეიყვანეთ სახელი">
 
-        <label for="profile-email">ელ-ფოსტა შეტყობინებებისთვის:</label>
+        <label for="profile-email" data-i18n="emailForNotifications">ელ-ფოსტა შეტყობინებებისთვის:</label>
         <input type="email" id="profile-email" placeholder="example@mail.com">
 
         <div class="status-box">
-          <p>გამოწერის სტატუსი: <span id="user-sub-status" class="badge-free">უფასო</span></p>
+          <p><span data-i18n="subStatus">გამოწერის სტატუსი:</span> <span id="user-sub-status" class="badge-free">Free</span></p>
         </div>
 
-        <button type="submit" class="btn-submit">პროფილის შენახვა</button>
+        <button type="submit" class="btn-submit" data-i18n="saveProfile">პროფილის შენახვა</button>
       </form>
     </div>
   </div>
@@ -122,29 +127,29 @@
   <div id="subscription-modal" class="modal">
     <div class="modal-content sub-content">
       <span class="close-btn" id="close-sub">&times;</span>
-      <h2>💎 აირჩიეთ გამოწერის პაკეტი</h2>
-      <p style="margin-bottom: 20px; color: #666;">მიიღეთ შეტყობინებები მეილზე ახალ ივენთებსა და ტრენინგებზე!</p>
+      <h2 data-i18n="subPackagesTitle">💎 აირჩიეთ გამოწერის პაკეტი</h2>
+      <p style="margin-bottom: 20px; color: #666;" data-i18n="subPackagesSubtitle">მიიღეთ შეტყობინებები მეილზე ახალ ივენთებსა და ტრენინგებზე!</p>
       
       <div class="packages-grid">
         <div class="package-card">
           <h3>PRO Member</h3>
-          <p class="pkg-price">29 ₾ / თვეში</p>
+          <p class="pkg-price">29 ₾ / <span data-i18n="perMonth">თვეში</span></p>
           <ul>
-            <li>✅ ადრეული შეტყობინებები მეილზე</li>
-            <li>✅ პრიორიტეტული დაჯავშნა</li>
+            <li data-i18n="proFeat1">✅ ადრეული შეტყობინებები მეილზე</li>
+            <li data-i18n="proFeat2">✅ პრიორიტეტული დაჯავშნა</li>
           </ul>
-          <button class="btn-buy-pkg" data-pkg="PRO">შერჩევა</button>
+          <button class="btn-buy-pkg" data-pkg="PRO" data-i18n="btnSelect">შერჩევა</button>
         </div>
 
         <div class="package-card featured">
           <h3>VIP Tech Pass</h3>
-          <p class="pkg-price">59 ₾ / თვეში</p>
+          <p class="pkg-price">59 ₾ / <span data-i18n="perMonth">თვეში</span></p>
           <ul>
-            <li>✅ ყველა ივენთზე პრიორიტეტი</li>
-            <li>✅ მეილ შეტყობინებები + ფასდაკლება</li>
-            <li>✅ ექსკლუზიური ვორქშოფები</li>
+            <li data-i18n="vipFeat1">✅ ყველა ივენთზე პრიორიტეტი</li>
+            <li data-i18n="vipFeat2">✅ მეილ შეტყობინებები + ფასდაკლება</li>
+            <li data-i18n="vipFeat3">✅ ექსკლუზიური ვორქშოფები</li>
           </ul>
-          <button class="btn-buy-pkg" data-pkg="VIP">შერჩევა</button>
+          <button class="btn-buy-pkg" data-pkg="VIP" data-i18n="btnSelect">შერჩევა</button>
         </div>
       </div>
     </div>
