@@ -1,7 +1,7 @@
 let allEvents = [];
 const USD_RATE = 2.7;
 
-// ენების ლექსიკონი
+// ენების ლექსიკონი და ტექ-ფაქტები
 const translations = {
   ka: {
     profileBtn: "პირადი კაბინეთი",
@@ -44,19 +44,18 @@ const translations = {
     alertSubSuccess: "🎉 გილოცავთ! თქვენ წარმატებით გამოიწერეთ {pkg} პაკეტი. შეტყობინებები მეილზე გამოგიგზავნებათ!",
     alertBookingSuccess: "ადგილი წარმატებით დარეგისტრირდა! დასტური გამოგზავნილია მეილზე.",
     robotMessages: {
-      walk: [
-        "სასეირნოდ გავედი! 🚶‍♂️",
-        "საიტზე სისუფთავეა ✨",
-        "საინტერესო ივენთებია! 🚀"
-      ],
+      climb: "კიბით ავდივარ, ივენთის ბანერს ვამოწმებ! 🪜🔨",
+      skate: "სკეიტბორდით სეირნობა რა მაგარია! 🛹💨",
       charge: "როზეტს მივუერთდი, ენერგიას ვივსებ! 🔌🔋",
       clean: "საიტის ქვედა ზოლს ვასუფთავებ 🧹✨",
       love: "ვაუ, რა საყვარელი ივენთია! ❤️",
-      sleep: "Zzz... ცოტას წავუძინებ... 😴",
-      click: [
-        "გამარჯობა! მე შენი პატარა მეგობარი ვარ 🤖",
-        "რით დაგეხმარო? ✨",
-        "დააჭირე ივენთს დასაჯავშნად! 📅"
+      sleep: "Zzz... ლოგინი გავშალე, წავუძინებ... 😴",
+      wakeUp: "⏰ მაღვიძარა! წამოვხტი, საქმეს შევუდექი!",
+      facts: [
+        "💡 იცოდი? პირველი კომპიუტერული მაუსი ხისგან იყო დამზადებული!",
+        "💡 პირველი ვებ-საიტი 1991 წელს შეიქმნა და დღესაც მუშაობს!",
+        "💡 Python-ის სახელი გველისგან კი არა, შოუ Monty Python-ისგან მოდის!",
+        "💡 პირველი ბუგი (Bug) კომპიუტერში რეალური ჩრჩილი იყო!"
       ]
     }
   },
@@ -101,19 +100,18 @@ const translations = {
     alertSubSuccess: "🎉 Congratulations! You subscribed to {pkg} plan. Email alerts are active!",
     alertBookingSuccess: "Spot booked successfully! Confirmation sent to email.",
     robotMessages: {
-      walk: [
-        "Just taking a stroll! 🚶‍♂️",
-        "Everything looks shiny! ✨",
-        "Awesome events ahead! 🚀"
-      ],
-      charge: "Plugged into socket, recharging! 🔌🔋",
+      climb: "Climbing ladder to fix event banner! 🪜🔨",
+      skate: "Riding my skateboard! 🛹💨",
+      charge: "Plugged in, recharging battery! 🔌🔋",
       clean: "Tidying up the page... 🧹✨",
       love: "Aww, lovely event! ❤️",
-      sleep: "Zzz... taking a short nap... 😴",
-      click: [
-        "Hello! I am your little assistant 🤖",
-        "How can I help you? ✨",
-        "Click an event to book! 📅"
+      sleep: "Zzz... set up my bed, taking a nap... 😴",
+      wakeUp: "⏰ Alarm! Woke up, back to work!",
+      facts: [
+        "💡 Did you know? The first computer mouse was made of wood!",
+        "💡 The first website ever made in 1991 is still online!",
+        "💡 Python was named after the Monty Python show, not the snake!",
+        "💡 The first computer bug was an actual real moth!"
       ]
     }
   }
@@ -140,10 +138,13 @@ const bookingModal = document.getElementById('booking-modal');
 const profileModal = document.getElementById('profile-modal');
 const subModal = document.getElementById('subscription-modal');
 
-// 🤖 რობოტი
+// 🤖 რობოტის ელემენტები
 const robotContainer = document.getElementById('cute-robot');
 const robotBubble = document.getElementById('robot-bubble');
 const robotHandItem = document.getElementById('robot-hand-item');
+const robotVehicle = document.getElementById('robot-vehicle');
+const robotLadder = document.getElementById('robot-ladder');
+const robotBed = document.getElementById('robot-bed');
 
 langSelect.value = currentLang;
 
@@ -165,7 +166,7 @@ function setLanguage(lang) {
     }
   });
 
-  robotBubble.textContent = translations[lang].robotMessages.click[0];
+  robotBubble.textContent = translations[lang].robotMessages.facts[0];
   updateUI();
 }
 
@@ -339,11 +340,12 @@ document.getElementById('booking-form').addEventListener('submit', (e) => {
   bookingModal.style.display = 'none';
 });
 
-// 🤖 🤖 🤖 რობოტის ახალი, საყვარელი ლოგიკა 🤖 🤖 🤖
+// 🤖 🤖 🤖 რობოტის სუპერ-სიუჟეტური ანიმაციები 🤖 🤖 🤖
 let lastActivity = Date.now();
 let isRobotBusy = false;
+let isSleeping = false;
 
-// 1. ❤️ გულების ანიმაცია
+// 1. ❤️ გულები
 function triggerRobotLove() {
   if (isRobotBusy) return;
   isRobotBusy = true;
@@ -356,12 +358,53 @@ function triggerRobotLove() {
   }, 3000);
 }
 
-// 2. 🔌 როზეტთან მივლა და დატენვა
+// 2. 🪜 კიბეზე ასვლა და მონტაჟი
+function triggerRobotLadderClimb() {
+  if (isRobotBusy) return;
+  isRobotBusy = true;
+
+  const currentRight = parseInt(robotContainer.style.right || '60');
+  robotLadder.style.right = `${currentRight + 20}px`;
+  robotLadder.style.display = 'block';
+
+  robotBubble.textContent = translations[currentLang].robotMessages.climb;
+  robotContainer.className = 'robot-container robot-climbing';
+  robotContainer.style.bottom = '100px'; // ასვლა კიბეზე
+  robotHandItem.textContent = '🔨';
+
+  setTimeout(() => {
+    robotContainer.style.bottom = '20px'; // ჩამოსვლა კიბეზე
+    setTimeout(() => {
+      robotLadder.style.display = 'none';
+      robotHandItem.textContent = '';
+      robotContainer.className = 'robot-container';
+      isRobotBusy = false;
+    }, 1000);
+  }, 2500);
+}
+
+// 3. 🛹 სკეიტბორდით სეირნობა
+function triggerRobotSkate() {
+  if (isRobotBusy) return;
+  isRobotBusy = true;
+
+  robotVehicle.textContent = '🛹';
+  robotBubble.textContent = translations[currentLang].robotMessages.skate;
+
+  const targetRight = Math.floor(Math.random() * (window.innerWidth - 140)) + 60;
+  robotContainer.style.right = `${targetRight}px`;
+
+  setTimeout(() => {
+    robotVehicle.textContent = '';
+    isRobotBusy = false;
+  }, 2500);
+}
+
+// 4. 🔌 როზეტით დატენვა
 function triggerRobotCharging() {
   if (isRobotBusy) return;
   isRobotBusy = true;
   
-  // მიდის მარჯვენა კუთხეში როზეტთან
   robotContainer.style.right = '45px';
   robotContainer.className = 'robot-container robot-walking';
 
@@ -374,11 +417,11 @@ function triggerRobotCharging() {
       robotHandItem.textContent = '';
       robotContainer.className = 'robot-container';
       isRobotBusy = false;
-    }, 3000);
+    }, 2500);
   }, 1200);
 }
 
-// 3. 🧹 დალაგება
+// 5. 🧹 დალაგება
 function triggerRobotCleaning() {
   if (isRobotBusy) return;
   isRobotBusy = true;
@@ -391,59 +434,78 @@ function triggerRobotCleaning() {
     robotHandItem.textContent = '';
     robotContainer.className = 'robot-container';
     isRobotBusy = false;
-  }, 3000);
+  }, 2500);
 }
 
-// 4. 🚶‍♂️ სეირნობა ეკრანზე
-function makeRobotWalk() {
+// 6. 💡 ტექ-ფაქტის თქმა
+function tellTechFact() {
   if (isRobotBusy) return;
-  isRobotBusy = true;
-
-  const randomRight = Math.floor(Math.random() * (window.innerWidth - 140)) + 60;
-  robotContainer.style.right = `${randomRight}px`;
-  robotContainer.className = 'robot-container robot-walking';
-  
-  const walkMsgs = translations[currentLang].robotMessages.walk;
-  robotBubble.textContent = walkMsgs[Math.floor(Math.random() * walkMsgs.length)];
-
-  setTimeout(() => {
-    robotContainer.classList.remove('robot-walking');
-    isRobotBusy = false;
-  }, 3000);
+  const facts = translations[currentLang].robotMessages.facts;
+  robotBubble.textContent = facts[Math.floor(Math.random() * facts.length)];
 }
+
+// 🛏️ ძილისა და გაღვიძების რიტუალი
+function wakeUpRobot() {
+  if (isSleeping) {
+    isSleeping = false;
+    robotBed.style.display = 'none';
+    robotContainer.className = 'robot-container';
+    robotBubble.textContent = translations[currentLang].robotMessages.wakeUp;
+    setTimeout(() => {
+      isRobotBusy = false;
+    }, 1500);
+  }
+}
+
+function handleUserActivity() {
+  lastActivity = Date.now();
+  wakeUpRobot();
+}
+
+document.addEventListener('mousemove', handleUserActivity);
+document.addEventListener('click', handleUserActivity);
 
 // რობოტზე დაჭერა
 robotContainer.addEventListener('click', () => {
   lastActivity = Date.now();
+  if (isSleeping) {
+    wakeUpRobot();
+    return;
+  }
   if (isRobotBusy) return;
 
-  const clickMsgs = translations[currentLang].robotMessages.click;
-  robotBubble.textContent = clickMsgs[Math.floor(Math.random() * clickMsgs.length)];
-
   const rand = Math.random();
-  if (rand < 0.5) makeRobotWalk();
-  else if (rand < 0.8) triggerRobotCleaning();
+  if (rand < 0.25) triggerRobotLadderClimb();
+  else if (rand < 0.5) triggerRobotSkate();
+  else if (rand < 0.75) tellTechFact();
   else triggerRobotCharging();
 });
 
-document.addEventListener('mousemove', () => lastActivity = Date.now());
-document.addEventListener('click', () => lastActivity = Date.now());
-
-// პერიოდული მოქმედება (ყოველ 10 წამში)
+// პერიოდული ავტომატური მოქმედებები (ყოველ 10 წამში)
 setInterval(() => {
   const idleTime = Date.now() - lastActivity;
 
-  if (idleTime > 20000 && !isRobotBusy) {
+  // 20 წამის უმოქმედობა -> საწოლი + ძილი
+  if (idleTime > 20000 && !isRobotBusy && !isSleeping) {
+    isSleeping = true;
+    isRobotBusy = true;
+    
+    const currentRight = parseInt(robotContainer.style.right || '60');
+    robotBed.style.right = `${currentRight - 10}px`;
+    robotBed.style.display = 'block';
+
     robotContainer.className = 'robot-container robot-sleeping';
     robotBubble.textContent = translations[currentLang].robotMessages.sleep;
     return;
   }
 
-  if (!isRobotBusy) {
-    robotContainer.classList.remove('robot-sleeping');
+  // ჩვეულებრივი მოქმედებები
+  if (!isRobotBusy && !isSleeping) {
     const randAction = Math.random();
-    if (randAction < 0.55) makeRobotWalk();
-    else if (randAction < 0.8) triggerRobotCleaning();
+    if (randAction < 0.3) tellTechFact();
+    else if (randAction < 0.5) triggerRobotLadderClimb();
+    else if (randAction < 0.7) triggerRobotSkate();
+    else if (randAction < 0.85) triggerRobotCleaning();
     else triggerRobotCharging();
   }
 }, 10000);
