@@ -41,23 +41,31 @@ function displayEvents(events) {
   });
 }
 
-// ფილტრაციის ლოგიკა
+// ფილტრაციის და ძებნის ლოგიკა
 function filterEvents() {
   const selectedCategory = document.getElementById('category-filter').value;
   const selectedFormat = document.getElementById('format-filter').value;
+  const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
 
   const filtered = allEvents.filter(event => {
     const categoryMatch = selectedCategory === 'all' || event.category === selectedCategory;
     const formatMatch = selectedFormat === 'all' || event.format === selectedFormat;
-    return categoryMatch && formatMatch;
+    
+    // ძებნა სათაურში ან სპიკერის სახელში
+    const titleMatch = event.title.toLowerCase().includes(searchQuery);
+    const speakerMatch = event.speaker.toLowerCase().includes(searchQuery);
+    const searchMatch = searchQuery === '' || titleMatch || speakerMatch;
+
+    return categoryMatch && formatMatch && searchMatch;
   });
 
   displayEvents(filtered);
 }
 
-// Event Listeners ფილტრებისთვის
+// Event Listeners ფილტრებისა და ძებნისთვის
 document.getElementById('category-filter').addEventListener('change', filterEvents);
 document.getElementById('format-filter').addEventListener('change', filterEvents);
+document.getElementById('search-input').addEventListener('input', filterEvents);
 
 // Modal-ისა და დაჯავშნის ლოგიკა
 const modal = document.getElementById('booking-modal');

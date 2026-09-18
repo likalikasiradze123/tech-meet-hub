@@ -13,8 +13,14 @@
     <p>იპოვეთ და დაჯავშნეთ ტექნოლოგიური ღონისძიებები, ჰაკათონები და ვორქშოფები</p>
   </header>
 
-  <!-- ფილტრაციის სექცია -->
-  <section style="display: flex; justify-content: center; gap: 20px; margin-bottom: 30px;">
+  <!-- ფილტრაციისა და ძებნის სექცია -->
+  <section style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
+    <!-- საძიებო ველი -->
+    <div>
+      <label for="search-input"><b>ძებნა:</b></label>
+      <input type="text" id="search-input" placeholder="მოძებნეთ ივენთი ან სპიკერი..." style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; width: 220px;">
+    </div>
+
     <div>
       <label for="category-filter"><b>ტექნოლოგია:</b></label>
       <select id="category-filter" style="padding: 8px; border-radius: 5px;">
