@@ -42,7 +42,14 @@ const translations = {
     bookingPrefix: "დაჯავშნა:",
     alertProfileUpdated: "პროფილი წარმატებით განახლდა!",
     alertSubSuccess: "🎉 გილოცავთ! თქვენ წარმატებით გამოიწერეთ {pkg} პაკეტი. შეტყობინებები მეილზე გამოგიგზავნებათ!",
-    alertBookingSuccess: "ადგილი წარმატებით დარეგისტრირდა! დასტური გამოგზავნილია მეილზე."
+    alertBookingSuccess: "ადგილი წარმატებით დარეგისტრირდა! დასტური გამოგზავნილია მეილზე.",
+    robotMessages: [
+      "გამარჯობა! მე ვეხმარები საიტის გამართვას 🛠️",
+      "ყველაფერი წესრიგშია! 🤖✨",
+      "ახალ ივენთებს ვამოწმებ... 🔍",
+      "დააჭირე ივენთს დასაჯავშნად! 🚀",
+      "მე პატარა ტექ-ასისტენტი ვარ! 💡"
+    ]
   },
   en: {
     profileBtn: "My Profile",
@@ -83,11 +90,17 @@ const translations = {
     bookingPrefix: "Booking:",
     alertProfileUpdated: "Profile updated successfully!",
     alertSubSuccess: "🎉 Congratulations! You subscribed to {pkg} plan. Email alerts are active!",
-    alertBookingSuccess: "Spot booked successfully! Confirmation sent to email."
+    alertBookingSuccess: "Spot booked successfully! Confirmation sent to email.",
+    robotMessages: [
+      "Hello! I am optimizing the website 🛠️",
+      "Everything looks good! 🤖✨",
+      "Checking for new events... 🔍",
+      "Click an event to book your spot! 🚀",
+      "I am your little tech assistant! 💡"
+    ]
   }
 };
 
-// LocalStorage-დან შენახული მონაცემები
 let currentLang = localStorage.getItem('currentLang') || 'ka';
 let userFavorites = JSON.parse(localStorage.getItem('userFavorites')) || [];
 let userProfile = JSON.parse(localStorage.getItem('userProfile')) || {
@@ -109,14 +122,16 @@ const bookingModal = document.getElementById('booking-modal');
 const profileModal = document.getElementById('profile-modal');
 const subModal = document.getElementById('subscription-modal');
 
+// 🤖 რობოტის ელემენტები
+const robot = document.getElementById('cute-robot');
+const robotBubble = document.getElementById('robot-bubble');
+
 langSelect.value = currentLang;
 
-// ენის შეცვლის ფუნქცია
 function setLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('currentLang', lang);
 
-  // ტექსტური ელემენტების განახლება
   document.querySelectorAll('[data-i18n]').forEach(elem => {
     const key = elem.getAttribute('data-i18n');
     if (translations[lang][key]) {
@@ -124,7 +139,6 @@ function setLanguage(lang) {
     }
   });
 
-  // Placeholder-ების განახლება
   document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
     const key = elem.getAttribute('data-i18n-placeholder');
     if (translations[lang][key]) {
@@ -132,6 +146,7 @@ function setLanguage(lang) {
     }
   });
 
+  robotBubble.textContent = translations[lang].robotMessages[0];
   updateUI();
 }
 
@@ -139,7 +154,6 @@ langSelect.addEventListener('change', (e) => {
   setLanguage(e.target.value);
 });
 
-// ივენთების წამოღება JSON-იდან
 fetch('src/data/events.json')
   .then(res => res.json())
   .then(data => {
@@ -163,7 +177,6 @@ function updateProfileButton() {
   }
 }
 
-// ივენთების გამოჩენა
 function displayEvents(events) {
   eventsGrid.innerHTML = '';
 
@@ -204,7 +217,6 @@ function displayEvents(events) {
   });
 }
 
-// ფილტრაცია და ძებნა
 function filterEvents() {
   const category = document.getElementById('category-filter').value;
   const format = document.getElementById('format-filter').value;
@@ -224,13 +236,11 @@ function filterEvents() {
   displayEvents(filtered);
 }
 
-// Event Listeners
 document.getElementById('category-filter').addEventListener('change', filterEvents);
 document.getElementById('format-filter').addEventListener('change', filterEvents);
 document.getElementById('search-input').addEventListener('input', filterEvents);
 document.getElementById('currency-select').addEventListener('change', filterEvents);
 
-// ფავორიტებში დამატება / ამოშლა
 eventsGrid.addEventListener('click', (e) => {
   if (e.target.classList.contains('fav-btn')) {
     const id = Number(e.target.dataset.id);
@@ -250,7 +260,6 @@ eventsGrid.addEventListener('click', (e) => {
   }
 });
 
-// ფავორიტების ფილტრი
 document.getElementById('show-favorites-btn').addEventListener('click', () => {
   showOnlyFavorites = !showOnlyFavorites;
   const btn = document.getElementById('show-favorites-btn');
@@ -258,7 +267,6 @@ document.getElementById('show-favorites-btn').addEventListener('click', () => {
   filterEvents();
 });
 
-// Modal-ები
 profileBtn.addEventListener('click', () => {
   document.getElementById('profile-name').value = userProfile.name;
   document.getElementById('profile-email').value = userProfile.email;
@@ -275,7 +283,6 @@ document.getElementById('close-booking').onclick = () => bookingModal.style.disp
 document.getElementById('close-profile').onclick = () => profileModal.style.display = 'none';
 document.getElementById('close-sub').onclick = () => subModal.style.display = 'none';
 
-// პროფილის შენახვა
 document.getElementById('profile-form').addEventListener('submit', (e) => {
   e.preventDefault();
   userProfile.name = document.getElementById('profile-name').value;
@@ -286,7 +293,6 @@ document.getElementById('profile-form').addEventListener('submit', (e) => {
   alert(translations[currentLang].alertProfileUpdated);
 });
 
-// ავატარის არჩევა
 document.querySelectorAll('.avatar-img').forEach(img => {
   img.addEventListener('click', (e) => {
     document.querySelectorAll('.avatar-img').forEach(i => i.classList.remove('selected'));
@@ -295,7 +301,6 @@ document.querySelectorAll('.avatar-img').forEach(img => {
   });
 });
 
-// პაკეტის ყიდვა / გამოწერა
 document.querySelectorAll('.btn-buy-pkg').forEach(btn => {
   btn.addEventListener('click', (e) => {
     const pkg = e.target.dataset.pkg;
@@ -308,9 +313,28 @@ document.querySelectorAll('.btn-buy-pkg').forEach(btn => {
   });
 });
 
-// დაჯავშნის ფორმა
 document.getElementById('booking-form').addEventListener('submit', (e) => {
   e.preventDefault();
   alert(translations[currentLang].alertBookingSuccess);
   bookingModal.style.display = 'none';
 });
+
+// 🤖 რობოტის ინტერაქტიული ქცევები
+let msgIndex = 0;
+
+// რობოტზე დაჭერისას ფრაზის შეცვლა და ანიმაცია
+robot.addEventListener('click', () => {
+  msgIndex = (msgIndex + 1) % translations[currentLang].robotMessages.length;
+  robotBubble.textContent = translations[currentLang].robotMessages[msgIndex];
+  
+  robot.classList.add('robot-working');
+  setTimeout(() => {
+    robot.classList.remove('robot-working');
+  }, 1500);
+});
+
+// რობოტის ავტომატური პერიოდული საუბარი
+setInterval(() => {
+  msgIndex = Math.floor(Math.random() * translations[currentLang].robotMessages.length);
+  robotBubble.textContent = translations[currentLang].robotMessages[msgIndex];
+}, 10000);
