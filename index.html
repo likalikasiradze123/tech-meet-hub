@@ -73,19 +73,26 @@
     <!-- ივენთების ბარათები -->
   </main>
 
-  <!-- 🤖 ანიმაციური რობოტი-ასისტენტი -->
+  <!-- 🤖 სუპერ-ინტერაქტიული რობოტი -->
   <div id="cute-robot" class="robot-container">
     <div class="robot-speech-bubble" id="robot-bubble">გამარჯობა! მე ვეხმარები საიტის გამართვას 🛠️</div>
-    <div class="robot-body">
+    <div class="robot-body" id="robot-body-main">
       <div class="robot-antenna">
-        <div class="antenna-ball"></div>
+        <div class="antenna-ball" id="antenna-ball"></div>
       </div>
-      <div class="robot-head">
-        <div class="robot-eye left"></div>
-        <div class="robot-eye right"></div>
-        <div class="robot-mouth"></div>
+      <div class="robot-head" id="robot-head">
+        <div class="robot-eye left" id="eye-left"></div>
+        <div class="robot-eye right" id="eye-right"></div>
+        <div class="robot-mouth" id="robot-mouth"></div>
       </div>
-      <div class="robot-torso">⚡</div>
+      <div class="robot-torso">
+        <span id="torso-icon">⚡</span>
+        <span id="robot-hand-item"></span>
+      </div>
+      <div class="robot-legs">
+        <div class="robot-leg left"></div>
+        <div class="robot-leg right"></div>
+      </div>
     </div>
   </div>
 

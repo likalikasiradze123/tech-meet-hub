@@ -43,13 +43,14 @@ const translations = {
     alertProfileUpdated: "პროფილი წარმატებით განახლდა!",
     alertSubSuccess: "🎉 გილოცავთ! თქვენ წარმატებით გამოიწერეთ {pkg} პაკეტი. შეტყობინებები მეილზე გამოგიგზავნებათ!",
     alertBookingSuccess: "ადგილი წარმატებით დარეგისტრირდა! დასტური გამოგზავნილია მეილზე.",
-    robotMessages: [
-      "გამარჯობა! მე ვეხმარები საიტის გამართვას 🛠️",
-      "ყველაფერი წესრიგშია! 🤖✨",
-      "ახალ ივენთებს ვამოწმებ... 🔍",
-      "დააჭირე ივენთს დასაჯავშნად! 🚀",
-      "მე პატარა ტექ-ასისტენტი ვარ! 💡"
-    ]
+    robotMessages: {
+      walk: "სეირნობა მიყვარს! 🚶‍♂️",
+      shock: "ვაიმე, დენმა დარტყა! ⚡😵",
+      love: "უი, რა საყვარელი ივენთია! ❤️",
+      fix: "საიტის კოდს ვასწორებ... 🔧",
+      sleep: "Zzz... ოდნავ დავისვენებ... 😴",
+      click: "გამარჯობა! მე შენი ტექ-ასისტენტი ვარ 🤖"
+    }
   },
   en: {
     profileBtn: "My Profile",
@@ -91,13 +92,14 @@ const translations = {
     alertProfileUpdated: "Profile updated successfully!",
     alertSubSuccess: "🎉 Congratulations! You subscribed to {pkg} plan. Email alerts are active!",
     alertBookingSuccess: "Spot booked successfully! Confirmation sent to email.",
-    robotMessages: [
-      "Hello! I am optimizing the website 🛠️",
-      "Everything looks good! 🤖✨",
-      "Checking for new events... 🔍",
-      "Click an event to book your spot! 🚀",
-      "I am your little tech assistant! 💡"
-    ]
+    robotMessages: {
+      walk: "I love walking around! 🚶‍♂️",
+      shock: "Ouch! Electric shock! ⚡😵",
+      love: "Aww, lovely event! ❤️",
+      fix: "Fixing website code... 🔧",
+      sleep: "Zzz... taking a nap... 😴",
+      click: "Hello! I am your tech assistant 🤖"
+    }
   }
 };
 
@@ -111,7 +113,7 @@ let userProfile = JSON.parse(localStorage.getItem('userProfile')) || {
 };
 let showOnlyFavorites = false;
 
-// DOM ელემენტები
+// DOM
 const eventsGrid = document.getElementById('events-grid');
 const favCountSpan = document.getElementById('fav-count');
 const profileBtn = document.getElementById('profile-btn');
@@ -122,9 +124,11 @@ const bookingModal = document.getElementById('booking-modal');
 const profileModal = document.getElementById('profile-modal');
 const subModal = document.getElementById('subscription-modal');
 
-// 🤖 რობოტის ელემენტები
-const robot = document.getElementById('cute-robot');
+// 🤖 რობოტი
+const robotContainer = document.getElementById('cute-robot');
+const robotBody = document.getElementById('robot-body-main');
 const robotBubble = document.getElementById('robot-bubble');
+const robotHandItem = document.getElementById('robot-hand-item');
 
 langSelect.value = currentLang;
 
@@ -146,7 +150,7 @@ function setLanguage(lang) {
     }
   });
 
-  robotBubble.textContent = translations[lang].robotMessages[0];
+  robotBubble.textContent = translations[lang].robotMessages.click;
   updateUI();
 }
 
@@ -248,6 +252,7 @@ eventsGrid.addEventListener('click', (e) => {
       userFavorites = userFavorites.filter(favId => favId !== id);
     } else {
       userFavorites.push(id);
+      triggerRobotLove(); // ❤️ რობოტის სიყვარულის ანიმაცია
     }
     localStorage.setItem('userFavorites', JSON.stringify(userFavorites));
     updateUI();
@@ -319,22 +324,97 @@ document.getElementById('booking-form').addEventListener('submit', (e) => {
   bookingModal.style.display = 'none';
 });
 
-// 🤖 რობოტის ინტერაქტიული ქცევები
-let msgIndex = 0;
+// 🤖 🤖 🤖 რობოტის სუპერ-ინტერაქტიული ლოგიკა 🤖 🤖 🤖
+let lastActivity = Date.now();
+let isRobotBusy = false;
 
-// რობოტზე დაჭერისას ფრაზის შეცვლა და ანიმაცია
-robot.addEventListener('click', () => {
-  msgIndex = (msgIndex + 1) % translations[currentLang].robotMessages.length;
-  robotBubble.textContent = translations[currentLang].robotMessages[msgIndex];
+// 1. ❤️ გულების ანიმაცია
+function triggerRobotLove() {
+  if (isRobotBusy) return;
+  isRobotBusy = true;
+  robotContainer.className = 'robot-container robot-hearts';
+  robotBubble.textContent = translations[currentLang].robotMessages.love;
   
-  robot.classList.add('robot-working');
   setTimeout(() => {
-    robot.classList.remove('robot-working');
-  }, 1500);
+    robotContainer.className = 'robot-container';
+    isRobotBusy = false;
+  }, 3000);
+}
+
+// 2. ⚡ დენის დარტყმის ანიმაცია
+function triggerRobotShock() {
+  if (isRobotBusy) return;
+  isRobotBusy = true;
+  robotHandItem.textContent = '🔌';
+  robotContainer.className = 'robot-container robot-shock';
+  robotBubble.textContent = translations[currentLang].robotMessages.shock;
+
+  setTimeout(() => {
+    robotHandItem.textContent = '';
+    robotContainer.className = 'robot-container';
+    isRobotBusy = false;
+  }, 2500);
+}
+
+// 3. 🔧 შეკეთების ანიმაცია
+function triggerRobotFix() {
+  if (isRobotBusy) return;
+  isRobotBusy = true;
+  robotHandItem.textContent = '🔧';
+  robotBubble.textContent = translations[currentLang].robotMessages.fix;
+
+  setTimeout(() => {
+    robotHandItem.textContent = '';
+    isRobotBusy = false;
+  }, 3000);
+}
+
+// 4. 🚶‍♂️ ეკრანზე სირბილი/სიარული
+function makeRobotWalk() {
+  if (isRobotBusy) return;
+  isRobotBusy = true;
+
+  const randomX = Math.floor(Math.random() * (window.innerWidth - 120));
+  robotContainer.style.left = `${randomX}px`;
+  robotContainer.className = 'robot-container robot-walking';
+  robotBubble.textContent = translations[currentLang].robotMessages.walk;
+
+  setTimeout(() => {
+    robotContainer.classList.remove('robot-walking');
+    isRobotBusy = false;
+  }, 3000);
+}
+
+// რობოტზე დაჭერა
+robotContainer.addEventListener('click', () => {
+  lastActivity = Date.now();
+  const rand = Math.random();
+  if (rand < 0.33) triggerRobotShock();
+  else if (rand < 0.66) triggerRobotFix();
+  else makeRobotWalk();
 });
 
-// რობოტის ავტომატური პერიოდული საუბარი
+// მომხმარებლის აქტივობაზე თვალყურის დევნება
+document.addEventListener('mousemove', () => lastActivity = Date.now());
+document.addEventListener('click', () => lastActivity = Date.now());
+
+// პერიოდული შემთხვევითი ქცევები (ყოველ 8 წამში)
 setInterval(() => {
-  msgIndex = Math.floor(Math.random() * translations[currentLang].robotMessages.length);
-  robotBubble.textContent = translations[currentLang].robotMessages[msgIndex];
-}, 10000);
+  const idleTime = Date.now() - lastActivity;
+
+  // თუ 15 წამი არაფერი ხდება -> ძილი
+  if (idleTime > 15000 && !isRobotBusy) {
+    robotContainer.className = 'robot-container robot-sleeping';
+    robotBubble.textContent = translations[currentLang].robotMessages.sleep;
+    return;
+  }
+
+  // თუ აქტიურია -> შემთხვევითი მოქმედება
+  if (!isRobotBusy) {
+    robotContainer.classList.remove('robot-sleeping');
+    const randAction = Math.random();
+    if (randAction < 0.4) makeRobotWalk();
+    else if (randAction < 0.7) triggerRobotShock();
+    else triggerRobotFix();
+  }
+}, 8000);
