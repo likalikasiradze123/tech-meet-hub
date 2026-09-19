@@ -12,9 +12,7 @@
     <div class="top-bar">
       <h1>🚀 Tech Meet & Greet Hub</h1>
       <div class="user-control" style="display: flex; gap: 10px; align-items: center;">
-        <!-- 🌙/☀️ თემის გადამრთველი -->
         <button id="theme-toggle-btn" class="btn-theme-toggle" title="თემის შეცვლა">🌙</button>
-        
         <select id="language-select" class="select-styled">
           <option value="ka">🇬🇪 GE</option>
           <option value="en">🇺🇸 EN</option>
@@ -52,7 +50,6 @@
       </select>
     </div>
 
-    <!-- 🔍 სორტირება -->
     <div>
       <label for="sort-select"><b data-i18n="labelSort">სორტირება:</b></label>
       <select id="sort-select">
@@ -76,6 +73,22 @@
     </div>
   </section>
 
+  <!-- 🎯 ინოვაცია 1: კარიერული ტესტი -->
+  <section class="quiz-section">
+    <div class="quiz-container">
+      <h3>🎯 არ იცი რომელი ივენთი აირჩიო? გაიარე 1-წუთიანი ტექ-ტესტი!</h3>
+      <div id="quiz-body">
+        <p id="quiz-question">რა მიმართულება გინდა განავითარო?</p>
+        <div class="quiz-options">
+          <button class="btn-quiz-opt" data-cat="AI">🤖 ხელოვნური ინტელექტი (AI)</button>
+          <button class="btn-quiz-opt" data-cat="Web Dev">💻 ვებ-დეველოპმენტი</button>
+          <button class="btn-quiz-opt" data-cat="Cybersecurity">🛡️ კიბერუსაფრთხოება</button>
+        </div>
+      </div>
+      <div id="quiz-result" style="display: none; margin-top: 10px; font-weight: bold; color: #38bdf8;"></div>
+    </div>
+  </section>
+
   <!-- პრემიუმ გამოწერის ბანერი -->
   <section class="subscription-banner">
     <h2 data-i18n="bannerTitle">🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
@@ -83,7 +96,7 @@
     <button id="subscribe-plan-btn" class="btn-subscribe-banner" data-i18n="btnViewPackages">💎 პაკეტების ნახვა</button>
   </section>
 
-  <!-- ⏳ უკუთვლის ტაიმერის ბანერი -->
+  <!-- ⏳ უკუთვლის ტაიმერი -->
   <section class="countdown-section" id="countdown-section">
     <div class="countdown-title">
       ⏳ <span data-i18n="nextEventTitle">უახლოეს ივენთამდე დარჩენილია:</span>
@@ -98,10 +111,36 @@
   </section>
 
   <main class="events-grid" id="events-grid">
-    <!-- ივენთების ბარათები -->
   </main>
 
-  <!-- 🤖 შემეცნებითი რობოტი -->
+  <!-- 💬 ინოვაცია 2: სპიკერის Q&A & გამოკითხვა Modal -->
+  <div id="qa-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-qa">&times;</span>
+      <h3>💬 დასვი კითხვა სპიკერისთვის</h3>
+      <p id="qa-event-title" style="color: #38bdf8; font-weight: bold; margin-bottom: 10px;"></p>
+      
+      <form id="qa-form">
+        <input type="text" id="qa-input" placeholder="დაწერე შენი კითხვა..." required>
+        <button type="submit" class="btn-submit" style="margin-top: 8px;">გაგზავნა</button>
+      </form>
+
+      <div style="margin-top: 15px;">
+        <h4>📊 საზოგადოების გამოკითხვა:</h4>
+        <p style="font-size: 0.85rem; margin-top: 5px;">რამდენად ელოდებით ამ ივენთს?</p>
+        <div style="display: flex; gap: 10px; margin-top: 8px;">
+          <button class="btn-poll" data-poll="high">🔥 ძალიან! (78%)</button>
+          <button class="btn-poll" data-poll="medium">👍 მაინტერესებს (22%)</button>
+        </div>
+      </div>
+
+      <div id="qa-list" style="margin-top: 15px; font-size: 0.85rem;">
+        <!-- კითხვები გამოჩნდება აქ -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 🤖 რობოტი -->
   <div id="cute-robot" class="robot-container">
     <div class="robot-speech-bubble" id="robot-bubble">გამარჯობა! მე შენი ტექ-ასისტენტი ვარ 🤖</div>
     <div class="robot-body" id="robot-body-main">
@@ -123,12 +162,23 @@
     </div>
   </div>
 
-  <!-- 1. დაჯავშნის Modal -->
+  <!-- 💺 ინოვაცია 3: ადგილების არჩევის Modal -->
   <div id="booking-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-booking">&times;</span>
       <h2 id="modal-event-title" data-i18n="modalBookingTitle">ღონისძიების დაჯავშნა</h2>
-      <form id="booking-form">
+      
+      <!-- 💺 ადგილების რუკა -->
+      <div class="seat-picker-container">
+        <p style="font-size: 0.85rem; margin-bottom: 8px;"><b>💺 აირჩიეთ სასურველი ადგილი დარბაზში:</b></p>
+        <div class="stage-label">🎬 სცენა / სპიკერი</div>
+        <div class="seats-grid" id="seats-grid">
+          <!-- ადგილების კუბიკები შეიქმნება JS-ით -->
+        </div>
+        <small id="selected-seat-label" style="display: block; margin-top: 8px; color: #22c55e; font-weight: bold;">არჩეული ადგილი: -</small>
+      </div>
+
+      <form id="booking-form" style="margin-top: 15px;">
         <label for="user-name" data-i18n="labelFullName">სახელი, გვარი:</label>
         <input type="text" id="user-name" required data-i18n-placeholder="phFullName" placeholder="მაგ: გიორგი ბერიძე">
 
@@ -140,7 +190,7 @@
     </div>
   </div>
 
-  <!-- 🎟️ 2. ციფრული ბილეთის Modal -->
+  <!-- 🎟️ ციფრული ბილეთის Modal -->
   <div id="ticket-modal" class="modal">
     <div class="modal-content ticket-modal-content">
       <span class="close-btn" id="close-ticket">&times;</span>
@@ -153,6 +203,7 @@
         </div>
         <div class="ticket-body">
           <p>👤 <b data-i18n="labelHolder">მფლობელი:</b> <span id="ticket-user-name">-</span></p>
+          <p>💺 <b>ადგილი დარბაზში:</b> <span id="ticket-seat-num">-</span></p>
           <p>📅 <b data-i18n="labelDate">თარიღი:</b> <span id="ticket-event-date">-</span></p>
           <p>📍 <b data-i18n="labelLocation">ადგილი:</b> <span id="ticket-event-location">-</span></p>
           <p>🆔 <b data-i18n="labelTicketId">ბილეთის ID:</b> <code id="ticket-id-code">#TKT-0000</code></p>
@@ -171,7 +222,7 @@
     </div>
   </div>
 
-  <!-- 3. პირადი კაბინეტის Modal -->
+  <!-- პირადი კაბინეტის Modal -->
   <div id="profile-modal" class="modal">
     <div class="modal-content profile-content">
       <span class="close-btn" id="close-profile">&times;</span>
@@ -207,7 +258,7 @@
     </div>
   </div>
 
-  <!-- 4. პაკეტების ყიდვის Modal -->
+  <!-- პაკეტების ყიდვის Modal -->
   <div id="subscription-modal" class="modal">
     <div class="modal-content sub-content">
       <span class="close-btn" id="close-sub">&times;</span>

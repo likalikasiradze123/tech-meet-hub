@@ -101,6 +101,38 @@ body {
   font-weight: bold;
 }
 
+/* 🎯 კარიერული ტესტი */
+.quiz-section {
+  max-width: 1200px;
+  margin: 0 auto 20px auto;
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+}
+
+.quiz-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-quiz-opt {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-quiz-opt:hover {
+  background: white;
+  color: #0284c7;
+}
+
 .subscription-banner {
   background: linear-gradient(135deg, #4f46e5, #7c3aed);
   color: white;
@@ -123,7 +155,7 @@ body {
   cursor: pointer;
 }
 
-/* ⏳ უკუთვლის ტაიმერის სტილი */
+/* ⏳ ტაიმერი */
 .countdown-section {
   background: var(--card-bg);
   border: 2px solid #38bdf8;
@@ -136,16 +168,6 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.countdown-title {
-  font-size: 1rem;
-}
-
-.countdown-title strong {
-  color: #38bdf8;
-  margin-left: 5px;
 }
 
 .timer-boxes {
@@ -270,7 +292,7 @@ body {
   font-weight: bold;
 }
 
-.btn-calendar-icon {
+.btn-qa-icon, .btn-calendar-icon {
   background: #0284c7;
   color: white;
   border: none;
@@ -278,6 +300,66 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.9rem;
+}
+
+/* 💺 ადგილების არჩევის სტილი */
+.seat-picker-container {
+  background: var(--bg-color);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.stage-label {
+  background: #64748b;
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.seats-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.seat {
+  width: 32px;
+  height: 32px;
+  background: #22c55e;
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.seat.selected {
+  background: #f59e0b !important;
+}
+
+.seat.occupied {
+  background: #94a3b8 !important;
+  cursor: not-allowed;
+}
+
+/* 💬 გამოკითხვის ღილაკები */
+.btn-poll {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
 }
 
 /* Modals */
@@ -314,63 +396,18 @@ body {
   cursor: pointer;
 }
 
-.avatar-section {
-  margin: 15px 0;
-}
-
-.avatar-options {
-  display: flex;
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.avatar-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 3px solid transparent;
-  cursor: pointer;
-  background: #f1f5f9;
-}
-
-.avatar-img.selected {
-  border-color: #4f46e5;
-}
-
-#profile-form, #booking-form {
+#profile-form, #booking-form, #qa-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
-#profile-form input, #booking-form input {
+#profile-form input, #booking-form input, #qa-form input {
   padding: 8px;
   border: 1px solid var(--border-color);
   background: var(--card-bg);
   color: var(--text-color);
   border-radius: 5px;
-}
-
-.status-box {
-  background: var(--bg-color);
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-}
-
-.badge-free {
-  background: #94a3b8;
-  color: white;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.badge-vip {
-  background: #f59e0b;
-  color: white;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: bold;
 }
 
 .btn-submit {
@@ -383,58 +420,12 @@ body {
   font-weight: bold;
 }
 
-.packages-grid {
-  display: flex;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.package-card {
-  border: 1px solid var(--border-color);
-  padding: 15px;
-  border-radius: 8px;
-  flex: 1;
-  text-align: center;
-}
-
-.package-card.featured {
-  border: 2px solid #f59e0b;
-  background: rgba(245, 158, 11, 0.1);
-}
-
-.package-card ul {
-  list-style: none;
-  font-size: 0.85rem;
-  margin: 12px 0;
-  text-align: left;
-}
-
-.btn-buy-pkg {
-  background: #4f46e5;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-  font-weight: bold;
-}
-
-/* 🎟️ ციფრული ბილეთის სტილი */
 .ticket-card {
   background: linear-gradient(135deg, #0f172a, #1e293b);
   color: white;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
   border: 2px dashed #38bdf8;
-  position: relative;
-}
-
-.ticket-header {
-  border-bottom: 1px solid #334155;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
 }
 
 .ticket-badge {
@@ -444,25 +435,6 @@ body {
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: bold;
-}
-
-.ticket-header h3 {
-  margin-top: 5px;
-  font-size: 1.2rem;
-  color: #f8fafc;
-}
-
-.ticket-body p {
-  margin-bottom: 8px;
-  font-size: 0.9rem;
-  color: #cbd5e1;
-}
-
-.ticket-body code {
-  background: #334155;
-  color: #f59e0b;
-  padding: 2px 6px;
-  border-radius: 4px;
 }
 
 .ticket-qr-container {
@@ -476,13 +448,6 @@ body {
 .ticket-qr-container img {
   width: 130px;
   height: 130px;
-}
-
-.ticket-qr-container small {
-  display: block;
-  color: #64748b;
-  font-size: 0.75rem;
-  margin-top: 5px;
 }
 
 .ticket-actions-grid {
@@ -513,16 +478,6 @@ body {
   align-items: center;
 }
 
-.ticket-item-mini h4 {
-  font-size: 0.9rem;
-  color: var(--text-color);
-}
-
-.ticket-item-mini p {
-  font-size: 0.8rem;
-  color: var(--subtext-color);
-}
-
 /* 🤖 რობოტი */
 .robot-container {
   position: fixed;
@@ -543,17 +498,6 @@ body {
   font-size: 0.85rem;
   font-weight: bold;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.robot-speech-bubble::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  right: 25px;
-  border-width: 6px 6px 0;
-  border-style: solid;
-  border-color: #38bdf8 transparent;
 }
 
 .robot-body {
@@ -603,7 +547,6 @@ body {
   justify-content: space-around;
   align-items: center;
   padding: 0 6px;
-  position: relative;
 }
 
 .robot-eye {
@@ -632,7 +575,6 @@ body {
   justify-content: center;
   align-items: center;
   color: #f59e0b;
-  font-size: 15px;
 }
 
 .robot-legs {

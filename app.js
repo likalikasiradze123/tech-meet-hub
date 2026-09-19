@@ -1,7 +1,6 @@
 let allEvents = [];
 const USD_RATE = 2.7;
 
-// ენების ლექსიკონი
 const translations = {
   ka: {
     profileBtn: "პირადი კაბინეთი",
@@ -154,6 +153,7 @@ let myTickets = JSON.parse(localStorage.getItem('myTickets')) || [];
 let showOnlyFavorites = false;
 let selectedEventForBooking = null;
 let currentActiveTicket = null;
+let selectedSeatNumber = null;
 
 // DOM
 const eventsGrid = document.getElementById('events-grid');
@@ -167,12 +167,12 @@ const bookingModal = document.getElementById('booking-modal');
 const ticketModal = document.getElementById('ticket-modal');
 const profileModal = document.getElementById('profile-modal');
 const subModal = document.getElementById('subscription-modal');
+const qaModal = document.getElementById('qa-modal');
 
 // 🤖 რობოტი
 const robotContainer = document.getElementById('cute-robot');
 const robotBubble = document.getElementById('robot-bubble');
 
-// 🌙 Dark / Light Mode ლოგიკა
 if (isDarkMode) {
   document.body.classList.add('dark-theme');
   themeToggleBtn.textContent = '☀️';
@@ -273,6 +273,7 @@ function displayEvents(events) {
         <div class="card-footer">
           <span class="price">${formattedPrice}</span>
           <div style="display: flex; gap: 5px;">
+            <button class="btn-qa-icon" data-id="${event.id}" title="დასვი კითხვა">💬</button>
             <button class="btn-calendar-icon" data-id="${event.id}" title="Google Calendar">🗓️</button>
             <button class="btn-details" data-id="${event.id}">${translations[currentLang].btnBookNow}</button>
           </div>
@@ -301,7 +302,6 @@ function filterEvents() {
     return catMatch && fmtMatch && searchMatch && favMatch;
   });
 
-  // 🔍 სორტირების ლოგიკა
   if (sort === 'date') {
     filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
   } else if (sort === 'price-asc') {
@@ -321,6 +321,18 @@ document.getElementById('sort-select').addEventListener('change', filterEvents);
 document.getElementById('search-input').addEventListener('input', filterEvents);
 document.getElementById('currency-select').addEventListener('change', filterEvents);
 
+// 🎯 კარიერული ტესტი
+document.querySelectorAll('.btn-quiz-opt').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const cat = e.target.dataset.cat;
+    document.getElementById('category-filter').value = cat;
+    filterEvents();
+    const resultDiv = document.getElementById('quiz-result');
+    resultDiv.style.display = 'block';
+    resultDiv.textContent = `✅ თქვენთვის შერჩეულია ${cat} კატეგორიის ივენთები!`;
+  });
+});
+
 eventsGrid.addEventListener('click', (e) => {
   if (e.target.classList.contains('fav-btn')) {
     const id = Number(e.target.dataset.id);
@@ -333,12 +345,20 @@ eventsGrid.addEventListener('click', (e) => {
     updateUI();
   }
 
+  // 💬 Q&A Modal-ის გახსნა
+  if (e.target.classList.contains('btn-qa-icon')) {
+    const eventId = Number(e.target.dataset.id);
+    const ev = allEvents.find(i => i.id === eventId);
+    if (ev) {
+      document.getElementById('qa-event-title').textContent = `${ev.title} (🎤 ${ev.speaker})`;
+      qaModal.style.display = 'flex';
+    }
+  }
+
   if (e.target.classList.contains('btn-calendar-icon')) {
     const eventId = Number(e.target.dataset.id);
     const ev = allEvents.find(item => item.id === eventId);
-    if (ev) {
-      openGoogleCalendar(ev.title, ev.date, ev.location);
-    }
+    if (ev) openGoogleCalendar(ev.title, ev.date, ev.location);
   }
 
   if (e.target.classList.contains('btn-details')) {
@@ -348,9 +368,61 @@ eventsGrid.addEventListener('click', (e) => {
       document.getElementById('modal-event-title').textContent = `${translations[currentLang].bookingPrefix} ${selectedEventForBooking.title}`;
       if (userProfile.name) document.getElementById('user-name').value = userProfile.name;
       if (userProfile.email) document.getElementById('user-email').value = userProfile.email;
+      renderSeats();
       bookingModal.style.display = 'flex';
     }
   }
+});
+
+// 💺 ადგილების რენდერი
+function renderSeats() {
+  const seatsGrid = document.getElementById('seats-grid');
+  seatsGrid.innerHTML = '';
+  selectedSeatNumber = null;
+  document.getElementById('selected-seat-label').textContent = 'არჩეული ადგილი: -';
+
+  for (let i = 1; i <= 18; i++) {
+    const seat = document.createElement('div');
+    seat.className = 'seat';
+    seat.textContent = i;
+
+    // რამდენიმე დაკავებული ადგილი სიმულაციისთვის
+    if (i === 3 || i === 7 || i === 12) {
+      seat.classList.add('occupied');
+      seat.title = 'დაკავებულია';
+    } else {
+      seat.addEventListener('click', () => {
+        document.querySelectorAll('.seat').forEach(s => s.classList.remove('selected'));
+        seat.classList.add('selected');
+        selectedSeatNumber = i;
+        document.getElementById('selected-seat-label').textContent = `არჩეული ადგილი: #${i}`;
+      });
+    }
+    seatsGrid.appendChild(seat);
+  }
+}
+
+// 💬 Q&A გაგზავნა
+document.getElementById('qa-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const input = document.getElementById('qa-input');
+  const qaList = document.getElementById('qa-list');
+
+  const qItem = document.createElement('div');
+  qItem.style.background = 'rgba(56, 189, 248, 0.1)';
+  qItem.style.padding = '6px 10px';
+  qItem.style.borderRadius = '6px';
+  qItem.style.marginBottom = '6px';
+  qItem.innerHTML = `❓ <b>თქვენ:</b> ${input.value}`;
+
+  qaList.prepend(qItem);
+  input.value = '';
+});
+
+document.querySelectorAll('.btn-poll').forEach(btn => {
+  btn.addEventListener('click', () => {
+    alert('თქვენი ხმა მიღებულია! მადლობა აქტიურობისთვის.');
+  });
 });
 
 document.getElementById('show-favorites-btn').addEventListener('click', () => {
@@ -369,15 +441,14 @@ profileBtn.addEventListener('click', () => {
   profileModal.style.display = 'flex';
 });
 
-document.getElementById('subscribe-plan-btn').addEventListener('click', () => {
-  subModal.style.display = 'flex';
-});
+document.getElementById('subscribe-plan-btn').addEventListener('click', () => subModal.style.display = 'flex');
 
 document.getElementById('close-booking').onclick = () => bookingModal.style.display = 'none';
 document.getElementById('close-ticket').onclick = () => ticketModal.style.display = 'none';
 document.getElementById('close-ticket-btn').onclick = () => ticketModal.style.display = 'none';
 document.getElementById('close-profile').onclick = () => profileModal.style.display = 'none';
 document.getElementById('close-sub').onclick = () => subModal.style.display = 'none';
+document.getElementById('close-qa').onclick = () => qaModal.style.display = 'none';
 
 document.getElementById('profile-form').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -404,12 +475,11 @@ document.querySelectorAll('.btn-buy-pkg').forEach(btn => {
     localStorage.setItem('userProfile', JSON.stringify(userProfile));
     updateUI();
     subModal.style.display = 'none';
-    const msg = translations[currentLang].alertSubSuccess.replace('{pkg}', pkg);
-    alert(msg);
+    alert(translations[currentLang].alertSubSuccess.replace('{pkg}', pkg));
   });
 });
 
-// 🎟️ დაჯავშნა და QR კოდიანი ციფრული ბილეთის გენერაცია
+// 🎟️ დაჯავშნა
 document.getElementById('booking-form').addEventListener('submit', (e) => {
   e.preventDefault();
   
@@ -423,7 +493,8 @@ document.getElementById('booking-form').addEventListener('submit', (e) => {
     userEmail: userEmail,
     eventTitle: selectedEventForBooking.title,
     eventDate: selectedEventForBooking.date,
-    eventLocation: selectedEventForBooking.location
+    eventLocation: selectedEventForBooking.location,
+    seatNum: selectedSeatNumber ? `#${selectedSeatNumber}` : 'თავისუფალი'
   };
 
   myTickets.push(currentActiveTicket);
@@ -431,11 +502,12 @@ document.getElementById('booking-form').addEventListener('submit', (e) => {
 
   document.getElementById('ticket-event-title').textContent = currentActiveTicket.eventTitle;
   document.getElementById('ticket-user-name').textContent = currentActiveTicket.userName;
+  document.getElementById('ticket-seat-num').textContent = currentActiveTicket.seatNum;
   document.getElementById('ticket-event-date').textContent = currentActiveTicket.eventDate;
   document.getElementById('ticket-event-location').textContent = currentActiveTicket.eventLocation;
   document.getElementById('ticket-id-code').textContent = `#${currentActiveTicket.id}`;
 
-  const qrContent = encodeURIComponent(`TicketID: ${currentActiveTicket.id} | Event: ${currentActiveTicket.eventTitle} | Holder: ${currentActiveTicket.userName}`);
+  const qrContent = encodeURIComponent(`TicketID: ${currentActiveTicket.id} | Event: ${currentActiveTicket.eventTitle} | Holder: ${currentActiveTicket.userName} | Seat: ${currentActiveTicket.seatNum}`);
   document.getElementById('ticket-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrContent}`;
 
   bookingModal.style.display = 'none';
@@ -443,7 +515,7 @@ document.getElementById('booking-form').addEventListener('submit', (e) => {
   updateUI();
 });
 
-// ⏳ უკუთვლის ტაიმერის ლოგიკა
+// ⏳ ტაიმერი
 function startCountdownTimer() {
   if (allEvents.length === 0) return;
 
@@ -457,13 +529,7 @@ function startCountdownTimer() {
     const now = new Date().getTime();
     const distance = eventDate - now;
 
-    if (distance < 0) {
-      document.getElementById('timer-days').textContent = '00';
-      document.getElementById('timer-hours').textContent = '00';
-      document.getElementById('timer-minutes').textContent = '00';
-      document.getElementById('timer-seconds').textContent = '00';
-      return;
-    }
+    if (distance < 0) return;
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -477,27 +543,20 @@ function startCountdownTimer() {
   }, 1000);
 }
 
-// 🗓️ Google Calendar-ში დამატების ფუნქცია
 function openGoogleCalendar(title, dateStr, location) {
   const formattedDate = dateStr.replace(/-/g, '');
   const startTime = `${formattedDate}T100000Z`;
   const endTime = `${formattedDate}T120000Z`;
-
   const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startTime}/${endTime}&details=${encodeURIComponent('Tech Meet & Greet Hub Event')}&location=${encodeURIComponent(location)}`;
-  
   window.open(calendarUrl, '_blank');
 }
 
 document.getElementById('add-calendar-btn').addEventListener('click', () => {
-  if (currentActiveTicket) {
-    openGoogleCalendar(currentActiveTicket.eventTitle, currentActiveTicket.eventDate, currentActiveTicket.eventLocation);
-  }
+  if (currentActiveTicket) openGoogleCalendar(currentActiveTicket.eventTitle, currentActiveTicket.eventDate, currentActiveTicket.eventLocation);
 });
 
-// 📥 ბილეთის ჩამოტვირთვა / დაბეჭდვა (PDF)
 document.getElementById('download-ticket-btn').addEventListener('click', () => {
   const ticketElement = document.getElementById('digital-ticket').outerHTML;
-  
   const printWindow = window.open('', '', 'width=600,height=700');
   printWindow.document.write(`
     <html>
@@ -516,10 +575,7 @@ document.getElementById('download-ticket-btn').addEventListener('click', () => {
       <body>
         ${ticketElement}
         <script>
-          setTimeout(() => {
-            window.print();
-            window.close();
-          }, 500);
+          setTimeout(() => { window.print(); window.close(); }, 500);
         <\/script>
       </body>
     </html>
@@ -527,7 +583,6 @@ document.getElementById('download-ticket-btn').addEventListener('click', () => {
   printWindow.document.close();
 });
 
-// 🎟️ პირადი კაბინეტის ბილეთების სიის რენდერი
 function renderMyTickets() {
   const container = document.getElementById('my-tickets-list');
   container.innerHTML = '';
@@ -543,7 +598,7 @@ function renderMyTickets() {
     item.innerHTML = `
       <div>
         <h4>${tkt.eventTitle}</h4>
-        <p>📅 ${tkt.eventDate} | 🆔 ${tkt.id}</p>
+        <p>📅 ${tkt.eventDate} | 💺 ${tkt.seatNum || 'თავისუფალი'} | 🆔 ${tkt.id}</p>
       </div>
       <span style="font-size: 1.2rem;">🎟️</span>
     `;
@@ -551,7 +606,6 @@ function renderMyTickets() {
   });
 }
 
-// 🧠 შემეცნებითი რობოტი
 let factIndex = 0;
 function showNextFact() {
   const facts = translations[currentLang].robotInfo;
