@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Meet & Greet Hub</title>
+  <title>Tech Meet & Greet Hub - Vector Edition</title>
   <style>
     :root {
-      --bg-color: #f4f7f6;
+      --bg-color: #f8fafc;
       --card-bg: #ffffff;
       --text-color: #0f172a;
-      --subtext-color: #555555;
-      --border-color: #cccccc;
+      --subtext-color: #475569;
+      --border-color: #e2e8f0;
+      --accent-color: #6366f1;
       --modal-bg: #ffffff;
     }
 
@@ -27,7 +28,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
@@ -40,7 +41,7 @@
 
     .header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     .top-bar {
@@ -48,23 +49,28 @@
       justify-content: space-between;
       align-items: center;
       max-width: 1200px;
-      margin: 0 auto 10px auto;
+      margin: 0 auto 15px auto;
     }
 
     .btn-theme-toggle {
       background: var(--card-bg);
-      border: 1px solid var(--border-color);
+      border: 2px solid var(--border-color);
       color: var(--text-color);
-      padding: 6px 12px;
+      padding: 8px 14px;
       border-radius: 20px;
       cursor: pointer;
       font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .btn-theme-toggle:hover {
+      transform: scale(1.05);
     }
 
     .select-styled {
-      padding: 6px;
-      border-radius: 15px;
-      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 2px solid var(--border-color);
       background: var(--card-bg);
       color: var(--text-color);
       font-weight: bold;
@@ -72,13 +78,14 @@
     }
 
     .btn-profile {
-      background: #0f172a;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
       color: white;
       border: none;
-      padding: 8px 16px;
+      padding: 10px 20px;
       border-radius: 20px;
       cursor: pointer;
       font-weight: bold;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
 
     .controls-section {
@@ -86,235 +93,267 @@
       justify-content: center;
       align-items: center;
       gap: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       flex-wrap: wrap;
     }
 
     .controls-section input, .controls-section select {
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 2px solid var(--border-color);
       background: var(--card-bg);
       color: var(--text-color);
+      outline: none;
     }
 
     .btn-secondary {
-      background: #e11d48;
+      background: #f43f5e;
       color: white;
       border: none;
-      padding: 9px 15px;
-      border-radius: 5px;
+      padding: 10px 18px;
+      border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
+      box-shadow: 0 4px 10px rgba(244, 63, 94, 0.25);
     }
 
     .subscription-banner {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
       color: white;
       text-align: center;
-      padding: 20px;
-      border-radius: 12px;
+      padding: 25px;
+      border-radius: 16px;
       max-width: 1200px;
-      margin: 0 auto 20px auto;
+      margin: 0 auto 25px auto;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
     }
 
     .btn-subscribe-banner {
-      margin-top: 12px;
+      margin-top: 15px;
       background: #f59e0b;
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
+      padding: 12px 24px;
+      border-radius: 10px;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
     }
 
     /* ⏳ ტაიმერი */
     .countdown-section {
       background: var(--card-bg);
       border: 2px solid #38bdf8;
-      border-radius: 12px;
+      border-radius: 16px;
       max-width: 1200px;
       margin: 0 auto 30px auto;
-      padding: 15px 20px;
+      padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 15px;
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
     }
 
     .timer-boxes {
       display: flex;
-      gap: 10px;
+      gap: 12px;
     }
 
     .time-box {
       background: #0f172a;
       color: #38bdf8;
-      padding: 8px 12px;
-      border-radius: 8px;
+      padding: 10px 14px;
+      border-radius: 10px;
       text-align: center;
-      min-width: 55px;
+      min-width: 60px;
     }
 
     .time-box span {
       display: block;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: bold;
     }
 
     .time-box small {
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       color: #94a3b8;
     }
 
     .events-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
+    /* 🎨 ვექტორული ბარათების სტილი */
     .event-card {
       background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
       position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     }
 
     .fav-btn {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 12px;
+      right: 12px;
       background: rgba(255, 255, 255, 0.9);
       border: none;
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
 
     .fav-btn.active {
       background: #ffe4e6;
     }
 
-    .event-card img {
+    .event-card-img-container {
       width: 100%;
-      height: 160px;
-      object-fit: cover;
+      height: 180px;
+      background: #f1f5f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .event-card img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
     }
 
     .event-info {
-      padding: 15px;
+      padding: 20px;
     }
 
     .badge {
       background: #e0e7ff;
-      color: #3730a3;
-      padding: 4px 8px;
-      border-radius: 4px;
+      color: #4338ca;
+      padding: 6px 12px;
+      border-radius: 8px;
       font-size: 0.8rem;
       font-weight: bold;
+      display: inline-block;
     }
 
     .event-title {
-      margin: 10px 0 5px 0;
-      font-size: 1.2rem;
+      margin: 12px 0 6px 0;
+      font-size: 1.25rem;
     }
 
     .rating-stars {
       color: #f59e0b;
-      font-size: 0.85rem;
-      margin-bottom: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
       font-weight: bold;
     }
 
     .speaker, .event-details {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--subtext-color);
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
 
     .card-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 15px;
+      margin-top: 18px;
       gap: 8px;
     }
 
     .price {
-      font-weight: bold;
-      font-size: 1.1rem;
-      color: #22c55e;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #10b981;
     }
 
     .btn-details {
-      background: #4f46e5;
+      background: #6366f1;
       color: white;
       border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
+      padding: 10px 16px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
     }
 
     .btn-qa-icon, .btn-calendar-icon {
       background: #0284c7;
       color: white;
       border: none;
-      padding: 8px 10px;
-      border-radius: 5px;
+      padding: 10px 12px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
 
     /* 💺 ადგილების არჩევა */
     .seat-picker-container {
       background: var(--bg-color);
-      padding: 12px;
-      border-radius: 8px;
-      margin-top: 10px;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 12px;
       text-align: center;
     }
 
     .stage-label {
-      background: #64748b;
+      background: #475569;
       color: white;
-      font-size: 0.75rem;
-      padding: 4px;
-      border-radius: 4px;
-      margin-bottom: 12px;
+      font-size: 0.8rem;
+      padding: 6px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-weight: bold;
     }
 
     .seats-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: 8px;
-      max-width: 260px;
+      gap: 10px;
+      max-width: 280px;
       margin: 0 auto;
     }
 
     .seat {
-      width: 32px;
-      height: 32px;
-      background: #22c55e;
+      width: 36px;
+      height: 36px;
+      background: #10b981;
       color: white;
-      border-radius: 6px;
+      border-radius: 8px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: bold;
       cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .seat:hover:not(.occupied) {
+      transform: scale(1.1);
     }
 
     .seat.selected {
@@ -328,12 +367,13 @@
 
     .btn-poll {
       background: var(--bg-color);
-      border: 1px solid var(--border-color);
+      border: 2px solid var(--border-color);
       color: var(--text-color);
-      padding: 6px 12px;
-      border-radius: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
+      font-weight: bold;
     }
 
     /* Modals */
@@ -344,70 +384,73 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(15, 23, 42, 0.75);
       justify-content: center;
       align-items: center;
       z-index: 1000;
+      backdrop-filter: blur(4px);
     }
 
     .modal-content {
       background-color: var(--modal-bg);
       color: var(--text-color);
-      padding: 25px;
-      border-radius: 10px;
+      padding: 30px;
+      border-radius: 20px;
       width: 90%;
       max-width: 480px;
       position: relative;
       max-height: 90vh;
       overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
 
     .close-btn {
       position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 24px;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
       cursor: pointer;
     }
 
     #profile-form, #booking-form, #qa-form {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     #profile-form input, #booking-form input, #qa-form input {
-      padding: 8px;
-      border: 1px solid var(--border-color);
+      padding: 10px;
+      border: 2px solid var(--border-color);
       background: var(--card-bg);
       color: var(--text-color);
-      border-radius: 5px;
+      border-radius: 8px;
     }
 
     .btn-submit {
-      background: #22c55e;
+      background: #10b981;
       color: white;
       border: none;
-      padding: 10px;
-      border-radius: 5px;
+      padding: 12px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 1rem;
     }
 
     .ticket-card {
       background: linear-gradient(135deg, #0f172a, #1e293b);
       color: white;
-      border-radius: 12px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 22px;
       border: 2px dashed #38bdf8;
     }
 
     .ticket-badge {
       background: #38bdf8;
       color: #0f172a;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
       font-weight: bold;
     }
 
@@ -416,12 +459,12 @@
       margin-top: 15px;
       background: white;
       padding: 12px;
-      border-radius: 8px;
+      border-radius: 10px;
     }
 
     .ticket-qr-container img {
-      width: 130px;
-      height: 130px;
+      width: 140px;
+      height: 140px;
     }
 
     .ticket-actions-grid {
@@ -444,9 +487,9 @@
 
     .ticket-item-mini {
       background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      padding: 10px;
-      border-radius: 8px;
+      border: 2px solid var(--border-color);
+      padding: 12px;
+      border-radius: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -467,11 +510,12 @@
       right: -10px;
       background: #38bdf8;
       color: #0f172a;
-      padding: 8px 14px;
-      border-radius: 12px;
+      padding: 10px 16px;
+      border-radius: 14px;
       font-size: 0.85rem;
       font-weight: bold;
       white-space: nowrap;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
 
     .robot-body {
@@ -660,7 +704,7 @@
     <div class="modal-content">
       <span class="close-btn" id="close-qa">&times;</span>
       <h3>💬 დასვი კითხვა სპიკერისთვის</h3>
-      <p id="qa-event-title" style="color: #38bdf8; font-weight: bold; margin-bottom: 10px;"></p>
+      <p id="qa-event-title" style="color: #0284c7; font-weight: bold; margin-bottom: 10px;"></p>
       
       <form id="qa-form">
         <input type="text" id="qa-input" placeholder="დაწერე შენი კითხვა..." required>
@@ -710,7 +754,7 @@
         <p style="font-size: 0.85rem; margin-bottom: 8px;"><b>💺 აირჩიეთ სასურველი ადგილი დარბაზში:</b></p>
         <div class="stage-label">🎬 სცენა / სპიკერი</div>
         <div class="seats-grid" id="seats-grid"></div>
-        <small id="selected-seat-label" style="display: block; margin-top: 8px; color: #22c55e; font-weight: bold;">არჩეული ადგილი: -</small>
+        <small id="selected-seat-label" style="display: block; margin-top: 8px; color: #10b981; font-weight: bold;">არჩეული ადგილი: -</small>
       </div>
 
       <form id="booking-form" style="margin-top: 15px;">
@@ -751,7 +795,7 @@
 
       <div class="ticket-actions-grid">
         <button id="add-calendar-btn" class="btn-submit" style="background: #0284c7;">🗓️ <span data-i18n="btnAddToCalendar">კალენდარში დამატება</span></button>
-        <button id="download-ticket-btn" class="btn-submit" style="background: #4f46e5;">📥 <span data-i18n="btnDownload">ჩამოტვირთვა (PDF)</span></button>
+        <button id="download-ticket-btn" class="btn-submit" style="background: #6366f1;">📥 <span data-i18n="btnDownload">ჩამოტვირთვა (PDF)</span></button>
       </div>
       <button id="close-ticket-btn" class="btn-secondary" style="width: 100%; margin-top: 10px;" data-i18n="btnClose">დახურვა</button>
     </div>
@@ -781,6 +825,7 @@
 
   <!-- JavaScript ლოგიკა -->
   <script>
+    // 🎨 ვექტორული ილუსტრაციებით განახლებული ივენთების მონაცემები
     let allEvents = [
       {
         "id": 1,
@@ -792,7 +837,7 @@
         "location": "Tbilisi Tech Hub",
         "price": 120,
         "rating": 4.9,
-        "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500"
+        "image": "https://cdni.iconscout.com/illustration/premium/thumb/artificial-intelligence-illustration-download-in-svg-png-gif-file-formats--ai-brain-robot-technology-pack-future-illustrations-3708852.png"
       },
       {
         "id": 2,
@@ -804,7 +849,7 @@
         "location": "Zoom Meeting",
         "price": 70,
         "rating": 4.8,
-        "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500"
+        "image": "https://cdni.iconscout.com/illustration/premium/thumb/web-development-illustration-download-in-svg-png-gif-file-formats--coding-programmer-developer-programming-technology-pack-illustrations-3309832.png"
       },
       {
         "id": 3,
@@ -816,7 +861,7 @@
         "location": "Ozurgeti TechnoPark / Online",
         "price": 160,
         "rating": 5.0,
-        "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500"
+        "image": "https://cdni.iconscout.com/illustration/premium/thumb/cyber-security-illustration-download-in-svg-png-gif-file-formats--data-protection-safety-shield-network-technology-pack-illustrations-3708855.png"
       }
     ];
 
@@ -850,18 +895,6 @@
       localStorage.setItem('isDarkMode', isDarkMode);
     });
 
-    fetch('src/data/events.json')
-      .then(res => res.json())
-      .then(data => {
-        allEvents = data;
-        filterEvents();
-        startCountdownTimer();
-      })
-      .catch(() => {
-        filterEvents();
-        startCountdownTimer();
-      });
-
     function displayEvents(events) {
       eventsGrid.innerHTML = '';
       const currency = document.getElementById('currency-select').value;
@@ -881,7 +914,9 @@
           <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${event.id}">
             ${isFav ? '❤️' : '🤍'}
           </button>
-          <img src="${event.image}" alt="${event.title}">
+          <div class="event-card-img-container">
+            <img src="${event.image}" alt="${event.title}">
+          </div>
           <div class="event-info">
             <span class="badge">${event.category} • ${event.format}</span>
             <h3 class="event-title">${event.title}</h3>
@@ -890,7 +925,7 @@
             <p class="event-details">📅 ${event.date} | 📍 ${event.location}</p>
             <div class="card-footer">
               <span class="price">${formattedPrice}</span>
-              <div style="display: flex; gap: 5px;">
+              <div style="display: flex; gap: 6px;">
                 <button class="btn-qa-icon" data-id="${event.id}" title="დასვი კითხვა">💬</button>
                 <button class="btn-calendar-icon" data-id="${event.id}" title="Google Calendar">🗓️</button>
                 <button class="btn-details" data-id="${event.id}">დაჯავშნა</button>
@@ -1084,6 +1119,8 @@
       });
     }
 
+    filterEvents();
+    startCountdownTimer();
     renderMyTickets();
   </script>
 </body>
