@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Meet & Greet Hub - Vector Edition</title>
+  <title>Tech Meet & Greet Hub</title>
   <style>
     :root {
       --bg-color: #f8fafc;
@@ -11,7 +11,7 @@
       --text-color: #0f172a;
       --subtext-color: #475569;
       --border-color: #e2e8f0;
-      --accent-color: #6366f1;
+      --accent-color: #4f46e5;
       --modal-bg: #ffffff;
     }
 
@@ -52,40 +52,47 @@
       margin: 0 auto 15px auto;
     }
 
+    .top-bar h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
     .btn-theme-toggle {
       background: var(--card-bg);
-      border: 2px solid var(--border-color);
+      border: 1px solid var(--border-color);
       color: var(--text-color);
       padding: 8px 14px;
-      border-radius: 20px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
       transition: all 0.2s;
     }
 
     .btn-theme-toggle:hover {
-      transform: scale(1.05);
+      border-color: var(--accent-color);
     }
 
     .select-styled {
       padding: 8px 12px;
-      border-radius: 12px;
-      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
       background: var(--card-bg);
       color: var(--text-color);
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
     }
 
     .btn-profile {
-      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      background: var(--accent-color);
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
+      padding: 9px 18px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      font-weight: 600;
+      font-size: 0.9rem;
     }
 
     .controls-section {
@@ -99,87 +106,108 @@
 
     .controls-section input, .controls-section select {
       padding: 10px 14px;
-      border-radius: 10px;
-      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
       background: var(--card-bg);
       color: var(--text-color);
       outline: none;
+      font-size: 0.9rem;
     }
 
     .btn-secondary {
-      background: #f43f5e;
+      background: #e11d48;
       color: white;
       border: none;
       padding: 10px 18px;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(244, 63, 94, 0.25);
+      font-weight: 600;
+      font-size: 0.9rem;
     }
 
     .subscription-banner {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      background: linear-gradient(135deg, #4f46e5, #3730a3);
       color: white;
       text-align: center;
       padding: 25px;
-      border-radius: 16px;
+      border-radius: 12px;
       max-width: 1200px;
       margin: 0 auto 25px auto;
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+    }
+
+    .subscription-banner h2 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .subscription-banner p {
+      font-size: 0.95rem;
+      opacity: 0.9;
     }
 
     .btn-subscribe-banner {
       margin-top: 15px;
       background: #f59e0b;
-      color: white;
+      color: #0f172a;
       border: none;
-      padding: 12px 24px;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: bold;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
     }
 
-    /* ⏳ ტაიმერი */
+    /* ტაიმერი */
     .countdown-section {
       background: var(--card-bg);
-      border: 2px solid #38bdf8;
-      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
       max-width: 1200px;
       margin: 0 auto 30px auto;
-      padding: 20px;
+      padding: 18px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 15px;
-      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+    }
+
+    .countdown-title {
+      font-size: 0.95rem;
+      color: var(--subtext-color);
+    }
+
+    .countdown-title strong {
+      color: var(--accent-color);
+      margin-left: 5px;
+      font-size: 1.05rem;
     }
 
     .timer-boxes {
       display: flex;
-      gap: 12px;
+      gap: 10px;
     }
 
     .time-box {
       background: #0f172a;
       color: #38bdf8;
-      padding: 10px 14px;
-      border-radius: 10px;
+      padding: 8px 14px;
+      border-radius: 8px;
       text-align: center;
       min-width: 60px;
     }
 
     .time-box span {
       display: block;
-      font-size: 1.3rem;
-      font-weight: bold;
+      font-size: 1.2rem;
+      font-weight: 700;
     }
 
     .time-box small {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .events-grid {
@@ -190,13 +218,13 @@
       margin: 0 auto;
     }
 
-    /* 🎨 ბარათების სტილი */
+    /* ბარათების სტილი */
     .event-card {
       background: var(--card-bg);
-      border: 2px solid var(--border-color);
-      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
       display: flex;
       flex-direction: column;
       position: relative;
@@ -204,8 +232,8 @@
     }
 
     .event-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
 
     .fav-btn {
@@ -213,18 +241,24 @@
       top: 12px;
       right: 12px;
       background: rgba(255, 255, 255, 0.9);
-      border: none;
+      border: 1px solid #cbd5e1;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       cursor: pointer;
-      font-size: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      font-size: 14px;
+      font-weight: bold;
+      color: #64748b;
       z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .fav-btn.active {
       background: #ffe4e6;
+      color: #e11d48;
+      border-color: #fda4af;
     }
 
     .event-card-img-container {
@@ -232,7 +266,7 @@
       height: 180px;
       background: #f1f5f9;
       overflow: hidden;
-      border-bottom: 2px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
     }
 
     .event-card img {
@@ -247,28 +281,31 @@
 
     .badge {
       background: #e0e7ff;
-      color: #4338ca;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: bold;
+      color: #3730a3;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       display: inline-block;
     }
 
     .event-title {
       margin: 12px 0 6px 0;
-      font-size: 1.25rem;
+      font-size: 1.15rem;
+      font-weight: 700;
     }
 
     .rating-stars {
       color: #f59e0b;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin-bottom: 10px;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     .speaker, .event-details {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--subtext-color);
       margin-bottom: 6px;
     }
@@ -283,36 +320,42 @@
 
     .price {
       font-weight: 800;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: #10b981;
     }
 
     .btn-details {
-      background: #6366f1;
+      background: var(--accent-color);
       color: white;
       border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
+      padding: 9px 15px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+      font-weight: 600;
+      font-size: 0.85rem;
     }
 
     .btn-qa-icon, .btn-calendar-icon {
-      background: #0284c7;
-      color: white;
-      border: none;
-      padding: 10px 12px;
-      border-radius: 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 8px 12px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 0.8rem;
+      font-weight: 600;
     }
 
-    /* 💺 ადგილების არჩევა */
+    .btn-qa-icon:hover, .btn-calendar-icon:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    /* ადგილების არჩევა */
     .seat-picker-container {
       background: var(--bg-color);
       padding: 15px;
-      border-radius: 12px;
+      border-radius: 8px;
       margin-top: 12px;
       text-align: center;
     }
@@ -320,17 +363,19 @@
     .stage-label {
       background: #475569;
       color: white;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       padding: 6px;
-      border-radius: 6px;
+      border-radius: 4px;
       margin-bottom: 15px;
-      font-weight: bold;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .seats-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
+      gap: 8px;
       max-width: 280px;
       margin: 0 auto;
     }
@@ -340,18 +385,13 @@
       height: 36px;
       background: #10b981;
       color: white;
-      border-radius: 8px;
+      border-radius: 6px;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 0.8rem;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
-      transition: transform 0.1s;
-    }
-
-    .seat:hover:not(.occupied) {
-      transform: scale(1.1);
     }
 
     .seat.selected {
@@ -365,13 +405,13 @@
 
     .btn-poll {
       background: var(--bg-color);
-      border: 2px solid var(--border-color);
+      border: 1px solid var(--border-color);
       color: var(--text-color);
       padding: 8px 14px;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
       font-size: 0.85rem;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     /* Modals */
@@ -382,32 +422,32 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(15, 23, 42, 0.75);
+      background-color: rgba(15, 23, 42, 0.6);
       justify-content: center;
       align-items: center;
       z-index: 1000;
-      backdrop-filter: blur(4px);
     }
 
     .modal-content {
       background-color: var(--modal-bg);
       color: var(--text-color);
       padding: 30px;
-      border-radius: 20px;
+      border-radius: 12px;
       width: 90%;
       max-width: 480px;
       position: relative;
       max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
     .close-btn {
       position: absolute;
       top: 15px;
       right: 20px;
-      font-size: 28px;
+      font-size: 24px;
       cursor: pointer;
+      color: var(--subtext-color);
     }
 
     #profile-form, #booking-form, #qa-form {
@@ -418,27 +458,27 @@
 
     #profile-form input, #booking-form input, #qa-form input {
       padding: 10px;
-      border: 2px solid var(--border-color);
+      border: 1px solid var(--border-color);
       background: var(--card-bg);
       color: var(--text-color);
-      border-radius: 8px;
+      border-radius: 6px;
     }
 
     .btn-submit {
       background: #10b981;
       color: white;
       border: none;
-      padding: 12px;
-      border-radius: 8px;
+      padding: 11px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: bold;
-      font-size: 1rem;
+      font-weight: 700;
+      font-size: 0.95rem;
     }
 
     .ticket-card {
       background: linear-gradient(135deg, #0f172a, #1e293b);
       color: white;
-      border-radius: 16px;
+      border-radius: 12px;
       padding: 22px;
       border: 2px dashed #38bdf8;
     }
@@ -447,9 +487,10 @@
       background: #38bdf8;
       color: #0f172a;
       padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: bold;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
     .ticket-qr-container {
@@ -457,7 +498,7 @@
       margin-top: 15px;
       background: white;
       padding: 12px;
-      border-radius: 10px;
+      border-radius: 8px;
     }
 
     .ticket-qr-container img {
@@ -485,15 +526,15 @@
 
     .ticket-item-mini {
       background: var(--bg-color);
-      border: 2px solid var(--border-color);
+      border: 1px solid var(--border-color);
       padding: 12px;
-      border-radius: 10px;
+      border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    /* 🤖 რობოტი */
+    /* ასისტენტის ბარათი */
     .robot-container {
       position: fixed;
       bottom: 20px;
@@ -503,107 +544,14 @@
     }
 
     .robot-speech-bubble {
-      position: absolute;
-      bottom: 105px;
-      right: -10px;
-      background: #38bdf8;
-      color: #0f172a;
+      background: #0f172a;
+      color: #38bdf8;
+      border: 1px solid #38bdf8;
       padding: 10px 16px;
-      border-radius: 14px;
-      font-size: 0.85rem;
-      font-weight: bold;
-      white-space: nowrap;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    }
-
-    .robot-body {
-      width: 70px;
-      height: 90px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
-
-    .robot-ear {
-      width: 6px;
-      height: 10px;
-      background: #38bdf8;
-      position: absolute;
-      top: 18px;
-      border-radius: 3px;
-    }
-    .robot-ear.left { left: 4px; }
-    .robot-ear.right { right: 4px; }
-
-    .robot-antenna {
-      width: 4px;
-      height: 14px;
-      background: #64748b;
-      position: relative;
-    }
-
-    .antenna-ball {
-      width: 10px;
-      height: 10px;
-      background: #ef4444;
-      border-radius: 50%;
-      position: absolute;
-      top: -8px;
-      left: -3px;
-    }
-
-    .robot-head {
-      width: 52px;
-      height: 38px;
-      background: linear-gradient(145deg, #1e293b, #0f172a);
-      border: 2px solid #38bdf8;
-      border-radius: 12px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 0 6px;
-    }
-
-    .robot-eye {
-      width: 12px;
-      height: 12px;
-      background: #38bdf8;
-      border-radius: 50%;
-    }
-
-    .robot-mouth {
-      position: absolute;
-      bottom: 4px;
-      width: 16px;
-      height: 3px;
-      background: #38bdf8;
-      border-radius: 2px;
-    }
-
-    .robot-torso {
-      width: 44px;
-      height: 30px;
-      background: linear-gradient(145deg, #475569, #334155);
       border-radius: 8px;
-      margin-top: 2px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #f59e0b;
-    }
-
-    .robot-legs {
-      display: flex;
-      gap: 14px;
-      margin-top: 2px;
-    }
-
-    .robot-leg {
-      width: 7px;
-      height: 14px;
-      background: #64748b;
-      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
   </style>
 </head>
@@ -611,14 +559,14 @@
 
   <header class="header">
     <div class="top-bar">
-      <h1>🚀 Tech Meet & Greet Hub</h1>
+      <h1>Tech Meet & Greet Hub</h1>
       <div class="user-control" style="display: flex; gap: 10px; align-items: center;">
-        <button id="theme-toggle-btn" class="btn-theme-toggle" title="თემის შეცვლა">🌙</button>
+        <button id="theme-toggle-btn" class="btn-theme-toggle" title="თემის შეცვლა">რეჟიმი</button>
         <select id="language-select" class="select-styled">
-          <option value="ka">🇬🇪 GE</option>
-          <option value="en">🇺🇸 EN</option>
+          <option value="ka">GE</option>
+          <option value="en">EN</option>
         </select>
-        <button id="profile-btn" class="btn-profile">👤 <span data-i18n="profileBtn">პირადი კაბინეთი</span></button>
+        <button id="profile-btn" class="btn-profile"><span data-i18n="profileBtn">პირადი კაბინეთი</span></button>
       </div>
     </div>
     <p data-i18n="headerSubtitle">იპოვეთ, დაჯავშნეთ და მიიღეთ ექსკლუზიური შეტყობინებები ტექნოლოგიურ ივენთებზე</p>
@@ -670,21 +618,21 @@
     </div>
 
     <div>
-      <button id="show-favorites-btn" class="btn-secondary">❤️ <span data-i18n="btnInterested">მაინტერესებს</span> (<span id="fav-count">0</span>)</button>
+      <button id="show-favorites-btn" class="btn-secondary"><span data-i18n="btnInterested">მაინტერესებს</span> (<span id="fav-count">0</span>)</button>
     </div>
   </section>
 
   <!-- ბანერი -->
   <section class="subscription-banner">
-    <h2 data-i18n="bannerTitle">🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
+    <h2 data-i18n="bannerTitle">გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
     <p data-i18n="bannerDesc">შეიტყვეთ დაგეგმილი ივენთებისა და ტრენინგების შესახებ ყველაზე ადრე და დაჯავშნეთ ადგილები პრიორიტეტულად.</p>
-    <button id="subscribe-plan-btn" class="btn-subscribe-banner" data-i18n="btnViewPackages">💎 პაკეტების ნახვა</button>
+    <button id="subscribe-plan-btn" class="btn-subscribe-banner" data-i18n="btnViewPackages">პაკეტების ნახვა</button>
   </section>
 
-  <!-- ⏳ ტაიმერი -->
+  <!-- ტაიმერი -->
   <section class="countdown-section" id="countdown-section">
     <div class="countdown-title">
-      ⏳ <span data-i18n="nextEventTitle">უახლოეს ივენთამდე დარჩენილია:</span>
+      <span data-i18n="nextEventTitle">უახლოეს ივენთამდე დარჩენილია:</span>
       <strong id="next-event-name">AI & Future Tech Summit</strong>
     </div>
     <div class="timer-boxes">
@@ -697,12 +645,12 @@
 
   <main class="events-grid" id="events-grid"></main>
 
-  <!-- 💬 Q&A Modal -->
+  <!-- Q&A Modal -->
   <div id="qa-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-qa">&times;</span>
-      <h3>💬 დასვი კითხვა სპიკერისთვის</h3>
-      <p id="qa-event-title" style="color: #0284c7; font-weight: bold; margin-bottom: 10px;"></p>
+      <h3>დასვი კითხვა სპიკერისთვის</h3>
+      <p id="qa-event-title" style="color: #0284c7; font-weight: 600; margin-bottom: 10px;"></p>
       
       <form id="qa-form">
         <input type="text" id="qa-input" placeholder="დაწერე შენი კითხვა..." required>
@@ -710,11 +658,11 @@
       </form>
 
       <div style="margin-top: 15px;">
-        <h4>📊 საზოგადოების გამოკითხვა:</h4>
+        <h4>საზოგადოების გამოკითხვა:</h4>
         <p style="font-size: 0.85rem; margin-top: 5px;">რამდენად ელოდებით ამ ივენთს?</p>
         <div style="display: flex; gap: 10px; margin-top: 8px;">
-          <button class="btn-poll" data-poll="high">🔥 ძალიან! (78%)</button>
-          <button class="btn-poll" data-poll="medium">👍 მაინტერესებს (22%)</button>
+          <button class="btn-poll" data-poll="high">ძალიან (78%)</button>
+          <button class="btn-poll" data-poll="medium">მაინტერესებს (22%)</button>
         </div>
       </div>
 
@@ -722,37 +670,22 @@
     </div>
   </div>
 
-  <!-- 🤖 რობოტი -->
+  <!-- ასისტენტი -->
   <div id="cute-robot" class="robot-container">
-    <div class="robot-speech-bubble" id="robot-bubble">გამარჯობა! მე შენი ტექ-ასისტენტი ვარ 🤖</div>
-    <div class="robot-body">
-      <div class="robot-ear left"></div>
-      <div class="robot-ear right"></div>
-      <div class="robot-antenna"><div class="antenna-ball"></div></div>
-      <div class="robot-head">
-        <div class="robot-eye left"></div>
-        <div class="robot-eye right"></div>
-        <div class="robot-mouth"></div>
-      </div>
-      <div class="robot-torso">⚡</div>
-      <div class="robot-legs">
-        <div class="robot-leg left"></div>
-        <div class="robot-leg right"></div>
-      </div>
-    </div>
+    <div class="robot-speech-bubble" id="robot-bubble">ტექ-ასისტენტი აქ არის</div>
   </div>
 
-  <!-- 💺 დაჯავშნისა და ადგილების Modal -->
+  <!-- დაჯავშნისა და ადგილების Modal -->
   <div id="booking-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-booking">&times;</span>
       <h2 id="modal-event-title" data-i18n="modalBookingTitle">ღონისძიების დაჯავშნა</h2>
       
       <div class="seat-picker-container">
-        <p style="font-size: 0.85rem; margin-bottom: 8px;"><b>💺 აირჩიეთ სასურველი ადგილი დარბაზში:</b></p>
-        <div class="stage-label">🎬 სცენა / სპიკერი</div>
+        <p style="font-size: 0.85rem; margin-bottom: 8px;"><b>აირჩიეთ სასურველი ადგილი დარბაზში:</b></p>
+        <div class="stage-label">სცენა / სპიკერი</div>
         <div class="seats-grid" id="seats-grid"></div>
-        <small id="selected-seat-label" style="display: block; margin-top: 8px; color: #10b981; font-weight: bold;">არჩეული ადგილი: -</small>
+        <small id="selected-seat-label" style="display: block; margin-top: 8px; color: #10b981; font-weight: 700;">არჩეული ადგილი: -</small>
       </div>
 
       <form id="booking-form" style="margin-top: 15px;">
@@ -767,11 +700,11 @@
     </div>
   </div>
 
-  <!-- 🎟️ ბილეთის Modal -->
+  <!-- ბილეთის Modal -->
   <div id="ticket-modal" class="modal">
     <div class="modal-content ticket-modal-content">
       <span class="close-btn" id="close-ticket">&times;</span>
-      <h2 style="text-align: center; margin-bottom: 15px;" data-i18n="yourTicketTitle">🎟️ თქვენი ციფრული ბილეთი</h2>
+      <h2 style="text-align: center; margin-bottom: 15px;" data-i18n="yourTicketTitle">თქვენი ციფრული ბილეთი</h2>
       
       <div class="ticket-card" id="digital-ticket">
         <div class="ticket-header">
@@ -779,11 +712,11 @@
           <h3 id="ticket-event-title">AI & Future Tech Summit</h3>
         </div>
         <div class="ticket-body" style="margin-top: 10px;">
-          <p>👤 <b data-i18n="labelHolder">მფლობელი:</b> <span id="ticket-user-name">-</span></p>
-          <p>💺 <b>ადგილი დარბაზში:</b> <span id="ticket-seat-num">-</span></p>
-          <p>📅 <b data-i18n="labelDate">თარიღი:</b> <span id="ticket-event-date">-</span></p>
-          <p>📍 <b data-i18n="labelLocation">ადგილი:</b> <span id="ticket-event-location">-</span></p>
-          <p>🆔 <b data-i18n="labelTicketId">ბილეთის ID:</b> <code id="ticket-id-code">#TKT-0000</code></p>
+          <p><b data-i18n="labelHolder">მფლობელი:</b> <span id="ticket-user-name">-</span></p>
+          <p><b>ადგილი დარბაზში:</b> <span id="ticket-seat-num">-</span></p>
+          <p><b data-i18n="labelDate">თარიღი:</b> <span id="ticket-event-date">-</span></p>
+          <p><b data-i18n="labelLocation">ადგილი:</b> <span id="ticket-event-location">-</span></p>
+          <p><b data-i18n="labelTicketId">ბილეთის ID:</b> <code id="ticket-id-code">#TKT-0000</code></p>
         </div>
         <div class="ticket-qr-container">
           <img id="ticket-qr-img" src="" alt="QR Code">
@@ -792,8 +725,8 @@
       </div>
 
       <div class="ticket-actions-grid">
-        <button id="add-calendar-btn" class="btn-submit" style="background: #0284c7;">🗓️ <span data-i18n="btnAddToCalendar">კალენდარში დამატება</span></button>
-        <button id="download-ticket-btn" class="btn-submit" style="background: #6366f1;">📥 <span data-i18n="btnDownload">ჩამოტვირთვა (PDF)</span></button>
+        <button id="add-calendar-btn" class="btn-submit" style="background: #0284c7;"><span data-i18n="btnAddToCalendar">კალენდარში დამატება</span></button>
+        <button id="download-ticket-btn" class="btn-submit" style="background: #4f46e5;"><span data-i18n="btnDownload">ჩამოტვირთვა (PDF)</span></button>
       </div>
       <button id="close-ticket-btn" class="btn-secondary" style="width: 100%; margin-top: 10px;" data-i18n="btnClose">დახურვა</button>
     </div>
@@ -803,7 +736,7 @@
   <div id="profile-modal" class="modal">
     <div class="modal-content profile-content">
       <span class="close-btn" id="close-profile">&times;</span>
-      <h2 data-i18n="profileTitle">👤 პირადი კაბინეთი</h2>
+      <h2 data-i18n="profileTitle">პირადი კაბინეთი</h2>
       
       <form id="profile-form" style="margin-top: 15px;">
         <label for="profile-name" data-i18n="yourName">თქვენი სახელი:</label>
@@ -816,14 +749,13 @@
       </form>
 
       <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-      <h3 style="margin-bottom: 10px;" data-i18n="myTicketsHeading">🎟️ ჩემი დაჯავშნილი ბილეთები</h3>
+      <h3 style="margin-bottom: 10px;" data-i18n="myTicketsHeading">ჩემი დაჯავშნილი ბილეთები</h3>
       <div id="my-tickets-list" class="my-tickets-list"></div>
     </div>
   </div>
 
   <!-- JavaScript ლოგიკა -->
   <script>
-    // 🎨 სტაბილური, მაღალი ხარისხის სურათები Unsplash-დან (რომლებიც არასდროს იბლოკება)
     let allEvents = [
       {
         "id": 1,
@@ -872,7 +804,6 @@
     let currentActiveTicket = null;
     let selectedSeatNumber = null;
 
-    // DOM Elements
     const eventsGrid = document.getElementById('events-grid');
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     const bookingModal = document.getElementById('booking-modal');
@@ -880,16 +811,13 @@
     const qaModal = document.getElementById('qa-modal');
     const profileModal = document.getElementById('profile-modal');
 
-    // Theme Mode
     if (isDarkMode) {
       document.body.classList.add('dark-theme');
-      themeToggleBtn.textContent = '☀️';
     }
 
     themeToggleBtn.addEventListener('click', () => {
       isDarkMode = !isDarkMode;
       document.body.classList.toggle('dark-theme', isDarkMode);
-      themeToggleBtn.textContent = isDarkMode ? '☀️' : '🌙';
       localStorage.setItem('isDarkMode', isDarkMode);
     });
 
@@ -906,11 +834,11 @@
           ? `$${(event.price / USD_RATE).toFixed(0)}` 
           : `${event.price} ₾`;
 
-        const ratingStars = '⭐'.repeat(Math.floor(event.rating || 5)) + ` (${event.rating || 5.0})`;
+        const ratingStars = `Rating: ${event.rating || 5.0} / 5.0`;
 
         card.innerHTML = `
           <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${event.id}">
-            ${isFav ? '❤️' : '🤍'}
+            ${isFav ? 'FAV' : 'ADD'}
           </button>
           <div class="event-card-img-container">
             <img src="${event.image}" alt="${event.title}">
@@ -919,13 +847,13 @@
             <span class="badge">${event.category} • ${event.format}</span>
             <h3 class="event-title">${event.title}</h3>
             <div class="rating-stars">${ratingStars}</div>
-            <p class="speaker">🎤 ${event.speaker}</p>
-            <p class="event-details">📅 ${event.date} | 📍 ${event.location}</p>
+            <p class="speaker">Speaker: ${event.speaker}</p>
+            <p class="event-details">Date: ${event.date} | Location: ${event.location}</p>
             <div class="card-footer">
               <span class="price">${formattedPrice}</span>
               <div style="display: flex; gap: 6px;">
-                <button class="btn-qa-icon" data-id="${event.id}" title="დასვი კითხვა">💬</button>
-                <button class="btn-calendar-icon" data-id="${event.id}" title="Google Calendar">🗓️</button>
+                <button class="btn-qa-icon" data-id="${event.id}" title="დასვი კითხვა">Q&A</button>
+                <button class="btn-calendar-icon" data-id="${event.id}" title="Google Calendar">Calendar</button>
                 <button class="btn-details" data-id="${event.id}">დაჯავშნა</button>
               </div>
             </div>
@@ -976,7 +904,7 @@
         const eventId = Number(e.target.dataset.id);
         const ev = allEvents.find(i => i.id === eventId);
         if (ev) {
-          document.getElementById('qa-event-title').textContent = `${ev.title} (🎤 ${ev.speaker})`;
+          document.getElementById('qa-event-title').textContent = `${ev.title} (${ev.speaker})`;
           qaModal.style.display = 'flex';
         }
       }
@@ -1001,7 +929,6 @@
       }
     });
 
-    // 💺 ადგილების არჩევა
     function renderSeats() {
       const seatsGrid = document.getElementById('seats-grid');
       seatsGrid.innerHTML = '';
@@ -1027,7 +954,6 @@
       }
     }
 
-    // დაჯავშნა
     document.getElementById('booking-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const userName = document.getElementById('user-name').value;
@@ -1062,7 +988,6 @@
       renderMyTickets();
     });
 
-    // ⏳ ტაიმერი
     function startCountdownTimer() {
       if (allEvents.length === 0) return;
       const sorted = [...allEvents].sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -1088,7 +1013,6 @@
       }, 1000);
     }
 
-    // Modal-ების დახურვა
     document.getElementById('close-booking').onclick = () => bookingModal.style.display = 'none';
     document.getElementById('close-ticket').onclick = () => ticketModal.style.display = 'none';
     document.getElementById('close-ticket-btn').onclick = () => ticketModal.style.display = 'none';
@@ -1109,9 +1033,8 @@
         item.innerHTML = `
           <div>
             <h4>${tkt.eventTitle}</h4>
-            <p>📅 ${tkt.eventDate} | 💺 ${tkt.seatNum} | 🆔 ${tkt.id}</p>
+            <p>Date: ${tkt.eventDate} | Seat: ${tkt.seatNum} | ID: ${tkt.id}</p>
           </div>
-          <span style="font-size: 1.2rem;">🎟️</span>
         `;
         container.appendChild(item);
       });
