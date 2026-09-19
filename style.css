@@ -151,6 +151,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-top: 15px;
+  gap: 8px;
 }
 
 .price {
@@ -166,6 +167,17 @@ body {
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-calendar-icon {
+  background: #0284c7;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
 /* Modals */
@@ -187,7 +199,7 @@ body {
   padding: 25px;
   border-radius: 10px;
   width: 90%;
-  max-width: 450px;
+  max-width: 480px;
   position: relative;
   max-height: 90vh;
   overflow-y: auto;
@@ -368,6 +380,16 @@ body {
   color: #64748b;
   font-size: 0.75rem;
   margin-top: 5px;
+}
+
+.ticket-actions-grid {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.ticket-actions-grid button {
+  flex: 1;
 }
 
 .my-tickets-list {

@@ -48,7 +48,8 @@ const translations = {
     labelLocation: "ადგილი:",
     labelTicketId: "ბილეთის ID:",
     qrScanTip: "წარადგინეთ ეს QR კოდი შესასვლელთან",
-    btnDownload: "ბილეთის ჩამოტვირთვა (PDF)",
+    btnDownload: "ჩამოტვირთვა (PDF)",
+    btnAddToCalendar: "კალენდარში დამატება",
     btnClose: "დახურვა",
     myTicketsHeading: "🎟️ ჩემი დაჯავშნილი ბილეთები",
     noSavedTickets: "ჯერ არ გაქვთ დაჯავშნილი ბილეთები.",
@@ -105,7 +106,8 @@ const translations = {
     labelLocation: "Location:",
     labelTicketId: "Ticket ID:",
     qrScanTip: "Present this QR code at the entrance",
-    btnDownload: "Download Ticket (PDF)",
+    btnDownload: "Download (PDF)",
+    btnAddToCalendar: "Add to Calendar",
     btnClose: "Close",
     myTicketsHeading: "🎟️ My Booked Tickets",
     noSavedTickets: "You have no booked tickets yet.",
@@ -130,6 +132,7 @@ let userProfile = JSON.parse(localStorage.getItem('userProfile')) || {
 let myTickets = JSON.parse(localStorage.getItem('myTickets')) || [];
 let showOnlyFavorites = false;
 let selectedEventForBooking = null;
+let currentActiveTicket = null;
 
 // DOM
 const eventsGrid = document.getElementById('events-grid');
@@ -228,7 +231,10 @@ function displayEvents(events) {
         <p class="event-details">📅 ${event.date} | 📍 ${event.location}</p>
         <div class="card-footer">
           <span class="price">${formattedPrice}</span>
-          <button class="btn-details" data-id="${event.id}">${translations[currentLang].btnBookNow}</button>
+          <div style="display: flex; gap: 5px;">
+            <button class="btn-calendar-icon" data-id="${event.id}" title="Google Calendar">🗓️</button>
+            <button class="btn-details" data-id="${event.id}">${translations[currentLang].btnBookNow}</button>
+          </div>
         </div>
       </div>
     `;
@@ -271,6 +277,15 @@ eventsGrid.addEventListener('click', (e) => {
     }
     localStorage.setItem('userFavorites', JSON.stringify(userFavorites));
     updateUI();
+  }
+
+  // 🗓️ პირდაპირ ბარათიდან Google Calendar-ში დამატება
+  if (e.target.classList.contains('btn-calendar-icon')) {
+    const eventId = Number(e.target.dataset.id);
+    const ev = allEvents.find(item => item.id === eventId);
+    if (ev) {
+      openGoogleCalendar(ev.title, ev.date, ev.location);
+    }
   }
 
   if (e.target.classList.contains('btn-details')) {
@@ -349,7 +364,7 @@ document.getElementById('booking-form').addEventListener('submit', (e) => {
   const userEmail = document.getElementById('user-email').value;
   const ticketId = 'TKT-' + Math.floor(100000 + Math.random() * 900000);
 
-  const ticketData = {
+  currentActiveTicket = {
     id: ticketId,
     userName: userName,
     userEmail: userEmail,
@@ -358,19 +373,16 @@ document.getElementById('booking-form').addEventListener('submit', (e) => {
     eventLocation: selectedEventForBooking.location
   };
 
-  // შენახვა
-  myTickets.push(ticketData);
+  myTickets.push(currentActiveTicket);
   localStorage.setItem('myTickets', JSON.stringify(myTickets));
 
-  // ბილეთის modal-ის შევსება
-  document.getElementById('ticket-event-title').textContent = ticketData.eventTitle;
-  document.getElementById('ticket-user-name').textContent = ticketData.userName;
-  document.getElementById('ticket-event-date').textContent = ticketData.eventDate;
-  document.getElementById('ticket-event-location').textContent = ticketData.eventLocation;
-  document.getElementById('ticket-id-code').textContent = `#${ticketData.id}`;
+  document.getElementById('ticket-event-title').textContent = currentActiveTicket.eventTitle;
+  document.getElementById('ticket-user-name').textContent = currentActiveTicket.userName;
+  document.getElementById('ticket-event-date').textContent = currentActiveTicket.eventDate;
+  document.getElementById('ticket-event-location').textContent = currentActiveTicket.eventLocation;
+  document.getElementById('ticket-id-code').textContent = `#${currentActiveTicket.id}`;
 
-  // QR კოდის API
-  const qrContent = encodeURIComponent(`TicketID: ${ticketData.id} | Event: ${ticketData.eventTitle} | Holder: ${ticketData.userName}`);
+  const qrContent = encodeURIComponent(`TicketID: ${currentActiveTicket.id} | Event: ${currentActiveTicket.eventTitle} | Holder: ${currentActiveTicket.userName}`);
   document.getElementById('ticket-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrContent}`;
 
   bookingModal.style.display = 'none';
@@ -378,39 +390,23 @@ document.getElementById('booking-form').addEventListener('submit', (e) => {
   updateUI();
 });
 
-// 🎟️ პირადი კაბინეტისთვის ბილეთების სიის რენდერი
-function renderMyTickets() {
-  const container = document.getElementById('my-tickets-list');
-  container.innerHTML = '';
+// 🗓️ Google Calendar-ში დამატების ფუნქცია
+function openGoogleCalendar(title, dateStr, location) {
+  const formattedDate = dateStr.replace(/-/g, '');
+  const startTime = `${formattedDate}T100000Z`;
+  const endTime = `${formattedDate}T120000Z`;
 
-  if (myTickets.length === 0) {
-    container.innerHTML = `<p style="font-size: 0.85rem; color: #888;">${translations[currentLang].noSavedTickets}</p>`;
-    return;
+  const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startTime}/${endTime}&details=${encodeURIComponent('Tech Meet & Greet Hub Event')}&location=${encodeURIComponent(location)}`;
+  
+  window.open(calendarUrl, '_blank');
+}
+
+// ბილეთის Modal-ის ღილაკზე დაჭერა
+document.getElementById('add-calendar-btn').addEventListener('click', () => {
+  if (currentActiveTicket) {
+    openGoogleCalendar(currentActiveTicket.eventTitle, currentActiveTicket.eventDate, currentActiveTicket.eventLocation);
   }
-
-  myTickets.forEach(tkt => {
-    const item = document.createElement('div');
-    item.className = 'ticket-item-mini';
-    item.innerHTML = `
-      <div>
-        <h4>${tkt.eventTitle}</h4>
-        <p>📅 ${tkt.eventDate} | 🆔 ${tkt.id}</p>
-      </div>
-      <span style="font-size: 1.2rem;">🎟️</span>
-    `;
-    container.appendChild(item);
-  });
-}
-
-// 🧠 შემეცნებითი რობოტი
-let factIndex = 0;
-function showNextFact() {
-  const facts = translations[currentLang].robotInfo;
-  factIndex = (factIndex + 1) % facts.length;
-  robotBubble.textContent = facts[factIndex];
-}
-robotContainer.addEventListener('click', showNextFact);
-setInterval(showNextFact, 12000);
+});
 
 // 📥 ბილეთის ჩამოტვირთვა / დაბეჭდვა (PDF)
 document.getElementById('download-ticket-btn').addEventListener('click', () => {
@@ -444,3 +440,37 @@ document.getElementById('download-ticket-btn').addEventListener('click', () => {
   `);
   printWindow.document.close();
 });
+
+// 🎟️ პირადი კაბინეტის ბილეთების სიის რენდერი
+function renderMyTickets() {
+  const container = document.getElementById('my-tickets-list');
+  container.innerHTML = '';
+
+  if (myTickets.length === 0) {
+    container.innerHTML = `<p style="font-size: 0.85rem; color: #888;">${translations[currentLang].noSavedTickets}</p>`;
+    return;
+  }
+
+  myTickets.forEach(tkt => {
+    const item = document.createElement('div');
+    item.className = 'ticket-item-mini';
+    item.innerHTML = `
+      <div>
+        <h4>${tkt.eventTitle}</h4>
+        <p>📅 ${tkt.eventDate} | 🆔 ${tkt.id}</p>
+      </div>
+      <span style="font-size: 1.2rem;">🎟️</span>
+    `;
+    container.appendChild(item);
+  });
+}
+
+// 🧠 შემეცნებითი რობოტი
+let factIndex = 0;
+function showNextFact() {
+  const facts = translations[currentLang].robotInfo;
+  factIndex = (factIndex + 1) % facts.length;
+  robotBubble.textContent = facts[factIndex];
+}
+robotContainer.addEventListener('click', showNextFact);
+setInterval(showNextFact, 12000);
