@@ -52,47 +52,32 @@
       margin: 0 auto 15px auto;
     }
 
-    /* ⚡ ნეონის ლოგო და ანიმაცია */
-    .logo-container {
+    /* ⚡ თანამედროვე ტექ-ლოგო სათაურის წინ */
+    .brand-container {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .top-bar h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-
-    .neon-tech-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #0284c7, #6366f1);
+    .brand-logo-badge {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
       border-radius: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 0 12px rgba(99, 102, 241, 0.6), 0 0 20px rgba(56, 189, 248, 0.4);
-      animation: neonPulse 2s infinite alternate ease-in-out;
+      color: white;
+      font-weight: 800;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+      position: relative;
     }
 
-    .neon-tech-icon svg {
-      width: 24px;
-      height: 24px;
-      fill: #ffffff;
-      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
-    }
-
-    @keyframes neonPulse {
-      0% {
-        box-shadow: 0 0 8px rgba(99, 102, 241, 0.5), 0 0 15px rgba(56, 189, 248, 0.3);
-        transform: scale(1);
-      }
-      100% {
-        box-shadow: 0 0 18px rgba(99, 102, 241, 0.9), 0 0 30px rgba(56, 189, 248, 0.7);
-        transform: scale(1.06);
-      }
+    .brand-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
     .btn-theme-toggle {
@@ -592,14 +577,10 @@
 
   <header class="header">
     <div class="top-bar">
-      <!-- ⚡ ნეონური ლოგო -->
-      <div class="logo-container">
-        <div class="neon-tech-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-          </svg>
-        </div>
-        <h1>Tech Meet & Greet Hub</h1>
+      <!-- ⚡ დახვეწილი ტექ-ლოგო და სათაური -->
+      <div class="brand-container">
+        <div class="brand-logo-badge">T&G</div>
+        <h1 class="brand-title">Tech Meet & Greet Hub</h1>
       </div>
 
       <div class="user-control" style="display: flex; gap: 10px; align-items: center;">
@@ -772,7 +753,7 @@
       </div>
       <button id="close-ticket-btn" class="btn-secondary" style="width: 100%; margin-top: 10px;" data-i18n="btnClose">დახურვა</button>
     </div>
-  </div>
+  </section>
 
   <!-- პროფილის Modal -->
   <div id="profile-modal" class="modal">
