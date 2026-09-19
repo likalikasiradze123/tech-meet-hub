@@ -8,6 +8,7 @@
     "date": "2026-10-20",
     "location": "Tbilisi Tech Hub",
     "price": 120,
+    "rating": 4.9,
     "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500"
   },
   {
@@ -19,6 +20,7 @@
     "date": "2026-11-05",
     "location": "Zoom Meeting",
     "price": 70,
+    "rating": 4.8,
     "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500"
   },
   {
@@ -30,6 +32,7 @@
     "date": "2026-11-12",
     "location": "Ozurgeti TechnoPark / Online",
     "price": 160,
+    "rating": 5.0,
     "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500"
   }
 ]

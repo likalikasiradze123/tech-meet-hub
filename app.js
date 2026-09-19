@@ -10,12 +10,22 @@ const translations = {
     searchPlaceholder: "მოძებნეთ ივენთი ან სპიკერი...",
     labelCategory: "ტექნოლოგია:",
     labelFormat: "ფორმატი:",
+    labelSort: "სორტირება:",
+    sortDate: "თარიღით (უახლოესი)",
+    sortPriceAsc: "ფასით (დაბლიდან მაღლა)",
+    sortPriceDesc: "ფასით (მაღლიდან დაბლა)",
+    sortRating: "რეიტინგით",
     labelCurrency: "ვალუტა:",
     optAll: "ყველა",
     btnInterested: "მაინტერესებს",
     bannerTitle: "🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!",
     bannerDesc: "შეიტყვეთ დაგეგმილი ივენთებისა და ტრენინგების შესახებ ყველაზე ადრე და დაჯავშნეთ ადგილები პრიორიტეტულად.",
     btnViewPackages: "💎 პაკეტების ნახვა",
+    nextEventTitle: "უახლოეს ივენთამდე დარჩენილია:",
+    unitDays: "დღე",
+    unitHours: "საათი",
+    unitMinutes: "წუთი",
+    unitSeconds: "წამი",
     modalBookingTitle: "ღონისძიების დაჯავშნა",
     labelFullName: "სახელი, გვარი:",
     phFullName: "მაგ: გიორგი ბერიძე",
@@ -68,12 +78,22 @@ const translations = {
     searchPlaceholder: "Search event or speaker...",
     labelCategory: "Category:",
     labelFormat: "Format:",
+    labelSort: "Sort by:",
+    sortDate: "Date (Upcoming)",
+    sortPriceAsc: "Price (Low to High)",
+    sortPriceDesc: "Price (High to Low)",
+    sortRating: "Rating",
     labelCurrency: "Currency:",
     optAll: "All",
     btnInterested: "Favorites",
     bannerTitle: "🔔 Subscribe to Premium & Get Email Alerts!",
     bannerDesc: "Learn about upcoming events and workshops first and get priority booking.",
     btnViewPackages: "💎 View Packages",
+    nextEventTitle: "Time left until next event:",
+    unitDays: "Days",
+    unitHours: "Hours",
+    unitMinutes: "Mins",
+    unitSeconds: "Secs",
     modalBookingTitle: "Event Booking",
     labelFullName: "Full Name:",
     phFullName: "e.g. John Doe",
@@ -122,6 +142,7 @@ const translations = {
 };
 
 let currentLang = localStorage.getItem('currentLang') || 'ka';
+let isDarkMode = localStorage.getItem('isDarkMode') === 'true';
 let userFavorites = JSON.parse(localStorage.getItem('userFavorites')) || [];
 let userProfile = JSON.parse(localStorage.getItem('userProfile')) || {
   name: '',
@@ -139,6 +160,7 @@ const eventsGrid = document.getElementById('events-grid');
 const favCountSpan = document.getElementById('fav-count');
 const profileBtn = document.getElementById('profile-btn');
 const langSelect = document.getElementById('language-select');
+const themeToggleBtn = document.getElementById('theme-toggle-btn');
 
 // Modals
 const bookingModal = document.getElementById('booking-modal');
@@ -149,6 +171,21 @@ const subModal = document.getElementById('subscription-modal');
 // 🤖 რობოტი
 const robotContainer = document.getElementById('cute-robot');
 const robotBubble = document.getElementById('robot-bubble');
+
+// 🌙 Dark / Light Mode ლოგიკა
+if (isDarkMode) {
+  document.body.classList.add('dark-theme');
+  themeToggleBtn.textContent = '☀️';
+} else {
+  themeToggleBtn.textContent = '🌙';
+}
+
+themeToggleBtn.addEventListener('click', () => {
+  isDarkMode = !isDarkMode;
+  document.body.classList.toggle('dark-theme', isDarkMode);
+  themeToggleBtn.textContent = isDarkMode ? '☀️' : '🌙';
+  localStorage.setItem('isDarkMode', isDarkMode);
+});
 
 langSelect.value = currentLang;
 
@@ -181,6 +218,7 @@ fetch('src/data/events.json')
   .then(data => {
     allEvents = data;
     setLanguage(currentLang);
+    startCountdownTimer();
   })
   .catch(err => console.error('შეცდომა:', err));
 
@@ -219,6 +257,8 @@ function displayEvents(events) {
       ? `$${(event.price / USD_RATE).toFixed(0)}` 
       : `${event.price} ₾`;
 
+    const ratingStars = '⭐'.repeat(Math.floor(event.rating || 5)) + ` (${event.rating || 5.0})`;
+
     card.innerHTML = `
       <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${event.id}">
         ${isFav ? '❤️' : '🤍'}
@@ -227,6 +267,7 @@ function displayEvents(events) {
       <div class="event-info">
         <span class="badge">${event.category} • ${event.format}</span>
         <h3 class="event-title">${event.title}</h3>
+        <div class="rating-stars">${ratingStars}</div>
         <p class="speaker">🎤 ${event.speaker}</p>
         <p class="event-details">📅 ${event.date} | 📍 ${event.location}</p>
         <div class="card-footer">
@@ -246,9 +287,10 @@ function displayEvents(events) {
 function filterEvents() {
   const category = document.getElementById('category-filter').value;
   const format = document.getElementById('format-filter').value;
+  const sort = document.getElementById('sort-select').value;
   const query = document.getElementById('search-input').value.toLowerCase().trim();
 
-  const filtered = allEvents.filter(e => {
+  let filtered = allEvents.filter(e => {
     const catMatch = category === 'all' || e.category === category;
     const fmtMatch = format === 'all' || e.format === format;
     const searchMatch = query === '' || 
@@ -259,11 +301,23 @@ function filterEvents() {
     return catMatch && fmtMatch && searchMatch && favMatch;
   });
 
+  // 🔍 სორტირების ლოგიკა
+  if (sort === 'date') {
+    filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+  } else if (sort === 'price-asc') {
+    filtered.sort((a, b) => a.price - b.price);
+  } else if (sort === 'price-desc') {
+    filtered.sort((a, b) => b.price - a.price);
+  } else if (sort === 'rating') {
+    filtered.sort((a, b) => (b.rating || 5) - (a.rating || 5));
+  }
+
   displayEvents(filtered);
 }
 
 document.getElementById('category-filter').addEventListener('change', filterEvents);
 document.getElementById('format-filter').addEventListener('change', filterEvents);
+document.getElementById('sort-select').addEventListener('change', filterEvents);
 document.getElementById('search-input').addEventListener('input', filterEvents);
 document.getElementById('currency-select').addEventListener('change', filterEvents);
 
@@ -279,7 +333,6 @@ eventsGrid.addEventListener('click', (e) => {
     updateUI();
   }
 
-  // 🗓️ პირდაპირ ბარათიდან Google Calendar-ში დამატება
   if (e.target.classList.contains('btn-calendar-icon')) {
     const eventId = Number(e.target.dataset.id);
     const ev = allEvents.find(item => item.id === eventId);
@@ -390,6 +443,40 @@ document.getElementById('booking-form').addEventListener('submit', (e) => {
   updateUI();
 });
 
+// ⏳ უკუთვლის ტაიმერის ლოგიკა
+function startCountdownTimer() {
+  if (allEvents.length === 0) return;
+
+  const sortedEvents = [...allEvents].sort((a, b) => new Date(a.date) - new Date(b.date));
+  const nextEvent = sortedEvents[0];
+  document.getElementById('next-event-name').textContent = nextEvent.title;
+
+  const eventDate = new Date(nextEvent.date + 'T10:00:00').getTime();
+
+  setInterval(() => {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    if (distance < 0) {
+      document.getElementById('timer-days').textContent = '00';
+      document.getElementById('timer-hours').textContent = '00';
+      document.getElementById('timer-minutes').textContent = '00';
+      document.getElementById('timer-seconds').textContent = '00';
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById('timer-days').textContent = days < 10 ? '0' + days : days;
+    document.getElementById('timer-hours').textContent = hours < 10 ? '0' + hours : hours;
+    document.getElementById('timer-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+    document.getElementById('timer-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+  }, 1000);
+}
+
 // 🗓️ Google Calendar-ში დამატების ფუნქცია
 function openGoogleCalendar(title, dateStr, location) {
   const formattedDate = dateStr.replace(/-/g, '');
@@ -401,7 +488,6 @@ function openGoogleCalendar(title, dateStr, location) {
   window.open(calendarUrl, '_blank');
 }
 
-// ბილეთის Modal-ის ღილაკზე დაჭერა
 document.getElementById('add-calendar-btn').addEventListener('click', () => {
   if (currentActiveTicket) {
     openGoogleCalendar(currentActiveTicket.eventTitle, currentActiveTicket.eventDate, currentActiveTicket.eventLocation);

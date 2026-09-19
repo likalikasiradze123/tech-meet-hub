@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Meet & Greet Hub</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -12,7 +12,10 @@
     <div class="top-bar">
       <h1>🚀 Tech Meet & Greet Hub</h1>
       <div class="user-control" style="display: flex; gap: 10px; align-items: center;">
-        <select id="language-select" style="padding: 6px; border-radius: 15px; border: 1px solid #ccc; font-weight: bold; cursor: pointer;">
+        <!-- 🌙/☀️ თემის გადამრთველი -->
+        <button id="theme-toggle-btn" class="btn-theme-toggle" title="თემის შეცვლა">🌙</button>
+        
+        <select id="language-select" class="select-styled">
           <option value="ka">🇬🇪 GE</option>
           <option value="en">🇺🇸 EN</option>
         </select>
@@ -22,6 +25,7 @@
     <p data-i18n="headerSubtitle">იპოვეთ, დაჯავშნეთ და მიიღეთ ექსკლუზიური შეტყობინებები ტექნოლოგიურ ივენთებზე</p>
   </header>
 
+  <!-- ფილტრაციისა და ძებნის სექცია -->
   <section class="controls-section">
     <div>
       <label for="search-input"><b data-i18n="labelSearch">ძებნა:</b></label>
@@ -48,6 +52,17 @@
       </select>
     </div>
 
+    <!-- 🔍 სორტირება -->
+    <div>
+      <label for="sort-select"><b data-i18n="labelSort">სორტირება:</b></label>
+      <select id="sort-select">
+        <option value="date" data-i18n="sortDate">თარიღით (უახლოესი)</option>
+        <option value="price-asc" data-i18n="sortPriceAsc">ფასით (დაბლიდან მაღლა)</option>
+        <option value="price-desc" data-i18n="sortPriceDesc">ფასით (მაღლიდან დაბლა)</option>
+        <option value="rating" data-i18n="sortRating">რეიტინგით</option>
+      </select>
+    </div>
+
     <div>
       <label for="currency-select"><b data-i18n="labelCurrency">ვალუტა:</b></label>
       <select id="currency-select">
@@ -61,16 +76,32 @@
     </div>
   </section>
 
+  <!-- პრემიუმ გამოწერის ბანერი -->
   <section class="subscription-banner">
     <h2 data-i18n="bannerTitle">🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
     <p data-i18n="bannerDesc">შეიტყვეთ დაგეგმილი ივენთებისა და ტრენინგების შესახებ ყველაზე ადრე და დაჯავშნეთ ადგილები პრიორიტეტულად.</p>
     <button id="subscribe-plan-btn" class="btn-subscribe-banner" data-i18n="btnViewPackages">💎 პაკეტების ნახვა</button>
   </section>
 
+  <!-- ⏳ უკუთვლის ტაიმერის ბანერი -->
+  <section class="countdown-section" id="countdown-section">
+    <div class="countdown-title">
+      ⏳ <span data-i18n="nextEventTitle">უახლოეს ივენთამდე დარჩენილია:</span>
+      <strong id="next-event-name">AI & Future Tech Summit</strong>
+    </div>
+    <div class="timer-boxes">
+      <div class="time-box"><span id="timer-days">00</span><small data-i18n="unitDays">დღე</small></div>
+      <div class="time-box"><span id="timer-hours">00</span><small data-i18n="unitHours">საათი</small></div>
+      <div class="time-box"><span id="timer-minutes">00</span><small data-i18n="unitMinutes">წუთი</small></div>
+      <div class="time-box"><span id="timer-seconds">00</span><small data-i18n="unitSeconds">წამი</small></div>
+    </div>
+  </section>
+
   <main class="events-grid" id="events-grid">
+    <!-- ივენთების ბარათები -->
   </main>
 
-  <!-- 🤖 საყვარელი რობოტი -->
+  <!-- 🤖 შემეცნებითი რობოტი -->
   <div id="cute-robot" class="robot-container">
     <div class="robot-speech-bubble" id="robot-bubble">გამარჯობა! მე შენი ტექ-ასისტენტი ვარ 🤖</div>
     <div class="robot-body" id="robot-body-main">
@@ -92,7 +123,7 @@
     </div>
   </div>
 
-  <!-- Modal 1: დაჯავშნა -->
+  <!-- 1. დაჯავშნის Modal -->
   <div id="booking-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-booking">&times;</span>
@@ -109,7 +140,7 @@
     </div>
   </div>
 
-  <!-- Modal 2: ციფრული ბილეთი -->
+  <!-- 🎟️ 2. ციფრული ბილეთის Modal -->
   <div id="ticket-modal" class="modal">
     <div class="modal-content ticket-modal-content">
       <span class="close-btn" id="close-ticket">&times;</span>
@@ -132,14 +163,15 @@
         </div>
       </div>
 
-      <div style="display: flex; gap: 10px; margin-top: 15px;">
-        <button id="download-ticket-btn" class="btn-submit" style="flex: 1; background: #4f46e5;">📥 <span data-i18n="btnDownload">ბილეთის ჩამოტვირთვა</span></button>
-        <button id="close-ticket-btn" class="btn-secondary" style="flex: 1;" data-i18n="btnClose">დახურვა</button>
+      <div class="ticket-actions-grid">
+        <button id="add-calendar-btn" class="btn-submit" style="background: #0284c7;">🗓️ <span data-i18n="btnAddToCalendar">კალენდარში დამატება</span></button>
+        <button id="download-ticket-btn" class="btn-submit" style="background: #4f46e5;">📥 <span data-i18n="btnDownload">ჩამოტვირთვა (PDF)</span></button>
       </div>
+      <button id="close-ticket-btn" class="btn-secondary" style="width: 100%; margin-top: 10px;" data-i18n="btnClose">დახურვა</button>
     </div>
   </div>
 
-  <!-- Modal 3: პროფილი -->
+  <!-- 3. პირადი კაბინეტის Modal -->
   <div id="profile-modal" class="modal">
     <div class="modal-content profile-content">
       <span class="close-btn" id="close-profile">&times;</span>
@@ -175,7 +207,7 @@
     </div>
   </div>
 
-  <!-- Modal 4: პაკეტები -->
+  <!-- 4. პაკეტების ყიდვის Modal -->
   <div id="subscription-modal" class="modal">
     <div class="modal-content sub-content">
       <span class="close-btn" id="close-sub">&times;</span>
@@ -207,6 +239,6 @@
     </div>
   </div>
 
-  <script src="./app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
