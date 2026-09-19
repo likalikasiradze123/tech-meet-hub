@@ -108,39 +108,6 @@
       font-weight: bold;
     }
 
-    /* 🎯 კარიერული ტესტი */
-    .quiz-section {
-      max-width: 1200px;
-      margin: 0 auto 20px auto;
-      background: linear-gradient(135deg, #0284c7, #0369a1);
-      color: white;
-      padding: 20px;
-      border-radius: 12px;
-    }
-
-    .quiz-options {
-      display: flex;
-      gap: 10px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn-quiz-opt {
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid white;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.2s ease;
-    }
-
-    .btn-quiz-opt:hover {
-      background: white;
-      color: #0284c7;
-    }
-
     .subscription-banner {
       background: linear-gradient(135deg, #4f46e5, #7c3aed);
       color: white;
@@ -665,18 +632,6 @@
     </div>
   </section>
 
-  <!-- 🎯 3-კითხვიანი კარიერული ტესტი -->
-  <section class="quiz-section">
-    <div class="quiz-container">
-      <h3>🎯 არ იცი რომელი ივენთი აირჩიო? გაიარე 3-კითხვიანი ტექ-ტესტი!</h3>
-      <div id="quiz-body" style="margin-top: 10px;">
-        <p id="quiz-question" style="font-size: 1.1rem; font-weight: bold;"></p>
-        <div class="quiz-options"></div>
-      </div>
-      <div id="quiz-result" style="display: none; margin-top: 15px; font-weight: bold; color: #38bdf8; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;"></div>
-    </div>
-  </section>
-
   <!-- ბანერი -->
   <section class="subscription-banner">
     <h2 data-i18n="bannerTitle">🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
@@ -826,7 +781,6 @@
 
   <!-- JavaScript ლოგიკა -->
   <script>
-    // დროებითი ივენთები (თუ JSON ვერ ჩაიტვირთა)
     let allEvents = [
       {
         "id": 1,
@@ -867,104 +821,13 @@
     ];
 
     const USD_RATE = 2.7;
-    let currentLang = localStorage.getItem('currentLang') || 'ka';
     let isDarkMode = localStorage.getItem('isDarkMode') === 'true';
     let userFavorites = JSON.parse(localStorage.getItem('userFavorites')) || [];
-    let userProfile = JSON.parse(localStorage.getItem('userProfile')) || { name: '', email: '' };
     let myTickets = JSON.parse(localStorage.getItem('myTickets')) || [];
     let showOnlyFavorites = false;
     let selectedEventForBooking = null;
     let currentActiveTicket = null;
     let selectedSeatNumber = null;
-
-    // 🎯 3-კითხვიანი კარიერული ტესტის მონაცემები
-    const quizQuestions = [
-      {
-        q: "1/3: რა უფრო გიტაცებთ ყოველდღიურ საქმიანობაში?",
-        opts: [
-          { text: "🧠 ალგორითმები და მონაცემები", cat: "AI" },
-          { text: "🎨 ვებ-საიტების აწყობა და დიზაინი", cat: "Web Dev" },
-          { text: "🛡️ სისტემების დაცვა და ჰაკინგი", cat: "Cybersecurity" }
-        ]
-      },
-      {
-        q: "2/3: რომელ ინსტრუმენტთან ისურვებდით მუშაობას?",
-        opts: [
-          { text: "🤖 Neural Networks & Python", cat: "AI" },
-          { text: "💻 React, HTML & CSS", cat: "Web Dev" },
-          { text: "🔒 Linux, Firewalls & Cryptography", cat: "Cybersecurity" }
-        ]
-      },
-      {
-        q: "3/3: რა არის თქვენი მთავარი კარიერული მიზანი?",
-        opts: [
-          { text: "🚀 AI ასისტენტების შექმნა", cat: "AI" },
-          { text: "🌐 თანამედროვე ვებ-აპლიკაციები", cat: "Web Dev" },
-          { text: "🔐 კომპანიების უსაფრთხოება", cat: "Cybersecurity" }
-        ]
-      }
-    ];
-
-    let currentQuizStep = 0;
-    let quizScores = { "AI": 0, "Web Dev": 0, "Cybersecurity": 0 };
-
-    function renderQuizStep() {
-      const qObj = quizQuestions[currentQuizStep];
-      const qQuestion = document.getElementById('quiz-question');
-      const qOptionsContainer = document.querySelector('.quiz-options');
-      const qResult = document.getElementById('quiz-result');
-
-      qResult.style.display = 'none';
-      qQuestion.textContent = qObj.q;
-      qOptionsContainer.innerHTML = '';
-
-      qObj.opts.forEach(opt => {
-        const btn = document.createElement('button');
-        btn.className = 'btn-quiz-opt';
-        btn.textContent = opt.text;
-        btn.addEventListener('click', () => {
-          quizScores[opt.cat]++;
-          currentQuizStep++;
-
-          if (currentQuizStep < quizQuestions.length) {
-            renderQuizStep();
-          } else {
-            finishQuiz();
-          }
-        });
-        qOptionsContainer.appendChild(btn);
-      });
-    }
-
-    function finishQuiz() {
-      let topCategory = "AI";
-      let maxScore = -1;
-      for (const cat in quizScores) {
-        if (quizScores[cat] > maxScore) {
-          maxScore = quizScores[cat];
-          topCategory = cat;
-        }
-      }
-
-      const qQuestion = document.getElementById('quiz-question');
-      const qOptionsContainer = document.querySelector('.quiz-options');
-      const qResult = document.getElementById('quiz-result');
-
-      qQuestion.textContent = "🎉 ტესტი დასრულებულია!";
-      qOptionsContainer.innerHTML = `<button class="btn-quiz-opt" id="btn-reset-quiz">🔄 ტესტის თავიდან გავლით</button>`;
-
-      qResult.style.display = 'block';
-      qResult.innerHTML = `🌟 თქვენი პასუხებიდან გამომდინარე, გირჩევთ <b>${topCategory}</b> მიმართულებას! ფილტრი ავტომატურად მორგებულია.`;
-
-      document.getElementById('category-filter').value = topCategory;
-      filterEvents();
-
-      document.getElementById('btn-reset-quiz').addEventListener('click', () => {
-        currentQuizStep = 0;
-        quizScores = { "AI": 0, "Web Dev": 0, "Cybersecurity": 0 };
-        renderQuizStep();
-      });
-    }
 
     // DOM Elements
     const eventsGrid = document.getElementById('events-grid');
@@ -987,7 +850,6 @@
       localStorage.setItem('isDarkMode', isDarkMode);
     });
 
-    // Fetch JSON or fallback
     fetch('src/data/events.json')
       .then(res => res.json())
       .then(data => {
@@ -1222,8 +1084,6 @@
       });
     }
 
-    // ინიციალიზაცია
-    renderQuizStep();
     renderMyTickets();
   </script>
 </body>
