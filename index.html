@@ -4,7 +4,599 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Meet & Greet Hub</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --bg-color: #f4f7f6;
+      --card-bg: #ffffff;
+      --text-color: #0f172a;
+      --subtext-color: #555555;
+      --border-color: #cccccc;
+      --modal-bg: #ffffff;
+    }
+
+    body.dark-theme {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-color: #f8fafc;
+      --subtext-color: #94a3b8;
+      --border-color: #334155;
+      --modal-bg: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding: 20px;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto 10px auto;
+    }
+
+    .btn-theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .select-styled {
+      padding: 6px;
+      border-radius: 15px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-color);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-profile {
+      background: #0f172a;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .controls-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .controls-section input, .controls-section select {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-color);
+    }
+
+    .btn-secondary {
+      background: #e11d48;
+      color: white;
+      border: none;
+      padding: 9px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* 🎯 კარიერული ტესტი */
+    .quiz-section {
+      max-width: 1200px;
+      margin: 0 auto 20px auto;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .quiz-options {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-quiz-opt {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid white;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+
+    .btn-quiz-opt:hover {
+      background: white;
+      color: #0284c7;
+    }
+
+    .subscription-banner {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 1200px;
+      margin: 0 auto 20px auto;
+    }
+
+    .btn-subscribe-banner {
+      margin-top: 12px;
+      background: #f59e0b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* ⏳ ტაიმერი */
+    .countdown-section {
+      background: var(--card-bg);
+      border: 2px solid #38bdf8;
+      border-radius: 12px;
+      max-width: 1200px;
+      margin: 0 auto 30px auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .timer-boxes {
+      display: flex;
+      gap: 10px;
+    }
+
+    .time-box {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 55px;
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .time-box small {
+      font-size: 0.65rem;
+      color: #94a3b8;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .event-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .fav-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .fav-btn.active {
+      background: #ffe4e6;
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .event-info {
+      padding: 15px;
+    }
+
+    .badge {
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .event-title {
+      margin: 10px 0 5px 0;
+      font-size: 1.2rem;
+    }
+
+    .rating-stars {
+      color: #f59e0b;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .speaker, .event-details {
+      font-size: 0.9rem;
+      color: var(--subtext-color);
+      margin-bottom: 5px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      gap: 8px;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #22c55e;
+    }
+
+    .btn-details {
+      background: #4f46e5;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-qa-icon, .btn-calendar-icon {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    /* 💺 ადგილების არჩევა */
+    .seat-picker-container {
+      background: var(--bg-color);
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .stage-label {
+      background: #64748b;
+      color: white;
+      font-size: 0.75rem;
+      padding: 4px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .seats-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      max-width: 260px;
+      margin: 0 auto;
+    }
+
+    .seat {
+      width: 32px;
+      height: 32px;
+      background: #22c55e;
+      color: white;
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .seat.selected {
+      background: #f59e0b !important;
+    }
+
+    .seat.occupied {
+      background: #94a3b8 !important;
+      cursor: not-allowed;
+    }
+
+    .btn-poll {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: var(--modal-bg);
+      color: var(--text-color);
+      padding: 25px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 480px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    #profile-form, #booking-form, #qa-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #profile-form input, #booking-form input, #qa-form input {
+      padding: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-color);
+      border-radius: 5px;
+    }
+
+    .btn-submit {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .ticket-card {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      border-radius: 12px;
+      padding: 20px;
+      border: 2px dashed #38bdf8;
+    }
+
+    .ticket-badge {
+      background: #38bdf8;
+      color: #0f172a;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .ticket-qr-container {
+      text-align: center;
+      margin-top: 15px;
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+    }
+
+    .ticket-qr-container img {
+      width: 130px;
+      height: 130px;
+    }
+
+    .ticket-actions-grid {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .ticket-actions-grid button {
+      flex: 1;
+    }
+
+    .my-tickets-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .ticket-item-mini {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 🤖 რობოტი */
+    .robot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 999;
+      cursor: pointer;
+    }
+
+    .robot-speech-bubble {
+      position: absolute;
+      bottom: 105px;
+      right: -10px;
+      background: #38bdf8;
+      color: #0f172a;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .robot-body {
+      width: 70px;
+      height: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .robot-ear {
+      width: 6px;
+      height: 10px;
+      background: #38bdf8;
+      position: absolute;
+      top: 18px;
+      border-radius: 3px;
+    }
+    .robot-ear.left { left: 4px; }
+    .robot-ear.right { right: 4px; }
+
+    .robot-antenna {
+      width: 4px;
+      height: 14px;
+      background: #64748b;
+      position: relative;
+    }
+
+    .antenna-ball {
+      width: 10px;
+      height: 10px;
+      background: #ef4444;
+      border-radius: 50%;
+      position: absolute;
+      top: -8px;
+      left: -3px;
+    }
+
+    .robot-head {
+      width: 52px;
+      height: 38px;
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 2px solid #38bdf8;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 6px;
+    }
+
+    .robot-eye {
+      width: 12px;
+      height: 12px;
+      background: #38bdf8;
+      border-radius: 50%;
+    }
+
+    .robot-mouth {
+      position: absolute;
+      bottom: 4px;
+      width: 16px;
+      height: 3px;
+      background: #38bdf8;
+      border-radius: 2px;
+    }
+
+    .robot-torso {
+      width: 44px;
+      height: 30px;
+      background: linear-gradient(145deg, #475569, #334155);
+      border-radius: 8px;
+      margin-top: 2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #f59e0b;
+    }
+
+    .robot-legs {
+      display: flex;
+      gap: 14px;
+      margin-top: 2px;
+    }
+
+    .robot-leg {
+      width: 7px;
+      height: 14px;
+      background: #64748b;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 
@@ -23,7 +615,7 @@
     <p data-i18n="headerSubtitle">იპოვეთ, დაჯავშნეთ და მიიღეთ ექსკლუზიური შეტყობინებები ტექნოლოგიურ ივენთებზე</p>
   </header>
 
-  <!-- ფილტრაციისა და ძებნის სექცია -->
+  <!-- ფილტრაცია -->
   <section class="controls-section">
     <div>
       <label for="search-input"><b data-i18n="labelSearch">ძებნა:</b></label>
@@ -73,30 +665,26 @@
     </div>
   </section>
 
-  <!-- 🎯 ინოვაცია 1: კარიერული ტესტი -->
+  <!-- 🎯 3-კითხვიანი კარიერული ტესტი -->
   <section class="quiz-section">
     <div class="quiz-container">
-      <h3>🎯 არ იცი რომელი ივენთი აირჩიო? გაიარე 1-წუთიანი ტექ-ტესტი!</h3>
-      <div id="quiz-body">
-        <p id="quiz-question">რა მიმართულება გინდა განავითარო?</p>
-        <div class="quiz-options">
-          <button class="btn-quiz-opt" data-cat="AI">🤖 ხელოვნური ინტელექტი (AI)</button>
-          <button class="btn-quiz-opt" data-cat="Web Dev">💻 ვებ-დეველოპმენტი</button>
-          <button class="btn-quiz-opt" data-cat="Cybersecurity">🛡️ კიბერუსაფრთხოება</button>
-        </div>
+      <h3>🎯 არ იცი რომელი ივენთი აირჩიო? გაიარე 3-კითხვიანი ტექ-ტესტი!</h3>
+      <div id="quiz-body" style="margin-top: 10px;">
+        <p id="quiz-question" style="font-size: 1.1rem; font-weight: bold;"></p>
+        <div class="quiz-options"></div>
       </div>
-      <div id="quiz-result" style="display: none; margin-top: 10px; font-weight: bold; color: #38bdf8;"></div>
+      <div id="quiz-result" style="display: none; margin-top: 15px; font-weight: bold; color: #38bdf8; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;"></div>
     </div>
   </section>
 
-  <!-- პრემიუმ გამოწერის ბანერი -->
+  <!-- ბანერი -->
   <section class="subscription-banner">
     <h2 data-i18n="bannerTitle">🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
     <p data-i18n="bannerDesc">შეიტყვეთ დაგეგმილი ივენთებისა და ტრენინგების შესახებ ყველაზე ადრე და დაჯავშნეთ ადგილები პრიორიტეტულად.</p>
     <button id="subscribe-plan-btn" class="btn-subscribe-banner" data-i18n="btnViewPackages">💎 პაკეტების ნახვა</button>
   </section>
 
-  <!-- ⏳ უკუთვლის ტაიმერი -->
+  <!-- ⏳ ტაიმერი -->
   <section class="countdown-section" id="countdown-section">
     <div class="countdown-title">
       ⏳ <span data-i18n="nextEventTitle">უახლოეს ივენთამდე დარჩენილია:</span>
@@ -110,10 +698,9 @@
     </div>
   </section>
 
-  <main class="events-grid" id="events-grid">
-  </main>
+  <main class="events-grid" id="events-grid"></main>
 
-  <!-- 💬 ინოვაცია 2: სპიკერის Q&A & გამოკითხვა Modal -->
+  <!-- 💬 Q&A Modal -->
   <div id="qa-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-qa">&times;</span>
@@ -122,7 +709,7 @@
       
       <form id="qa-form">
         <input type="text" id="qa-input" placeholder="დაწერე შენი კითხვა..." required>
-        <button type="submit" class="btn-submit" style="margin-top: 8px;">გაგზავნა</button>
+        <button type="submit" class="btn-submit">გაგზავნა</button>
       </form>
 
       <div style="margin-top: 15px;">
@@ -134,25 +721,21 @@
         </div>
       </div>
 
-      <div id="qa-list" style="margin-top: 15px; font-size: 0.85rem;">
-        <!-- კითხვები გამოჩნდება აქ -->
-      </div>
+      <div id="qa-list" style="margin-top: 15px; font-size: 0.85rem;"></div>
     </div>
   </div>
 
   <!-- 🤖 რობოტი -->
   <div id="cute-robot" class="robot-container">
     <div class="robot-speech-bubble" id="robot-bubble">გამარჯობა! მე შენი ტექ-ასისტენტი ვარ 🤖</div>
-    <div class="robot-body" id="robot-body-main">
+    <div class="robot-body">
       <div class="robot-ear left"></div>
       <div class="robot-ear right"></div>
-      <div class="robot-antenna">
-        <div class="antenna-ball" id="antenna-ball"></div>
-      </div>
-      <div class="robot-head" id="robot-head">
-        <div class="robot-eye left" id="eye-left"></div>
-        <div class="robot-eye right" id="eye-right"></div>
-        <div class="robot-mouth" id="robot-mouth"></div>
+      <div class="robot-antenna"><div class="antenna-ball"></div></div>
+      <div class="robot-head">
+        <div class="robot-eye left"></div>
+        <div class="robot-eye right"></div>
+        <div class="robot-mouth"></div>
       </div>
       <div class="robot-torso">⚡</div>
       <div class="robot-legs">
@@ -162,19 +745,16 @@
     </div>
   </div>
 
-  <!-- 💺 ინოვაცია 3: ადგილების არჩევის Modal -->
+  <!-- 💺 დაჯავშნისა და ადგილების Modal -->
   <div id="booking-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-booking">&times;</span>
       <h2 id="modal-event-title" data-i18n="modalBookingTitle">ღონისძიების დაჯავშნა</h2>
       
-      <!-- 💺 ადგილების რუკა -->
       <div class="seat-picker-container">
         <p style="font-size: 0.85rem; margin-bottom: 8px;"><b>💺 აირჩიეთ სასურველი ადგილი დარბაზში:</b></p>
         <div class="stage-label">🎬 სცენა / სპიკერი</div>
-        <div class="seats-grid" id="seats-grid">
-          <!-- ადგილების კუბიკები შეიქმნება JS-ით -->
-        </div>
+        <div class="seats-grid" id="seats-grid"></div>
         <small id="selected-seat-label" style="display: block; margin-top: 8px; color: #22c55e; font-weight: bold;">არჩეული ადგილი: -</small>
       </div>
 
@@ -190,7 +770,7 @@
     </div>
   </div>
 
-  <!-- 🎟️ ციფრული ბილეთის Modal -->
+  <!-- 🎟️ ბილეთის Modal -->
   <div id="ticket-modal" class="modal">
     <div class="modal-content ticket-modal-content">
       <span class="close-btn" id="close-ticket">&times;</span>
@@ -201,7 +781,7 @@
           <span class="ticket-badge">VIP PASS</span>
           <h3 id="ticket-event-title">AI & Future Tech Summit</h3>
         </div>
-        <div class="ticket-body">
+        <div class="ticket-body" style="margin-top: 10px;">
           <p>👤 <b data-i18n="labelHolder">მფლობელი:</b> <span id="ticket-user-name">-</span></p>
           <p>💺 <b>ადგილი დარბაზში:</b> <span id="ticket-seat-num">-</span></p>
           <p>📅 <b data-i18n="labelDate">თარიღი:</b> <span id="ticket-event-date">-</span></p>
@@ -222,32 +802,18 @@
     </div>
   </div>
 
-  <!-- პირადი კაბინეტის Modal -->
+  <!-- პროფილის Modal -->
   <div id="profile-modal" class="modal">
     <div class="modal-content profile-content">
       <span class="close-btn" id="close-profile">&times;</span>
       <h2 data-i18n="profileTitle">👤 პირადი კაბინეთი</h2>
       
-      <div class="avatar-section">
-        <p><b data-i18n="chooseAvatar">აირჩიეთ ავატარი:</b></p>
-        <div class="avatar-options">
-          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Felix" class="avatar-img selected" data-avatar="Felix">
-          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Aria" class="avatar-img" data-avatar="Aria">
-          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Leo" class="avatar-img" data-avatar="Leo">
-          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Maya" class="avatar-img" data-avatar="Maya">
-        </div>
-      </div>
-
-      <form id="profile-form">
+      <form id="profile-form" style="margin-top: 15px;">
         <label for="profile-name" data-i18n="yourName">თქვენი სახელი:</label>
-        <input type="text" id="profile-name" data-i18n-placeholder="phEnterName" placeholder="შეიყვანეთ სახელი">
+        <input type="text" id="profile-name" placeholder="შეიყვანეთ სახელი">
 
         <label for="profile-email" data-i18n="emailForNotifications">ელ-ფოსტა შეტყობინებებისთვის:</label>
         <input type="email" id="profile-email" placeholder="example@mail.com">
-
-        <div class="status-box">
-          <p><span data-i18n="subStatus">გამოწერის სტატუსი:</span> <span id="user-sub-status" class="badge-free">Free</span></p>
-        </div>
 
         <button type="submit" class="btn-submit" data-i18n="saveProfile">პროფილის შენახვა</button>
       </form>
@@ -258,38 +824,407 @@
     </div>
   </div>
 
-  <!-- პაკეტების ყიდვის Modal -->
-  <div id="subscription-modal" class="modal">
-    <div class="modal-content sub-content">
-      <span class="close-btn" id="close-sub">&times;</span>
-      <h2 data-i18n="subPackagesTitle">💎 აირჩიეთ გამოწერის პაკეტი</h2>
-      <p style="margin-bottom: 20px; color: #666;" data-i18n="subPackagesSubtitle">მიიღეთ შეტყობინებები მეილზე ახალ ივენთებსა და ტრენინგებზე!</p>
-      
-      <div class="packages-grid">
-        <div class="package-card">
-          <h3>PRO Member</h3>
-          <p class="pkg-price">29 ₾ / <span data-i18n="perMonth">თვეში</span></p>
-          <ul>
-            <li data-i18n="proFeat1">✅ ადრეული შეტყობინებები მეილზე</li>
-            <li data-i18n="proFeat2">✅ პრიორიტეტული დაჯავშნა</li>
-          </ul>
-          <button class="btn-buy-pkg" data-pkg="PRO" data-i18n="btnSelect">შერჩევა</button>
-        </div>
+  <!-- JavaScript ლოგიკა -->
+  <script>
+    // დროებითი ივენთები (თუ JSON ვერ ჩაიტვირთა)
+    let allEvents = [
+      {
+        "id": 1,
+        "title": "AI & Future Tech Summit",
+        "category": "AI",
+        "format": "In-person",
+        "speaker": "გიორგი ბერიძე",
+        "date": "2026-10-20",
+        "location": "Tbilisi Tech Hub",
+        "price": 120,
+        "rating": 4.9,
+        "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500"
+      },
+      {
+        "id": 2,
+        "title": "React & Next.js Workshop",
+        "category": "Web Dev",
+        "format": "Online",
+        "speaker": "ნიტა ქავთარაძე",
+        "date": "2026-11-05",
+        "location": "Zoom Meeting",
+        "price": 70,
+        "rating": 4.8,
+        "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500"
+      },
+      {
+        "id": 3,
+        "title": "Cybersecurity & Ethical Hacking",
+        "category": "Cybersecurity",
+        "format": "Hybrid",
+        "speaker": "დავით ჩხეიძე",
+        "date": "2026-11-12",
+        "location": "Ozurgeti TechnoPark / Online",
+        "price": 160,
+        "rating": 5.0,
+        "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500"
+      }
+    ];
 
-        <div class="package-card featured">
-          <h3>VIP Tech Pass</h3>
-          <p class="pkg-price">59 ₾ / <span data-i18n="perMonth">თვეში</span></p>
-          <ul>
-            <li data-i18n="vipFeat1">✅ ყველა ივენთზე პრიორიტეტი</li>
-            <li data-i18n="vipFeat2">✅ მეილ შეტყობინებები + ფასდაკლება</li>
-            <li data-i18n="vipFeat3">✅ ექსკლუზიური ვორქშოფები</li>
-          </ul>
-          <button class="btn-buy-pkg" data-pkg="VIP" data-i18n="btnSelect">შერჩევა</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    const USD_RATE = 2.7;
+    let currentLang = localStorage.getItem('currentLang') || 'ka';
+    let isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+    let userFavorites = JSON.parse(localStorage.getItem('userFavorites')) || [];
+    let userProfile = JSON.parse(localStorage.getItem('userProfile')) || { name: '', email: '' };
+    let myTickets = JSON.parse(localStorage.getItem('myTickets')) || [];
+    let showOnlyFavorites = false;
+    let selectedEventForBooking = null;
+    let currentActiveTicket = null;
+    let selectedSeatNumber = null;
 
-  <script src="app.js"></script>
+    // 🎯 3-კითხვიანი კარიერული ტესტის მონაცემები
+    const quizQuestions = [
+      {
+        q: "1/3: რა უფრო გიტაცებთ ყოველდღიურ საქმიანობაში?",
+        opts: [
+          { text: "🧠 ალგორითმები და მონაცემები", cat: "AI" },
+          { text: "🎨 ვებ-საიტების აწყობა და დიზაინი", cat: "Web Dev" },
+          { text: "🛡️ სისტემების დაცვა და ჰაკინგი", cat: "Cybersecurity" }
+        ]
+      },
+      {
+        q: "2/3: რომელ ინსტრუმენტთან ისურვებდით მუშაობას?",
+        opts: [
+          { text: "🤖 Neural Networks & Python", cat: "AI" },
+          { text: "💻 React, HTML & CSS", cat: "Web Dev" },
+          { text: "🔒 Linux, Firewalls & Cryptography", cat: "Cybersecurity" }
+        ]
+      },
+      {
+        q: "3/3: რა არის თქვენი მთავარი კარიერული მიზანი?",
+        opts: [
+          { text: "🚀 AI ასისტენტების შექმნა", cat: "AI" },
+          { text: "🌐 თანამედროვე ვებ-აპლიკაციები", cat: "Web Dev" },
+          { text: "🔐 კომპანიების უსაფრთხოება", cat: "Cybersecurity" }
+        ]
+      }
+    ];
+
+    let currentQuizStep = 0;
+    let quizScores = { "AI": 0, "Web Dev": 0, "Cybersecurity": 0 };
+
+    function renderQuizStep() {
+      const qObj = quizQuestions[currentQuizStep];
+      const qQuestion = document.getElementById('quiz-question');
+      const qOptionsContainer = document.querySelector('.quiz-options');
+      const qResult = document.getElementById('quiz-result');
+
+      qResult.style.display = 'none';
+      qQuestion.textContent = qObj.q;
+      qOptionsContainer.innerHTML = '';
+
+      qObj.opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-quiz-opt';
+        btn.textContent = opt.text;
+        btn.addEventListener('click', () => {
+          quizScores[opt.cat]++;
+          currentQuizStep++;
+
+          if (currentQuizStep < quizQuestions.length) {
+            renderQuizStep();
+          } else {
+            finishQuiz();
+          }
+        });
+        qOptionsContainer.appendChild(btn);
+      });
+    }
+
+    function finishQuiz() {
+      let topCategory = "AI";
+      let maxScore = -1;
+      for (const cat in quizScores) {
+        if (quizScores[cat] > maxScore) {
+          maxScore = quizScores[cat];
+          topCategory = cat;
+        }
+      }
+
+      const qQuestion = document.getElementById('quiz-question');
+      const qOptionsContainer = document.querySelector('.quiz-options');
+      const qResult = document.getElementById('quiz-result');
+
+      qQuestion.textContent = "🎉 ტესტი დასრულებულია!";
+      qOptionsContainer.innerHTML = `<button class="btn-quiz-opt" id="btn-reset-quiz">🔄 ტესტის თავიდან გავლით</button>`;
+
+      qResult.style.display = 'block';
+      qResult.innerHTML = `🌟 თქვენი პასუხებიდან გამომდინარე, გირჩევთ <b>${topCategory}</b> მიმართულებას! ფილტრი ავტომატურად მორგებულია.`;
+
+      document.getElementById('category-filter').value = topCategory;
+      filterEvents();
+
+      document.getElementById('btn-reset-quiz').addEventListener('click', () => {
+        currentQuizStep = 0;
+        quizScores = { "AI": 0, "Web Dev": 0, "Cybersecurity": 0 };
+        renderQuizStep();
+      });
+    }
+
+    // DOM Elements
+    const eventsGrid = document.getElementById('events-grid');
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const bookingModal = document.getElementById('booking-modal');
+    const ticketModal = document.getElementById('ticket-modal');
+    const qaModal = document.getElementById('qa-modal');
+    const profileModal = document.getElementById('profile-modal');
+
+    // Theme Mode
+    if (isDarkMode) {
+      document.body.classList.add('dark-theme');
+      themeToggleBtn.textContent = '☀️';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      isDarkMode = !isDarkMode;
+      document.body.classList.toggle('dark-theme', isDarkMode);
+      themeToggleBtn.textContent = isDarkMode ? '☀️' : '🌙';
+      localStorage.setItem('isDarkMode', isDarkMode);
+    });
+
+    // Fetch JSON or fallback
+    fetch('src/data/events.json')
+      .then(res => res.json())
+      .then(data => {
+        allEvents = data;
+        filterEvents();
+        startCountdownTimer();
+      })
+      .catch(() => {
+        filterEvents();
+        startCountdownTimer();
+      });
+
+    function displayEvents(events) {
+      eventsGrid.innerHTML = '';
+      const currency = document.getElementById('currency-select').value;
+
+      events.forEach(event => {
+        const isFav = userFavorites.includes(event.id);
+        const card = document.createElement('div');
+        card.className = 'event-card';
+
+        let formattedPrice = currency === 'USD' 
+          ? `$${(event.price / USD_RATE).toFixed(0)}` 
+          : `${event.price} ₾`;
+
+        const ratingStars = '⭐'.repeat(Math.floor(event.rating || 5)) + ` (${event.rating || 5.0})`;
+
+        card.innerHTML = `
+          <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${event.id}">
+            ${isFav ? '❤️' : '🤍'}
+          </button>
+          <img src="${event.image}" alt="${event.title}">
+          <div class="event-info">
+            <span class="badge">${event.category} • ${event.format}</span>
+            <h3 class="event-title">${event.title}</h3>
+            <div class="rating-stars">${ratingStars}</div>
+            <p class="speaker">🎤 ${event.speaker}</p>
+            <p class="event-details">📅 ${event.date} | 📍 ${event.location}</p>
+            <div class="card-footer">
+              <span class="price">${formattedPrice}</span>
+              <div style="display: flex; gap: 5px;">
+                <button class="btn-qa-icon" data-id="${event.id}" title="დასვი კითხვა">💬</button>
+                <button class="btn-calendar-icon" data-id="${event.id}" title="Google Calendar">🗓️</button>
+                <button class="btn-details" data-id="${event.id}">დაჯავშნა</button>
+              </div>
+            </div>
+          </div>
+        `;
+        eventsGrid.appendChild(card);
+      });
+    }
+
+    function filterEvents() {
+      const category = document.getElementById('category-filter').value;
+      const format = document.getElementById('format-filter').value;
+      const sort = document.getElementById('sort-select').value;
+      const query = document.getElementById('search-input').value.toLowerCase().trim();
+
+      let filtered = allEvents.filter(e => {
+        const catMatch = category === 'all' || e.category === category;
+        const fmtMatch = format === 'all' || e.format === format;
+        const searchMatch = query === '' || e.title.toLowerCase().includes(query) || e.speaker.toLowerCase().includes(query);
+        const favMatch = !showOnlyFavorites || userFavorites.includes(e.id);
+        return catMatch && fmtMatch && searchMatch && favMatch;
+      });
+
+      if (sort === 'date') filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+      else if (sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+      else if (sort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+      else if (sort === 'rating') filtered.sort((a, b) => (b.rating || 5) - (a.rating || 5));
+
+      displayEvents(filtered);
+    }
+
+    document.getElementById('category-filter').addEventListener('change', filterEvents);
+    document.getElementById('format-filter').addEventListener('change', filterEvents);
+    document.getElementById('sort-select').addEventListener('change', filterEvents);
+    document.getElementById('search-input').addEventListener('input', filterEvents);
+    document.getElementById('currency-select').addEventListener('change', filterEvents);
+
+    eventsGrid.addEventListener('click', (e) => {
+      if (e.target.classList.contains('fav-btn')) {
+        const id = Number(e.target.dataset.id);
+        userFavorites = userFavorites.includes(id) ? userFavorites.filter(f => f !== id) : [...userFavorites, id];
+        localStorage.setItem('userFavorites', JSON.stringify(userFavorites));
+        document.getElementById('fav-count').textContent = userFavorites.length;
+        filterEvents();
+      }
+
+      if (e.target.classList.contains('btn-qa-icon')) {
+        const eventId = Number(e.target.dataset.id);
+        const ev = allEvents.find(i => i.id === eventId);
+        if (ev) {
+          document.getElementById('qa-event-title').textContent = `${ev.title} (🎤 ${ev.speaker})`;
+          qaModal.style.display = 'flex';
+        }
+      }
+
+      if (e.target.classList.contains('btn-calendar-icon')) {
+        const eventId = Number(e.target.dataset.id);
+        const ev = allEvents.find(i => i.id === eventId);
+        if (ev) {
+          const formattedDate = ev.date.replace(/-/g, '');
+          window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${formattedDate}T100000Z/${formattedDate}T120000Z&location=${encodeURIComponent(ev.location)}`, '_blank');
+        }
+      }
+
+      if (e.target.classList.contains('btn-details')) {
+        const eventId = Number(e.target.dataset.id);
+        selectedEventForBooking = allEvents.find(ev => ev.id === eventId);
+        if (selectedEventForBooking) {
+          document.getElementById('modal-event-title').textContent = `დაჯავშნა: ${selectedEventForBooking.title}`;
+          renderSeats();
+          bookingModal.style.display = 'flex';
+        }
+      }
+    });
+
+    // 💺 ადგილების არჩევა
+    function renderSeats() {
+      const seatsGrid = document.getElementById('seats-grid');
+      seatsGrid.innerHTML = '';
+      selectedSeatNumber = null;
+      document.getElementById('selected-seat-label').textContent = 'არჩეული ადგილი: -';
+
+      for (let i = 1; i <= 18; i++) {
+        const seat = document.createElement('div');
+        seat.className = 'seat';
+        seat.textContent = i;
+
+        if (i === 3 || i === 7 || i === 12) {
+          seat.classList.add('occupied');
+        } else {
+          seat.addEventListener('click', () => {
+            document.querySelectorAll('.seat').forEach(s => s.classList.remove('selected'));
+            seat.classList.add('selected');
+            selectedSeatNumber = i;
+            document.getElementById('selected-seat-label').textContent = `არჩეული ადგილი: #${i}`;
+          });
+        }
+        seatsGrid.appendChild(seat);
+      }
+    }
+
+    // დაჯავშნა
+    document.getElementById('booking-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const userName = document.getElementById('user-name').value;
+      const userEmail = document.getElementById('user-email').value;
+      const ticketId = 'TKT-' + Math.floor(100000 + Math.random() * 900000);
+
+      currentActiveTicket = {
+        id: ticketId,
+        userName: userName,
+        userEmail: userEmail,
+        eventTitle: selectedEventForBooking.title,
+        eventDate: selectedEventForBooking.date,
+        eventLocation: selectedEventForBooking.location,
+        seatNum: selectedSeatNumber ? `#${selectedSeatNumber}` : 'თავისუფალი'
+      };
+
+      myTickets.push(currentActiveTicket);
+      localStorage.setItem('myTickets', JSON.stringify(myTickets));
+
+      document.getElementById('ticket-event-title').textContent = currentActiveTicket.eventTitle;
+      document.getElementById('ticket-user-name').textContent = currentActiveTicket.userName;
+      document.getElementById('ticket-seat-num').textContent = currentActiveTicket.seatNum;
+      document.getElementById('ticket-event-date').textContent = currentActiveTicket.eventDate;
+      document.getElementById('ticket-event-location').textContent = currentActiveTicket.eventLocation;
+      document.getElementById('ticket-id-code').textContent = `#${currentActiveTicket.id}`;
+
+      const qrContent = encodeURIComponent(`TicketID: ${currentActiveTicket.id} | Event: ${currentActiveTicket.eventTitle} | Holder: ${currentActiveTicket.userName}`);
+      document.getElementById('ticket-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrContent}`;
+
+      bookingModal.style.display = 'none';
+      ticketModal.style.display = 'flex';
+      renderMyTickets();
+    });
+
+    // ⏳ ტაიმერი
+    function startCountdownTimer() {
+      if (allEvents.length === 0) return;
+      const sorted = [...allEvents].sort((a, b) => new Date(a.date) - new Date(b.date));
+      const nextEvent = sorted[0];
+      document.getElementById('next-event-name').textContent = nextEvent.title;
+
+      const eventDate = new Date(nextEvent.date + 'T10:00:00').getTime();
+
+      setInterval(() => {
+        const now = new Date().getTime();
+        const distance = eventDate - now;
+        if (distance < 0) return;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('timer-days').textContent = days < 10 ? '0' + days : days;
+        document.getElementById('timer-hours').textContent = hours < 10 ? '0' + hours : hours;
+        document.getElementById('timer-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('timer-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+      }, 1000);
+    }
+
+    // Modal-ების დახურვა
+    document.getElementById('close-booking').onclick = () => bookingModal.style.display = 'none';
+    document.getElementById('close-ticket').onclick = () => ticketModal.style.display = 'none';
+    document.getElementById('close-ticket-btn').onclick = () => ticketModal.style.display = 'none';
+    document.getElementById('close-qa').onclick = () => qaModal.style.display = 'none';
+    document.getElementById('close-profile').onclick = () => profileModal.style.display = 'none';
+    document.getElementById('profile-btn').onclick = () => profileModal.style.display = 'flex';
+
+    function renderMyTickets() {
+      const container = document.getElementById('my-tickets-list');
+      container.innerHTML = '';
+      if (myTickets.length === 0) {
+        container.innerHTML = '<p style="font-size: 0.85rem; color: #888;">ჯერ არ გაქვთ დაჯავშნილი ბილეთები.</p>';
+        return;
+      }
+      myTickets.forEach(tkt => {
+        const item = document.createElement('div');
+        item.className = 'ticket-item-mini';
+        item.innerHTML = `
+          <div>
+            <h4>${tkt.eventTitle}</h4>
+            <p>📅 ${tkt.eventDate} | 💺 ${tkt.seatNum} | 🆔 ${tkt.id}</p>
+          </div>
+          <span style="font-size: 1.2rem;">🎟️</span>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // ინიციალიზაცია
+    renderQuizStep();
+    renderMyTickets();
+  </script>
 </body>
 </html>
