@@ -1,7 +1,7 @@
 let allEvents = [];
 const USD_RATE = 2.7;
 
-// ენების ლექსიკონი და შემეცნებითი/საინფორმაციო ფრაზები
+// ენების ლექსიკონი
 const translations = {
   ka: {
     profileBtn: "პირადი კაბინეთი",
@@ -42,15 +42,21 @@ const translations = {
     bookingPrefix: "დაჯავშნა:",
     alertProfileUpdated: "პროფილი წარმატებით განახლდა!",
     alertSubSuccess: "🎉 გილოცავთ! თქვენ წარმატებით გამოიწერეთ {pkg} პაკეტი.",
-    alertBookingSuccess: "ადგილი წარმატებით დარეგისტრირდა!",
+    yourTicketTitle: "🎟️ თქვენი ციფრული ბილეთი",
+    labelHolder: "მფლობელი:",
+    labelDate: "თარიღი:",
+    labelLocation: "ადგილი:",
+    labelTicketId: "ბილეთის ID:",
+    qrScanTip: "წარადგინეთ ეს QR კოდი შესასვლელთან",
+    btnClose: "დახურვა",
+    myTicketsHeading: "🎟️ ჩემი დაჯავშნილი ბილეთები",
+    noSavedTickets: "ჯერ არ გაქვთ დაჯავშნილი ბილეთები.",
     robotInfo: [
       "💡 იცოდით? პირველი კომპიუტერული მაუსი 1964 წელს ხისგან დამზადდა.",
       "💡 მსოფლიოში პირველი ვებ-საიტი 1991 წელს შეიქმნა და დღესაც აქტიურია.",
       "💡 Python-ის სახელი ცნობილი ბრიტანული კომედიური შოუსგან (Monty Python) მოდის.",
-      "💡 ტერმინი Bug (შეცდომა კოდში) 1947 წელს კომპიუტერში ნაპოვნ რეალურ ჩრჩილს უკავშირდება.",
-      "💡 QWERTY კლავიატურა 1873 წელს საბეჭდი მანქანების გაჭედვის თავიდან ასაცილებლად შეიქმნა.",
-      "📅 არ დაგავიწყდეთ სასურველი ივენთის ფავორიტებში დამატება!",
-      "🔔 პრემიუმ გამოწერით პირველი მიიღებთ შეტყობინებებს ახალ ვორქშოფებზე."
+      "💡 ტერმინი Bug 1947 წელს კომპიუტერში ნაპოვნ რეალურ ჩრჩილს უკავშირდება.",
+      "📅 დაჯავშნის შემდეგ ბილეთი ინახება თქვენს პირად კაბინეტში!"
     ]
   },
   en: {
@@ -92,15 +98,21 @@ const translations = {
     bookingPrefix: "Booking:",
     alertProfileUpdated: "Profile updated successfully!",
     alertSubSuccess: "🎉 Congratulations! You subscribed to {pkg} plan.",
-    alertBookingSuccess: "Spot booked successfully!",
+    yourTicketTitle: "🎟️ Your Digital Ticket",
+    labelHolder: "Holder:",
+    labelDate: "Date:",
+    labelLocation: "Location:",
+    labelTicketId: "Ticket ID:",
+    qrScanTip: "Present this QR code at the entrance",
+    btnClose: "Close",
+    myTicketsHeading: "🎟️ My Booked Tickets",
+    noSavedTickets: "You have no booked tickets yet.",
     robotInfo: [
       "💡 Did you know? The first computer mouse was made of wood in 1964.",
       "💡 The world's first website created in 1991 is still online today.",
       "💡 Python was named after the Monty Python show, not the snake.",
       "💡 The term 'Bug' came from an actual moth found inside a computer in 1947.",
-      "💡 QWERTY keyboard was designed in 1873 to slow down typists and prevent jams.",
-      "📅 Don't forget to add events to your favorites list!",
-      "🔔 Premium subscribers receive early notifications for new workshops."
+      "📅 After booking, your tickets are saved in your profile!"
     ]
   }
 };
@@ -113,7 +125,9 @@ let userProfile = JSON.parse(localStorage.getItem('userProfile')) || {
   avatar: 'Felix',
   subscription: 'Free'
 };
+let myTickets = JSON.parse(localStorage.getItem('myTickets')) || [];
 let showOnlyFavorites = false;
+let selectedEventForBooking = null;
 
 // DOM
 const eventsGrid = document.getElementById('events-grid');
@@ -123,6 +137,7 @@ const langSelect = document.getElementById('language-select');
 
 // Modals
 const bookingModal = document.getElementById('booking-modal');
+const ticketModal = document.getElementById('ticket-modal');
 const profileModal = document.getElementById('profile-modal');
 const subModal = document.getElementById('subscription-modal');
 
@@ -154,7 +169,6 @@ function setLanguage(lang) {
   updateUI();
 }
 
-langSelect.value = currentLang;
 langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
 
 fetch('src/data/events.json')
@@ -169,6 +183,7 @@ function updateUI() {
   favCountSpan.textContent = userFavorites.length;
   updateProfileButton();
   filterEvents();
+  renderMyTickets();
 }
 
 function updateProfileButton() {
@@ -211,7 +226,7 @@ function displayEvents(events) {
         <p class="event-details">📅 ${event.date} | 📍 ${event.location}</p>
         <div class="card-footer">
           <span class="price">${formattedPrice}</span>
-          <button class="btn-details" data-title="${event.title}">${translations[currentLang].btnBookNow}</button>
+          <button class="btn-details" data-id="${event.id}">${translations[currentLang].btnBookNow}</button>
         </div>
       </div>
     `;
@@ -257,9 +272,14 @@ eventsGrid.addEventListener('click', (e) => {
   }
 
   if (e.target.classList.contains('btn-details')) {
-    const title = e.target.dataset.title;
-    document.getElementById('modal-event-title').textContent = `${translations[currentLang].bookingPrefix} ${title}`;
-    bookingModal.style.display = 'flex';
+    const eventId = Number(e.target.dataset.id);
+    selectedEventForBooking = allEvents.find(ev => ev.id === eventId);
+    if (selectedEventForBooking) {
+      document.getElementById('modal-event-title').textContent = `${translations[currentLang].bookingPrefix} ${selectedEventForBooking.title}`;
+      if (userProfile.name) document.getElementById('user-name').value = userProfile.name;
+      if (userProfile.email) document.getElementById('user-email').value = userProfile.email;
+      bookingModal.style.display = 'flex';
+    }
   }
 });
 
@@ -275,6 +295,7 @@ profileBtn.addEventListener('click', () => {
   document.getElementById('profile-email').value = userProfile.email;
   document.getElementById('user-sub-status').textContent = userProfile.subscription;
   document.getElementById('user-sub-status').className = userProfile.subscription === 'Free' ? 'badge-free' : 'badge-vip';
+  renderMyTickets();
   profileModal.style.display = 'flex';
 });
 
@@ -283,6 +304,8 @@ document.getElementById('subscribe-plan-btn').addEventListener('click', () => {
 });
 
 document.getElementById('close-booking').onclick = () => bookingModal.style.display = 'none';
+document.getElementById('close-ticket').onclick = () => ticketModal.style.display = 'none';
+document.getElementById('close-ticket-btn').onclick = () => ticketModal.style.display = 'none';
 document.getElementById('close-profile').onclick = () => profileModal.style.display = 'none';
 document.getElementById('close-sub').onclick = () => subModal.style.display = 'none';
 
@@ -316,23 +339,73 @@ document.querySelectorAll('.btn-buy-pkg').forEach(btn => {
   });
 });
 
+// 🎟️ დაჯავშნა და QR კოდიანი ციფრული ბილეთის გენერაცია
 document.getElementById('booking-form').addEventListener('submit', (e) => {
   e.preventDefault();
-  alert(translations[currentLang].alertBookingSuccess);
+  
+  const userName = document.getElementById('user-name').value;
+  const userEmail = document.getElementById('user-email').value;
+  const ticketId = 'TKT-' + Math.floor(100000 + Math.random() * 900000);
+
+  const ticketData = {
+    id: ticketId,
+    userName: userName,
+    userEmail: userEmail,
+    eventTitle: selectedEventForBooking.title,
+    eventDate: selectedEventForBooking.date,
+    eventLocation: selectedEventForBooking.location
+  };
+
+  // შენახვა
+  myTickets.push(ticketData);
+  localStorage.setItem('myTickets', JSON.stringify(myTickets));
+
+  // ბილეთის modal-ის შევსება
+  document.getElementById('ticket-event-title').textContent = ticketData.eventTitle;
+  document.getElementById('ticket-user-name').textContent = ticketData.userName;
+  document.getElementById('ticket-event-date').textContent = ticketData.eventDate;
+  document.getElementById('ticket-event-location').textContent = ticketData.eventLocation;
+  document.getElementById('ticket-id-code').textContent = `#${ticketData.id}`;
+
+  // QR კოდის API
+  const qrContent = encodeURIComponent(`TicketID: ${ticketData.id} | Event: ${ticketData.eventTitle} | Holder: ${ticketData.userName}`);
+  document.getElementById('ticket-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrContent}`;
+
   bookingModal.style.display = 'none';
+  ticketModal.style.display = 'flex';
+  updateUI();
 });
 
-// 🧠 მხოლოდ შემეცნებითი და საინფორმაციო ფუნქცია
-let factIndex = 0;
+// 🎟️ პირადი კაბინეტისთვის ბილეთების სიის რენდერი
+function renderMyTickets() {
+  const container = document.getElementById('my-tickets-list');
+  container.innerHTML = '';
 
+  if (myTickets.length === 0) {
+    container.innerHTML = `<p style="font-size: 0.85rem; color: #888;">${translations[currentLang].noSavedTickets}</p>`;
+    return;
+  }
+
+  myTickets.forEach(tkt => {
+    const item = document.createElement('div');
+    item.className = 'ticket-item-mini';
+    item.innerHTML = `
+      <div>
+        <h4>${tkt.eventTitle}</h4>
+        <p>📅 ${tkt.eventDate} | 🆔 ${tkt.id}</p>
+      </div>
+      <span style="font-size: 1.2rem;">🎟️</span>
+    `;
+    container.appendChild(item);
+  });
+}
+
+// 🧠 შემეცნებითი რობოტი
+let factIndex = 0;
 function showNextFact() {
   const facts = translations[currentLang].robotInfo;
   factIndex = (factIndex + 1) % facts.length;
   robotBubble.textContent = facts[factIndex];
 }
-
-// რობოტზე დაჭერისას ახალი ტექ-ფაქტი გამოვა
 robotContainer.addEventListener('click', showNextFact);
-
-// ყოველ 12 წამში ავტომატურად შეიცვლება ტექ-ფაქტი
 setInterval(showNextFact, 12000);

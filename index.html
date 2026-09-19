@@ -73,21 +73,9 @@
     <!-- ივენთების ბარათები -->
   </main>
 
-  <!-- 🔌 კედლის როზეტი რობოტის დასატენად -->
-  <div class="wall-socket" id="wall-socket" title="დატენვის ადგილი">
-    <div class="socket-hole left"></div>
-    <div class="socket-hole right"></div>
-  </div>
-
-  <!-- 🪜 კიბე დინამიკური ანიმაციისთვის -->
-  <div id="robot-ladder" class="robot-ladder"></div>
-
-  <!-- 🛏️ რობოტის საწოლი -->
-  <div id="robot-bed" class="robot-bed">🛌</div>
-
-  <!-- 🤖 სუპერ-პერსონაჟი რობოტი -->
+  <!-- 🤖 შემეცნებითი რობოტი -->
   <div id="cute-robot" class="robot-container">
-    <div class="robot-speech-bubble" id="robot-bubble">გამარჯობა! მე შენი პატარა მეგობარი ვარ 🤖</div>
+    <div class="robot-speech-bubble" id="robot-bubble">გამარჯობა! მე შენი ტექ-ასისტენტი ვარ 🤖</div>
     <div class="robot-body" id="robot-body-main">
       <div class="robot-ear left"></div>
       <div class="robot-ear right"></div>
@@ -99,11 +87,7 @@
         <div class="robot-eye right" id="eye-right"></div>
         <div class="robot-mouth" id="robot-mouth"></div>
       </div>
-      <div class="robot-torso">
-        <span id="torso-icon">⚡</span>
-        <span id="robot-hand-item"></span>
-      </div>
-      <div class="robot-vehicle" id="robot-vehicle"></div>
+      <div class="robot-torso">⚡</div>
       <div class="robot-legs">
         <div class="robot-leg left"></div>
         <div class="robot-leg right"></div>
@@ -128,7 +112,35 @@
     </div>
   </div>
 
-  <!-- 2. პირადი კაბინეტის Modal -->
+  <!-- 🎟️ 2. ციფრული ბილეთის Modal (დაჯავშნის შემდეგ) -->
+  <div id="ticket-modal" class="modal">
+    <div class="modal-content ticket-modal-content">
+      <span class="close-btn" id="close-ticket">&times;</span>
+      <h2 style="text-align: center; margin-bottom: 15px;" data-i18n="yourTicketTitle">🎟️ თქვენი ციფრული ბილეთი</h2>
+      
+      <div class="ticket-card" id="digital-ticket">
+        <div class="ticket-header">
+          <span class="ticket-badge">VIP PASS</span>
+          <h3 id="ticket-event-title">AI & Future Tech Summit</h3>
+        </div>
+        <div class="ticket-body">
+          <p>👤 <b data-i18n="labelHolder">მფლობელი:</b> <span id="ticket-user-name">-</span></p>
+
+          <p>📅 <b data-i18n="labelDate">თარიღი:</b> <span id="ticket-event-date">-</span></p>
+          <p>📍 <b data-i18n="labelLocation">ადგილი:</b> <span id="ticket-event-location">-</span></p>
+          <p>🆔 <b data-i18n="labelTicketId">ბილეთის ID:</b> <code id="ticket-id-code">#TKT-0000</code></p>
+        </div>
+        <div class="ticket-qr-container">
+          <img id="ticket-qr-img" src="" alt="QR Code">
+          <small data-i18n="qrScanTip">წარადგინეთ ეს QR კოდი შესასვლელთან</small>
+        </div>
+      </div>
+
+      <button id="close-ticket-btn" class="btn-submit" style="width: 100%; margin-top: 15px;" data-i18n="btnClose">დახურვა</button>
+    </div>
+  </div>
+
+  <!-- 3. პირადი კაბინეტის Modal -->
   <div id="profile-modal" class="modal">
     <div class="modal-content profile-content">
       <span class="close-btn" id="close-profile">&times;</span>
@@ -157,10 +169,17 @@
 
         <button type="submit" class="btn-submit" data-i18n="saveProfile">პროფილის შენახვა</button>
       </form>
+
+      <!-- ჩემი ბილეთების სექცია -->
+      <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+      <h3 style="margin-bottom: 10px;" data-i18n="myTicketsHeading">🎟️ ჩემი დაჯავშნილი ბილეთები</h3>
+      <div id="my-tickets-list" class="my-tickets-list">
+        <!-- შენახული ბილეთები გამოჩნდება აქ -->
+      </div>
     </div>
   </div>
 
-  <!-- 3. პაკეტების ყიდვის Modal -->
+  <!-- 4. პაკეტების ყიდვის Modal -->
   <div id="subscription-modal" class="modal">
     <div class="modal-content sub-content">
       <span class="close-btn" id="close-sub">&times;</span>
