@@ -63,10 +63,9 @@
       border: 1px solid var(--border-color);
       color: var(--text-color);
       padding: 8px 14px;
-      border-radius: 8px;
+      border-radius: 20px;
       cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 1rem;
       transition: all 0.2s;
     }
 
@@ -76,7 +75,7 @@
 
     .select-styled {
       padding: 8px 12px;
-      border-radius: 8px;
+      border-radius: 12px;
       border: 1px solid var(--border-color);
       background: var(--card-bg);
       color: var(--text-color);
@@ -89,7 +88,7 @@
       color: white;
       border: none;
       padding: 9px 18px;
-      border-radius: 8px;
+      border-radius: 20px;
       cursor: pointer;
       font-weight: 600;
       font-size: 0.9rem;
@@ -142,7 +141,7 @@
 
     .subscription-banner p {
       font-size: 0.95rem;
-      opacity: 0.9;
+      opacity: 0.95;
     }
 
     .btn-subscribe-banner {
@@ -243,12 +242,10 @@
       background: rgba(255, 255, 255, 0.9);
       border: 1px solid #cbd5e1;
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       cursor: pointer;
-      font-size: 11px;
-      font-weight: 700;
-      color: #64748b;
+      font-size: 16px;
       z-index: 2;
       display: flex;
       justify-content: center;
@@ -257,7 +254,6 @@
 
     .fav-btn.active {
       background: #ffe4e6;
-      color: #e11d48;
       border-color: #fda4af;
     }
 
@@ -342,7 +338,7 @@
       padding: 8px 12px;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: 600;
     }
 
@@ -559,14 +555,14 @@
 
   <header class="header">
     <div class="top-bar">
-      <h1>Tech Meet & Greet Hub</h1>
+      <h1>🚀 Tech Meet & Greet Hub</h1>
       <div class="user-control" style="display: flex; gap: 10px; align-items: center;">
-        <button id="theme-toggle-btn" class="btn-theme-toggle" title="თემის შეცვლა">Dark Mode</button>
+        <button id="theme-toggle-btn" class="btn-theme-toggle" title="თემის შეცვლა">🌙</button>
         <select id="language-select" class="select-styled">
-          <option value="ka">GE</option>
-          <option value="en">EN</option>
+          <option value="ka">🇬🇪 GE</option>
+          <option value="en">🇺🇸 EN</option>
         </select>
-        <button id="profile-btn" class="btn-profile"><span data-i18n="profileBtn">პირადი კაბინეთი</span></button>
+        <button id="profile-btn" class="btn-profile">👤 <span data-i18n="profileBtn">პირადი კაბინეთი</span></button>
       </div>
     </div>
     <p data-i18n="headerSubtitle">იპოვეთ, დაჯავშნეთ და მიიღეთ ექსკლუზიური შეტყობინებები ტექნოლოგიურ ივენთებზე</p>
@@ -618,21 +614,21 @@
     </div>
 
     <div>
-      <button id="show-favorites-btn" class="btn-secondary"><span data-i18n="btnInterested">მაინტერესებს</span> (<span id="fav-count">0</span>)</button>
+      <button id="show-favorites-btn" class="btn-secondary">❤️ <span data-i18n="btnInterested">მაინტერესებს</span> (<span id="fav-count">0</span>)</button>
     </div>
   </section>
 
   <!-- ბანერი -->
   <section class="subscription-banner">
-    <h2 data-i18n="bannerTitle">გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
+    <h2 data-i18n="bannerTitle">🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
     <p data-i18n="bannerDesc">შეიტყვეთ დაგეგმილი ივენთებისა და ტრენინგების შესახებ ყველაზე ადრე და დაჯავშნეთ ადგილები პრიორიტეტულად.</p>
-    <button id="subscribe-plan-btn" class="btn-subscribe-banner" data-i18n="btnViewPackages">პაკეტების ნახვა</button>
+    <button id="subscribe-plan-btn" class="btn-subscribe-banner" data-i18n="btnViewPackages">💎 პაკეტების ნახვა</button>
   </section>
 
   <!-- ტაიმერი -->
   <section class="countdown-section" id="countdown-section">
     <div class="countdown-title">
-      <span data-i18n="nextEventTitle">უახლოეს ივენთამდე დარჩენილია:</span>
+      ⏳ <span data-i18n="nextEventTitle">უახლოეს ივენთამდე დარჩენილია:</span>
       <strong id="next-event-name">AI & Future Tech Summit</strong>
     </div>
     <div class="timer-boxes">
@@ -649,7 +645,7 @@
   <div id="qa-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-qa">&times;</span>
-      <h3>დასვი კითხვა სპიკერისთვის</h3>
+      <h3>💬 დასვი კითხვა სპიკერისთვის</h3>
       <p id="qa-event-title" style="color: #0284c7; font-weight: 600; margin-bottom: 10px;"></p>
       
       <form id="qa-form">
@@ -658,11 +654,11 @@
       </form>
 
       <div style="margin-top: 15px;">
-        <h4>საზოგადოების გამოკითხვა:</h4>
+        <h4>📊 საზოგადოების გამოკითხვა:</h4>
         <p style="font-size: 0.85rem; margin-top: 5px;">რამდენად ელოდებით ამ ივენთს?</p>
         <div style="display: flex; gap: 10px; margin-top: 8px;">
-          <button class="btn-poll" data-poll="high">ძალიან (78%)</button>
-          <button class="btn-poll" data-poll="medium">მაინტერესებს (22%)</button>
+          <button class="btn-poll" data-poll="high">🔥 ძალიან (78%)</button>
+          <button class="btn-poll" data-poll="medium">👍 მაინტერესებს (22%)</button>
         </div>
       </div>
 
@@ -672,7 +668,7 @@
 
   <!-- ასისტენტი -->
   <div id="cute-robot" class="robot-container">
-    <div class="robot-speech-bubble" id="robot-bubble">ტექ-ასისტენტი აქ არის</div>
+    <div class="robot-speech-bubble" id="robot-bubble">🤖 ტექ-ასისტენტი აქ არის</div>
   </div>
 
   <!-- დაჯავშნისა და ადგილების Modal -->
@@ -682,8 +678,8 @@
       <h2 id="modal-event-title" data-i18n="modalBookingTitle">ღონისძიების დაჯავშნა</h2>
       
       <div class="seat-picker-container">
-        <p style="font-size: 0.85rem; margin-bottom: 8px;"><b>აირჩიეთ სასურველი ადგილი დარბაზში:</b></p>
-        <div class="stage-label">სცენა / სპიკერი</div>
+        <p style="font-size: 0.85rem; margin-bottom: 8px;"><b>💺 აირჩიეთ სასურველი ადგილი დარბაზში:</b></p>
+        <div class="stage-label">🎬 სცენა / სპიკერი</div>
         <div class="seats-grid" id="seats-grid"></div>
         <small id="selected-seat-label" style="display: block; margin-top: 8px; color: #10b981; font-weight: 700;">არჩეული ადგილი: -</small>
       </div>
@@ -704,7 +700,7 @@
   <div id="ticket-modal" class="modal">
     <div class="modal-content ticket-modal-content">
       <span class="close-btn" id="close-ticket">&times;</span>
-      <h2 style="text-align: center; margin-bottom: 15px;" data-i18n="yourTicketTitle">თქვენი ციფრული ბილეთი</h2>
+      <h2 style="text-align: center; margin-bottom: 15px;" data-i18n="yourTicketTitle">🎟️ თქვენი ციფრული ბილეთი</h2>
       
       <div class="ticket-card" id="digital-ticket">
         <div class="ticket-header">
@@ -712,11 +708,11 @@
           <h3 id="ticket-event-title">AI & Future Tech Summit</h3>
         </div>
         <div class="ticket-body" style="margin-top: 10px;">
-          <p><b data-i18n="labelHolder">მფლობელი:</b> <span id="ticket-user-name">-</span></p>
-          <p><b>ადგილი დარბაზში:</b> <span id="ticket-seat-num">-</span></p>
-          <p><b data-i18n="labelDate">თარიღი:</b> <span id="ticket-event-date">-</span></p>
-          <p><b data-i18n="labelLocation">ადგილი:</b> <span id="ticket-event-location">-</span></p>
-          <p><b data-i18n="labelTicketId">ბილეთის ID:</b> <code id="ticket-id-code">#TKT-0000</code></p>
+          <p>👤 <b data-i18n="labelHolder">მფლობელი:</b> <span id="ticket-user-name">-</span></p>
+          <p>💺 <b>ადგილი დარბაზში:</b> <span id="ticket-seat-num">-</span></p>
+          <p>📅 <b data-i18n="labelDate">თარიღი:</b> <span id="ticket-event-date">-</span></p>
+          <p>📍 <b data-i18n="labelLocation">ადგილი:</b> <span id="ticket-event-location">-</span></p>
+          <p>🆔 <b data-i18n="labelTicketId">ბილეთის ID:</b> <code id="ticket-id-code">#TKT-0000</code></p>
         </div>
         <div class="ticket-qr-container">
           <img id="ticket-qr-img" src="" alt="QR Code">
@@ -725,8 +721,8 @@
       </div>
 
       <div class="ticket-actions-grid">
-        <button id="add-calendar-btn" class="btn-submit" style="background: #0284c7;"><span data-i18n="btnAddToCalendar">კალენდარში დამატება</span></button>
-        <button id="download-ticket-btn" class="btn-submit" style="background: #4f46e5;"><span data-i18n="btnDownload">ჩამოტვირთვა (PDF)</span></button>
+        <button id="add-calendar-btn" class="btn-submit" style="background: #0284c7;">🗓️ <span data-i18n="btnAddToCalendar">კალენდარში დამატება</span></button>
+        <button id="download-ticket-btn" class="btn-submit" style="background: #4f46e5;">📥 <span data-i18n="btnDownload">ჩამოტვირთვა (PDF)</span></button>
       </div>
       <button id="close-ticket-btn" class="btn-secondary" style="width: 100%; margin-top: 10px;" data-i18n="btnClose">დახურვა</button>
     </div>
@@ -736,7 +732,7 @@
   <div id="profile-modal" class="modal">
     <div class="modal-content profile-content">
       <span class="close-btn" id="close-profile">&times;</span>
-      <h2 data-i18n="profileTitle">პირადი კაბინეთი</h2>
+      <h2 data-i18n="profileTitle">👤 პირადი კაბინეთი</h2>
       
       <form id="profile-form" style="margin-top: 15px;">
         <label for="profile-name" data-i18n="yourName">თქვენი სახელი:</label>
@@ -749,7 +745,7 @@
       </form>
 
       <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-      <h3 style="margin-bottom: 10px;" data-i18n="myTicketsHeading">ჩემი დაჯავშნილი ბილეთები</h3>
+      <h3 style="margin-bottom: 10px;" data-i18n="myTicketsHeading">🎟️ ჩემი დაჯავშნილი ბილეთები</h3>
       <div id="my-tickets-list" class="my-tickets-list"></div>
     </div>
   </div>
@@ -811,18 +807,18 @@
     const qaModal = document.getElementById('qa-modal');
     const profileModal = document.getElementById('profile-modal');
 
-    // 🌙 Dark Mode ლოგიკა + ღილაკის ტექსტი
+    // 🌙 Dark Mode ლოგიკა + ემოჯი
     if (isDarkMode) {
       document.body.classList.add('dark-theme');
-      themeToggleBtn.textContent = 'Light Mode';
+      themeToggleBtn.textContent = '☀️';
     } else {
-      themeToggleBtn.textContent = 'Dark Mode';
+      themeToggleBtn.textContent = '🌙';
     }
 
     themeToggleBtn.addEventListener('click', () => {
       isDarkMode = !isDarkMode;
       document.body.classList.toggle('dark-theme', isDarkMode);
-      themeToggleBtn.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+      themeToggleBtn.textContent = isDarkMode ? '☀️' : '🌙';
       localStorage.setItem('isDarkMode', isDarkMode);
     });
 
@@ -839,11 +835,11 @@
           ? `$${(event.price / USD_RATE).toFixed(0)}` 
           : `${event.price} ₾`;
 
-        const ratingStars = `Rating: ${event.rating || 5.0} / 5.0`;
+        const ratingStars = '⭐'.repeat(Math.floor(event.rating || 5)) + ` (${event.rating || 5.0})`;
 
         card.innerHTML = `
           <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${event.id}">
-            ${isFav ? 'FAV' : 'ADD'}
+            ${isFav ? '❤️' : '🤍'}
           </button>
           <div class="event-card-img-container">
             <img src="${event.image}" alt="${event.title}">
@@ -852,13 +848,13 @@
             <span class="badge">${event.category} • ${event.format}</span>
             <h3 class="event-title">${event.title}</h3>
             <div class="rating-stars">${ratingStars}</div>
-            <p class="speaker">Speaker: ${event.speaker}</p>
-            <p class="event-details">Date: ${event.date} | Location: ${event.location}</p>
+            <p class="speaker">🎤 ${event.speaker}</p>
+            <p class="event-details">📅 ${event.date} | 📍 ${event.location}</p>
             <div class="card-footer">
               <span class="price">${formattedPrice}</span>
               <div style="display: flex; gap: 6px;">
-                <button class="btn-qa-icon" data-id="${event.id}" title="დასვი კითხვა">Q&A</button>
-                <button class="btn-calendar-icon" data-id="${event.id}" title="Google Calendar">Calendar</button>
+                <button class="btn-qa-icon" data-id="${event.id}" title="დასვი კითხვა">💬 Q&A</button>
+                <button class="btn-calendar-icon" data-id="${event.id}" title="Google Calendar">🗓️</button>
                 <button class="btn-details" data-id="${event.id}">დაჯავშნა</button>
               </div>
             </div>
@@ -909,7 +905,7 @@
         const eventId = Number(e.target.dataset.id);
         const ev = allEvents.find(i => i.id === eventId);
         if (ev) {
-          document.getElementById('qa-event-title').textContent = `${ev.title} (${ev.speaker})`;
+          document.getElementById('qa-event-title').textContent = `${ev.title} (🎤 ${ev.speaker})`;
           qaModal.style.display = 'flex';
         }
       }
@@ -1038,8 +1034,9 @@
         item.innerHTML = `
           <div>
             <h4>${tkt.eventTitle}</h4>
-            <p>Date: ${tkt.eventDate} | Seat: ${tkt.seatNum} | ID: ${tkt.id}</p>
+            <p>📅 ${tkt.eventDate} | 💺 ${tkt.seatNum} | 🆔 ${tkt.id}</p>
           </div>
+          <span style="font-size: 1.2rem;">🎟️</span>
         `;
         container.appendChild(item);
       });
