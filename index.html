@@ -52,7 +52,7 @@
       margin: 0 auto 15px auto;
     }
 
-    /* ⚡ თანამედროვე ტექ-ლოგო სათაურის წინ */
+    /* ⚡ ლოგო + ანიმირებული გრადიენტული სათაური */
     .brand-container {
       display: flex;
       align-items: center;
@@ -60,8 +60,8 @@
     }
 
     .brand-logo-badge {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       background: linear-gradient(135deg, #4f46e5, #06b6d4);
       border-radius: 10px;
       display: flex;
@@ -75,9 +75,20 @@
     }
 
     .brand-title {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 800;
+      background: linear-gradient(135deg, #6366f1, #38bdf8, #ec4899);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 4s ease infinite;
       letter-spacing: -0.5px;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .btn-theme-toggle {
@@ -577,7 +588,7 @@
 
   <header class="header">
     <div class="top-bar">
-      <!-- ⚡ დახვეწილი ტექ-ლოგო და სათაური -->
+      <!-- ⚡ T&G ლოგო + ანიმირებული გრადიენტული ტექსტი -->
       <div class="brand-container">
         <div class="brand-logo-badge">T&G</div>
         <h1 class="brand-title">Tech Meet & Greet Hub</h1>
@@ -753,7 +764,7 @@
       </div>
       <button id="close-ticket-btn" class="btn-secondary" style="width: 100%; margin-top: 10px;" data-i18n="btnClose">დახურვა</button>
     </div>
-  </section>
+  </div>
 
   <!-- პროფილის Modal -->
   <div id="profile-modal" class="modal">
