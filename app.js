@@ -48,6 +48,7 @@ const translations = {
     labelLocation: "ადგილი:",
     labelTicketId: "ბილეთის ID:",
     qrScanTip: "წარადგინეთ ეს QR კოდი შესასვლელთან",
+    btnDownload: "ბილეთის ჩამოტვირთვა (PDF)",
     btnClose: "დახურვა",
     myTicketsHeading: "🎟️ ჩემი დაჯავშნილი ბილეთები",
     noSavedTickets: "ჯერ არ გაქვთ დაჯავშნილი ბილეთები.",
@@ -104,6 +105,7 @@ const translations = {
     labelLocation: "Location:",
     labelTicketId: "Ticket ID:",
     qrScanTip: "Present this QR code at the entrance",
+    btnDownload: "Download Ticket (PDF)",
     btnClose: "Close",
     myTicketsHeading: "🎟️ My Booked Tickets",
     noSavedTickets: "You have no booked tickets yet.",
@@ -409,3 +411,36 @@ function showNextFact() {
 }
 robotContainer.addEventListener('click', showNextFact);
 setInterval(showNextFact, 12000);
+
+// 📥 ბილეთის ჩამოტვირთვა / დაბეჭდვა (PDF)
+document.getElementById('download-ticket-btn').addEventListener('click', () => {
+  const ticketElement = document.getElementById('digital-ticket').outerHTML;
+  
+  const printWindow = window.open('', '', 'width=600,height=700');
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>Ticket - ${document.getElementById('ticket-event-title').textContent}</title>
+        <style>
+          body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; padding: 40px; background: #f4f7f6; }
+          .ticket-card { background: #0f172a; color: white; border-radius: 12px; padding: 25px; width: 350px; border: 2px dashed #38bdf8; }
+          .ticket-header { border-bottom: 1px solid #334155; padding-bottom: 10px; margin-bottom: 15px; }
+          .ticket-badge { background: #38bdf8; color: #0f172a; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+          .ticket-body p { margin-bottom: 8px; font-size: 14px; color: #cbd5e1; }
+          .ticket-qr-container { text-align: center; margin-top: 15px; background: white; padding: 10px; border-radius: 8px; color: #333; }
+          .ticket-qr-container img { width: 130px; height: 130px; }
+        </style>
+      </head>
+      <body>
+        ${ticketElement}
+        <script>
+          setTimeout(() => {
+            window.print();
+            window.close();
+          }, 500);
+        <\/script>
+      </body>
+    </html>
+  `);
+  printWindow.document.close();
+});
