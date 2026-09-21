@@ -13,6 +13,9 @@
       --border-color: #e2e8f0;
       --accent-color: #4f46e5;
       --modal-bg: #ffffff;
+
+      --robot-head-color: #38bdf8;
+      --robot-body-color: #6366f1;
     }
 
     body.dark-theme {
@@ -37,6 +40,7 @@
       padding: 20px;
       overflow-x: hidden;
       transition: background-color 0.3s ease, color 0.3s ease;
+      padding-bottom: 120px; /* ადგილი ტობის სეირნობისთვის */
     }
 
     .header {
@@ -89,14 +93,24 @@
       100% { background-position: 0% 50%; }
     }
 
-    .btn-theme-toggle {
+    .btn-theme-toggle, .btn-robot-toggle {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       color: var(--text-color);
       padding: 8px 14px;
       border-radius: 20px;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-robot-toggle.off {
+      background: #ef4444;
+      color: white;
+      border-color: #b91c1c;
     }
 
     .select-styled {
@@ -327,154 +341,88 @@
       cursor: pointer;
     }
 
-    /* 🤖 🏠 ლოგინში მყოფი და თავისი ცხოვრებით მცხოვრები საყვარელი რობოტი */
-    .skater-robot-container {
+    /* 🤖 🤖 🤖 ცოცხალი და ავტონომიური რობოტი „ტობი“ */
+    .toby-widget-container {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999;
+      bottom: 10px;
+      left: 20px;
+      z-index: 9999;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      transition: bottom 0.5s ease, transform 0.3s ease;
+      align-items: center;
+      user-select: none;
+      transition: left 0.8s linear, opacity 0.4s ease, transform 0.4s ease;
     }
 
-    .robot-controls-bar {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 6px;
+    .toby-widget-container.facing-left {
+      transform: scaleX(-1);
     }
 
-    .btn-power, .btn-sound {
-      background: #0f172a;
+    .toby-widget-container.facing-left .toby-speech-bubble {
+      transform: scaleX(-1); /* ტექსტი რომ არ გადაბრუნდეს */
+    }
+
+    .toby-widget-container.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .toby-speech-bubble {
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(8px);
       color: #38bdf8;
-      border: 1px solid #38bdf8;
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    .btn-power.off {
-      background: #ef4444;
-      color: white;
-      border-color: #b91c1c;
-    }
-
-    .robot-speech-bubble {
-      background: #0f172a;
-      color: #38bdf8;
-      border: 1px solid #38bdf8;
+      border: 1.5px solid #38bdf8;
       padding: 8px 12px;
       border-radius: 12px;
       font-size: 0.8rem;
       font-weight: 600;
       margin-bottom: 6px;
-      max-width: 220px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      animation: floatBubble 2.5s ease-in-out infinite;
-      position: relative;
+      max-width: 200px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
       line-height: 1.3;
+      text-align: center;
+      white-space: normal;
     }
 
-    @keyframes floatBubble {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
+    .toby-speech-bubble.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .robot-skate-svg {
-      width: 100px;
-      height: 115px;
+    .toby-svg-wrapper {
+      width: 75px;
+      height: 90px;
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
     }
 
-    /* 🛏️ ლოგინი და ძილის რეჟიმი */
-    .robot-bed-group {
-      display: none;
+    /* ⚡⚡ დენის დარტყმა */
+    .toby-widget-container.shocked {
+      animation: shockAnim 0.1s infinite alternate;
     }
 
-    .skater-robot-container.sleeping .robot-bed-group {
-      display: block;
+    @keyframes shockAnim {
+      0% { transform: translate(3px, 3px) rotate(5deg); filter: drop-shadow(0 0 15px #f59e0b); }
+      100% { transform: translate(-3px, -3px) rotate(-5deg); filter: drop-shadow(0 0 20px #ef4444); }
     }
 
-    .skater-robot-container.sleeping .robot-skate-group {
-      display: none;
-    }
+    .toby-widget-container.shocked .robot-eye { display: none; }
+    .toby-widget-container.shocked .shock-eyes { display: block !important; }
 
-    .skater-robot-container.sleeping .robot-standing-group {
-      display: none;
-    }
+    /* ელემენტების გამოჩენა/დამალვა რეჟიმების მიხედვით */
+    .shock-eyes, .hammer-item, .scooter-item, .bike-item, .laptop-item, .tree-item, .spark-item { display: none; }
 
-    /* როცა სკეიტზე არაა */
-    .skater-robot-container.no-skate .robot-skate-group {
-      display: none;
-    }
-
-    .skater-robot-container.no-skate .robot-standing-group {
-      display: block;
-    }
-
-    .sleep-zzz {
-      display: none;
-      font-weight: 800;
-      color: #ec4899;
-      font-size: 1rem;
-      animation: zzzAnim 1.8s infinite;
-      position: absolute;
-      top: -12px;
-      right: 12px;
-    }
-
-    .skater-robot-container.sleeping .sleep-zzz {
-      display: block;
-    }
-
-    @keyframes zzzAnim {
-      0% { opacity: 0; transform: translate(0, 0) scale(0.8); }
-      50% { opacity: 1; }
-      100% { opacity: 0; transform: translate(12px, -18px) scale(1.3); }
-    }
-
-    .robot-eye {
-      animation: eyeBlink 3.5s infinite;
-      transform-origin: center;
-    }
-
-    @keyframes eyeBlink {
-      0%, 90%, 100% { transform: scaleY(1); }
-      95% { transform: scaleY(0.1); }
-    }
-
-    .antenna-light {
-      animation: antennaGlow 1.5s infinite alternate;
-    }
-
-    @keyframes antennaGlow {
-      from { fill: #f59e0b; filter: drop-shadow(0 0 2px #f59e0b); }
-      to { fill: #ec4899; filter: drop-shadow(0 0 8px #ec4899); }
-    }
-
-    .skate-wheel {
-      animation: wheelSpin 0.5s linear infinite;
-      transform-origin: center;
-    }
-
-    @keyframes wheelSpin {
-      100% { transform: rotate(360deg); }
-    }
-
-    .skater-robot-container.jump .robot-skate-svg {
-      animation: skateJump 0.6s ease;
-    }
-
-    @keyframes skateJump {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-45px) rotate(-10deg); }
-      100% { transform: translateY(0) rotate(0deg); }
-    }
+    .mode-walk .hammer-item { display: block !important; }
+    .mode-scooter .scooter-item { display: block !important; }
+    .mode-bike .bike-item { display: block !important; }
+    .mode-coding .laptop-item { display: block !important; }
+    .mode-planting .tree-item { display: block !important; }
+    .mode-fixing .spark-item { display: block !important; }
 
     /* Modals */
     .modal {
@@ -487,7 +435,7 @@
       background-color: rgba(15, 23, 42, 0.6);
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      z-index: 10000;
     }
 
     .modal-content {
@@ -511,7 +459,7 @@
     }
 
     .chat-box-messages {
-      height: 200px;
+      height: 220px;
       overflow-y: auto;
       background: var(--bg-color);
       border: 1px solid var(--border-color);
@@ -523,7 +471,7 @@
       gap: 8px;
     }
 
-    .chat-msg { max-width: 80%; padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; }
+    .chat-msg { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; line-height: 1.4; }
     .chat-msg.bot { background: #e0e7ff; color: #3730a3; align-self: flex-start; }
     .chat-msg.user { background: var(--accent-color); color: white; align-self: flex-end; }
 
@@ -693,6 +641,7 @@
       </div>
 
       <div class="user-control" style="display: flex; gap: 10px; align-items: center;">
+        <button id="toggle-toby-visibility-btn" class="btn-robot-toggle" title="ასისტენტის გამოჩენა/დამალვა">🤖 Toby: ON</button>
         <button id="theme-toggle-btn" class="btn-theme-toggle" title="თემის შეცვლა">🌙</button>
         <select id="language-select" class="select-styled">
           <option value="ka">🇬🇪 GE</option>
@@ -777,42 +726,59 @@
 
   <main class="events-grid" id="events-grid"></main>
 
-  <!-- 🤖 🏠 ცოცხალი საყვარელი რობოტი (ლოგინითა და საინტერესო ამბებით) -->
-  <div class="skater-robot-container" id="robot-container">
-    <div class="robot-controls-bar">
-      <button id="robot-power-btn" class="btn-power" title="ჩართვა/გამორთვა">⚡ ON</button>
-      <button id="robot-sound-btn" class="btn-sound" title="ხმის ჩართვა/გათიშვა">🔊 SOUND</button>
-    </div>
-
-    <div class="robot-speech-bubble" id="robot-bubble">
-      <span class="sleep-zzz">Zzz...</span>
-      <span id="robot-text-msg">💡 იცოდი? პირველი კომპიუტერული მაუსი ხისგან იყო დამზადებული!</span>
+  <!-- 🤖 🤖 🤖 ცოცხალი და ავტონომიური რობოტი „ტობი“ -->
+  <div class="toby-widget-container mode-walk" id="toby-widget">
+    <div class="toby-speech-bubble" id="toby-bubble">
+      <span id="toby-text-msg">💡 იცოდი? პირველი კომპიუტერული მაუსი ხისგან დამზადდა!</span>
     </div>
     
-    <svg class="robot-skate-svg" id="robot-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-      
-      <!-- 🛏️ ლოგინი (გამოჩნდება OFF რეჟიმში) -->
-      <g class="robot-bed-group">
-        <!-- ლოგინის ჩარჩო -->
-        <rect x="20" y="160" width="160" height="50" rx="10" fill="#475569"/>
-        <!-- ბალიში -->
-        <rect x="30" y="145" width="45" height="25" rx="8" fill="#ffffff"/>
-        <!-- მძინარე რობოტის თავი -->
-        <rect x="35" y="125" width="60" height="40" rx="12" fill="#38BDF8"/>
-        <!-- დახუჭული თვალები -->
-        <path d="M 48 142 Q 54 147 60 142 M 68 142 Q 74 147 80 142" stroke="#0F172A" stroke-width="3" stroke-linecap="round"/>
-        <!-- ანტენა -->
-        <line x1="65" y1="125" x2="65" y2="110" stroke="#64748B" stroke-width="3"/>
-        <circle cx="65" cy="106" r="6" fill="#64748B"/>
-        <!-- საბანი -->
-        <path d="M 60 155 L 175 155 Q 180 155 180 160 L 180 205 Q 180 210 175 210 L 60 210 Z" fill="#EC4899"/>
-      </g>
+    <div class="toby-svg-wrapper" id="toby-btn">
+      <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        
+        <!-- 🔨 ურო (მხარზე გადადებული) -->
+        <g class="hammer-item">
+          <rect x="125" y="60" width="12" height="65" rx="3" fill="#78350F" transform="rotate(-35 125 60)"/>
+          <rect x="145" y="45" width="30" height="20" rx="4" fill="#64748B" transform="rotate(-35 145 45)"/>
+        </g>
 
-      <!-- 🛹 სკეიტბორდის ჯგუფი -->
-      <g class="robot-skate-group">
+        <!-- 🛴 სამაკატი (სკუტერი) -->
+        <g class="scooter-item">
+          <rect x="20" y="195" width="160" height="8" rx="4" fill="#EC4899"/>
+          <circle cx="35" cy="210" r="10" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
+          <circle cx="165" cy="210" r="10" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
+          <line x1="150" y1="195" x2="140" y2="120" stroke="#64748B" stroke-width="6"/>
+          <line x1="125" y1="120" x2="155" y2="120" stroke="#0F172A" stroke-width="6"/>
+        </g>
+
+        <!-- 🚲 ველოსიპედი -->
+        <g class="bike-item">
+          <circle cx="45" cy="200" r="18" fill="none" stroke="#38BDF8" stroke-width="4"/>
+          <circle cx="155" cy="200" r="18" fill="none" stroke="#38BDF8" stroke-width="4"/>
+          <path d="M 45 200 L 95 200 L 125 150 L 70 150 Z" fill="none" stroke="#F59E0B" stroke-width="4"/>
+          <line x1="125" y1="150" x2="155" y2="200" stroke="#F59E0B" stroke-width="4"/>
+        </g>
+
+        <!-- 💻 ლეპტოპი (კოდის წერა) -->
+        <g class="laptop-item">
+          <rect x="50" y="145" width="100" height="12" rx="3" fill="#94A3B8"/>
+          <path d="M 60 145 L 70 105 L 130 105 L 140 145 Z" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
+          <text x="75" y="125" fill="#10B981" font-size="10" font-family="monospace">&lt;code/&gt;</text>
+        </g>
+
+        <!-- 🌳 ხე (დარგვა) -->
+        <g class="tree-item">
+          <rect x="155" y="150" width="10" height="45" fill="#78350F"/>
+          <circle cx="160" cy="135" r="22" fill="#10B981"/>
+        </g>
+
+        <!-- ⚡ ნაპერწკალი (საიტის აძრობისას) -->
+        <g class="spark-item">
+          <path d="M 10 180 L 30 160 L 20 200 L 40 170" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+        </g>
+
         <!-- ანტენა -->
         <line x1="100" y1="35" x2="100" y2="15" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
-        <circle class="antenna-light" cx="100" cy="10" r="8" fill="#F59E0B"/>
+        <circle cx="100" cy="10" r="8" fill="#EC4899"/>
 
         <!-- თავი -->
         <rect x="55" y="32" width="90" height="65" rx="22" fill="#38BDF8" stroke="#0284C7" stroke-width="4"/>
@@ -823,10 +789,16 @@
         <rect x="68" y="42" width="64" height="45" rx="12" fill="#0F172A"/>
         <circle class="robot-eye" cx="84" cy="60" r="8" fill="#38BDF8"/>
         <circle class="robot-eye" cx="116" cy="60" r="8" fill="#38BDF8"/>
-        <!-- ვარდისფერი ლოყები (Blush) -->
+        
+        <!-- ⚡ დენის დარტყმის თვალები (X_X) -->
+        <g class="shock-eyes">
+          <path d="M 78 54 L 90 66 M 90 54 L 78 66" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 110 54 L 122 66 M 122 54 L 110 66" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
+        </g>
+
+        <!-- ლოყები და ღიმილი -->
         <circle cx="76" cy="72" r="5" fill="#EC4899" opacity="0.6"/>
         <circle cx="124" cy="72" r="5" fill="#EC4899" opacity="0.6"/>
-        <!-- ღიმილი -->
         <path d="M 88 74 Q 100 82 112 74" stroke="#10B981" stroke-width="3" stroke-linecap="round" fill="none"/>
 
         <!-- ტანი -->
@@ -840,62 +812,25 @@
         <!-- ფეხები -->
         <rect x="80" y="167" width="12" height="25" rx="4" fill="#64748B"/>
         <rect x="108" y="167" width="12" height="25" rx="4" fill="#64748B"/>
-
-        <!-- 🛹 სკეიტი -->
-        <rect x="30" y="192" width="140" height="12" rx="6" fill="#EC4899" stroke="#BE185D" stroke-width="3"/>
-        <g class="skate-wheel" style="transform-origin: 55px 210px;">
-          <circle cx="55" cy="210" r="9" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
-        </g>
-        <g class="skate-wheel" style="transform-origin: 145px 210px;">
-          <circle cx="145" cy="210" r="9" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
-        </g>
-      </g>
-
-      <!-- 🚶‍♂️ ფეხით დგომის ჯგუფი (როცა სკეიტზე არაა) -->
-      <g class="robot-standing-group" style="display: none;">
-        <!-- ანტენა -->
-        <line x1="100" y1="35" x2="100" y2="15" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
-        <circle class="antenna-light" cx="100" cy="10" r="8" fill="#F59E0B"/>
-
-        <!-- თავი -->
-        <rect x="55" y="32" width="90" height="65" rx="22" fill="#38BDF8" stroke="#0284C7" stroke-width="4"/>
-        <rect x="68" y="42" width="64" height="45" rx="12" fill="#0F172A"/>
-        <circle class="robot-eye" cx="84" cy="60" r="8" fill="#38BDF8"/>
-        <circle class="robot-eye" cx="116" cy="60" r="8" fill="#38BDF8"/>
-        <circle cx="76" cy="72" r="5" fill="#EC4899" opacity="0.6"/>
-        <circle cx="124" cy="72" r="5" fill="#EC4899" opacity="0.6"/>
-        <path d="M 88 74 Q 100 82 112 74" stroke="#10B981" stroke-width="3" stroke-linecap="round" fill="none"/>
-
-        <!-- ტანი -->
-        <rect x="65" y="102" width="70" height="68" rx="16" fill="#6366F1" stroke="#4338CA" stroke-width="4"/>
-        <circle cx="100" cy="132" r="10" fill="#38BDF8"/>
-
-        <!-- ხელში ყავის ჭიქა -->
-        <path d="M 65 115 Q 45 130 50 145" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
-        <rect x="40" y="140" width="16" height="20" rx="3" fill="#F59E0B"/>
-        <path d="M 135 115 Q 155 125 150 145" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
-
-        <!-- ფეხები/ბოტასები -->
-        <rect x="76" y="170" width="16" height="30" rx="6" fill="#0F172A"/>
-        <rect x="108" y="170" width="16" height="30" rx="6" fill="#0F172A"/>
-      </g>
-
-    </svg>
+        <rect x="72" y="188" width="24" height="10" rx="4" fill="#0F172A"/>
+        <rect x="104" y="188" width="24" height="10" rx="4" fill="#0F172A"/>
+      </svg>
+    </div>
   </div>
 
-  <!-- 🤖 Chat Modal -->
+  <!-- 🤖 Toby's AI Chat Modal -->
   <div id="robot-chat-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-robot-chat">&times;</span>
-      <h3>🤖 ტექ-ასისტენტი</h3>
-      <p style="font-size: 0.85rem; color: var(--subtext-color);">მზად ვარ დაგეხმარო ივენთების ძებნასა და დაჯავშნაში!</p>
+      <h3>🤖 ტობი — შენი ჭკვიანი ასისტენტი</h3>
+      <p style="font-size: 0.85rem; color: var(--subtext-color);">მკითხე ნებისმიერი რამ საიტზე არსებული ივენთების შესახებ!</p>
       
       <div class="chat-box-messages" id="chat-messages-container">
-        <div class="chat-msg bot">ჰეი! რა გაინტერესებს დღევანდელ ტექნოლოგიებში?</div>
+        <div class="chat-msg bot">გამარჯობა! მე ტობი ვარ 🤖 במה დაგეხმარო? შეგიძლია მკითხო ივენთების ფასებზე, სპიკერებზე ან დაჯავშნაზე!</div>
       </div>
 
       <form id="robot-chat-form" style="display: flex; gap: 8px;">
-        <input type="text" id="robot-chat-input" placeholder="დაწერე შეკითხვა..." required style="flex: 1; padding: 8px; border-radius: 6px; border: 1px solid var(--border-color);">
+        <input type="text" id="robot-chat-input" placeholder="მაგ: რა ივენთებია AI-ზე?..." required style="flex: 1; padding: 8px; border-radius: 6px; border: 1px solid var(--border-color);">
         <button type="submit" class="btn-submit">გაგზავნა</button>
       </form>
     </div>
@@ -1084,21 +1019,9 @@
     let currentActiveTicket = null;
     let selectedSeatNumber = null;
 
-    let isRobotPoweredOn = true;
-    let isSoundEnabled = true;
-
-    // 💡 რობოტის საინტერესო ამბები და ფაქტები
-    const techFacts = [
-      "💡 იცოდი? პირველი კომპიუტერული მაუსი 1964 წელს ხისგან დამზადდა!",
-      "🚀 ყოველდღიურად მსოფლიოში 300 მილიარდზე მეტი ელ-ფოსტა იგზავნება!",
-      "☕ Python-ის სახელი გველს კი არა, ბრიტანულ კომედიურ შოუს უკავშირდება!",
-      "🤖 ტერმინი 'რობოტი' ჩეხური სიტყვიდან 'robota' მოდის და მძიმე შრომას ნიშნავს.",
-      "🔒 პირველი კომპიუტერული ვირუსი 'Creeper' 1971 წელს შეიქმნა.",
-      "🌐 პირველი ვებსაიტი ინტერნეტში 1991 წელს გაეშვა და დღემდე მუშაობს!"
-    ];
-
     const eventsGrid = document.getElementById('events-grid');
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const toggleTobyVisibilityBtn = document.getElementById('toggle-toby-visibility-btn');
     const bookingModal = document.getElementById('booking-modal');
     const ticketModal = document.getElementById('ticket-modal');
     const qaModal = document.getElementById('qa-modal');
@@ -1121,35 +1044,19 @@
       localStorage.setItem('isDarkMode', isDarkMode);
     });
 
-    function playRobotSound(type) {
-      if (!isSoundEnabled || !isRobotPoweredOn) return;
+    function playBeepSound() {
       try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.connect(gain);
         gain.connect(ctx.destination);
-
-        if (type === 'jump') {
-          osc.frequency.setValueAtTime(200, ctx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(700, ctx.currentTime + 0.15);
-          gain.gain.setValueAtTime(0.2, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
-          osc.start(); osc.stop(ctx.currentTime + 0.15);
-        } else if (type === 'power') {
-          osc.frequency.setValueAtTime(350, ctx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.25);
-          gain.gain.setValueAtTime(0.3, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
-          osc.start(); osc.stop(ctx.currentTime + 0.25);
-        } else if (type === 'chat') {
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(520, ctx.currentTime);
-          osc.frequency.setValueAtTime(680, ctx.currentTime + 0.08);
-          gain.gain.setValueAtTime(0.15, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.16);
-          osc.start(); osc.stop(ctx.currentTime + 0.16);
-        }
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(580, ctx.currentTime);
+        osc.frequency.setValueAtTime(750, ctx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.16);
+        osc.start(); osc.stop(ctx.currentTime + 0.16);
       } catch (e) {}
     }
 
@@ -1403,103 +1310,167 @@
     }
 
     /* ===================================================
-       🤖 🏠 რობოტის დინამიური ლოგიკა (ლოგინი, ამბები, სკეიტის ცვლა)
+       🤖 🤖 🤖 ტობის ავტონომიური ცხოვრების ლოგიკა (Autonomous Loop)
     =================================================== */
-    const robotContainer = document.getElementById('robot-container');
-    const robotSvg = document.getElementById('robot-svg');
-    const powerBtn = document.getElementById('robot-power-btn');
-    const soundBtn = document.getElementById('robot-sound-btn');
-    const robotTextMsg = document.getElementById('robot-text-msg');
+    const tobyWidget = document.getElementById('toby-widget');
+    const tobyBtn = document.getElementById('toby-btn');
+    const tobyBubble = document.getElementById('toby-bubble');
+    const tobyTextMsg = document.getElementById('toby-text-msg');
 
-    let factIndex = 0;
+    let isTobyVisible = true;
+    let currentX = 50;
+    let targetX = 50;
+    let isMoving = false;
+    let bubbleTimeout = null;
 
-    // 💡 ტექ-ფაქტის/ამბის განახლების ფუნქცია
-    function updateTechFact() {
-      if (!isRobotPoweredOn) return;
-      factIndex = (factIndex + 1) % techFacts.length;
-      robotTextMsg.textContent = techFacts[factIndex];
-      playRobotSound('chat');
+    const techFacts = [
+      "💡 იცოდი? პირველი კომპიუტერული მაუსი 1964 წელს ხისგან დამზადდა!",
+      "🚀 ყოველდღიურად მსოფლიოში 300 მილიარდზე მეტი ელ-ფოსტა იგზავნება!",
+      "☕ Python-ის სახელი გველს კი არა, ბრიტანულ კომედიურ შოუს უკავშირდება!",
+      "🤖 ტერმინი 'რობოტი' ჩეხური სიტყვიდან 'robota' მოდის.",
+      "🔒 პირველი კომპიუტერული ვირუსი 'Creeper' 1971 წელს შეიქმნა.",
+      "🌐 პირველი ვებსაიტი ინტერნეტში 1991 წელს გაეშვა!"
+    ];
+
+    const modes = ['mode-walk', 'mode-scooter', 'mode-bike', 'mode-fixing', 'mode-planting', 'mode-coding'];
+
+    toggleTobyVisibilityBtn.addEventListener('click', () => {
+      isTobyVisible = !isTobyVisible;
+      if (isTobyVisible) {
+        tobyWidget.classList.remove('hidden');
+        toggleTobyVisibilityBtn.classList.remove('off');
+        toggleTobyVisibilityBtn.textContent = '🤖 Toby: ON';
+        showBubbleMessage("👋 დავბრუნდი!");
+      } else {
+        tobyWidget.classList.add('hidden');
+        toggleTobyVisibilityBtn.classList.add('off');
+        toggleTobyVisibilityBtn.textContent = '🤖 Toby: OFF';
+      }
+      playBeepSound();
+    });
+
+    function showBubbleMessage(text) {
+      if (!isTobyVisible) return;
+      tobyTextMsg.textContent = text;
+      tobyBubble.classList.add('active');
+      clearTimeout(bubbleTimeout);
+      bubbleTimeout = setTimeout(() => {
+        tobyBubble.classList.remove('active');
+      }, 3500);
     }
 
-    // ყოველ 12 წამში ახალ საინტერესო ამბავს ყვება
-    setInterval(updateTechFact, 12000);
-
-    // ⚡ ON/OFF (ლოგინში ჩასვლა / აშლა)
-    powerBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      isRobotPoweredOn = !isRobotPoweredOn;
-      if (isRobotPoweredOn) {
-        robotContainer.classList.remove('sleeping');
-        powerBtn.classList.remove('off');
-        powerBtn.textContent = '⚡ ON';
-        robotTextMsg.textContent = '☕ დილა მშვიდობისა! ლოგინი ავალაგე!';
-        playRobotSound('power');
-      } else {
-        robotContainer.classList.add('sleeping');
-        powerBtn.classList.add('off');
-        powerBtn.textContent = '💤 OFF';
-        robotTextMsg.textContent = '😴 ლოგინში ჩავწექი, ტკბილი სიზმრები!';
-      }
-    });
-
-    soundBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      isSoundEnabled = !isSoundEnabled;
-      soundBtn.textContent = isSoundEnabled ? '🔊 SOUND' : '🔇 MUTE';
-      if (isSoundEnabled) playRobotSound('chat');
-    });
-
-    // 🤖 დაჭერისას: ახალი ამბის თქმა + ჩატის გახსნა + ხანდახან სკეიტიდან ჩამოსვლა
-    robotSvg.addEventListener('click', () => {
-      if (!isRobotPoweredOn) {
-        robotTextMsg.textContent = '😴 ჯერ ჩამრთე, რომ ავდგე!';
+    // 🔄 ტობის ავტონომიური ციკლი (Autonomous Life Cycle)
+    function runTobyAutonomousLife() {
+      if (!isTobyVisible || tobyWidget.classList.contains('shocked')) {
+        setTimeout(runTobyAutonomousLife, 3000);
         return;
       }
 
-      // ხან სკეიტზეა, ხან ფეხით დგება ყავით!
-      if (Math.random() > 0.5) {
-        robotContainer.classList.toggle('no-skate');
+      // შემთხვევითი რეჟიმის არჩევა
+      const nextMode = modes[Math.floor(Math.random() * modes.length)];
+      tobyWidget.classList.remove(...modes);
+      tobyWidget.classList.add(nextMode);
+
+      const screenWidth = window.innerWidth - 120;
+
+      if (nextMode === 'mode-walk' || nextMode === 'mode-scooter' || nextMode === 'mode-bike') {
+        // 🚶‍♂️ 🚲 🛴 მოძრაობა ეკრანის გასწვრივ
+        targetX = Math.floor(Math.random() * screenWidth);
+        if (targetX < currentX) {
+          tobyWidget.classList.add('facing-left');
+        } else {
+          tobyWidget.classList.remove('facing-left');
+        }
+
+        tobyWidget.style.left = targetX + 'px';
+        currentX = targetX;
+
+        // მოძრაობისას ამბის თქმა
+        const fact = techFacts[Math.floor(Math.random() * techFacts.length)];
+        showBubbleMessage(fact);
+
+        setTimeout(runTobyAutonomousLife, 6000);
+
+      } else if (nextMode === 'mode-fixing') {
+        // 🛠️ ⚡ საიტის აძრობა და დენის დარტყმა!
+        showBubbleMessage("🛠️ მოიცა, საიტის ამ ნაწილს მოვაძრობ...");
+        
+        setTimeout(() => {
+          tobyWidget.classList.add('shocked');
+          showBubbleMessage("⚡⚡ BZZZT! ვაი, არასწორად მოვაძრე! ⚡⚡");
+          playBeepSound();
+
+          setTimeout(() => {
+            tobyWidget.classList.remove('shocked');
+            showBubbleMessage("✅ უცებ აღვადგინე!");
+            setTimeout(runTobyAutonomousLife, 3000);
+          }, 2000);
+        }, 2000);
+
+      } else if (nextMode === 'mode-planting') {
+        // 🌳 ხის დარგვა
+        showBubbleMessage("🌱 მოდი, აქ პატარა ხეს დავრგავ!");
+        setTimeout(runTobyAutonomousLife, 5000);
+
+      } else if (nextMode === 'mode-coding') {
+        // 💻 კოდის წერა
+        showBubbleMessage("💻 ახალ ფუნქციონალს ვწერ საიტისთვის...");
+        setTimeout(runTobyAutonomousLife, 6000);
       }
+    }
 
-      robotContainer.classList.add('jump');
-      updateTechFact();
-      playRobotSound('jump');
-
-      setTimeout(() => {
-        robotContainer.classList.remove('jump');
-        robotChatModal.style.display = 'flex';
-      }, 500);
+    // დაკლიკება -> ჩატის გახსნა
+    tobyBtn.addEventListener('click', () => {
+      playBeepSound();
+      robotChatModal.style.display = 'flex';
     });
 
-    // 🤖 ჩატის გაგზავნა
+    /* 🧠 ტობის AI ჩატი */
     document.getElementById('robot-chat-form').onsubmit = (e) => {
       e.preventDefault();
       const input = document.getElementById('robot-chat-input');
-      const val = input.value.trim();
-      if (!val) return;
+      const query = input.value.trim().toLowerCase();
+      if (!query) return;
 
       const container = document.getElementById('chat-messages-container');
       const userMsg = document.createElement('div');
       userMsg.className = 'chat-msg user';
-      userMsg.textContent = val;
+      userMsg.textContent = input.value;
       container.appendChild(userMsg);
       input.value = '';
 
-      playRobotSound('chat');
+      playBeepSound();
 
       setTimeout(() => {
+        let reply = "🤖 უკაცრავად, ამ კითხვაზე ზუსტი პასუხი ვერ ვიპოვე. შეგიძლია მკითხო ივენთების ფასებზე, სპიკერებზე ან დაჯავშნაზე!";
+
+        if (query.includes("ფას") || query.includes("ღირს") || query.includes("რა ჯდება")) {
+          reply = "💰 ივენთების ფასები:\n• AI Summit: 120 ₾\n• React Workshop: 70 ₾\n• Cybersecurity: 160 ₾";
+        } else if (query.includes("სპიკერ") || query.includes("ვინ საუბრობს") || query.includes("ვინ არის")) {
+          reply = "🎤 ჩვენი სპიკერები არიან:\n• გიორგი ბერიძე (AI Researcher)\n• ნიტა ქავთარაძე (Lead Web Dev)\n• დავით ჩხეიძე (Ethical Hacker)";
+        } else if (query.includes("დაჯავშნა") || query.includes("ბილეთ") || query.includes("როგორ ვიყიდო")) {
+          reply = "🎟️ დაჯავშნისთვის დააჭირეთ სასურველი ივენთის ბარათზე ღილაკს 'დაჯავშნა', აირჩიეთ ადგილი და შეიყვანეთ თქვენი მონაცემები!";
+        } else if (query.includes("თარიღ") || query.includes("როდის")) {
+          reply = "📅 უახლოესი ივენთები:\n• AI Summit — 20 ოქტომბერი\n• React Workshop — 5 ნოემბერი\n• Cybersecurity — 12 ნოემბერი";
+        } else if (query.includes("გამარჯობა") || query.includes("სალამი") || query.includes("ჰეი")) {
+          reply = "👋 სალამი! მე ტობი ვარ. במה დაგეხმარო დღეს?";
+        }
+
         const botMsg = document.createElement('div');
         botMsg.className = 'chat-msg bot';
-        botMsg.textContent = '🤖 საინტერესო კითხვაა! საუკეთესო ტექ-ივენთები გელოდებათ!';
+        botMsg.style.whiteSpace = 'pre-line';
+        botMsg.textContent = reply;
         container.appendChild(botMsg);
         container.scrollTop = container.scrollHeight;
-        playRobotSound('chat');
-      }, 500);
+      }, 400);
     };
 
     filterEvents();
     startCountdownTimer();
     renderMyTickets();
+
+    // 🚀 ტობის ავტონომიური ცხოვრების ჩართვა
+    setTimeout(runTobyAutonomousLife, 1500);
   </script>
 </body>
 </html>
