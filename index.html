@@ -339,7 +339,18 @@
       margin-bottom: 6px;
     }
 
-    /* ინტერაქტიული ლოკაციის ბმული */
+    /* 🎤 ინტერაქტიული სპიკერის ბმული */
+    .speaker-link {
+      color: var(--accent-color);
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .speaker-link:hover {
+      color: #3730a3;
+    }
+
     .location-link {
       color: #0284c7;
       text-decoration: underline;
@@ -491,6 +502,53 @@
       color: var(--subtext-color);
     }
 
+    /* 🎤 სპიკერის პროფილის სტილები */
+    .speaker-profile-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .speaker-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent-color);
+    }
+
+    .speaker-socials {
+      display: flex;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .speaker-socials a {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text-color);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .speaker-talks-list {
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    .speaker-talks-list li {
+      background: var(--bg-color);
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+      border-left: 3px solid var(--accent-color);
+    }
+
     #profile-form, #booking-form, #qa-form {
       display: flex;
       flex-direction: column;
@@ -595,7 +653,6 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
 
-    /* რუკის სტილები */
     .map-frame-container {
       width: 100%;
       height: 250px;
@@ -719,6 +776,32 @@
   </section>
 
   <main class="events-grid" id="events-grid"></main>
+
+  <!-- 🎤 Speaker Profile Modal -->
+  <div id="speaker-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-speaker">&times;</span>
+      <div class="speaker-profile-header">
+        <img id="speaker-avatar" src="" alt="Speaker" class="speaker-avatar">
+        <div>
+          <h3 id="speaker-name"></h3>
+          <p id="speaker-role" style="font-size: 0.85rem; color: var(--accent-color); font-weight: 600;"></p>
+        </div>
+      </div>
+      
+      <p id="speaker-bio" style="font-size: 0.9rem; line-height: 1.5; color: var(--subtext-color);"></p>
+
+      <div class="speaker-socials">
+        <a id="speaker-linkedin" href="#" target="_blank">🔗 LinkedIn</a>
+        <a id="speaker-github" href="#" target="_blank">💻 GitHub</a>
+      </div>
+
+      <div style="margin-top: 15px;">
+        <h4 style="font-size: 0.95rem; margin-bottom: 8px;">🎯 გამოსვლები და ივენთები:</h4>
+        <ul id="speaker-talks" class="speaker-talks-list"></ul>
+      </div>
+    </div>
+  </div>
 
   <!-- 🗺️ Google Maps Modal -->
   <div id="map-modal" class="modal">
@@ -846,6 +929,44 @@
 
   <!-- JavaScript ლოგიკა -->
   <script>
+    // 🎤 სპიკერების მონაცემთა ბაზა
+    const speakersData = {
+      "გიორგი ბერიძე": {
+        role: "Senior AI Researcher @ TechCorp",
+        bio: "გიორგის აქვს 8-წლიანი გამოცდილება AI და Machine Learning მიმართულებით. იგი ხელმძღვანელობს Generative AI პროექტებს და არის საერთაშორისო ტექ-კონფერენციების აქტიური სპიკერი.",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80",
+        linkedin: "https://linkedin.com",
+        github: "https://github.com",
+        talks: [
+          "AI & Future Tech Summit (2026)",
+          "LLM Models & Prompt Engineering (2025)",
+          "Deep Learning Fundamentals (2024)"
+        ]
+      },
+      "ნიტა ქავთარაძე": {
+        role: "Lead Web Developer & Frontend Architect",
+        bio: "ნიტა არის React და Next.js ეკოსისტემის ექსპერტი. მისი ხელმძღვანელობით შექმნილა ათობით მაღალტვირთული ვებ-აპლიკაცია.",
+        avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&auto=format&fit=crop&q=80",
+        linkedin: "https://linkedin.com",
+        github: "https://github.com",
+        talks: [
+          "React & Next.js Workshop (2026)",
+          "Modern UI/UX & Tailwind CSS (2025)"
+        ]
+      },
+      "დავით ჩხეიძე": {
+        role: "Cybersecurity Specialist & Ethical Hacker",
+        bio: "დავითი იცავს მსხვილ ფინანსურ ინსტიტუტებს კიბერშეტევებისგან. ფლობს CISSP და CEH სერთიფიკატებს.",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80",
+        linkedin: "https://linkedin.com",
+        github: "https://github.com",
+        talks: [
+          "Cybersecurity & Ethical Hacking (2026)",
+          "Zero Trust Architecture (2025)"
+        ]
+      }
+    };
+
     let allEvents = [
       {
         "id": 1,
@@ -901,6 +1022,7 @@
     const qaModal = document.getElementById('qa-modal');
     const profileModal = document.getElementById('profile-modal');
     const mapModal = document.getElementById('map-modal');
+    const speakerModal = document.getElementById('speaker-modal');
 
     // 🌙 Dark Mode ლოგიკა + ემოჯი
     if (isDarkMode) {
@@ -943,7 +1065,7 @@
             <span class="badge">${event.category} • ${event.format}</span>
             <h3 class="event-title">${event.title}</h3>
             <div class="rating-stars">${ratingStars}</div>
-            <p class="speaker">🎤 ${event.speaker}</p>
+            <p class="speaker">🎤 <span class="speaker-link" data-name="${event.speaker}">${event.speaker}</span></p>
             <p class="event-details">📅 ${event.date} | 📍 <span class="location-link" data-location="${event.location}">${event.location}</span></p>
             <div class="card-footer">
               <span class="price">${formattedPrice}</span>
@@ -988,6 +1110,30 @@
     document.getElementById('currency-select').addEventListener('change', filterEvents);
 
     eventsGrid.addEventListener('click', (e) => {
+      // 🎤 სპიკერზე დაჭერისას პროფილის გახსნა
+      if (e.target.classList.contains('speaker-link')) {
+        const name = e.target.dataset.name;
+        const data = speakersData[name];
+        if (data) {
+          document.getElementById('speaker-name').textContent = name;
+          document.getElementById('speaker-role').textContent = data.role;
+          document.getElementById('speaker-bio').textContent = data.bio;
+          document.getElementById('speaker-avatar').src = data.avatar;
+          document.getElementById('speaker-linkedin').href = data.linkedin;
+          document.getElementById('speaker-github').href = data.github;
+
+          const talksList = document.getElementById('speaker-talks');
+          talksList.innerHTML = '';
+          data.talks.forEach(t => {
+            const li = document.createElement('li');
+            li.textContent = t;
+            talksList.appendChild(li);
+          });
+
+          speakerModal.style.display = 'flex';
+        }
+      }
+
       // 🗺️ ლოკაციაზე დაჭერისას რუკის გახსნა
       if (e.target.classList.contains('location-link')) {
         const loc = e.target.dataset.location;
@@ -1125,6 +1271,7 @@
     document.getElementById('close-qa').onclick = () => qaModal.style.display = 'none';
     document.getElementById('close-profile').onclick = () => profileModal.style.display = 'none';
     document.getElementById('close-map').onclick = () => mapModal.style.display = 'none';
+    document.getElementById('close-speaker').onclick = () => speakerModal.style.display = 'none';
     document.getElementById('profile-btn').onclick = () => profileModal.style.display = 'flex';
 
     function renderMyTickets() {
