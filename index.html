@@ -4,10 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Meet & Greet Hub</title>
-
-  <!-- Three.js 3D გრაფიკისთვის -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
   <style>
     :root {
       --bg-color: #f8fafc;
@@ -75,7 +71,6 @@
       font-weight: 800;
       font-size: 1.1rem;
       box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
-      position: relative;
     }
 
     .brand-title {
@@ -103,11 +98,6 @@
       border-radius: 20px;
       cursor: pointer;
       font-size: 1rem;
-      transition: all 0.2s;
-    }
-
-    .btn-theme-toggle:hover {
-      border-color: var(--accent-color);
     }
 
     .select-styled {
@@ -171,16 +161,6 @@
       margin: 0 auto 25px auto;
     }
 
-    .subscription-banner h2 {
-      font-size: 1.3rem;
-      margin-bottom: 8px;
-    }
-
-    .subscription-banner p {
-      font-size: 0.95rem;
-      opacity: 0.95;
-    }
-
     .btn-subscribe-banner {
       margin-top: 15px;
       background: #f59e0b;
@@ -193,7 +173,6 @@
       cursor: pointer;
     }
 
-    /* ტაიმერი */
     .countdown-section {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -206,17 +185,6 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 15px;
-    }
-
-    .countdown-title {
-      font-size: 0.95rem;
-      color: var(--subtext-color);
-    }
-
-    .countdown-title strong {
-      color: var(--accent-color);
-      margin-left: 5px;
-      font-size: 1.05rem;
     }
 
     .timer-boxes {
@@ -243,7 +211,6 @@
       font-size: 0.65rem;
       color: #94a3b8;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     .events-grid {
@@ -254,7 +221,6 @@
       margin: 0 auto;
     }
 
-    /* ბარათების სტილი */
     .event-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -264,12 +230,6 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .event-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
 
     .fav-btn {
@@ -282,16 +242,6 @@
       width: 38px;
       height: 38px;
       cursor: pointer;
-      font-size: 16px;
-      z-index: 2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .fav-btn.active {
-      background: #ffe4e6;
-      border-color: #fda4af;
     }
 
     .event-card-img-container {
@@ -299,7 +249,6 @@
       height: 180px;
       background: #f1f5f9;
       overflow: hidden;
-      border-bottom: 1px solid var(--border-color);
     }
 
     .event-card img {
@@ -320,8 +269,6 @@
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      display: inline-block;
     }
 
     .event-title {
@@ -330,47 +277,11 @@
       font-weight: 700;
     }
 
-    .rating-stars {
-      color: #f59e0b;
-      font-size: 0.85rem;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    .speaker, .event-details {
-      font-size: 0.9rem;
-      color: var(--subtext-color);
-      margin-bottom: 6px;
-    }
-
-    .speaker-link {
-      color: var(--accent-color);
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    .speaker-link:hover {
-      color: #3730a3;
-    }
-
-    .location-link {
-      color: #0284c7;
-      text-decoration: underline;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .location-link:hover {
-      color: #0369a1;
-    }
-
     .card-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 18px;
-      gap: 8px;
     }
 
     .price {
@@ -387,7 +298,6 @@
       border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.85rem;
     }
 
     .btn-qa-icon, .btn-calendar-icon {
@@ -397,44 +307,93 @@
       padding: 8px 12px;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 600;
     }
 
-    .btn-qa-icon:hover, .btn-calendar-icon:hover {
-      border-color: var(--accent-color);
-      color: var(--accent-color);
-    }
-
-    /* 🛹 3D კუტე რობოტის კონტეინერი */
-    .robot-3d-wrapper {
+    /* 🛹 ანიმირებული ცოცხალი რობოტი სკეიტბორდზე */
+    .skater-robot-container {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 15px;
+      right: 15px;
       z-index: 999;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
+      align-items: center;
     }
 
-    .robot-3d-bubble {
+    .robot-speech-bubble {
       background: #0f172a;
       color: #38bdf8;
       border: 1px solid #38bdf8;
-      padding: 8px 14px;
+      padding: 8px 12px;
       border-radius: 12px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      margin-bottom: 6px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-      max-width: 220px;
-      text-align: right;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      animation: floatBubble 2s ease-in-out infinite;
     }
 
-    #robot-3d-canvas {
-      width: 180px;
-      height: 200px;
-      cursor: pointer;
+    @keyframes floatBubble {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* 🤖 SVG რობოტი + სკეიტი */
+    .robot-skate-svg {
+      width: 120px;
+      height: 140px;
+      transition: transform 0.3s ease;
+      animation: skateDrive 3s ease-in-out infinite alternate;
+    }
+
+    /* სკეიტით დასრიალება მარცხნივ-მარჯვნივ */
+    @keyframes skateDrive {
+      0% { transform: translateX(0) rotate(-2deg); }
+      50% { transform: translateX(-20px) rotate(3deg); }
+      100% { transform: translateX(5px) rotate(-1deg); }
+    }
+
+    /* თვალების დახამხამება */
+    .robot-eye {
+      animation: eyeBlink 3s infinite;
+      transform-origin: center;
+    }
+
+    @keyframes eyeBlink {
+      0%, 90%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.1); }
+    }
+
+    /* ანტენის ნათება */
+    .antenna-light {
+      animation: antennaGlow 1.5s infinite alternate;
+    }
+
+    @keyframes antennaGlow {
+      from { fill: #f59e0b; filter: drop-shadow(0 0 2px #f59e0b); }
+      to { fill: #ef4444; filter: drop-shadow(0 0 8px #ef4444); }
+    }
+
+    /* სკეიტბორდის თვლების ტრიალი */
+    .skate-wheel {
+      animation: wheelSpin 0.6s linear infinite;
+      transform-origin: center;
+    }
+
+    @keyframes wheelSpin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* დაჭერისას ნახტომის ანიმაცია */
+    .skater-robot-container.jump .robot-skate-svg {
+      animation: skateJump 0.6s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    }
+
+    @keyframes skateJump {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-50px) rotate(-15deg); }
+      100% { transform: translateY(0) rotate(0deg); }
     }
 
     /* Modals */
@@ -459,9 +418,6 @@
       width: 90%;
       max-width: 480px;
       position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
     .close-btn {
@@ -470,7 +426,6 @@
       right: 20px;
       font-size: 24px;
       cursor: pointer;
-      color: var(--subtext-color);
     }
 
     .chat-box-messages {
@@ -486,235 +441,18 @@
       gap: 8px;
     }
 
-    .chat-msg {
-      max-width: 80%;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-    }
-
+    .chat-msg { max-width: 80%; padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; }
     .chat-msg.bot { background: #e0e7ff; color: #3730a3; align-self: flex-start; }
     .chat-msg.user { background: var(--accent-color); color: white; align-self: flex-end; }
-
-    .speaker-profile-header {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
-    .speaker-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent-color);
-    }
-
-    .speaker-socials {
-      display: flex;
-      gap: 10px;
-      margin: 12px 0;
-    }
-
-    .speaker-socials a {
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      padding: 6px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      color: var(--text-color);
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .speaker-talks-list {
-      list-style: none;
-      margin-top: 8px;
-    }
-
-    .speaker-talks-list li {
-      background: var(--bg-color);
-      padding: 8px 12px;
-      border-radius: 6px;
-      margin-bottom: 6px;
-      font-size: 0.85rem;
-      border-left: 3px solid var(--accent-color);
-    }
-
-    /* ადგილების არჩევა */
-    .seat-picker-container {
-      background: var(--bg-color);
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 12px;
-      text-align: center;
-    }
-
-    .stage-label {
-      background: #475569;
-      color: white;
-      font-size: 0.75rem;
-      padding: 6px;
-      border-radius: 4px;
-      margin-bottom: 15px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .seats-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 8px;
-      max-width: 280px;
-      margin: 0 auto;
-    }
-
-    .seat {
-      width: 36px;
-      height: 36px;
-      background: #10b981;
-      color: white;
-      border-radius: 6px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .seat.selected {
-      background: #f59e0b !important;
-    }
-
-    .seat.occupied {
-      background: #94a3b8 !important;
-      cursor: not-allowed;
-    }
-
-    .btn-poll {
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      padding: 8px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    #profile-form, #booking-form, #qa-form, #robot-chat-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    #profile-form input, #booking-form input, #qa-form input, #robot-chat-input {
-      padding: 10px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg);
-      color: var(--text-color);
-      border-radius: 6px;
-    }
 
     .btn-submit {
       background: #10b981;
       color: white;
       border: none;
-      padding: 11px;
+      padding: 10px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: 700;
-      font-size: 0.95rem;
-    }
-
-    .ticket-card {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      border-radius: 12px;
-      padding: 22px;
-      border: 2px dashed #38bdf8;
-    }
-
-    .ticket-badge {
-      background: #38bdf8;
-      color: #0f172a;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .ticket-qr-container {
-      text-align: center;
-      margin-top: 15px;
-      background: white;
-      padding: 12px;
-      border-radius: 8px;
-    }
-
-    .ticket-qr-container img {
-      width: 140px;
-      height: 140px;
-    }
-
-    .ticket-actions-grid {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .ticket-actions-grid button {
-      flex: 1;
-    }
-
-    .my-tickets-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-
-    .ticket-item-mini {
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      padding: 12px;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .map-frame-container {
-      width: 100%;
-      height: 250px;
-      border-radius: 8px;
-      overflow: hidden;
-      margin: 15px 0;
-      border: 1px solid var(--border-color);
-    }
-
-    .map-frame-container iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .btn-external-map {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      background: #0284c7;
-      color: white;
-      padding: 10px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -722,108 +460,80 @@
 
   <header class="header">
     <div class="top-bar">
-      <!-- ⚡ T&G ლოგო + ანიმირებული გრადიენტული ტექსტი -->
       <div class="brand-container">
         <div class="brand-logo-badge">T&G</div>
         <h1 class="brand-title">Tech Meet & Greet Hub</h1>
       </div>
 
-      <div class="user-control" style="display: flex; gap: 10px; align-items: center;">
-        <button id="theme-toggle-btn" class="btn-theme-toggle" title="თემის შეცვლა">🌙</button>
-        <select id="language-select" class="select-styled">
-          <option value="ka">🇬🇪 GE</option>
-          <option value="en">🇺🇸 EN</option>
-        </select>
-        <button id="profile-btn" class="btn-profile">👤 <span data-i18n="profileBtn">პირადი კაბინეთი</span></button>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <button id="theme-toggle-btn" class="btn-theme-toggle">🌙</button>
+        <button id="profile-btn" class="btn-profile">👤 პირადი კაბინეთი</button>
       </div>
     </div>
-    <p data-i18n="headerSubtitle">იპოვეთ, დაჯავშნეთ და მიიღეთ ექსკლუზიური შეტყობინებები ტექნოლოგიურ ივენთებზე</p>
+    <p>იპოვეთ, დაჯავშნეთ და მიიღეთ ექსკლუზიური შეტყობინებები ტექნოლოგიურ ივენთებზე</p>
   </header>
-
-  <!-- ფილტრაცია -->
-  <section class="controls-section">
-    <div>
-      <label for="search-input"><b data-i18n="labelSearch">ძებნა:</b></label>
-      <input type="text" id="search-input" data-i18n-placeholder="searchPlaceholder" placeholder="მოძებნეთ ივენთი ან სპიკერი...">
-    </div>
-
-    <div>
-      <label for="category-filter"><b data-i18n="labelCategory">ტექნოლოგია:</b></label>
-      <select id="category-filter">
-        <option value="all" data-i18n="optAll">ყველა</option>
-        <option value="AI">AI</option>
-        <option value="Web Dev">Web Dev</option>
-        <option value="Cybersecurity">Cybersecurity</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="format-filter"><b data-i18n="labelFormat">ფორმატი:</b></label>
-      <select id="format-filter">
-        <option value="all" data-i18n="optAll">ყველა</option>
-        <option value="Online">Online</option>
-        <option value="In-person">In-person</option>
-        <option value="Hybrid">Hybrid</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="sort-select"><b data-i18n="labelSort">სორტირება:</b></label>
-      <select id="sort-select">
-        <option value="date" data-i18n="sortDate">თარიღით (უახლოესი)</option>
-        <option value="price-asc" data-i18n="sortPriceAsc">ფასით (დაბლიდან მაღლა)</option>
-        <option value="price-desc" data-i18n="sortPriceDesc">ფასით (მაღლიდან დაბლა)</option>
-        <option value="rating" data-i18n="sortRating">რეიტინგით</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="currency-select"><b data-i18n="labelCurrency">ვალუტა:</b></label>
-      <select id="currency-select">
-        <option value="GEL">GEL (₾)</option>
-        <option value="USD">USD ($)</option>
-      </select>
-    </div>
-
-    <div>
-      <button id="show-favorites-btn" class="btn-secondary">❤️ <span data-i18n="btnInterested">მაინტერესებს</span> (<span id="fav-count">0</span>)</button>
-    </div>
-  </section>
-
-  <!-- ბანერი -->
-  <section class="subscription-banner">
-    <h2 data-i18n="bannerTitle">🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
-    <p data-i18n="bannerDesc">შეიტყვეთ დაგეგმილი ივენთებისა და ტრენინგების შესახებ ყველაზე ადრე და დაჯავშნეთ ადგილები პრიორიტეტულად.</p>
-    <button id="subscribe-plan-btn" class="btn-subscribe-banner" data-i18n="btnViewPackages">💎 პაკეტების ნახვა</button>
-  </section>
-
-  <!-- ტაიმერი -->
-  <section class="countdown-section" id="countdown-section">
-    <div class="countdown-title">
-      ⏳ <span data-i18n="nextEventTitle">უახლოეს ივენთამდე დარჩენილია:</span>
-      <strong id="next-event-name">AI & Future Tech Summit</strong>
-    </div>
-    <div class="timer-boxes">
-      <div class="time-box"><span id="timer-days">00</span><small data-i18n="unitDays">დღე</small></div>
-      <div class="time-box"><span id="timer-hours">00</span><small data-i18n="unitHours">საათი</small></div>
-      <div class="time-box"><span id="timer-minutes">00</span><small data-i18n="unitMinutes">წუთი</small></div>
-      <div class="time-box"><span id="timer-seconds">00</span><small data-i18n="unitSeconds">წამი</small></div>
-    </div>
-  </section>
 
   <main class="events-grid" id="events-grid"></main>
 
-  <!-- 🛹 3D კუტე რობოტი სკეიტბორდზე -->
-  <div class="robot-3d-wrapper">
-    <div class="robot-3d-bubble" id="robot-3d-bubble">🛹 გამარჯობა! დამაჭირე!</div>
-    <canvas id="robot-3d-canvas"></canvas>
+  <!-- 🛹 ანიმირებული ნამდვილი რობოტი სკეიტბორდზე -->
+  <div class="skater-robot-container" id="robot-container">
+    <div class="robot-speech-bubble" id="robot-bubble">🛹 ჰეი! დამაჭირე სკეიტზე!</div>
+    
+    <svg class="robot-skate-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- ანტენა -->
+      <line x1="100" y1="35" x2="100" y2="15" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+      <circle class="antenna-light" cx="100" cy="10" r="8" fill="#F59E0B"/>
+
+      <!-- თავი -->
+      <rect x="60" y="35" width="80" height="60" rx="18" fill="#38BDF8" stroke="#0284C7" stroke-width="4"/>
+      <!-- ყურები -->
+      <rect x="48" y="52" width="12" height="24" rx="4" fill="#64748B"/>
+      <rect x="140" y="52" width="12" height="24" rx="4" fill="#64748B"/>
+      
+      <!-- სახის ეკრანი -->
+      <rect x="70" y="45" width="60" height="40" rx="10" fill="#0F172A"/>
+      <!-- თვალები -->
+      <circle class="robot-eye" cx="85" cy="62" r="7" fill="#38BDF8"/>
+      <circle class="robot-eye" cx="115" cy="62" r="7" fill="#38BDF8"/>
+      <!-- ღიმილი -->
+      <path d="M 88 75 Q 100 83 112 75" stroke="#10B981" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+      <!-- კისერი -->
+      <rect x="90" y="95" width="20" height="10" rx="2" fill="#64748B"/>
+
+      <!-- ტანი -->
+      <rect x="65" y="105" width="70" height="65" rx="14" fill="#4F46E5" stroke="#3730A3" stroke-width="4"/>
+      <!-- გულის ინდიკატორი -->
+      <circle cx="100" cy="135" r="10" fill="#38BDF8"/>
+      <path d="M96 135 L104 135" stroke="#0F172A" stroke-width="2"/>
+
+      <!-- ხელები -->
+      <path d="M 65 118 Q 45 130 40 145" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <path d="M 135 118 Q 155 130 160 145" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <circle cx="40" cy="145" r="6" fill="#F59E0B"/>
+      <circle cx="160" cy="145" r="6" fill="#F59E0B"/>
+
+      <!-- ფეხები -->
+      <rect x="80" y="170" width="12" height="25" rx="4" fill="#64748B"/>
+      <rect x="108" y="170" width="12" height="25" rx="4" fill="#64748B"/>
+
+      <!-- 🛹 სკეიტბორდი -->
+      <rect x="30" y="195" width="140" height="12" rx="6" fill="#EC4899" stroke="#BE185D" stroke-width="3"/>
+      <!-- თვლები -->
+      <g class="skate-wheel" style="transform-origin: 55px 213px;">
+        <circle cx="55" cy="213" r="10" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
+      </g>
+      <g class="skate-wheel" style="transform-origin: 145px 213px;">
+        <circle cx="145" cy="213" r="10" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
+      </g>
+    </svg>
   </div>
 
-  <!-- 🤖 Robot AI Chat Modal -->
+  <!-- 🤖 Chat Modal -->
   <div id="robot-chat-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-robot-chat">&times;</span>
-      <h3>🤖 3D ტექ-ასისტენტი</h3>
+      <h3>🤖 ტექ-ასისტენტი</h3>
       <p style="font-size: 0.85rem; color: var(--subtext-color);">მზად ვარ დაგეხმარო ივენთების ძებნასა და დაჯავშნაში!</p>
       
       <div class="chat-box-messages" id="chat-messages-container">
@@ -831,616 +541,77 @@
       </div>
 
       <form id="robot-chat-form" style="display: flex; gap: 8px;">
-        <input type="text" id="robot-chat-input" placeholder="დაწერე შეკითხვა..." required style="flex: 1;">
-        <button type="submit" class="btn-submit" style="padding: 10px 16px;">გაგზავნა</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- 🎤 Speaker Profile Modal -->
-  <div id="speaker-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="close-speaker">&times;</span>
-      <div class="speaker-profile-header">
-        <img id="speaker-avatar" src="" alt="Speaker" class="speaker-avatar">
-        <div>
-          <h3 id="speaker-name"></h3>
-          <p id="speaker-role" style="font-size: 0.85rem; color: var(--accent-color); font-weight: 600;"></p>
-        </div>
-      </div>
-      
-      <p id="speaker-bio" style="font-size: 0.9rem; line-height: 1.5; color: var(--subtext-color);"></p>
-
-      <div class="speaker-socials">
-        <a id="speaker-linkedin" href="#" target="_blank">🔗 LinkedIn</a>
-        <a id="speaker-github" href="#" target="_blank">💻 GitHub</a>
-      </div>
-
-      <div style="margin-top: 15px;">
-        <h4 style="font-size: 0.95rem; margin-bottom: 8px;">🎯 გამოსვლები და ივენთები:</h4>
-        <ul id="speaker-talks" class="speaker-talks-list"></ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- 🗺️ Google Maps Modal -->
-  <div id="map-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="close-map">&times;</span>
-      <h3>📍 ლოკაცია და მარშრუტი</h3>
-      <p id="map-location-title" style="font-weight: 700; color: var(--accent-color); margin-top: 5px;"></p>
-      
-      <div class="map-frame-container">
-        <iframe id="google-map-iframe" src="" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-
-      <a id="google-map-external-link" href="#" target="_blank" class="btn-external-map">🗺️ Google Maps-ში გახსნა & მარშრუტი</a>
-    </div>
-  </div>
-
-  <!-- Q&A Modal -->
-  <div id="qa-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="close-qa">&times;</span>
-      <h3>💬 დასვი კითხვა სპიკერისთვის</h3>
-      <p id="qa-event-title" style="color: #0284c7; font-weight: 600; margin-bottom: 10px;"></p>
-      
-      <form id="qa-form">
-        <input type="text" id="qa-input" placeholder="დაწერე შენი კითხვა..." required>
+        <input type="text" id="robot-chat-input" placeholder="დაწერე შეკითხვა..." required style="flex: 1; padding: 8px; border-radius: 6px; border: 1px solid var(--border-color);">
         <button type="submit" class="btn-submit">გაგზავნა</button>
       </form>
-
-      <div style="margin-top: 15px;">
-        <h4>📊 საზოგადოების გამოკითხვა:</h4>
-        <p style="font-size: 0.85rem; margin-top: 5px;">რამდენად ელოდებით ამ ივენთს?</p>
-        <div style="display: flex; gap: 10px; margin-top: 8px;">
-          <button class="btn-poll" data-poll="high">🔥 ძალიან (78%)</button>
-          <button class="btn-poll" data-poll="medium">👍 მაინტერესებს (22%)</button>
-        </div>
-      </div>
-
-      <div id="qa-list" style="margin-top: 15px; font-size: 0.85rem;"></div>
     </div>
   </div>
 
-  <!-- დაჯავშნისა და ადგილების Modal -->
-  <div id="booking-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="close-booking">&times;</span>
-      <h2 id="modal-event-title" data-i18n="modalBookingTitle">ღონისძიების დაჯავშნა</h2>
-      
-      <div class="seat-picker-container">
-        <p style="font-size: 0.85rem; margin-bottom: 8px;"><b>💺 აირჩიეთ სასურველი ადგილი დარბაზში:</b></p>
-        <div class="stage-label">🎬 სცენა / სპიკერი</div>
-        <div class="seats-grid" id="seats-grid"></div>
-        <small id="selected-seat-label" style="display: block; margin-top: 8px; color: #10b981; font-weight: 700;">არჩეული ადგილი: -</small>
-      </div>
-
-      <form id="booking-form" style="margin-top: 15px;">
-        <label for="user-name" data-i18n="labelFullName">სახელი, გვარი:</label>
-        <input type="text" id="user-name" required data-i18n-placeholder="phFullName" placeholder="მაგ: გიორგი ბერიძე">
-
-        <label for="user-email" data-i18n="labelEmail">ელ-ფოსტა:</label>
-        <input type="email" id="user-email" required placeholder="example@mail.com">
-
-        <button type="submit" class="btn-submit" data-i18n="btnConfirm">დადასტურება</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ბილეთის Modal -->
-  <div id="ticket-modal" class="modal">
-    <div class="modal-content ticket-modal-content">
-      <span class="close-btn" id="close-ticket">&times;</span>
-      <h2 style="text-align: center; margin-bottom: 15px;" data-i18n="yourTicketTitle">🎟️ თქვენი ციფრული ბილეთი</h2>
-      
-      <div class="ticket-card" id="digital-ticket">
-        <div class="ticket-header">
-          <span class="ticket-badge">VIP PASS</span>
-          <h3 id="ticket-event-title">AI & Future Tech Summit</h3>
-        </div>
-        <div class="ticket-body" style="margin-top: 10px;">
-          <p>👤 <b data-i18n="labelHolder">მფლობელი:</b> <span id="ticket-user-name">-</span></p>
-          <p>💺 <b>ადგილი დარბაზში:</b> <span id="ticket-seat-num">-</span></p>
-          <p>📅 <b data-i18n="labelDate">თარიღი:</b> <span id="ticket-event-date">-</span></p>
-          <p>📍 <b data-i18n="labelLocation">ადგილი:</b> <span id="ticket-event-location">-</span></p>
-          <p>🆔 <b data-i18n="labelTicketId">ბილეთის ID:</b> <code id="ticket-id-code">#TKT-0000</code></p>
-        </div>
-        <div class="ticket-qr-container">
-          <img id="ticket-qr-img" src="" alt="QR Code">
-          <small data-i18n="qrScanTip">წარადგინეთ ეს QR კოდი შესასვლელთან</small>
-        </div>
-      </div>
-
-      <div class="ticket-actions-grid">
-        <button id="add-calendar-btn" class="btn-submit" style="background: #0284c7;">🗓️ <span data-i18n="btnAddToCalendar">კალენდარში დამატება</span></button>
-        <button id="download-ticket-btn" class="btn-submit" style="background: #4f46e5;">📥 <span data-i18n="btnDownload">ჩამოტვირთვა (PDF)</span></button>
-      </div>
-      <button id="close-ticket-btn" class="btn-secondary" style="width: 100%; margin-top: 10px;" data-i18n="btnClose">დახურვა</button>
-    </div>
-  </div>
-
-  <!-- პროფილის Modal -->
-  <div id="profile-modal" class="modal">
-    <div class="modal-content profile-content">
-      <span class="close-btn" id="close-profile">&times;</span>
-      <h2 data-i18n="profileTitle">👤 პირადი კაბინეთი</h2>
-      
-      <form id="profile-form" style="margin-top: 15px;">
-        <label for="profile-name" data-i18n="yourName">თქვენი სახელი:</label>
-        <input type="text" id="profile-name" placeholder="შეიყვანეთ სახელი">
-
-        <label for="profile-email" data-i18n="emailForNotifications">ელ-ფოსტა შეტყობინებებისთვის:</label>
-        <input type="email" id="profile-email" placeholder="example@mail.com">
-
-        <button type="submit" class="btn-submit" data-i18n="saveProfile">პროფილის შენახვა</button>
-      </form>
-
-      <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-      <h3 style="margin-bottom: 10px;" data-i18n="myTicketsHeading">🎟️ ჩემი დაჯავშნილი ბილეთები</h3>
-      <div id="my-tickets-list" class="my-tickets-list"></div>
-    </div>
-  </div>
-
-  <!-- JavaScript & Three.js 3D ლოგიკა -->
   <script>
-    const speakersData = {
-      "გიორგი ბერიძე": {
-        role: "Senior AI Researcher @ TechCorp",
-        bio: "გიორგის აქვს 8-წლიანი გამოცდილება AI და Machine Learning მიმართულებით.",
-        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80",
-        linkedin: "https://linkedin.com",
-        github: "https://github.com",
-        talks: ["AI & Future Tech Summit (2026)"]
-      },
-      "ნიტა ქავთარაძე": {
-        role: "Lead Web Developer & Frontend Architect",
-        bio: "ნიტა არის React და Next.js ეკოსისტემის ექსპერტი.",
-        avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&auto=format&fit=crop&q=80",
-        linkedin: "https://linkedin.com",
-        github: "https://github.com",
-        talks: ["React & Next.js Workshop (2026)"]
-      },
-      "დავით ჩხეიძე": {
-        role: "Cybersecurity Specialist & Ethical Hacker",
-        bio: "დავითი იცავს მსხვილ ფინანსურ ინსტიტუტებს კიბერშეტევებისგან.",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80",
-        linkedin: "https://linkedin.com",
-        github: "https://github.com",
-        talks: ["Cybersecurity & Ethical Hacking (2026)"]
-      }
-    };
-
     let allEvents = [
       {
         "id": 1,
         "title": "AI & Future Tech Summit",
         "category": "AI",
-        "format": "In-person",
         "speaker": "გიორგი ბერიძე",
         "date": "2026-10-20",
-        "location": "Tbilisi Tech Hub",
         "price": 120,
-        "rating": 4.9,
         "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80"
       },
       {
         "id": 2,
         "title": "React & Next.js Workshop",
         "category": "Web Dev",
-        "format": "Online",
         "speaker": "ნიტა ქავთარაძე",
         "date": "2026-11-05",
-        "location": "Zoom Meeting",
         "price": 70,
-        "rating": 4.8,
         "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80"
-      },
-      {
-        "id": 3,
-        "title": "Cybersecurity & Ethical Hacking",
-        "category": "Cybersecurity",
-        "format": "Hybrid",
-        "speaker": "დავით ჩხეიძე",
-        "date": "2026-11-12",
-        "location": "Ozurgeti TechnoPark / Online",
-        "price": 160,
-        "rating": 5.0,
-        "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80"
       }
     ];
 
-    const USD_RATE = 2.7;
-    let isDarkMode = localStorage.getItem('isDarkMode') === 'true';
-    let userFavorites = JSON.parse(localStorage.getItem('userFavorites')) || [];
-    let myTickets = JSON.parse(localStorage.getItem('myTickets')) || [];
-    let showOnlyFavorites = false;
-    let selectedEventForBooking = null;
-    let currentActiveTicket = null;
-    let selectedSeatNumber = null;
-
     const eventsGrid = document.getElementById('events-grid');
-    const themeToggleBtn = document.getElementById('theme-toggle-btn');
-    const bookingModal = document.getElementById('booking-modal');
-    const ticketModal = document.getElementById('ticket-modal');
-    const qaModal = document.getElementById('qa-modal');
-    const profileModal = document.getElementById('profile-modal');
-    const mapModal = document.getElementById('map-modal');
-    const speakerModal = document.getElementById('speaker-modal');
-    const robotChatModal = document.getElementById('robot-chat-modal');
-
-    if (isDarkMode) {
-      document.body.classList.add('dark-theme');
-      themeToggleBtn.textContent = '☀️';
-    } else {
-      themeToggleBtn.textContent = '🌙';
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-      isDarkMode = !isDarkMode;
-      document.body.classList.toggle('dark-theme', isDarkMode);
-      themeToggleBtn.textContent = isDarkMode ? '☀️' : '🌙';
-      localStorage.setItem('isDarkMode', isDarkMode);
-    });
-
-    function displayEvents(events) {
+    function displayEvents() {
       eventsGrid.innerHTML = '';
-      const currency = document.getElementById('currency-select').value;
-
-      events.forEach(event => {
-        const isFav = userFavorites.includes(event.id);
+      allEvents.forEach(event => {
         const card = document.createElement('div');
         card.className = 'event-card';
-
-        let formattedPrice = currency === 'USD' 
-          ? `$${(event.price / USD_RATE).toFixed(0)}` 
-          : `${event.price} ₾`;
-
-        const ratingStars = '⭐'.repeat(Math.floor(event.rating || 5)) + ` (${event.rating || 5.0})`;
-
         card.innerHTML = `
-          <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${event.id}">
-            ${isFav ? '❤️' : '🤍'}
-          </button>
           <div class="event-card-img-container">
             <img src="${event.image}" alt="${event.title}">
           </div>
           <div class="event-info">
-            <span class="badge">${event.category} • ${event.format}</span>
+            <span class="badge">${event.category}</span>
             <h3 class="event-title">${event.title}</h3>
-            <div class="rating-stars">${ratingStars}</div>
-            <p class="speaker">🎤 <span class="speaker-link" data-name="${event.speaker}">${event.speaker}</span></p>
-            <p class="event-details">📅 ${event.date} | 📍 <span class="location-link" data-location="${event.location}">${event.location}</span></p>
+            <p>🎤 ${event.speaker}</p>
+            <p>📅 ${event.date}</p>
             <div class="card-footer">
-              <span class="price">${formattedPrice}</span>
-              <div style="display: flex; gap: 6px;">
-                <button class="btn-qa-icon" data-id="${event.id}" title="დასვი კითხვა">💬 Q&A</button>
-                <button class="btn-calendar-icon" data-id="${event.id}" title="Google Calendar">🗓️</button>
-                <button class="btn-details" data-id="${event.id}">დაჯავშნა</button>
-              </div>
+              <span class="price">${event.price} ₾</span>
+              <button class="btn-details">დაჯავშნა</button>
             </div>
           </div>
         `;
         eventsGrid.appendChild(card);
       });
     }
+    displayEvents();
 
-    function filterEvents() {
-      const category = document.getElementById('category-filter').value;
-      const format = document.getElementById('format-filter').value;
-      const sort = document.getElementById('sort-select').value;
-      const query = document.getElementById('search-input').value.toLowerCase().trim();
+    // 🛹 რობოტზე დაჭერისას Ollie (ნახტომი) და ჩატის გახსნა
+    const robotContainer = document.getElementById('robot-container');
+    const robotBubble = document.getElementById('robot-bubble');
 
-      let filtered = allEvents.filter(e => {
-        const catMatch = category === 'all' || e.category === category;
-        const fmtMatch = format === 'all' || e.format === format;
-        const searchMatch = query === '' || e.title.toLowerCase().includes(query) || e.speaker.toLowerCase().includes(query);
-        const favMatch = !showOnlyFavorites || userFavorites.includes(e.id);
-        return catMatch && fmtMatch && searchMatch && favMatch;
-      });
+    robotContainer.addEventListener('click', () => {
+      robotContainer.classList.add('jump');
+      robotBubble.textContent = '🛹 OLLIE TRICK! BZZT!';
 
-      if (sort === 'date') filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
-      else if (sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
-      else if (sort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
-      else if (sort === 'rating') filtered.sort((a, b) => (b.rating || 5) - (a.rating || 5));
-
-      displayEvents(filtered);
-    }
-
-    document.getElementById('category-filter').addEventListener('change', filterEvents);
-    document.getElementById('format-filter').addEventListener('change', filterEvents);
-    document.getElementById('sort-select').addEventListener('change', filterEvents);
-    document.getElementById('search-input').addEventListener('input', filterEvents);
-    document.getElementById('currency-select').addEventListener('change', filterEvents);
-
-    eventsGrid.addEventListener('click', (e) => {
-      if (e.target.classList.contains('speaker-link')) {
-        const name = e.target.dataset.name;
-        const data = speakersData[name];
-        if (data) {
-          document.getElementById('speaker-name').textContent = name;
-          document.getElementById('speaker-role').textContent = data.role;
-          document.getElementById('speaker-bio').textContent = data.bio;
-          document.getElementById('speaker-avatar').src = data.avatar;
-          document.getElementById('speaker-linkedin').href = data.linkedin;
-          document.getElementById('speaker-github').href = data.github;
-
-          const talksList = document.getElementById('speaker-talks');
-          talksList.innerHTML = '';
-          data.talks.forEach(t => {
-            const li = document.createElement('li');
-            li.textContent = t;
-            talksList.appendChild(li);
-          });
-
-          speakerModal.style.display = 'flex';
-        }
-      }
-
-      if (e.target.classList.contains('location-link')) {
-        const loc = e.target.dataset.location;
-        document.getElementById('map-location-title').textContent = loc;
-        const queryLoc = encodeURIComponent(loc);
-        document.getElementById('google-map-iframe').src = `https://maps.google.com/maps?q=${queryLoc}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-        document.getElementById('google-map-external-link').href = `https://www.google.com/maps/search/?api=1&query=${queryLoc}`;
-        mapModal.style.display = 'flex';
-      }
-
-      if (e.target.classList.contains('fav-btn')) {
-        const id = Number(e.target.dataset.id);
-        userFavorites = userFavorites.includes(id) ? userFavorites.filter(f => f !== id) : [...userFavorites, id];
-        localStorage.setItem('userFavorites', JSON.stringify(userFavorites));
-        document.getElementById('fav-count').textContent = userFavorites.length;
-        filterEvents();
-      }
-
-      if (e.target.classList.contains('btn-qa-icon')) {
-        const eventId = Number(e.target.dataset.id);
-        const ev = allEvents.find(i => i.id === eventId);
-        if (ev) {
-          document.getElementById('qa-event-title').textContent = `${ev.title} (🎤 ${ev.speaker})`;
-          qaModal.style.display = 'flex';
-        }
-      }
-
-      if (e.target.classList.contains('btn-calendar-icon')) {
-        const eventId = Number(e.target.dataset.id);
-        const ev = allEvents.find(i => i.id === eventId);
-        if (ev) {
-          const formattedDate = ev.date.replace(/-/g, '');
-          window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${formattedDate}T100000Z/${formattedDate}T120000Z&location=${encodeURIComponent(ev.location)}`, '_blank');
-        }
-      }
-
-      if (e.target.classList.contains('btn-details')) {
-        const eventId = Number(e.target.dataset.id);
-        selectedEventForBooking = allEvents.find(ev => ev.id === eventId);
-        if (selectedEventForBooking) {
-          document.getElementById('modal-event-title').textContent = `დაჯავშნა: ${selectedEventForBooking.title}`;
-          renderSeats();
-          bookingModal.style.display = 'flex';
-        }
-      }
+      setTimeout(() => {
+        robotContainer.classList.remove('jump');
+        document.getElementById('robot-chat-modal').style.display = 'flex';
+      }, 600);
     });
 
-    function renderSeats() {
-      const seatsGrid = document.getElementById('seats-grid');
-      seatsGrid.innerHTML = '';
-      selectedSeatNumber = null;
-      document.getElementById('selected-seat-label').textContent = 'არჩეული ადგილი: -';
-
-      for (let i = 1; i <= 18; i++) {
-        const seat = document.createElement('div');
-        seat.className = 'seat';
-        seat.textContent = i;
-
-        if (i === 3 || i === 7 || i === 12) {
-          seat.classList.add('occupied');
-        } else {
-          seat.addEventListener('click', () => {
-            document.querySelectorAll('.seat').forEach(s => s.classList.remove('selected'));
-            seat.classList.add('selected');
-            selectedSeatNumber = i;
-            document.getElementById('selected-seat-label').textContent = `არჩეული ადგილი: #${i}`;
-          });
-        }
-        seatsGrid.appendChild(seat);
-      }
-    }
-
-    document.getElementById('booking-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const userName = document.getElementById('user-name').value;
-      const userEmail = document.getElementById('user-email').value;
-      const ticketId = 'TKT-' + Math.floor(100000 + Math.random() * 900000);
-
-      currentActiveTicket = {
-        id: ticketId,
-        userName: userName,
-        userEmail: userEmail,
-        eventTitle: selectedEventForBooking.title,
-        eventDate: selectedEventForBooking.date,
-        eventLocation: selectedEventForBooking.location,
-        seatNum: selectedSeatNumber ? `#${selectedSeatNumber}` : 'თავისუფალი'
-      };
-
-      myTickets.push(currentActiveTicket);
-      localStorage.setItem('myTickets', JSON.stringify(myTickets));
-
-      document.getElementById('ticket-event-title').textContent = currentActiveTicket.eventTitle;
-      document.getElementById('ticket-user-name').textContent = currentActiveTicket.userName;
-      document.getElementById('ticket-seat-num').textContent = currentActiveTicket.seatNum;
-      document.getElementById('ticket-event-date').textContent = currentActiveTicket.eventDate;
-      document.getElementById('ticket-event-location').textContent = currentActiveTicket.eventLocation;
-      document.getElementById('ticket-id-code').textContent = `#${currentActiveTicket.id}`;
-
-      const qrContent = encodeURIComponent(`TicketID: ${currentActiveTicket.id} | Event: ${currentActiveTicket.eventTitle} | Holder: ${currentActiveTicket.userName}`);
-      document.getElementById('ticket-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrContent}`;
-
-      bookingModal.style.display = 'none';
-      ticketModal.style.display = 'flex';
-      renderMyTickets();
-    });
-
-    function startCountdownTimer() {
-      if (allEvents.length === 0) return;
-      const sorted = [...allEvents].sort((a, b) => new Date(a.date) - new Date(b.date));
-      const nextEvent = sorted[0];
-      document.getElementById('next-event-name').textContent = nextEvent.title;
-
-      const eventDate = new Date(nextEvent.date + 'T10:00:00').getTime();
-
-      setInterval(() => {
-        const now = new Date().getTime();
-        const distance = eventDate - now;
-        if (distance < 0) return;
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById('timer-days').textContent = days < 10 ? '0' + days : days;
-        document.getElementById('timer-hours').textContent = hours < 10 ? '0' + hours : hours;
-        document.getElementById('timer-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-        document.getElementById('timer-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
-      }, 1000);
-    }
-
-    document.getElementById('close-booking').onclick = () => bookingModal.style.display = 'none';
-    document.getElementById('close-ticket').onclick = () => ticketModal.style.display = 'none';
-    document.getElementById('close-ticket-btn').onclick = () => ticketModal.style.display = 'none';
-    document.getElementById('close-qa').onclick = () => qaModal.style.display = 'none';
-    document.getElementById('close-profile').onclick = () => profileModal.style.display = 'none';
-    document.getElementById('close-map').onclick = () => mapModal.style.display = 'none';
-    document.getElementById('close-speaker').onclick = () => speakerModal.style.display = 'none';
-    document.getElementById('close-robot-chat').onclick = () => robotChatModal.style.display = 'none';
-    document.getElementById('profile-btn').onclick = () => profileModal.style.display = 'flex';
-
-    function renderMyTickets() {
-      const container = document.getElementById('my-tickets-list');
-      container.innerHTML = '';
-      if (myTickets.length === 0) {
-        container.innerHTML = '<p style="font-size: 0.85rem; color: #888;">ჯერ არ გაქვთ დაჯავშნილი ბილეთები.</p>';
-        return;
-      }
-      myTickets.forEach(tkt => {
-        const item = document.createElement('div');
-        item.className = 'ticket-item-mini';
-        item.innerHTML = `
-          <div>
-            <h4>${tkt.eventTitle}</h4>
-            <p>📅 ${tkt.eventDate} | 💺 ${tkt.seatNum} | 🆔 ${tkt.id}</p>
-          </div>
-          <span style="font-size: 1.2rem;">🎟️</span>
-        `;
-        container.appendChild(item);
-      });
-    }
-
-    /* ==========================================
-       🛹 THREE.JS 3D CUTE ROBOT WITH SKATEBOARD
-    ========================================== */
-    const canvas = document.getElementById('robot-3d-canvas');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, 180 / 200, 0.1, 1000);
-    camera.position.set(0, 1.4, 4);
-
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-    renderer.setSize(180, 200);
-    renderer.setPixelRatio(window.devicePixelRatio);
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
-    scene.add(ambientLight);
-    const dirLight = new THREE.DirectionalLight(0x38bdf8, 1.2);
-    dirLight.position.set(2, 4, 3);
-    scene.add(dirLight);
-
-    const robotGroup = new THREE.Group();
-
-    // 1. მრგვალი თავი
-    const headGeo = new THREE.SphereGeometry(0.5, 32, 32);
-    const robotMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.3, roughness: 0.2 });
-    const head = new THREE.Mesh(headGeo, robotMat);
-    head.position.y = 0.8;
-    robotGroup.add(head);
-
-    // ანტენა თავზე
-    const antennaRod = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.2), new THREE.MeshStandardMaterial({ color: 0x64748b }));
-    antennaRod.position.set(0, 1.35, 0);
-    const antennaBall = new THREE.Mesh(new THREE.SphereGeometry(0.06), new THREE.MeshBasicMaterial({ color: 0xec4899 }));
-    antennaBall.position.set(0, 1.47, 0);
-    robotGroup.add(antennaRod, antennaBall);
-
-    // თვალები
-    const eyeGeo = new THREE.SphereGeometry(0.09, 16, 16);
-    const eyeMat = new THREE.MeshBasicMaterial({ color: 0x0f172a });
-    const leftEye = new THREE.Mesh(eyeGeo, eyeMat); leftEye.position.set(-0.18, 0.85, 0.42);
-    const rightEye = new THREE.Mesh(eyeGeo, eyeMat); rightEye.position.set(0.18, 0.85, 0.42);
-    robotGroup.add(leftEye, rightEye);
-
-    // 2. სხეული
-    const bodyGeo = new THREE.BoxGeometry(0.55, 0.5, 0.4);
-    const bodyMat = new THREE.MeshStandardMaterial({ color: 0x4f46e5, metalness: 0.5 });
-    const body = new THREE.Mesh(bodyGeo, bodyMat);
-    body.position.y = 0.25;
-    robotGroup.add(body);
-
-    // ეკრანი
-    const screenGeo = new THREE.BoxGeometry(0.3, 0.25, 0.05);
-    const screenMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
-    const screen = new THREE.Mesh(screenGeo, screenMat);
-    screen.position.set(0, 0.27, 0.21);
-    robotGroup.add(screen);
-
-    // 3. ხელები
-    const armGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.35);
-    const armMat = new THREE.MeshStandardMaterial({ color: 0x64748b });
-    const leftArm = new THREE.Mesh(armGeo, armMat); leftArm.position.set(-0.35, 0.3, 0); leftArm.rotation.z = 0.4;
-    const rightArm = new THREE.Mesh(armGeo, armMat); rightArm.position.set(0.35, 0.3, 0); rightArm.rotation.z = -0.4;
-    robotGroup.add(leftArm, rightArm);
-
-    // 🛹 4. სკეიტბორდი
-    const skateGroup = new THREE.Group();
-    const boardGeo = new THREE.BoxGeometry(1.0, 0.06, 0.35);
-    const boardMat = new THREE.MeshStandardMaterial({ color: 0xec4899 });
-    const board = new THREE.Mesh(boardGeo, boardMat);
-    skateGroup.add(board);
-
-    const wheelGeo = new THREE.CylinderGeometry(0.07, 0.07, 0.06, 16);
-    const wheelMat = new THREE.MeshStandardMaterial({ color: 0x0f172a });
-    const w1 = new THREE.Mesh(wheelGeo, wheelMat); w1.rotation.x = Math.PI/2; w1.position.set(-0.35, -0.06, 0.14);
-    const w2 = new THREE.Mesh(wheelGeo, wheelMat); w2.rotation.x = Math.PI/2; w2.position.set(0.35, -0.06, 0.14);
-    const w3 = new THREE.Mesh(wheelGeo, wheelMat); w3.rotation.x = Math.PI/2; w3.position.set(-0.35, -0.06, -0.14);
-    const w4 = new THREE.Mesh(wheelGeo, wheelMat); w4.rotation.x = Math.PI/2; w4.position.set(0.35, -0.06, -0.14);
-    skateGroup.add(w1, w2, w3, w4);
-
-    skateGroup.position.y = -0.05;
-    robotGroup.add(skateGroup);
-
-    robotGroup.position.y = -0.3;
-    scene.add(robotGroup);
-
-    let clock = new THREE.Clock();
-    function animate() {
-      requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
-
-      robotGroup.position.y = -0.3 + Math.sin(time * 4) * 0.06;
-      robotGroup.rotation.y = Math.sin(time * 2) * 0.2;
-      robotGroup.rotation.z = Math.sin(time * 3) * 0.05;
-
-      leftArm.rotation.x = Math.sin(time * 5) * 0.3;
-      rightArm.rotation.x = -Math.sin(time * 5) * 0.3;
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    canvas.addEventListener('click', () => {
-      document.getElementById('robot-3d-bubble').textContent = '🛹 ჰეი! მოდი ვისაუბროთ!';
-      document.getElementById('robot-chat-modal').style.display = 'flex';
-    });
+    document.getElementById('close-robot-chat').onclick = () => {
+      document.getElementById('robot-chat-modal').style.display = 'none';
+    };
 
     document.getElementById('robot-chat-form').onsubmit = (e) => {
       e.preventDefault();
@@ -1463,10 +634,6 @@
         container.scrollTop = container.scrollHeight;
       }, 500);
     };
-
-    filterEvents();
-    startCountdownTimer();
-    renderMyTickets();
   </script>
 </body>
 </html>
