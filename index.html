@@ -339,6 +339,18 @@
       margin-bottom: 6px;
     }
 
+    /* ინტერაქტიული ლოკაციის ბმული */
+    .location-link {
+      color: #0284c7;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .location-link:hover {
+      color: #0369a1;
+    }
+
     .card-footer {
       display: flex;
       justify-content: space-between;
@@ -582,6 +594,35 @@
       font-weight: 600;
       box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
+
+    /* რუკის სტილები */
+    .map-frame-container {
+      width: 100%;
+      height: 250px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 15px 0;
+      border: 1px solid var(--border-color);
+    }
+
+    .map-frame-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .btn-external-map {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      background: #0284c7;
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -678,6 +719,21 @@
   </section>
 
   <main class="events-grid" id="events-grid"></main>
+
+  <!-- 🗺️ Google Maps Modal -->
+  <div id="map-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-map">&times;</span>
+      <h3>📍 ლოკაცია და მარშრუტი</h3>
+      <p id="map-location-title" style="font-weight: 700; color: var(--accent-color); margin-top: 5px;"></p>
+      
+      <div class="map-frame-container">
+        <iframe id="google-map-iframe" src="" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <a id="google-map-external-link" href="#" target="_blank" class="btn-external-map">🗺️ Google Maps-ში გახსნა & მარშრუტი</a>
+    </div>
+  </div>
 
   <!-- Q&A Modal -->
   <div id="qa-modal" class="modal">
@@ -844,6 +900,7 @@
     const ticketModal = document.getElementById('ticket-modal');
     const qaModal = document.getElementById('qa-modal');
     const profileModal = document.getElementById('profile-modal');
+    const mapModal = document.getElementById('map-modal');
 
     // 🌙 Dark Mode ლოგიკა + ემოჯი
     if (isDarkMode) {
@@ -887,7 +944,7 @@
             <h3 class="event-title">${event.title}</h3>
             <div class="rating-stars">${ratingStars}</div>
             <p class="speaker">🎤 ${event.speaker}</p>
-            <p class="event-details">📅 ${event.date} | 📍 ${event.location}</p>
+            <p class="event-details">📅 ${event.date} | 📍 <span class="location-link" data-location="${event.location}">${event.location}</span></p>
             <div class="card-footer">
               <span class="price">${formattedPrice}</span>
               <div style="display: flex; gap: 6px;">
@@ -931,6 +988,16 @@
     document.getElementById('currency-select').addEventListener('change', filterEvents);
 
     eventsGrid.addEventListener('click', (e) => {
+      // 🗺️ ლოკაციაზე დაჭერისას რუკის გახსნა
+      if (e.target.classList.contains('location-link')) {
+        const loc = e.target.dataset.location;
+        document.getElementById('map-location-title').textContent = loc;
+        const queryLoc = encodeURIComponent(loc);
+        document.getElementById('google-map-iframe').src = `https://maps.google.com/maps?q=${queryLoc}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+        document.getElementById('google-map-external-link').href = `https://www.google.com/maps/search/?api=1&query=${queryLoc}`;
+        mapModal.style.display = 'flex';
+      }
+
       if (e.target.classList.contains('fav-btn')) {
         const id = Number(e.target.dataset.id);
         userFavorites = userFavorites.includes(id) ? userFavorites.filter(f => f !== id) : [...userFavorites, id];
@@ -1057,6 +1124,7 @@
     document.getElementById('close-ticket-btn').onclick = () => ticketModal.style.display = 'none';
     document.getElementById('close-qa').onclick = () => qaModal.style.display = 'none';
     document.getElementById('close-profile').onclick = () => profileModal.style.display = 'none';
+    document.getElementById('close-map').onclick = () => mapModal.style.display = 'none';
     document.getElementById('profile-btn').onclick = () => profileModal.style.display = 'flex';
 
     function renderMyTickets() {
