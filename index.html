@@ -58,10 +58,17 @@
 
     @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-    .btn-theme-toggle, .btn-robot-toggle { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 14px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 700; }
+    .btn-theme-toggle, .btn-robot-toggle, .btn-noti-toggle { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 14px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 700; position: relative; }
     .btn-robot-toggle.off { background: #ef4444; color: white; border-color: #b91c1c; }
+    .noti-badge { position: absolute; top: -4px; right: -2px; background: #ef4444; color: white; font-size: 0.65rem; padding: 2px 5px; border-radius: 10px; font-weight: bold; }
+    
     .select-styled { padding: 8px 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); font-weight: 600; cursor: pointer; }
     .btn-profile { background: var(--accent-color); color: white; border: none; padding: 9px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+
+    .noti-dropdown { display: none; position: absolute; top: 60px; right: 20px; width: 320px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 10005; padding: 15px; }
+    .noti-dropdown.active { display: block; }
+    .noti-item { padding: 10px; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; display: flex; gap: 10px; align-items: center; }
+    .noti-item:last-child { border-bottom: none; }
 
     .controls-section { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
     .controls-section input, .controls-section select { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); outline: none; }
@@ -76,24 +83,144 @@
     .time-box span { display: block; font-size: 1.2rem; font-weight: 700; }
     .time-box small { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; }
 
+    .section-container { max-width: 1200px; margin: 0 auto 35px auto; }
+    .section-header-title { font-size: 1.35rem; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+
+    .quick-actions-bar { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+    .quick-actions-bar::-webkit-scrollbar { display: none; }
+    .quick-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 9px 18px; border-radius: 30px; cursor: pointer; font-weight: 700; font-size: 0.88rem; white-space: nowrap; transition: all 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+    .quick-btn:hover, .quick-btn.active { background: var(--accent-color); color: white; border-color: var(--accent-color); transform: translateY(-2px); }
+
+    .featured-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden; display: flex; flex-direction: row; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .featured-img-wrap { width: 45%; min-height: 220px; position: relative; }
+    .featured-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .featured-body { width: 55%; padding: 25px; display: flex; flex-direction: column; justify-content: center; }
+
     .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
-    .event-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; position: relative; }
-    .fav-btn { position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #cbd5e1; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; display: flex; justify-content: center; align-items: center; }
-    .fav-btn.active { background: #ffe4e6; border-color: #fda4af; }
+    .event-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .event-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
     .event-card-img-container { width: 100%; height: 180px; background: #f1f5f9; overflow: hidden; }
-    .event-card img { width: 100%; height: 100%; object-fit: cover; }
+    .event-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .event-card:hover img { transform: scale(1.05); }
+    .fav-btn { position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #cbd5e1; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; display: flex; justify-content: center; align-items: center; z-index: 2; }
+    .fav-btn.active { background: #ffe4e6; border-color: #fda4af; }
     .event-info { padding: 20px; }
     .badge { background: #e0e7ff; color: #3730a3; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; }
     .event-title { margin: 12px 0 6px 0; font-size: 1.15rem; font-weight: 700; }
     .speaker-link, .location-link { color: var(--accent-color); font-weight: 700; cursor: pointer; text-decoration: underline; }
     .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; }
     .price { font-weight: 800; font-size: 1.15rem; color: #10b981; }
-    .btn-details { background: var(--accent-color); color: white; border: none; padding: 9px 15px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    .btn-details { background: var(--accent-color); color: white; border: none; padding: 9px 15px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background-color 0.2s ease; }
+    .btn-details:hover { background: #4338ca; }
     .btn-qa-icon, .btn-calendar-icon { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 12px; border-radius: 6px; cursor: pointer; }
 
     /* ===================================================
-       🤖 TOBY CLEAN & ANIMATED CONTAINER (NO EXTRA PROPS)
+       🎨 განახლებული, პრემიუმ სპიკერების ბარათების სტილი
     =================================================== */
+    .speakers-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+    
+    .speaker-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 0 0 20px 0;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    
+    .speaker-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.12);
+    }
+
+    .speaker-card-top-bar {
+      height: 60px;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      margin-bottom: -40px;
+    }
+
+    .speaker-card-img {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 12px auto;
+      border: 4px solid var(--card-bg);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .speaker-tag {
+      display: inline-block;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    body.dark-theme .speaker-tag {
+      background: #334155;
+      color: #f8fafc;
+    }
+
+    .speaker-btn-action {
+      margin-top: 14px;
+      background: transparent;
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .speaker-card:hover .speaker-btn-action {
+      background: var(--accent-color);
+      color: white;
+    }
+
+    /* Calendar Section */
+    .calendar-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; }
+    .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; }
+    .cal-day-label { font-weight: 700; font-size: 0.8rem; color: var(--subtext-color); padding: 6px; }
+    .cal-date-cell { padding: 12px 4px; border-radius: 8px; border: 1px solid transparent; font-weight: 600; font-size: 0.9rem; cursor: pointer; position: relative; }
+    .cal-date-cell:hover { background: var(--bg-color); }
+    .cal-date-cell.has-event { background: #e0e7ff; color: #3730a3; border-color: #c7d2fe; font-weight: 800; }
+    .cal-date-cell.has-event::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; background: var(--accent-color); border-radius: 50%; }
+
+    /* Map Section */
+    .map-section-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+    .map-list-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+    .map-item-card { padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); cursor: pointer; transition: background 0.2s ease; }
+    .map-item-card:hover { background: var(--bg-color); border-color: var(--accent-color); }
+
+    /* Gamification / Tech Journey */
+    .journey-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 25px; }
+    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 15px; }
+    .achieve-item { background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.88rem; }
+    .achieve-item.completed { border-color: #10b981; background: #ecfdf5; color: #065f46; }
+
+    /* Footer */
+    .site-footer { text-align: center; padding: 30px 20px; margin-top: 40px; border-top: 1px solid var(--border-color); color: var(--subtext-color); font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .featured-card { flex-direction: column; }
+      .featured-img-wrap, .featured-body { width: 100%; }
+      .map-section-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Toby CSS (Unchanged) */
     .toby-widget-container {
       position: fixed;
       bottom: 12px;
@@ -112,7 +239,6 @@
     .toby-widget-container.facing-left .toby-speech-bubble { transform: scaleX(1); }
     .toby-widget-container.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    /* 💬 SPEECH BUBBLE */
     .toby-speech-bubble {
       background: rgba(15, 23, 42, 0.94);
       backdrop-filter: blur(8px);
@@ -135,7 +261,6 @@
     }
     .toby-speech-bubble.active { opacity: 1; transform: translateY(0); }
 
-    /* 🎨 SVG GRAPHICS */
     .toby-svg-wrapper {
       width: 80px;
       height: 95px;
@@ -144,14 +269,12 @@
       transition: transform 0.3s ease;
     }
 
-    /* Antenna Light */
     .antenna-light { animation: antennaPulse 2s infinite alternate ease-in-out; }
     @keyframes antennaPulse { 0% { fill: #ec4899; filter: drop-shadow(0 0 2px #ec4899); } 100% { fill: #f43f5e; filter: drop-shadow(0 0 8px #f43f5e); } }
 
     .toby-widget-container.state-idle .toby-svg-wrapper { animation: idleBob 3s infinite ease-in-out; }
     @keyframes idleBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
-    /* Walking Animation */
     .toby-widget-container.state-walking .leg-left { animation: walkLegLeft 0.4s infinite alternate ease-in-out; }
     .toby-widget-container.state-walking .leg-right { animation: walkLegRight 0.4s infinite alternate ease-in-out; }
     .toby-widget-container.state-walking .arm-left { animation: walkArmLeft 0.4s infinite alternate ease-in-out; }
@@ -162,38 +285,32 @@
     @keyframes walkArmLeft { 0% { transform: rotate(15deg); transform-origin: 65px 115px; } 100% { transform: rotate(-15deg); transform-origin: 65px 115px; } }
     @keyframes walkArmRight { 0% { transform: rotate(-15deg); transform-origin: 135px 115px; } 100% { transform: rotate(15deg); transform-origin: 135px 115px; } }
 
-    /* Coding / Laptop Overlay */
     .laptop-item { display: none; }
     .toby-widget-container.state-coding .laptop-item { display: block; }
     .toby-widget-container.state-coding .arm-left, .toby-widget-container.state-coding .arm-right { animation: typeKey 0.15s infinite alternate; }
     @keyframes typeKey { 0% { transform: translateY(0); } 100% { transform: translateY(3px); } }
 
-    /* Repairing Wrench & Spark */
     .wrench-item, .spark-item { display: none; }
     .toby-widget-container.state-repairing .wrench-item, .toby-widget-container.state-repairing .spark-item { display: block; }
     .toby-widget-container.state-repairing .arm-right { animation: fixWrench 0.3s infinite alternate; transform-origin: 135px 115px; }
     @keyframes fixWrench { 0% { transform: rotate(0deg); } 100% { transform: rotate(-35deg); } }
 
-    /* Sleeping */
     .toby-widget-container.state-sleeping .robot-eye { display: none; }
     .sleep-eyes { display: none; }
     .toby-widget-container.state-sleeping .sleep-eyes { display: block; }
     .toby-widget-container.state-sleeping .toby-svg-wrapper { transform: translateY(10px) scaleY(0.92); }
 
-    /* Charging Glow */
     .toby-widget-container.state-charging .antenna-light { animation: chargeGlow 0.3s infinite alternate; }
     @keyframes chargeGlow { 0% { fill: #f59e0b; filter: drop-shadow(0 0 2px #f59e0b); } 100% { fill: #10b981; filter: drop-shadow(0 0 12px #10b981); } }
 
-    /* Surprised / Spin / Jump Actions */
     .toby-widget-container.action-jump { animation: jumpAnim 0.5s ease; }
     @keyframes jumpAnim { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-35px); } }
 
     .toby-widget-container.action-spin .toby-svg-wrapper { animation: spinAnim 0.6s ease; }
     @keyframes spinAnim { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    /* Responsive */
     @media (max-width: 600px) {
-      .toby-widget-container { transform: scale(0.8); }
+      .toby-widget-container { transform: scale(0.75); }
     }
 
     /* Modals CSS */
@@ -229,6 +346,7 @@
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="header">
     <div class="top-bar">
       <div class="brand-container">
@@ -236,7 +354,11 @@
         <h1 class="brand-title">Tech Meet & Greet Hub</h1>
       </div>
 
-      <div class="user-control" style="display: flex; gap: 10px; align-items: center;">
+      <div class="user-control" style="display: flex; gap: 10px; align-items: center; position: relative;">
+        <button id="noti-toggle-btn" class="btn-noti-toggle" title="შეტყობინებები">
+          🔔 <span class="noti-badge">3</span>
+        </button>
+
         <button id="toggle-toby-visibility-btn" class="btn-robot-toggle" title="ასისტენტის გამოჩენა/დამალვა">🤖 Toby: ON</button>
         <button id="theme-toggle-btn" class="btn-theme-toggle" title="თემის შეცვლა">🌙</button>
         <select id="language-select" class="select-styled">
@@ -244,11 +366,19 @@
           <option value="en">🇺🇸 EN</option>
         </select>
         <button id="profile-btn" class="btn-profile">👤 პირადი კაბინეთი</button>
+
+        <div id="noti-dropdown" class="noti-dropdown">
+          <h4 style="margin-bottom: 10px; font-size: 0.95rem;">🔔 შეტყობინებები</h4>
+          <div class="noti-item">✨ <b>ახალი ივენთი:</b> AI Summit დაემატა!</div>
+          <div class="noti-item">🎟️ <b>ჯავშანი:</b> თქვენი ბილეთი დადასტურებულია.</div>
+          <div class="noti-item">🎤 <b>სპიკერი:</b> გიორგი ბერიძე ახალ თემას წარადგენს.</div>
+        </div>
       </div>
     </div>
     <p>იპოვეთ, დაჯავშნეთ და მიიღეთ ექსკლუზიური შეტყობინებები ტექნოლოგიურ ივენთებზე</p>
   </header>
 
+  <!-- CONTROLS & FILTERS -->
   <section class="controls-section">
     <div>
       <label for="search-input"><b>ძებნა:</b></label>
@@ -298,12 +428,14 @@
     </div>
   </section>
 
+  <!-- HERO BANNER -->
   <section class="subscription-banner">
     <h2>🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
     <p>შეიტყვეთ დაგეგმილი ივენთებისა და ტრენინგების შესახებ ყველაზე ადრე და დაჯავშნეთ ადგილები პრიორიტეტულად.</p>
     <button id="subscribe-plan-btn" class="btn-subscribe-banner">💎 პაკეტების ნახვა</button>
   </section>
 
+  <!-- COUNTDOWN SECTION -->
   <section class="countdown-section" id="countdown-section">
     <div class="countdown-title">
       ⏳ <span>უახლოეს ივენთამდე დარჩენილია:</span>
@@ -317,9 +449,99 @@
     </div>
   </section>
 
+  <!-- QUICK ACTIONS -->
+  <section class="section-container">
+    <h3 class="section-header-title">⚡ სწრაფი მოქმედებები</h3>
+    <div class="quick-actions-bar">
+      <button class="quick-btn active" data-quick="all">ყველა ივენთი</button>
+      <button class="quick-btn" data-quick="AI">AI</button>
+      <button class="quick-btn" data-quick="Web Dev">Web Dev</button>
+      <button class="quick-btn" data-quick="Cybersecurity">Cybersecurity</button>
+      <button class="quick-btn" data-quick="Online">ონლაინ</button>
+      <button class="quick-btn" data-quick="favs">ჩემი ფავორიტები</button>
+    </div>
+  </section>
+
+  <!-- FEATURED EVENT -->
+  <section class="section-container">
+    <h3 class="section-header-title">🔥 ამ კვირის გამორჩეული ივენთი</h3>
+    <div class="featured-card">
+      <div class="featured-img-wrap">
+        <img id="featured-img" src="" alt="Featured Event">
+      </div>
+      <div class="featured-body">
+        <span class="badge" id="featured-badge" style="width: fit-content; margin-bottom: 8px;">AI • In-person</span>
+        <h2 id="featured-title" style="font-size: 1.5rem; margin-bottom: 8px;"></h2>
+        <p style="margin-bottom: 6px; font-size: 0.92rem;">🎤 <span id="featured-speaker" style="font-weight: 700;"></span></p>
+        <p style="margin-bottom: 12px; font-size: 0.92rem;">📅 <span id="featured-date"></span> | 📍 <span id="featured-location"></span></p>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+          <span class="price" id="featured-price" style="font-size: 1.3rem;"></span>
+          <button class="btn-details" id="featured-btn-details">დეტალების ნახვა →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENT CARDS -->
   <main class="events-grid" id="events-grid"></main>
 
-  <!-- 🤖 ANIMATED TOBY WIDGET -->
+  <!-- FEATURED SPEAKERS -->
+  <section class="section-container" style="margin-top: 35px;">
+    <h3 class="section-header-title">🎤 მომავალი სპიკერები</h3>
+    <div class="speakers-row" id="speakers-row-container"></div>
+  </section>
+
+  <!-- EVENT CALENDAR -->
+  <section class="section-container">
+    <h3 class="section-header-title">📅 ივენთების კალენდარი</h3>
+    <div class="calendar-wrapper">
+      <div class="calendar-header">
+        <button id="cal-prev-btn" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">&lt; წინა</button>
+        <h4 id="cal-month-title" style="font-size: 1.1rem;">ოქტომბერი 2026</h4>
+        <button id="cal-next-btn" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">შემდეგი &gt;</button>
+      </div>
+      <div class="calendar-grid" id="calendar-days-grid"></div>
+    </div>
+  </section>
+
+  <!-- EVENT MAP -->
+  <section class="section-container">
+    <h3 class="section-header-title">📍 სად ტარდება ივენთები?</h3>
+    <div class="map-section-grid">
+      <div class="map-frame-container" style="height: 300px; margin: 0;">
+        <iframe id="main-section-google-map" src="https://maps.google.com/maps?q=Tbilisi&t=&z=12&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="map-list-box" id="map-locations-list"></div>
+    </div>
+  </section>
+
+  <!-- MY TECH JOURNEY -->
+  <section class="section-container">
+    <h3 class="section-header-title">🏆 ჩემი Tech Journey</h3>
+    <div class="journey-card">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h4 style="font-size: 1.1rem;">პროგრესი: <span id="journey-level-title" style="color: var(--accent-color);">Tech Explorer</span></h4>
+          <p style="font-size: 0.85rem; color: var(--subtext-color);">დაესწარით ივენთებს და გახსენით ახალი მიღწევები!</p>
+        </div>
+        <div style="font-size: 1.8rem;">🏅</div>
+      </div>
+
+      <div class="achievements-grid">
+        <div class="achieve-item" id="achieve-fav"><span>○</span> პირველი ფავორიტი</div>
+        <div class="achieve-item" id="achieve-book"><span>○</span> პირველი დაჯავშნა</div>
+        <div class="achieve-item" id="achieve-search"><span>○</span> ივენთების ძებნა</div>
+        <div class="achieve-item" id="achieve-qa"><span>○</span> დასმული Q&A კითხვა</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>© 2026 Tech Meet & Greet Hub. ყველა უფლება დაცულია.</p>
+  </footer>
+
+  <!-- TOBY WIDGET -->
   <div class="toby-widget-container state-idle" id="toby-widget">
     <div class="toby-speech-bubble" id="toby-bubble">
       <span id="toby-text-msg">👋 სალამი! მე ტობი ვარ.</span>
@@ -327,57 +549,35 @@
     
     <div class="toby-svg-wrapper" id="toby-btn">
       <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-        
-        <!-- 💻 Laptop Overlay -->
         <g class="laptop-item">
           <rect x="50" y="145" width="100" height="12" rx="3" fill="#94A3B8"/>
           <path d="M 60 145 L 70 105 L 130 105 L 140 145 Z" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
         </g>
-
-        <!-- 🔧 Wrench Overlay -->
         <g class="wrench-item">
           <path d="M 145 110 L 175 90 C 180 85 188 93 182 98 L 155 120 Z" fill="#94A3B8" stroke="#64748B" stroke-width="2"/>
         </g>
-
-        <!-- ⚡ Sparks Overlay -->
         <g class="spark-item">
           <path d="M 160 100 L 175 85 L 168 115 L 185 95" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
         </g>
-
-        <!-- Antenna -->
         <line x1="100" y1="35" x2="100" y2="15" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
         <circle class="antenna-light" cx="100" cy="10" r="8" fill="#EC4899"/>
-
-        <!-- Head -->
         <rect x="55" y="32" width="90" height="65" rx="22" fill="#38BDF8" stroke="#0284C7" stroke-width="4"/>
         <rect x="42" y="52" width="14" height="24" rx="5" fill="#64748B"/>
         <rect x="144" y="52" width="14" height="24" rx="5" fill="#64748B"/>
-        
-        <!-- Screen Face -->
         <rect x="68" y="42" width="64" height="45" rx="12" fill="#0F172A"/>
         <circle class="robot-eye eye-left" cx="84" cy="60" r="8" fill="#38BDF8"/>
         <circle class="robot-eye eye-right" cx="116" cy="60" r="8" fill="#38BDF8"/>
-
-        <!-- Sleeping Eyes -->
         <g class="sleep-eyes">
           <path d="M 76 62 Q 84 68 92 62" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
           <path d="M 108 62 Q 116 68 124 62" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
         </g>
-
-        <!-- Cheeks & Mouth -->
         <circle cx="76" cy="72" r="5" fill="#EC4899" opacity="0.6"/>
         <circle cx="124" cy="72" r="5" fill="#EC4899" opacity="0.6"/>
         <path d="M 88 74 Q 100 82 112 74" stroke="#10B981" stroke-width="3" stroke-linecap="round" fill="none"/>
-
-        <!-- Body -->
         <rect x="65" y="102" width="70" height="65" rx="16" fill="#6366F1" stroke="#4338CA" stroke-width="4"/>
         <circle cx="100" cy="132" r="10" fill="#38BDF8"/>
-
-        <!-- Arms -->
         <path class="arm-left" d="M 65 115 Q 45 125 40 140" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
         <path class="arm-right" d="M 135 115 Q 155 125 160 140" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
-
-        <!-- Legs -->
         <g class="leg-left">
           <rect x="80" y="167" width="12" height="25" rx="4" fill="#64748B"/>
           <rect x="72" y="188" width="24" height="10" rx="4" fill="#0F172A"/>
@@ -390,17 +590,15 @@
     </div>
   </div>
 
-  <!-- Modals -->
+  <!-- MODALS -->
   <div id="robot-chat-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-robot-chat">&times;</span>
       <h3>🤖 ტობი — შენი ჭკვიანი ასისტენტი</h3>
       <p style="font-size: 0.85rem; color: var(--subtext-color);">მკითხე ნებისმიერი რამ საიტზე არსებული ივენთების შესახებ!</p>
-      
       <div class="chat-box-messages" id="chat-messages-container">
         <div class="chat-msg bot">გამარჯობა! მე ტობი ვარ 🤖 რით დაგეხმარო? შეგიძლია მკითხო ივენთების ფასებზე, სპიკერებზე ან დაჯავშნაზე!</div>
       </div>
-
       <form id="robot-chat-form" style="display: flex; gap: 8px;">
         <input type="text" id="robot-chat-input" placeholder="მაგ: რა ივენთებია AI-ზე?..." required style="flex: 1; padding: 8px; border-radius: 6px; border: 1px solid var(--border-color);">
         <button type="submit" class="btn-submit">გაგზავნა</button>
@@ -510,10 +708,37 @@
   </div>
 
   <script>
+    /* ===================================================
+       🎯 განახლებული სპიკერების ბაზა (სწორი ფოტოები)
+    =================================================== */
     const speakersData = {
-      "გიორგი ბერიძე": { role: "Senior AI Researcher @ TechCorp", bio: "გიორგის აქვს 8-წლიანი გამოცდილება AI და Machine Learning მიმართულებით.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80", linkedin: "https://linkedin.com", github: "https://github.com", talks: ["AI & Future Tech Summit (2026)"] },
-      "ნიტა ქავთარაძე": { role: "Lead Web Developer & Frontend Architect", bio: "ნიტა არის React და Next.js ეკოსისტემის ექსპერტი.", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&auto=format&fit=crop&q=80", linkedin: "https://linkedin.com", github: "https://github.com", talks: ["React & Next.js Workshop (2026)"] },
-      "დავით ჩხეიძე": { role: "Cybersecurity Specialist & Ethical Hacker", bio: "დავითი იცავს მსხვილ ფინანსურ ინსტიტუტებს კიბერშეტევებისგან.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80", linkedin: "https://linkedin.com", github: "https://github.com", talks: ["Cybersecurity & Ethical Hacking (2026)"] }
+      "გიორგი ბერიძე": { 
+        role: "Senior AI Researcher @ TechCorp", 
+        tag: "AI Specialist",
+        bio: "გიორგის აქვს 8-წლიანი გამოცდილება AI და Machine Learning მიმართულებით.", 
+        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop&q=80", 
+        linkedin: "https://linkedin.com", 
+        github: "https://github.com", 
+        talks: ["AI & Future Tech Summit (2026)"] 
+      },
+      "ნიტა ქავთარაძე": { 
+        role: "Lead Web Developer & Frontend Architect", 
+        tag: "Frontend Architect",
+        bio: "ნიტა არის React და Next.js ეკოსისტემის ექსპერტი.", 
+        avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&auto=format&fit=crop&q=80", 
+        linkedin: "https://linkedin.com", 
+        github: "https://github.com", 
+        talks: ["React & Next.js Workshop (2026)"] 
+      },
+      "დავით ჩხეიძე": { 
+        role: "Cybersecurity Specialist & Ethical Hacker", 
+        tag: "Ethical Hacker",
+        bio: "დავითი იცავს მსხვილ ფინანსურ ინსტიტუტებს კიბერშეტევებისგან.", 
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80", 
+        linkedin: "https://linkedin.com", 
+        github: "https://github.com", 
+        talks: ["Cybersecurity & Ethical Hacking (2026)"] 
+      }
     };
 
     let allEvents = [
@@ -526,6 +751,7 @@
     let isDarkMode = localStorage.getItem('isDarkMode') === 'true';
     let userFavorites = JSON.parse(localStorage.getItem('userFavorites')) || [];
     let myTickets = JSON.parse(localStorage.getItem('myTickets')) || [];
+    let userJourney = JSON.parse(localStorage.getItem('userJourney')) || { fav: false, book: false, search: false, qa: false };
     let showOnlyFavorites = false;
     let selectedEventForBooking = null;
     let currentActiveTicket = null;
@@ -619,43 +845,25 @@
 
     document.getElementById('search-input').addEventListener('input', (e) => {
       filterEvents();
+      if (e.target.value.length > 2) updateJourney('search');
       if (typeof TobyEngine !== 'undefined' && TobyEngine.isAlive) {
         if (e.target.value.length === 1) TobyEngine.say("🔎 მეც ვეძებ...");
         if (e.target.value.length > 3) TobyEngine.say("👀 ვიპოვეთ!");
       }
     });
 
-    document.getElementById('currency-select').addEventListener('change', filterEvents);
+    document.getElementById('currency-select').addEventListener('change', () => { filterEvents(); renderFeaturedEvent(); });
 
     eventsGrid.addEventListener('click', (e) => {
-      if (e.target.classList.contains('speaker-link')) {
-        const name = e.target.dataset.name; const data = speakersData[name];
-        if (data) {
-          document.getElementById('speaker-name').textContent = name;
-          document.getElementById('speaker-role').textContent = data.role;
-          document.getElementById('speaker-bio').textContent = data.bio;
-          document.getElementById('speaker-avatar').src = data.avatar;
-          document.getElementById('speaker-linkedin').href = data.linkedin;
-          document.getElementById('speaker-github').href = data.github;
-          const talksList = document.getElementById('speaker-talks'); talksList.innerHTML = '';
-          data.talks.forEach(t => { const li = document.createElement('li'); li.textContent = t; talksList.appendChild(li); });
-          speakerModal.style.display = 'flex';
-        }
-      }
-      if (e.target.classList.contains('location-link')) {
-        const loc = e.target.dataset.location;
-        document.getElementById('map-location-title').textContent = loc;
-        const queryLoc = encodeURIComponent(loc);
-        document.getElementById('google-map-iframe').src = `https://maps.google.com/maps?q=${queryLoc}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-        document.getElementById('google-map-external-link').href = `https://www.google.com/maps/search/?api=1&query=${queryLoc}`;
-        mapModal.style.display = 'flex';
-        if (typeof TobyEngine !== 'undefined') TobyEngine.say("📍 აქ უნდა წავიდეთ.");
-      }
+      if (e.target.classList.contains('speaker-link')) openSpeakerModalByName(e.target.dataset.name);
+      if (e.target.classList.contains('location-link')) openMapModalByLocation(e.target.dataset.location);
       if (e.target.classList.contains('fav-btn')) {
         const id = Number(e.target.dataset.id);
         userFavorites = userFavorites.includes(id) ? userFavorites.filter(f => f !== id) : [...userFavorites, id];
         localStorage.setItem('userFavorites', JSON.stringify(userFavorites));
-        document.getElementById('fav-count').textContent = userFavorites.length; filterEvents();
+        document.getElementById('fav-count').textContent = userFavorites.length; 
+        updateJourney('fav');
+        filterEvents();
       }
       if (e.target.classList.contains('btn-qa-icon')) {
         const eventId = Number(e.target.dataset.id); const ev = allEvents.find(i => i.id === eventId);
@@ -665,16 +873,43 @@
         const eventId = Number(e.target.dataset.id); const ev = allEvents.find(i => i.id === eventId);
         if (ev) { const formattedDate = ev.date.replace(/-/g, ''); window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${formattedDate}T100000Z/${formattedDate}T120000Z&location=${encodeURIComponent(ev.location)}`, '_blank'); }
       }
-      if (e.target.classList.contains('btn-details')) {
-        const eventId = Number(e.target.dataset.id); selectedEventForBooking = allEvents.find(ev => ev.id === eventId);
-        if (selectedEventForBooking) {
-          document.getElementById('modal-event-title').textContent = `დაჯავშნა: ${selectedEventForBooking.title}`;
-          renderSeats();
-          bookingModal.style.display = 'flex';
-          if (typeof TobyEngine !== 'undefined') TobyEngine.say("🎟️ ადგილს ვამოწმებ...");
-        }
-      }
+      if (e.target.classList.contains('btn-details')) openBookingModalForEvent(Number(e.target.dataset.id));
     });
+
+    function openSpeakerModalByName(name) {
+      const data = speakersData[name];
+      if (data) {
+        document.getElementById('speaker-name').textContent = name;
+        document.getElementById('speaker-role').textContent = data.role;
+        document.getElementById('speaker-bio').textContent = data.bio;
+        document.getElementById('speaker-avatar').src = data.avatar;
+        document.getElementById('speaker-linkedin').href = data.linkedin;
+        document.getElementById('speaker-github').href = data.github;
+        const talksList = document.getElementById('speaker-talks'); talksList.innerHTML = '';
+        data.talks.forEach(t => { const li = document.createElement('li'); li.textContent = t; talksList.appendChild(li); });
+        speakerModal.style.display = 'flex';
+        if (typeof TobyEngine !== 'undefined') TobyEngine.say("🎤 მოდი სპიკერებსაც გავეცნოთ.");
+      }
+    }
+
+    function openMapModalByLocation(loc) {
+      document.getElementById('map-location-title').textContent = loc;
+      const queryLoc = encodeURIComponent(loc);
+      document.getElementById('google-map-iframe').src = `https://maps.google.com/maps?q=${queryLoc}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+      document.getElementById('google-map-external-link').href = `https://www.google.com/maps/search/?api=1&query=${queryLoc}`;
+      mapModal.style.display = 'flex';
+      if (typeof TobyEngine !== 'undefined') TobyEngine.say("📍 აქ ტარდება ივენთები.");
+    }
+
+    function openBookingModalForEvent(eventId) {
+      selectedEventForBooking = allEvents.find(ev => ev.id === eventId);
+      if (selectedEventForBooking) {
+        document.getElementById('modal-event-title').textContent = `დაჯავშნა: ${selectedEventForBooking.title}`;
+        renderSeats();
+        bookingModal.style.display = 'flex';
+        if (typeof TobyEngine !== 'undefined') TobyEngine.say("🎟️ ადგილებს ვამოწმებ...");
+      }
+    }
 
     function renderSeats() {
       const seatsGrid = document.getElementById('seats-grid'); seatsGrid.innerHTML = ''; selectedSeatNumber = null;
@@ -706,7 +941,15 @@
       bookingModal.style.display = 'none';
       ticketModal.style.display = 'flex';
       renderMyTickets();
+      updateJourney('book');
       if (typeof TobyEngine !== 'undefined') TobyEngine.say("🎉 დაჯავშნა დასრულდა!");
+    });
+
+    document.getElementById('qa-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert("კითხვა წარმატებით გაიგზავნა!");
+      qaModal.style.display = 'none';
+      updateJourney('qa');
     });
 
     function startCountdownTimer() {
@@ -737,15 +980,153 @@
     document.getElementById('close-robot-chat').onclick = () => robotChatModal.style.display = 'none';
     document.getElementById('profile-btn').onclick = () => profileModal.style.display = 'flex';
 
+    // Notification Toggle
+    const notiBtn = document.getElementById('noti-toggle-btn');
+    const notiDropdown = document.getElementById('noti-dropdown');
+    notiBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      notiDropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', () => notiDropdown.classList.remove('active'));
+
     function renderMyTickets() {
       const container = document.getElementById('my-tickets-list'); container.innerHTML = '';
       if (myTickets.length === 0) { container.innerHTML = '<p style="font-size: 0.85rem; color: #888;">ჯერ არ გაქვთ დაჯავშნილი ბილეთები.</p>'; return; }
       myTickets.forEach(tkt => { const item = document.createElement('div'); item.style.padding = '8px'; item.style.borderBottom = '1px solid #eee'; item.innerHTML = `<h4>${tkt.eventTitle}</h4><p>📅 ${tkt.eventDate} | 💺 ${tkt.seatNum}</p>`; container.appendChild(item); });
     }
 
-    /* ===================================================
-       🤖 TOBY AUTONOMOUS ENGINE (SELF-CONTAINED ANIMATIONS)
-    =================================================== */
+    /* Quick Actions Logic */
+    document.querySelectorAll('.quick-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const act = btn.dataset.quick;
+        showOnlyFavorites = false;
+
+        if (act === 'all') {
+          document.getElementById('category-filter').value = 'all';
+          document.getElementById('format-filter').value = 'all';
+        } else if (act === 'AI' || act === 'Web Dev' || act === 'Cybersecurity') {
+          document.getElementById('category-filter').value = act;
+          document.getElementById('format-filter').value = 'all';
+        } else if (act === 'Online') {
+          document.getElementById('category-filter').value = 'all';
+          document.getElementById('format-filter').value = 'Online';
+        } else if (act === 'favs') {
+          showOnlyFavorites = true;
+        }
+
+        filterEvents();
+        if (typeof TobyEngine !== 'undefined') TobyEngine.say("🔎 ვნახოთ რა ივენთებია.");
+      });
+    });
+
+    /* Featured Event Render */
+    function renderFeaturedEvent() {
+      if (allEvents.length === 0) return;
+      const feat = allEvents[0];
+      const currency = document.getElementById('currency-select').value;
+      let formattedPrice = currency === 'USD' ? `$${(feat.price / USD_RATE).toFixed(0)}` : `${feat.price} ₾`;
+
+      document.getElementById('featured-img').src = feat.image;
+      document.getElementById('featured-badge').textContent = `${feat.category} • ${feat.format}`;
+      document.getElementById('featured-title').textContent = feat.title;
+      document.getElementById('featured-speaker').textContent = feat.speaker;
+      document.getElementById('featured-date').textContent = feat.date;
+      document.getElementById('featured-location').textContent = feat.location;
+      document.getElementById('featured-price').textContent = formattedPrice;
+      
+      document.getElementById('featured-btn-details').onclick = () => {
+        openBookingModalForEvent(feat.id);
+        if (typeof TobyEngine !== 'undefined') TobyEngine.say("🔥 ეს ივენთი საინტერესო ჩანს!");
+      };
+    }
+
+    /* 🎨 განახლებული: სპიკერების რენდერის ფუნქცია */
+    function renderSpeakers() {
+      const container = document.getElementById('speakers-row-container');
+      container.innerHTML = '';
+      Object.keys(speakersData).forEach(name => {
+        const sp = speakersData[name];
+        const card = document.createElement('div');
+        card.className = 'speaker-card';
+        card.innerHTML = `
+          <div class="speaker-card-top-bar"></div>
+          <img src="${sp.avatar}" class="speaker-card-img" alt="${name}">
+          <span class="speaker-tag">${sp.tag}</span>
+          <h4 style="font-size: 1.05rem; font-weight: 800;">${name}</h4>
+          <p style="font-size: 0.82rem; color: var(--subtext-color); margin-top: 4px; padding: 0 15px;">${sp.role}</p>
+          <button class="speaker-btn-action">პროფილის ნახვა ➔</button>
+        `;
+        card.onclick = () => openSpeakerModalByName(name);
+        container.appendChild(card);
+      });
+    }
+
+    /* Event Calendar Render */
+    function renderCalendar() {
+      const daysGrid = document.getElementById('calendar-days-grid');
+      daysGrid.innerHTML = '';
+
+      const dayLabels = ['ორშ', 'სამ', 'ოთხ', 'ხუთ', 'პარ', 'შაბ', 'კვ'];
+      dayLabels.forEach(d => {
+        const lbl = document.createElement('div');
+        lbl.className = 'cal-day-label';
+        lbl.textContent = d;
+        daysGrid.appendChild(lbl);
+      });
+
+      for (let i = 1; i <= 31; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-date-cell';
+        cell.textContent = i;
+        const formattedDay = i < 10 ? '0' + i : i;
+        const dateStr = `2026-10-${formattedDay}`;
+
+        const foundEvent = allEvents.find(e => e.date === dateStr);
+        if (foundEvent) {
+          cell.classList.add('has-event');
+          cell.title = foundEvent.title;
+          cell.onclick = () => openBookingModalForEvent(foundEvent.id);
+        }
+        daysGrid.appendChild(cell);
+      }
+    }
+
+    /* Event Map List Render */
+    function renderMapLocations() {
+      const container = document.getElementById('map-locations-list');
+      container.innerHTML = '';
+      const uniqueLocs = [...new Set(allEvents.map(e => e.location))];
+
+      uniqueLocs.forEach(loc => {
+        const item = document.createElement('div');
+        item.className = 'map-item-card';
+        item.innerHTML = `<strong>📍 ${loc}</strong><p style="font-size: 0.8rem; color: var(--subtext-color); margin-top: 2px;">დააჭირეთ რუკაზე სანახავად</p>`;
+        item.onclick = () => {
+          if (loc.includes('Online')) {
+            alert('🌐 ეს არის ონლაინ ღონისძიება!');
+          } else {
+            const queryLoc = encodeURIComponent(loc);
+            document.getElementById('main-section-google-map').src = `https://maps.google.com/maps?q=${queryLoc}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+          }
+        };
+        container.appendChild(item);
+      });
+    }
+
+    /* Gamification Progress Update */
+    function updateJourney(type) {
+      if (type) userJourney[type] = true;
+      localStorage.setItem('userJourney', JSON.stringify(userJourney));
+
+      if (userJourney.fav) document.getElementById('achieve-fav').classList.add('completed'), document.getElementById('achieve-fav').querySelector('span').textContent = '✓';
+      if (userJourney.book) document.getElementById('achieve-book').classList.add('completed'), document.getElementById('achieve-book').querySelector('span').textContent = '✓';
+      if (userJourney.search) document.getElementById('achieve-search').classList.add('completed'), document.getElementById('achieve-search').querySelector('span').textContent = '✓';
+      if (userJourney.qa) document.getElementById('achieve-qa').classList.add('completed'), document.getElementById('achieve-qa').querySelector('span').textContent = '✓';
+    }
+
+    /* 🤖 TOBY AUTONOMOUS ENGINE */
     const TobyState = {
       IDLE: 'idle',
       WALKING: 'walking',
@@ -776,6 +1157,7 @@
         this.bindEvents();
         this.startIdleChecker();
         this.runAutonomousLifeCycle();
+        setTimeout(() => this.say("👋 გამარჯობა! მე Toby ვარ."), 1000);
       },
 
       say(text, duration = 4000) {
@@ -830,12 +1212,10 @@
         }, durationMs);
       },
 
-      // 1. COMPUTER WORK
       startCoding() {
         this.say("💻 ცოტა კოდზე ვიმუშავებ...");
         this.setState(TobyState.CODING);
         playBeepSound();
-        
         setTimeout(() => {
           this.say("⌨️ ყველაფერი კარგად მიდის!");
           setTimeout(() => {
@@ -846,12 +1226,10 @@
         }, 3000);
       },
 
-      // 2. REPAIR MODE
       startRepairing() {
         this.say("🔧 ამას მალე მოვაგვარებ!");
         this.setState(TobyState.REPAIRING);
         playBeepSound();
-
         setTimeout(() => {
           this.say("⚡ თითქმის შევაკეთე...");
           setTimeout(() => {
@@ -862,12 +1240,10 @@
         }, 2500);
       },
 
-      // 3. CHARGING
       startCharging() {
         this.say("⚡ ენერგიას ვივსებ...");
         this.setState(TobyState.CHARGING);
         playBeepSound();
-
         setTimeout(() => {
           this.say("🔋 100% ენერგია!");
           this.setState(TobyState.IDLE);
@@ -875,7 +1251,6 @@
         }, 3500);
       },
 
-      // 4. SLEEP MODE
       startSleeping() {
         this.setState(TobyState.SLEEPING);
         this.say("😴 ცოტა დავიღალე... Zzz");
@@ -911,7 +1286,6 @@
       bindEvents() {
         window.addEventListener('mousemove', (e) => {
           this.wakeUp();
-          
           if (!this.isAlive || this.currentState === TobyState.SLEEPING) return;
 
           const widgetRect = this.widget.getBoundingClientRect();
@@ -927,11 +1301,6 @@
           if (this.eyeLeft && this.eyeRight) {
             this.eyeLeft.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
             this.eyeRight.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-          }
-
-          const distance = Math.hypot(e.clientX - robotCenterX, e.clientY - robotCenterY);
-          if (distance < 90 && Math.random() < 0.02 && this.currentState === TobyState.IDLE) {
-            this.say("👀 გხედავ!");
           }
         });
 
@@ -988,10 +1357,18 @@
       }
     };
 
+    // DOM INITIALIZATION
     window.addEventListener('DOMContentLoaded', () => {
       filterEvents();
       startCountdownTimer();
       renderMyTickets();
+      
+      renderFeaturedEvent();
+      renderSpeakers();
+      renderCalendar();
+      renderMapLocations();
+      updateJourney();
+
       TobyEngine.init();
     });
 
