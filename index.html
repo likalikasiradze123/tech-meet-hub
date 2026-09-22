@@ -13,9 +13,6 @@
       --border-color: #e2e8f0;
       --accent-color: #4f46e5;
       --modal-bg: #ffffff;
-
-      --robot-head-color: #38bdf8;
-      --robot-body-color: #6366f1;
     }
 
     body.dark-theme {
@@ -40,308 +37,295 @@
       padding: 20px;
       overflow-x: hidden;
       transition: background-color 0.3s ease, color 0.3s ease;
-      padding-bottom: 120px; /* ადგილი ტობის სეირნობისთვის */
+      padding-bottom: 140px;
     }
 
-    .header {
-      text-align: center;
-      margin-bottom: 25px;
+    .header { 
+      text-align: center; 
+      margin-bottom: 25px; 
+    }
+    
+    .top-bar { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      max-width: 1200px; 
+      margin: 0 auto 15px auto; 
+    }
+    
+    .brand-container { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+    }
+    
+    .brand-logo-badge { 
+      width: 40px; 
+      height: 40px; 
+      background: linear-gradient(135deg, #4f46e5, #06b6d4); 
+      border-radius: 10px; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      color: white; 
+      font-weight: 800; 
+      font-size: 1.1rem; 
     }
 
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto 15px auto;
+    .brand-title { 
+      font-size: 2rem; 
+      font-weight: 800; 
+      background: linear-gradient(135deg, #6366f1, #38bdf8, #ec4899); 
+      background-size: 200% auto; 
+      -webkit-background-clip: text; 
+      background-clip: text; 
+      -webkit-text-fill-color: transparent; 
+      animation: gradientShift 4s ease infinite; 
     }
 
-    .brand-container {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    @keyframes gradientShift { 
+      0% { background-position: 0% 50%; } 
+      50% { background-position: 100% 50%; } 
+      100% { background-position: 0% 50%; } 
     }
 
-    .brand-logo-badge {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #4f46e5, #06b6d4);
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-weight: 800;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+    .btn-theme-toggle, .btn-robot-toggle { 
+      background: var(--card-bg); 
+      border: 1px solid var(--border-color); 
+      color: var(--text-color); 
+      padding: 8px 14px; 
+      border-radius: 20px; 
+      cursor: pointer; 
+      font-size: 0.9rem; 
+      font-weight: 700; 
+    }
+    
+    .btn-robot-toggle.off { 
+      background: #ef4444; 
+      color: white; 
+      border-color: #b91c1c; 
+    }
+    
+    .select-styled { 
+      padding: 8px 12px; 
+      border-radius: 12px; 
+      border: 1px solid var(--border-color); 
+      background: var(--card-bg); 
+      color: var(--text-color); 
+      font-weight: 600; 
+      cursor: pointer; 
+    }
+    
+    .btn-profile { 
+      background: var(--accent-color); 
+      color: white; 
+      border: none; 
+      padding: 9px 18px; 
+      border-radius: 20px; 
+      cursor: pointer; 
+      font-weight: 600; 
     }
 
-    .brand-title {
-      font-size: 2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #6366f1, #38bdf8, #ec4899);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientShift 4s ease infinite;
-      letter-spacing: -0.5px;
+    .controls-section { 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      gap: 15px; 
+      margin-bottom: 25px; 
+      flex-wrap: wrap; 
+    }
+    
+    .controls-section input, .controls-section select { 
+      padding: 10px 14px; 
+      border-radius: 8px; 
+      border: 1px solid var(--border-color); 
+      background: var(--card-bg); 
+      color: var(--text-color); 
+      outline: none; 
+    }
+    
+    .btn-secondary { 
+      background: #e11d48; 
+      color: white; 
+      border: none; 
+      padding: 10px 18px; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-weight: 600; 
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .subscription-banner { 
+      background: linear-gradient(135deg, #4f46e5, #3730a3); 
+      color: white; 
+      text-align: center; 
+      padding: 25px; 
+      border-radius: 12px; 
+      max-width: 1200px; 
+      margin: 0 auto 25px auto; 
+    }
+    
+    .btn-subscribe-banner { 
+      margin-top: 15px; 
+      background: #f59e0b; 
+      color: #0f172a; 
+      border: none; 
+      padding: 10px 22px; 
+      border-radius: 8px; 
+      font-size: 0.95rem; 
+      font-weight: 700; 
+      cursor: pointer; 
     }
 
-    .btn-theme-toggle, .btn-robot-toggle {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      padding: 8px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    .countdown-section { 
+      background: var(--card-bg); 
+      border: 1px solid var(--border-color); 
+      border-radius: 12px; 
+      max-width: 1200px; 
+      margin: 0 auto 30px auto; 
+      padding: 18px 24px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      flex-wrap: wrap; 
+      gap: 15px; 
+    }
+    
+    .timer-boxes { 
+      display: flex; 
+      gap: 10px; 
+    }
+    
+    .time-box { 
+      background: #0f172a; 
+      color: #38bdf8; 
+      padding: 8px 14px; 
+      border-radius: 8px; 
+      text-align: center; 
+      min-width: 60px; 
+    }
+    
+    .time-box span { 
+      display: block; 
+      font-size: 1.2rem; 
+      font-weight: 700; 
+    }
+    
+    .time-box small { 
+      font-size: 0.65rem; 
+      color: #94a3b8; 
+      text-transform: uppercase; 
     }
 
-    .btn-robot-toggle.off {
-      background: #ef4444;
-      color: white;
-      border-color: #b91c1c;
+    .events-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+      gap: 25px; 
+      max-width: 1200px; 
+      margin: 0 auto; 
+    }
+    
+    .event-card { 
+      background: var(--card-bg); 
+      border: 1px solid var(--border-color); 
+      border-radius: 12px; 
+      overflow: hidden; 
+      display: flex; 
+      flex-direction: column; 
+      position: relative; 
+    }
+    
+    .fav-btn { 
+      position: absolute; 
+      top: 12px; 
+      right: 12px; 
+      background: rgba(255, 255, 255, 0.9); 
+      border: 1px solid #cbd5e1; 
+      border-radius: 50%; 
+      width: 38px; 
+      height: 38px; 
+      cursor: pointer; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+    }
+    
+    .fav-btn.active { 
+      background: #ffe4e6; 
+      border-color: #fda4af; 
+    }
+    
+    .event-card-img-container { 
+      width: 100%; 
+      height: 180px; 
+      background: #f1f5f9; 
+      overflow: hidden; 
+    }
+    
+    .event-card img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+    }
+    
+    .event-info { 
+      padding: 20px; 
+    }
+    
+    .badge { 
+      background: #e0e7ff; 
+      color: #3730a3; 
+      padding: 4px 10px; 
+      border-radius: 6px; 
+      font-size: 0.75rem; 
+      font-weight: 700; 
+    }
+    
+    .event-title { 
+      margin: 12px 0 6px 0; 
+      font-size: 1.15rem; 
+      font-weight: 700; 
+    }
+    
+    .speaker-link, .location-link { 
+      color: var(--accent-color); 
+      font-weight: 700; 
+      cursor: pointer; 
+      text-decoration: underline; 
+    }
+    
+    .card-footer { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-top: 18px; 
+    }
+    
+    .price { 
+      font-weight: 800; 
+      font-size: 1.15rem; 
+      color: #10b981; 
+    }
+    
+    .btn-details { 
+      background: var(--accent-color); 
+      color: white; 
+      border: none; 
+      padding: 9px 15px; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-weight: 600; 
+    }
+    
+    .btn-qa-icon, .btn-calendar-icon { 
+      background: var(--card-bg); 
+      border: 1px solid var(--border-color); 
+      color: var(--text-color); 
+      padding: 8px 12px; 
+      border-radius: 6px; 
+      cursor: pointer; 
     }
 
-    .select-styled {
-      padding: 8px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg);
-      color: var(--text-color);
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .btn-profile {
-      background: var(--accent-color);
-      color: white;
-      border: none;
-      padding: 9px 18px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .controls-section {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-    }
-
-    .controls-section input, .controls-section select {
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg);
-      color: var(--text-color);
-      outline: none;
-      font-size: 0.9rem;
-    }
-
-    .btn-secondary {
-      background: #e11d48;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .subscription-banner {
-      background: linear-gradient(135deg, #4f46e5, #3730a3);
-      color: white;
-      text-align: center;
-      padding: 25px;
-      border-radius: 12px;
-      max-width: 1200px;
-      margin: 0 auto 25px auto;
-    }
-
-    .btn-subscribe-banner {
-      margin-top: 15px;
-      background: #f59e0b;
-      color: #0f172a;
-      border: none;
-      padding: 10px 22px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .countdown-section {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      max-width: 1200px;
-      margin: 0 auto 30px auto;
-      padding: 18px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .timer-boxes {
-      display: flex;
-      gap: 10px;
-    }
-
-    .time-box {
-      background: #0f172a;
-      color: #38bdf8;
-      padding: 8px 14px;
-      border-radius: 8px;
-      text-align: center;
-      min-width: 60px;
-    }
-
-    .time-box span {
-      display: block;
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    .time-box small {
-      font-size: 0.65rem;
-      color: #94a3b8;
-      text-transform: uppercase;
-    }
-
-    .events-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .event-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .fav-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid #cbd5e1;
-      border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .fav-btn.active {
-      background: #ffe4e6;
-      border-color: #fda4af;
-    }
-
-    .event-card-img-container {
-      width: 100%;
-      height: 180px;
-      background: #f1f5f9;
-      overflow: hidden;
-    }
-
-    .event-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .event-info {
-      padding: 20px;
-    }
-
-    .badge {
-      background: #e0e7ff;
-      color: #3730a3;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .event-title {
-      margin: 12px 0 6px 0;
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
-
-    .speaker-link, .location-link {
-      color: var(--accent-color);
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    .location-link {
-      color: #0284c7;
-    }
-
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 18px;
-    }
-
-    .price {
-      font-weight: 800;
-      font-size: 1.15rem;
-      color: #10b981;
-    }
-
-    .btn-details {
-      background: var(--accent-color);
-      color: white;
-      border: none;
-      padding: 9px 15px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .btn-qa-icon, .btn-calendar-icon {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    /* 🤖 🤖 🤖 ცოცხალი და ავტონომიური რობოტი „ტობი“ */
+    /* 🤖 ტობის ვიჯეტი */
     .toby-widget-container {
       position: fixed;
       bottom: 10px;
@@ -351,284 +335,101 @@
       flex-direction: column;
       align-items: center;
       user-select: none;
-      transition: left 0.8s linear, opacity 0.4s ease, transform 0.4s ease;
+      transition: left 4s ease-in-out, opacity 0.4s ease, transform 0.4s ease;
     }
 
-    .toby-widget-container.facing-left {
-      transform: scaleX(-1);
-    }
-
-    .toby-widget-container.facing-left .toby-speech-bubble {
-      transform: scaleX(-1); /* ტექსტი რომ არ გადაბრუნდეს */
-    }
-
-    .toby-widget-container.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
+    .toby-widget-container.facing-left { transform: scaleX(-1); }
+    .toby-widget-container.facing-left .toby-speech-bubble { transform: scaleX(-1); }
+    .toby-widget-container.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
     .toby-speech-bubble {
       background: rgba(15, 23, 42, 0.92);
       backdrop-filter: blur(8px);
       color: #38bdf8;
       border: 1.5px solid #38bdf8;
-      padding: 8px 12px;
-      border-radius: 12px;
-      font-size: 0.8rem;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 0.82rem;
       font-weight: 600;
-      margin-bottom: 6px;
-      max-width: 200px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      margin-bottom: 8px;
+      max-width: 220px;
       opacity: 0;
       transform: translateY(8px);
       pointer-events: none;
       transition: opacity 0.3s ease, transform 0.3s ease;
-      line-height: 1.3;
       text-align: center;
-      white-space: normal;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
     }
 
-    .toby-speech-bubble.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .toby-speech-bubble.active { opacity: 1; transform: translateY(0); }
 
     .toby-svg-wrapper {
-      width: 75px;
-      height: 90px;
+      width: 90px;
+      height: 105px;
       cursor: pointer;
       filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
     }
 
-    /* ⚡⚡ დენის დარტყმა */
-    .toby-widget-container.shocked {
-      animation: shockAnim 0.1s infinite alternate;
-    }
+    .mode-walk .leg-left { animation: walkLegLeft 0.8s infinite alternate ease-in-out; }
+    .mode-walk .leg-right { animation: walkLegRight 0.8s infinite alternate ease-in-out; }
 
-    @keyframes shockAnim {
-      0% { transform: translate(3px, 3px) rotate(5deg); filter: drop-shadow(0 0 15px #f59e0b); }
-      100% { transform: translate(-3px, -3px) rotate(-5deg); filter: drop-shadow(0 0 20px #ef4444); }
-    }
+    @keyframes walkLegLeft { 0% { transform: rotate(-20deg); transform-origin: 85px 167px; } 100% { transform: rotate(20deg); transform-origin: 85px 167px; } }
+    @keyframes walkLegRight { 0% { transform: rotate(20deg); transform-origin: 113px 167px; } 100% { transform: rotate(-20deg); transform-origin: 113px 167px; } }
 
+    .mode-bike .leg-left { animation: pedalLeft 0.6s infinite linear; }
+    .mode-bike .leg-right { animation: pedalRight 0.6s infinite linear; }
+    .mode-bike .bike-wheel { animation: spinWheel 0.6s infinite linear; transform-origin: center; }
+
+    @keyframes pedalLeft { 0% { transform: translateY(0); } 50% { transform: translateY(6px); } 100% { transform: translateY(0); } }
+    @keyframes pedalRight { 0% { transform: translateY(6px); } 50% { transform: translateY(0); } 100% { transform: translateY(6px); } }
+    @keyframes spinWheel { 100% { transform: rotate(360deg); } }
+
+    .mode-planting .shovel-item { display: block !important; animation: digGround 1s infinite alternate ease-in-out; transform-origin: 140px 140px; }
+    .mode-planting .tree-grow-item { display: block !important; animation: growTree 3s forwards ease-out; transform-origin: 160px 195px; }
+
+    @keyframes digGround { 0% { transform: rotate(0deg); } 100% { transform: rotate(-25deg); } }
+    @keyframes growTree { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+    .toby-widget-container.shocked { animation: shockAnim 0.1s infinite alternate; }
+    @keyframes shockAnim { 0% { transform: translate(3px, 3px) rotate(4deg); } 100% { transform: translate(-3px, -3px) rotate(-4deg); } }
     .toby-widget-container.shocked .robot-eye { display: none; }
     .toby-widget-container.shocked .shock-eyes { display: block !important; }
 
-    /* ელემენტების გამოჩენა/დამალვა რეჟიმების მიხედვით */
-    .shock-eyes, .hammer-item, .scooter-item, .bike-item, .laptop-item, .tree-item, .spark-item { display: none; }
+    .shock-eyes, .scooter-item, .bike-item, .laptop-item, .shovel-item, .tree-grow-item, .spark-item { display: none; }
 
-    .mode-walk .hammer-item { display: block !important; }
     .mode-scooter .scooter-item { display: block !important; }
     .mode-bike .bike-item { display: block !important; }
     .mode-coding .laptop-item { display: block !important; }
-    .mode-planting .tree-item { display: block !important; }
     .mode-fixing .spark-item { display: block !important; }
 
-    /* Modals */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(15, 23, 42, 0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-    }
-
-    .modal-content {
-      background-color: var(--modal-bg);
-      color: var(--text-color);
-      padding: 30px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 480px;
-      position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    .chat-box-messages {
-      height: 220px;
-      overflow-y: auto;
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 12px;
-      margin: 12px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.6); justify-content: center; align-items: center; z-index: 10000; }
+    .modal-content { background-color: var(--modal-bg); color: var(--text-color); padding: 30px; border-radius: 12px; width: 90%; max-width: 480px; position: relative; max-height: 90vh; overflow-y: auto; }
+    .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; }
+    .chat-box-messages { height: 220px; overflow-y: auto; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
     .chat-msg { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; line-height: 1.4; }
     .chat-msg.bot { background: #e0e7ff; color: #3730a3; align-self: flex-start; }
     .chat-msg.user { background: var(--accent-color); color: white; align-self: flex-end; }
-
-    .speaker-profile-header {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
-    .speaker-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent-color);
-    }
-
-    .speaker-socials {
-      display: flex;
-      gap: 10px;
-      margin: 12px 0;
-    }
-
-    .speaker-socials a {
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      padding: 6px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      color: var(--text-color);
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .speaker-talks-list {
-      list-style: none;
-      margin-top: 8px;
-    }
-
-    .speaker-talks-list li {
-      background: var(--bg-color);
-      padding: 8px 12px;
-      border-radius: 6px;
-      margin-bottom: 6px;
-      font-size: 0.85rem;
-      border-left: 3px solid var(--accent-color);
-    }
-
-    .seat-picker-container {
-      background: var(--bg-color);
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 12px;
-      text-align: center;
-    }
-
-    .stage-label {
-      background: #475569;
-      color: white;
-      font-size: 0.75rem;
-      padding: 6px;
-      border-radius: 4px;
-      margin-bottom: 15px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .seats-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 8px;
-      max-width: 280px;
-      margin: 0 auto;
-    }
-
-    .seat {
-      width: 36px;
-      height: 36px;
-      background: #10b981;
-      color: white;
-      border-radius: 6px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
+    .speaker-profile-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+    .speaker-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-color); }
+    .speaker-socials { display: flex; gap: 10px; margin: 12px 0; }
+    .speaker-socials a { background: var(--bg-color); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 6px; text-decoration: none; color: var(--text-color); font-size: 0.85rem; font-weight: 600; }
+    .speaker-talks-list { list-style: none; margin-top: 8px; }
+    .speaker-talks-list li { background: var(--bg-color); padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; font-size: 0.85rem; border-left: 3px solid var(--accent-color); }
+    .seat-picker-container { background: var(--bg-color); padding: 15px; border-radius: 8px; margin-top: 12px; text-align: center; }
+    .stage-label { background: #475569; color: white; font-size: 0.75rem; padding: 6px; border-radius: 4px; margin-bottom: 15px; font-weight: 600; text-transform: uppercase; }
+    .seats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; max-width: 280px; margin: 0 auto; }
+    .seat { width: 36px; height: 36px; background: #10b981; color: white; border-radius: 6px; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
     .seat.selected { background: #f59e0b !important; }
     .seat.occupied { background: #94a3b8 !important; cursor: not-allowed; }
-
-    #profile-form, #booking-form, #qa-form, #robot-chat-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    #profile-form input, #booking-form input, #qa-form input, #robot-chat-input {
-      padding: 10px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg);
-      color: var(--text-color);
-      border-radius: 6px;
-    }
-
-    .btn-submit {
-      background: #10b981;
-      color: white;
-      border: none;
-      padding: 11px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    .ticket-card {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      border-radius: 12px;
-      padding: 22px;
-      border: 2px dashed #38bdf8;
-    }
-
-    .ticket-qr-container {
-      text-align: center;
-      margin-top: 15px;
-      background: white;
-      padding: 12px;
-      border-radius: 8px;
-    }
-
+    #profile-form, #booking-form, #qa-form, #robot-chat-form { display: flex; flex-direction: column; gap: 12px; }
+    #profile-form input, #booking-form input, #qa-form input, #robot-chat-input { padding: 10px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); border-radius: 6px; }
+    .btn-submit { background: #10b981; color: white; border: none; padding: 11px; border-radius: 6px; cursor: pointer; font-weight: 700; }
+    .ticket-card { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; border-radius: 12px; padding: 22px; border: 2px dashed #38bdf8; }
+    .ticket-qr-container { text-align: center; margin-top: 15px; background: white; padding: 12px; border-radius: 8px; }
     .ticket-qr-container img { width: 140px; height: 140px; }
-
-    .map-frame-container {
-      width: 100%;
-      height: 250px;
-      border-radius: 8px;
-      overflow: hidden;
-      margin: 15px 0;
-      border: 1px solid var(--border-color);
-    }
-
+    .map-frame-container { width: 100%; height: 250px; border-radius: 8px; overflow: hidden; margin: 15px 0; border: 1px solid var(--border-color); }
     .map-frame-container iframe { width: 100%; height: 100%; border: 0; }
-
-    .btn-external-map {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      background: #0284c7;
-      color: white;
-      padding: 10px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 700;
-    }
+    .btn-external-map { display: inline-block; width: 100%; text-align: center; background: #0284c7; color: white; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -653,7 +454,6 @@
     <p>იპოვეთ, დაჯავშნეთ და მიიღეთ ექსკლუზიური შეტყობინებები ტექნოლოგიურ ივენთებზე</p>
   </header>
 
-  <!-- ფილტრაცია -->
   <section class="controls-section">
     <div>
       <label for="search-input"><b>ძებნა:</b></label>
@@ -703,14 +503,12 @@
     </div>
   </section>
 
-  <!-- ბანერი -->
   <section class="subscription-banner">
     <h2>🔔 გამოწერეთ პრემიუმ პაკეტი და მიიღეთ შეტყობინებები მეილზე!</h2>
     <p>შეიტყვეთ დაგეგმილი ივენთებისა და ტრენინგების შესახებ ყველაზე ადრე და დაჯავშნეთ ადგილები პრიორიტეტულად.</p>
     <button id="subscribe-plan-btn" class="btn-subscribe-banner">💎 პაკეტების ნახვა</button>
   </section>
 
-  <!-- ტაიმერი -->
   <section class="countdown-section" id="countdown-section">
     <div class="countdown-title">
       ⏳ <span>უახლოეს ივენთამდე დარჩენილია:</span>
@@ -726,22 +524,13 @@
 
   <main class="events-grid" id="events-grid"></main>
 
-  <!-- 🤖 🤖 🤖 ცოცხალი და ავტონომიური რობოტი „ტობი“ -->
-  <div class="toby-widget-container mode-walk" id="toby-widget">
+  <div class="toby-widget-container mode-coding" id="toby-widget">
     <div class="toby-speech-bubble" id="toby-bubble">
-      <span id="toby-text-msg">💡 იცოდი? პირველი კომპიუტერული მაუსი ხისგან დამზადდა!</span>
+      <span id="toby-text-msg">💻 მშვიდად ვმუშაობ საიტის კოდზე...</span>
     </div>
     
     <div class="toby-svg-wrapper" id="toby-btn">
       <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-        
-        <!-- 🔨 ურო (მხარზე გადადებული) -->
-        <g class="hammer-item">
-          <rect x="125" y="60" width="12" height="65" rx="3" fill="#78350F" transform="rotate(-35 125 60)"/>
-          <rect x="145" y="45" width="30" height="20" rx="4" fill="#64748B" transform="rotate(-35 145 45)"/>
-        </g>
-
-        <!-- 🛴 სამაკატი (სკუტერი) -->
         <g class="scooter-item">
           <rect x="20" y="195" width="160" height="8" rx="4" fill="#EC4899"/>
           <circle cx="35" cy="210" r="10" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
@@ -750,75 +539,70 @@
           <line x1="125" y1="120" x2="155" y2="120" stroke="#0F172A" stroke-width="6"/>
         </g>
 
-        <!-- 🚲 ველოსიპედი -->
         <g class="bike-item">
-          <circle cx="45" cy="200" r="18" fill="none" stroke="#38BDF8" stroke-width="4"/>
-          <circle cx="155" cy="200" r="18" fill="none" stroke="#38BDF8" stroke-width="4"/>
+          <circle class="bike-wheel" cx="45" cy="200" r="18" fill="none" stroke="#38BDF8" stroke-width="4"/>
+          <circle class="bike-wheel" cx="155" cy="200" r="18" fill="none" stroke="#38BDF8" stroke-width="4"/>
           <path d="M 45 200 L 95 200 L 125 150 L 70 150 Z" fill="none" stroke="#F59E0B" stroke-width="4"/>
           <line x1="125" y1="150" x2="155" y2="200" stroke="#F59E0B" stroke-width="4"/>
         </g>
 
-        <!-- 💻 ლეპტოპი (კოდის წერა) -->
         <g class="laptop-item">
           <rect x="50" y="145" width="100" height="12" rx="3" fill="#94A3B8"/>
           <path d="M 60 145 L 70 105 L 130 105 L 140 145 Z" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
-          <text x="75" y="125" fill="#10B981" font-size="10" font-family="monospace">&lt;code/&gt;</text>
         </g>
 
-        <!-- 🌳 ხე (დარგვა) -->
-        <g class="tree-item">
+        <g class="shovel-item">
+          <rect x="135" y="100" width="8" height="60" fill="#78350F" transform="rotate(-20 135 100)"/>
+          <path d="M 140 155 L 165 170 L 150 185 Z" fill="#64748B"/>
+        </g>
+
+        <g class="tree-grow-item">
           <rect x="155" y="150" width="10" height="45" fill="#78350F"/>
           <circle cx="160" cy="135" r="22" fill="#10B981"/>
         </g>
 
-        <!-- ⚡ ნაპერწკალი (საიტის აძრობისას) -->
         <g class="spark-item">
           <path d="M 10 180 L 30 160 L 20 200 L 40 170" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
         </g>
 
-        <!-- ანტენა -->
         <line x1="100" y1="35" x2="100" y2="15" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
         <circle cx="100" cy="10" r="8" fill="#EC4899"/>
 
-        <!-- თავი -->
         <rect x="55" y="32" width="90" height="65" rx="22" fill="#38BDF8" stroke="#0284C7" stroke-width="4"/>
         <rect x="42" y="52" width="14" height="24" rx="5" fill="#64748B"/>
         <rect x="144" y="52" width="14" height="24" rx="5" fill="#64748B"/>
         
-        <!-- სახის ეკრანი -->
         <rect x="68" y="42" width="64" height="45" rx="12" fill="#0F172A"/>
         <circle class="robot-eye" cx="84" cy="60" r="8" fill="#38BDF8"/>
         <circle class="robot-eye" cx="116" cy="60" r="8" fill="#38BDF8"/>
-        
-        <!-- ⚡ დენის დარტყმის თვალები (X_X) -->
+
         <g class="shock-eyes">
           <path d="M 78 54 L 90 66 M 90 54 L 78 66" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
           <path d="M 110 54 L 122 66 M 122 54 L 110 66" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
         </g>
 
-        <!-- ლოყები და ღიმილი -->
         <circle cx="76" cy="72" r="5" fill="#EC4899" opacity="0.6"/>
         <circle cx="124" cy="72" r="5" fill="#EC4899" opacity="0.6"/>
         <path d="M 88 74 Q 100 82 112 74" stroke="#10B981" stroke-width="3" stroke-linecap="round" fill="none"/>
 
-        <!-- ტანი -->
         <rect x="65" y="102" width="70" height="65" rx="16" fill="#6366F1" stroke="#4338CA" stroke-width="4"/>
         <circle cx="100" cy="132" r="10" fill="#38BDF8"/>
 
-        <!-- ხელები -->
-        <path d="M 65 115 Q 45 125 40 140" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
-        <path d="M 135 115 Q 155 125 160 140" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <path class="arm-left" d="M 65 115 Q 45 125 40 140" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <path class="arm-right" d="M 135 115 Q 155 125 160 140" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
 
-        <!-- ფეხები -->
-        <rect x="80" y="167" width="12" height="25" rx="4" fill="#64748B"/>
-        <rect x="108" y="167" width="12" height="25" rx="4" fill="#64748B"/>
-        <rect x="72" y="188" width="24" height="10" rx="4" fill="#0F172A"/>
-        <rect x="104" y="188" width="24" height="10" rx="4" fill="#0F172A"/>
+        <g class="leg-left">
+          <rect x="80" y="167" width="12" height="25" rx="4" fill="#64748B"/>
+          <rect x="72" y="188" width="24" height="10" rx="4" fill="#0F172A"/>
+        </g>
+        <g class="leg-right">
+          <rect x="108" y="167" width="12" height="25" rx="4" fill="#64748B"/>
+          <rect x="104" y="188" width="24" height="10" rx="4" fill="#0F172A"/>
+        </g>
       </svg>
     </div>
   </div>
 
-  <!-- 🤖 Toby's AI Chat Modal -->
   <div id="robot-chat-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-robot-chat">&times;</span>
@@ -826,7 +610,7 @@
       <p style="font-size: 0.85rem; color: var(--subtext-color);">მკითხე ნებისმიერი რამ საიტზე არსებული ივენთების შესახებ!</p>
       
       <div class="chat-box-messages" id="chat-messages-container">
-        <div class="chat-msg bot">გამარჯობა! მე ტობი ვარ 🤖 במה დაგეხმარო? შეგიძლია მკითხო ივენთების ფასებზე, სპიკერებზე ან დაჯავშნაზე!</div>
+        <div class="chat-msg bot">გამარჯობა! მე ტობი ვარ 🤖 რით დაგეხმარო? შეგიძლია მკითხო ივენთების ფასებზე, სპიკერებზე ან დაჯავშნაზე!</div>
       </div>
 
       <form id="robot-chat-form" style="display: flex; gap: 8px;">
@@ -836,7 +620,6 @@
     </div>
   </div>
 
-  <!-- 🎤 Speaker Profile Modal -->
   <div id="speaker-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-speaker">&times;</span>
@@ -859,7 +642,6 @@
     </div>
   </div>
 
-  <!-- 🗺️ Google Maps Modal -->
   <div id="map-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-map">&times;</span>
@@ -872,7 +654,6 @@
     </div>
   </div>
 
-  <!-- Q&A Modal -->
   <div id="qa-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-qa">&times;</span>
@@ -885,7 +666,6 @@
     </div>
   </div>
 
-  <!-- დაჯავშნის Modal -->
   <div id="booking-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-booking">&times;</span>
@@ -906,7 +686,6 @@
     </div>
   </div>
 
-  <!-- ბილეთის Modal -->
   <div id="ticket-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-ticket">&times;</span>
@@ -925,7 +704,6 @@
     </div>
   </div>
 
-  <!-- პროფილის Modal -->
   <div id="profile-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-profile">&times;</span>
@@ -945,69 +723,15 @@
 
   <script>
     const speakersData = {
-      "გიორგი ბერიძე": {
-        role: "Senior AI Researcher @ TechCorp",
-        bio: "გიორგის აქვს 8-წლიანი გამოცდილება AI და Machine Learning მიმართულებით.",
-        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80",
-        linkedin: "https://linkedin.com",
-        github: "https://github.com",
-        talks: ["AI & Future Tech Summit (2026)"]
-      },
-      "ნიტა ქავთარაძე": {
-        role: "Lead Web Developer & Frontend Architect",
-        bio: "ნიტა არის React და Next.js ეკოსისტემის ექსპერტი.",
-        avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&auto=format&fit=crop&q=80",
-        linkedin: "https://linkedin.com",
-        github: "https://github.com",
-        talks: ["React & Next.js Workshop (2026)"]
-      },
-      "დავით ჩხეიძე": {
-        role: "Cybersecurity Specialist & Ethical Hacker",
-        bio: "დავითი იცავს მსხვილ ფინანსურ ინსტიტუტებს კიბერშეტევებისგან.",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80",
-        linkedin: "https://linkedin.com",
-        github: "https://github.com",
-        talks: ["Cybersecurity & Ethical Hacking (2026)"]
-      }
+      "გიორგი ბერიძე": { role: "Senior AI Researcher @ TechCorp", bio: "გიორგის აქვს 8-წლიანი გამოცდილება AI და Machine Learning მიმართულებით.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80", linkedin: "https://linkedin.com", github: "https://github.com", talks: ["AI & Future Tech Summit (2026)"] },
+      "ნიტა ქავთარაძე": { role: "Lead Web Developer & Frontend Architect", bio: "ნიტა არის React და Next.js ეკოსისტემის ექსპერტი.", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&auto=format&fit=crop&q=80", linkedin: "https://linkedin.com", github: "https://github.com", talks: ["React & Next.js Workshop (2026)"] },
+      "დავით ჩხეიძე": { role: "Cybersecurity Specialist & Ethical Hacker", bio: "დავითი იცავს მსხვილ ფინანსურ ინსტიტუტებს კიბერშეტევებისგან.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80", linkedin: "https://linkedin.com", github: "https://github.com", talks: ["Cybersecurity & Ethical Hacking (2026)"] }
     };
 
     let allEvents = [
-      {
-        "id": 1,
-        "title": "AI & Future Tech Summit",
-        "category": "AI",
-        "format": "In-person",
-        "speaker": "გიორგი ბერიძე",
-        "date": "2026-10-20",
-        "location": "Tbilisi Tech Hub",
-        "price": 120,
-        "rating": 4.9,
-        "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80"
-      },
-      {
-        "id": 2,
-        "title": "React & Next.js Workshop",
-        "category": "Web Dev",
-        "format": "Online",
-        "speaker": "ნიტა ქავთარაძე",
-        "date": "2026-11-05",
-        "location": "Zoom Meeting",
-        "price": 70,
-        "rating": 4.8,
-        "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80"
-      },
-      {
-        "id": 3,
-        "title": "Cybersecurity & Ethical Hacking",
-        "category": "Cybersecurity",
-        "format": "Hybrid",
-        "speaker": "დავით ჩხეიძე",
-        "date": "2026-11-12",
-        "location": "Ozurgeti TechnoPark / Online",
-        "price": 160,
-        "rating": 5.0,
-        "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80"
-      }
+      { "id": 1, "title": "AI & Future Tech Summit", "category": "AI", "format": "In-person", "speaker": "გიორგი ბერიძე", "date": "2026-10-20", "location": "Tbilisi Tech Hub", "price": 120, "rating": 4.9, "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80" },
+      { "id": 2, "title": "React & Next.js Workshop", "category": "Web Dev", "format": "Online", "speaker": "ნიტა ქავთარაძე", "date": "2026-11-05", "location": "Zoom Meeting", "price": 70, "rating": 4.8, "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80" },
+      { "id": 3, "title": "Cybersecurity & Ethical Hacking", "category": "Cybersecurity", "format": "Hybrid", "speaker": "დავით ჩხეიძე", "date": "2026-11-12", "location": "Ozurgeti TechnoPark / Online", "price": 160, "rating": 5.0, "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80" }
     ];
 
     const USD_RATE = 2.7;
@@ -1030,12 +754,7 @@
     const speakerModal = document.getElementById('speaker-modal');
     const robotChatModal = document.getElementById('robot-chat-modal');
 
-    if (isDarkMode) {
-      document.body.classList.add('dark-theme');
-      themeToggleBtn.textContent = '☀️';
-    } else {
-      themeToggleBtn.textContent = '🌙';
-    }
+    if (isDarkMode) { document.body.classList.add('dark-theme'); themeToggleBtn.textContent = '☀️'; } else { themeToggleBtn.textContent = '🌙'; }
 
     themeToggleBtn.addEventListener('click', () => {
       isDarkMode = !isDarkMode;
@@ -1047,12 +766,9 @@
     function playBeepSound() {
       try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(580, ctx.currentTime);
+        const osc = ctx.createOscillator(); const gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.type = 'sine'; osc.frequency.setValueAtTime(580, ctx.currentTime);
         osc.frequency.setValueAtTime(750, ctx.currentTime + 0.08);
         gain.gain.setValueAtTime(0.12, ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.16);
@@ -1063,25 +779,14 @@
     function displayEvents(events) {
       eventsGrid.innerHTML = '';
       const currency = document.getElementById('currency-select').value;
-
       events.forEach(event => {
         const isFav = userFavorites.includes(event.id);
-        const card = document.createElement('div');
-        card.className = 'event-card';
-
-        let formattedPrice = currency === 'USD' 
-          ? `$${(event.price / USD_RATE).toFixed(0)}` 
-          : `${event.price} ₾`;
-
+        const card = document.createElement('div'); card.className = 'event-card';
+        let formattedPrice = currency === 'USD' ? `$${(event.price / USD_RATE).toFixed(0)}` : `${event.price} ₾`;
         const ratingStars = '⭐'.repeat(Math.floor(event.rating || 5)) + ` (${event.rating || 5.0})`;
-
         card.innerHTML = `
-          <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${event.id}">
-            ${isFav ? '❤️' : '🤍'}
-          </button>
-          <div class="event-card-img-container">
-            <img src="${event.image}" alt="${event.title}">
-          </div>
+          <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${event.id}">${isFav ? '❤️' : '🤍'}</button>
+          <div class="event-card-img-container"><img src="${event.image}" alt="${event.title}"></div>
           <div class="event-info">
             <span class="badge">${event.category} • ${event.format}</span>
             <h3 class="event-title">${event.title}</h3>
@@ -1107,7 +812,6 @@
       const format = document.getElementById('format-filter').value;
       const sort = document.getElementById('sort-select').value;
       const query = document.getElementById('search-input').value.toLowerCase().trim();
-
       let filtered = allEvents.filter(e => {
         const catMatch = category === 'all' || e.category === category;
         const fmtMatch = format === 'all' || e.format === format;
@@ -1115,12 +819,10 @@
         const favMatch = !showOnlyFavorites || userFavorites.includes(e.id);
         return catMatch && fmtMatch && searchMatch && favMatch;
       });
-
       if (sort === 'date') filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
       else if (sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
       else if (sort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
       else if (sort === 'rating') filtered.sort((a, b) => (b.rating || 5) - (a.rating || 5));
-
       displayEvents(filtered);
     }
 
@@ -1132,8 +834,7 @@
 
     eventsGrid.addEventListener('click', (e) => {
       if (e.target.classList.contains('speaker-link')) {
-        const name = e.target.dataset.name;
-        const data = speakersData[name];
+        const name = e.target.dataset.name; const data = speakersData[name];
         if (data) {
           document.getElementById('speaker-name').textContent = name;
           document.getElementById('speaker-role').textContent = data.role;
@@ -1141,19 +842,11 @@
           document.getElementById('speaker-avatar').src = data.avatar;
           document.getElementById('speaker-linkedin').href = data.linkedin;
           document.getElementById('speaker-github').href = data.github;
-
-          const talksList = document.getElementById('speaker-talks');
-          talksList.innerHTML = '';
-          data.talks.forEach(t => {
-            const li = document.createElement('li');
-            li.textContent = t;
-            talksList.appendChild(li);
-          });
-
+          const talksList = document.getElementById('speaker-talks'); talksList.innerHTML = '';
+          data.talks.forEach(t => { const li = document.createElement('li'); li.textContent = t; talksList.appendChild(li); });
           speakerModal.style.display = 'flex';
         }
       }
-
       if (e.target.classList.contains('location-link')) {
         const loc = e.target.dataset.location;
         document.getElementById('map-location-title').textContent = loc;
@@ -1162,64 +855,33 @@
         document.getElementById('google-map-external-link').href = `https://www.google.com/maps/search/?api=1&query=${queryLoc}`;
         mapModal.style.display = 'flex';
       }
-
       if (e.target.classList.contains('fav-btn')) {
         const id = Number(e.target.dataset.id);
         userFavorites = userFavorites.includes(id) ? userFavorites.filter(f => f !== id) : [...userFavorites, id];
         localStorage.setItem('userFavorites', JSON.stringify(userFavorites));
-        document.getElementById('fav-count').textContent = userFavorites.length;
-        filterEvents();
+        document.getElementById('fav-count').textContent = userFavorites.length; filterEvents();
       }
-
       if (e.target.classList.contains('btn-qa-icon')) {
-        const eventId = Number(e.target.dataset.id);
-        const ev = allEvents.find(i => i.id === eventId);
-        if (ev) {
-          document.getElementById('qa-event-title').textContent = `${ev.title} (🎤 ${ev.speaker})`;
-          qaModal.style.display = 'flex';
-        }
+        const eventId = Number(e.target.dataset.id); const ev = allEvents.find(i => i.id === eventId);
+        if (ev) { document.getElementById('qa-event-title').textContent = `${ev.title} (🎤 ${ev.speaker})`; qaModal.style.display = 'flex'; }
       }
-
       if (e.target.classList.contains('btn-calendar-icon')) {
-        const eventId = Number(e.target.dataset.id);
-        const ev = allEvents.find(i => i.id === eventId);
-        if (ev) {
-          const formattedDate = ev.date.replace(/-/g, '');
-          window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${formattedDate}T100000Z/${formattedDate}T120000Z&location=${encodeURIComponent(ev.location)}`, '_blank');
-        }
+        const eventId = Number(e.target.dataset.id); const ev = allEvents.find(i => i.id === eventId);
+        if (ev) { const formattedDate = ev.date.replace(/-/g, ''); window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${formattedDate}T100000Z/${formattedDate}T120000Z&location=${encodeURIComponent(ev.location)}`, '_blank'); }
       }
-
       if (e.target.classList.contains('btn-details')) {
-        const eventId = Number(e.target.dataset.id);
-        selectedEventForBooking = allEvents.find(ev => ev.id === eventId);
-        if (selectedEventForBooking) {
-          document.getElementById('modal-event-title').textContent = `დაჯავშნა: ${selectedEventForBooking.title}`;
-          renderSeats();
-          bookingModal.style.display = 'flex';
-        }
+        const eventId = Number(e.target.dataset.id); selectedEventForBooking = allEvents.find(ev => ev.id === eventId);
+        if (selectedEventForBooking) { document.getElementById('modal-event-title').textContent = `დაჯავშნა: ${selectedEventForBooking.title}`; renderSeats(); bookingModal.style.display = 'flex'; }
       }
     });
 
     function renderSeats() {
-      const seatsGrid = document.getElementById('seats-grid');
-      seatsGrid.innerHTML = '';
-      selectedSeatNumber = null;
+      const seatsGrid = document.getElementById('seats-grid'); seatsGrid.innerHTML = ''; selectedSeatNumber = null;
       document.getElementById('selected-seat-label').textContent = 'არჩეული ადგილი: -';
-
       for (let i = 1; i <= 18; i++) {
-        const seat = document.createElement('div');
-        seat.className = 'seat';
-        seat.textContent = i;
-
-        if (i === 3 || i === 7 || i === 12) {
-          seat.classList.add('occupied');
-        } else {
-          seat.addEventListener('click', () => {
-            document.querySelectorAll('.seat').forEach(s => s.classList.remove('selected'));
-            seat.classList.add('selected');
-            selectedSeatNumber = i;
-            document.getElementById('selected-seat-label').textContent = `არჩეული ადგილი: #${i}`;
-          });
+        const seat = document.createElement('div'); seat.className = 'seat'; seat.textContent = i;
+        if (i === 3 || i === 7 || i === 12) { seat.classList.add('occupied'); } else {
+          seat.addEventListener('click', () => { document.querySelectorAll('.seat').forEach(s => s.classList.remove('selected')); seat.classList.add('selected'); selectedSeatNumber = i; document.getElementById('selected-seat-label').textContent = `არჩეული ადგილი: #${i}`; });
         }
         seatsGrid.appendChild(seat);
       }
@@ -1230,33 +892,17 @@
       const userName = document.getElementById('user-name').value;
       const userEmail = document.getElementById('user-email').value;
       const ticketId = 'TKT-' + Math.floor(100000 + Math.random() * 900000);
-
-      currentActiveTicket = {
-        id: ticketId,
-        userName: userName,
-        userEmail: userEmail,
-        eventTitle: selectedEventForBooking.title,
-        eventDate: selectedEventForBooking.date,
-        eventLocation: selectedEventForBooking.location,
-        seatNum: selectedSeatNumber ? `#${selectedSeatNumber}` : 'თავისუფალი'
-      };
-
-      myTickets.push(currentActiveTicket);
-      localStorage.setItem('myTickets', JSON.stringify(myTickets));
-
+      currentActiveTicket = { id: ticketId, userName: userName, userEmail: userEmail, eventTitle: selectedEventForBooking.title, eventDate: selectedEventForBooking.date, eventLocation: selectedEventForBooking.location, seatNum: selectedSeatNumber ? `#${selectedSeatNumber}` : 'თავისუფალი' };
+      myTickets.push(currentActiveTicket); localStorage.setItem('myTickets', JSON.stringify(myTickets));
       document.getElementById('ticket-event-title').textContent = currentActiveTicket.eventTitle;
       document.getElementById('ticket-user-name').textContent = currentActiveTicket.userName;
       document.getElementById('ticket-seat-num').textContent = currentActiveTicket.seatNum;
       document.getElementById('ticket-event-date').textContent = currentActiveTicket.eventDate;
       document.getElementById('ticket-event-location').textContent = currentActiveTicket.eventLocation;
       document.getElementById('ticket-id-code').textContent = `#${currentActiveTicket.id}`;
-
       const qrContent = encodeURIComponent(`TicketID: ${currentActiveTicket.id} | Event: ${currentActiveTicket.eventTitle} | Holder: ${currentActiveTicket.userName}`);
       document.getElementById('ticket-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrContent}`;
-
-      bookingModal.style.display = 'none';
-      ticketModal.style.display = 'flex';
-      renderMyTickets();
+      bookingModal.style.display = 'none'; ticketModal.style.display = 'flex'; renderMyTickets();
     });
 
     function startCountdownTimer() {
@@ -1264,19 +910,13 @@
       const sorted = [...allEvents].sort((a, b) => new Date(a.date) - new Date(b.date));
       const nextEvent = sorted[0];
       document.getElementById('next-event-name').textContent = nextEvent.title;
-
       const eventDate = new Date(nextEvent.date + 'T10:00:00').getTime();
-
       setInterval(() => {
-        const now = new Date().getTime();
-        const distance = eventDate - now;
-        if (distance < 0) return;
-
+        const now = new Date().getTime(); const distance = eventDate - now; if (distance < 0) return;
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
         document.getElementById('timer-days').textContent = days < 10 ? '0' + days : days;
         document.getElementById('timer-hours').textContent = hours < 10 ? '0' + hours : hours;
         document.getElementById('timer-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
@@ -1294,24 +934,12 @@
     document.getElementById('profile-btn').onclick = () => profileModal.style.display = 'flex';
 
     function renderMyTickets() {
-      const container = document.getElementById('my-tickets-list');
-      container.innerHTML = '';
-      if (myTickets.length === 0) {
-        container.innerHTML = '<p style="font-size: 0.85rem; color: #888;">ჯერ არ გაქვთ დაჯავშნილი ბილეთები.</p>';
-        return;
-      }
-      myTickets.forEach(tkt => {
-        const item = document.createElement('div');
-        item.style.padding = '8px';
-        item.style.borderBottom = '1px solid #eee';
-        item.innerHTML = `<h4>${tkt.eventTitle}</h4><p>📅 ${tkt.eventDate} | 💺 ${tkt.seatNum}</p>`;
-        container.appendChild(item);
-      });
+      const container = document.getElementById('my-tickets-list'); container.innerHTML = '';
+      if (myTickets.length === 0) { container.innerHTML = '<p style="font-size: 0.85rem; color: #888;">ჯერ არ გაქვთ დაჯავშნილი ბილეთები.</p>'; return; }
+      myTickets.forEach(tkt => { const item = document.createElement('div'); item.style.padding = '8px'; item.style.borderBottom = '1px solid #eee'; item.innerHTML = `<h4>${tkt.eventTitle}</h4><p>📅 ${tkt.eventDate} | 💺 ${tkt.seatNum}</p>`; container.appendChild(item); });
     }
 
-    /* ===================================================
-       🤖 🤖 🤖 ტობის ავტონომიური ცხოვრების ლოგიკა (Autonomous Loop)
-    =================================================== */
+    /* 🤖 ტობის მოძრაობისა და ქცევის ლოგიკა */
     const tobyWidget = document.getElementById('toby-widget');
     const tobyBtn = document.getElementById('toby-btn');
     const tobyBubble = document.getElementById('toby-bubble');
@@ -1319,8 +947,6 @@
 
     let isTobyVisible = true;
     let currentX = 50;
-    let targetX = 50;
-    let isMoving = false;
     let bubbleTimeout = null;
 
     const techFacts = [
@@ -1332,7 +958,7 @@
       "🌐 პირველი ვებსაიტი ინტერნეტში 1991 წელს გაეშვა!"
     ];
 
-    const modes = ['mode-walk', 'mode-scooter', 'mode-bike', 'mode-fixing', 'mode-planting', 'mode-coding'];
+    const activeModes = ['mode-walk', 'mode-scooter', 'mode-bike', 'mode-fixing', 'mode-planting'];
 
     toggleTobyVisibilityBtn.addEventListener('click', () => {
       isTobyVisible = !isTobyVisible;
@@ -1340,7 +966,7 @@
         tobyWidget.classList.remove('hidden');
         toggleTobyVisibilityBtn.classList.remove('off');
         toggleTobyVisibilityBtn.textContent = '🤖 Toby: ON';
-        showBubbleMessage("👋 დავბრუნდი!");
+        showBubbleMessage("👋 სალამი! დავბრუნდი!");
       } else {
         tobyWidget.classList.add('hidden');
         toggleTobyVisibilityBtn.classList.add('off');
@@ -1354,78 +980,63 @@
       tobyTextMsg.textContent = text;
       tobyBubble.classList.add('active');
       clearTimeout(bubbleTimeout);
-      bubbleTimeout = setTimeout(() => {
-        tobyBubble.classList.remove('active');
-      }, 3500);
+      bubbleTimeout = setTimeout(() => { tobyBubble.classList.remove('active'); }, 4000);
     }
 
-    // 🔄 ტობის ავტონომიური ციკლი (Autonomous Life Cycle)
     function runTobyAutonomousLife() {
       if (!isTobyVisible || tobyWidget.classList.contains('shocked')) {
-        setTimeout(runTobyAutonomousLife, 3000);
+        setTimeout(runTobyAutonomousLife, 4000);
         return;
       }
 
-      // შემთხვევითი რეჟიმის არჩევა
-      const nextMode = modes[Math.floor(Math.random() * modes.length)];
-      tobyWidget.classList.remove(...modes);
+      // 50% შანსი: იაროს / ისეირნოს ეკრანზე
+      const nextMode = activeModes[Math.floor(Math.random() * activeModes.length)];
+      tobyWidget.classList.remove('mode-walk', 'mode-scooter', 'mode-bike', 'mode-fixing', 'mode-planting', 'mode-coding');
       tobyWidget.classList.add(nextMode);
 
-      const screenWidth = window.innerWidth - 120;
+      const screenWidth = Math.max(300, window.innerWidth - 140);
 
       if (nextMode === 'mode-walk' || nextMode === 'mode-scooter' || nextMode === 'mode-bike') {
-        // 🚶‍♂️ 🚲 🛴 მოძრაობა ეკრანის გასწვრივ
-        targetX = Math.floor(Math.random() * screenWidth);
-        if (targetX < currentX) {
-          tobyWidget.classList.add('facing-left');
-        } else {
-          tobyWidget.classList.remove('facing-left');
+        const targetX = Math.floor(Math.random() * screenWidth);
+        if (targetX < currentX) { 
+          tobyWidget.classList.add('facing-left'); 
+        } else { 
+          tobyWidget.classList.remove('facing-left'); 
         }
-
-        tobyWidget.style.left = targetX + 'px';
+        
+        tobyWidget.style.left = targetX + 'px'; 
         currentX = targetX;
 
-        // მოძრაობისას ამბის თქმა
         const fact = techFacts[Math.floor(Math.random() * techFacts.length)];
         showBubbleMessage(fact);
 
-        setTimeout(runTobyAutonomousLife, 6000);
-
+        setTimeout(runTobyAutonomousLife, 8000); // ყოველ 8 წამში იცვლის ადგილს
       } else if (nextMode === 'mode-fixing') {
-        // 🛠️ ⚡ საიტის აძრობა და დენის დარტყმა!
         showBubbleMessage("🛠️ მოიცა, საიტის ამ ნაწილს მოვაძრობ...");
-        
         setTimeout(() => {
           tobyWidget.classList.add('shocked');
-          showBubbleMessage("⚡⚡ BZZZT! ვაი, არასწორად მოვაძრე! ⚡⚡");
+          showBubbleMessage("⚡⚡ BZZZT! უი, სადენს შევეხე! ⚡⚡");
           playBeepSound();
-
           setTimeout(() => {
             tobyWidget.classList.remove('shocked');
-            showBubbleMessage("✅ უცებ აღვადგინე!");
-            setTimeout(runTobyAutonomousLife, 3000);
+            showBubbleMessage("✅ უცებ აღვადგინე კოდი!");
+            setTimeout(runTobyAutonomousLife, 8000);
           }, 2000);
         }, 2000);
-
       } else if (nextMode === 'mode-planting') {
-        // 🌳 ხის დარგვა
-        showBubbleMessage("🌱 მოდი, აქ პატარა ხეს დავრგავ!");
-        setTimeout(runTobyAutonomousLife, 5000);
-
-      } else if (nextMode === 'mode-coding') {
-        // 💻 კოდის წერა
-        showBubbleMessage("💻 ახალ ფუნქციონალს ვწერ საიტისთვის...");
-        setTimeout(runTobyAutonomousLife, 6000);
+        showBubbleMessage("⛏️ ჯერ მიწას ამოვთხრი ნიჩბით...");
+        setTimeout(() => {
+          showBubbleMessage("🌱 ახლა კი პატარა ნერგს დავრგავ!");
+          setTimeout(runTobyAutonomousLife, 8000);
+        }, 2500);
       }
     }
 
-    // დაკლიკება -> ჩატის გახსნა
     tobyBtn.addEventListener('click', () => {
       playBeepSound();
       robotChatModal.style.display = 'flex';
     });
 
-    /* 🧠 ტობის AI ჩატი */
     document.getElementById('robot-chat-form').onsubmit = (e) => {
       e.preventDefault();
       const input = document.getElementById('robot-chat-input');
@@ -1433,17 +1044,12 @@
       if (!query) return;
 
       const container = document.getElementById('chat-messages-container');
-      const userMsg = document.createElement('div');
-      userMsg.className = 'chat-msg user';
-      userMsg.textContent = input.value;
-      container.appendChild(userMsg);
-      input.value = '';
-
+      const userMsg = document.createElement('div'); userMsg.className = 'chat-msg user'; userMsg.textContent = input.value;
+      container.appendChild(userMsg); input.value = '';
       playBeepSound();
 
       setTimeout(() => {
         let reply = "🤖 უკაცრავად, ამ კითხვაზე ზუსტი პასუხი ვერ ვიპოვე. შეგიძლია მკითხო ივენთების ფასებზე, სპიკერებზე ან დაჯავშნაზე!";
-
         if (query.includes("ფას") || query.includes("ღირს") || query.includes("რა ჯდება")) {
           reply = "💰 ივენთების ფასები:\n• AI Summit: 120 ₾\n• React Workshop: 70 ₾\n• Cybersecurity: 160 ₾";
         } else if (query.includes("სპიკერ") || query.includes("ვინ საუბრობს") || query.includes("ვინ არის")) {
@@ -1453,15 +1059,11 @@
         } else if (query.includes("თარიღ") || query.includes("როდის")) {
           reply = "📅 უახლოესი ივენთები:\n• AI Summit — 20 ოქტომბერი\n• React Workshop — 5 ნოემბერი\n• Cybersecurity — 12 ნოემბერი";
         } else if (query.includes("გამარჯობა") || query.includes("სალამი") || query.includes("ჰეი")) {
-          reply = "👋 სალამი! მე ტობი ვარ. במה დაგეხმარო დღეს?";
+          reply = "👋 სალამი! მე ტობი ვარ. რით დაგეხმარო დღეს?";
         }
 
-        const botMsg = document.createElement('div');
-        botMsg.className = 'chat-msg bot';
-        botMsg.style.whiteSpace = 'pre-line';
-        botMsg.textContent = reply;
-        container.appendChild(botMsg);
-        container.scrollTop = container.scrollHeight;
+        const botMsg = document.createElement('div'); botMsg.className = 'chat-msg bot'; botMsg.style.whiteSpace = 'pre-line';
+        botMsg.textContent = reply; container.appendChild(botMsg); container.scrollTop = container.scrollHeight;
       }, 400);
     };
 
@@ -1469,8 +1071,8 @@
     startCountdownTimer();
     renderMyTickets();
 
-    // 🚀 ტობის ავტონომიური ცხოვრების ჩართვა
-    setTimeout(runTobyAutonomousLife, 1500);
+    // ტობის ავტომატური მოძრაობის გაშვება (ყოველ 8 წამში)
+    setTimeout(runTobyAutonomousLife, 1000);
   </script>
 </body>
 </html>
