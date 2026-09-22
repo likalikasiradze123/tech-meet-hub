@@ -37,40 +37,13 @@
       padding: 20px;
       overflow-x: hidden;
       transition: background-color 0.3s ease, color 0.3s ease;
-      padding-bottom: 140px;
+      padding-bottom: 120px;
     }
 
-    .header { 
-      text-align: center; 
-      margin-bottom: 25px; 
-    }
-    
-    .top-bar { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      max-width: 1200px; 
-      margin: 0 auto 15px auto; 
-    }
-    
-    .brand-container { 
-      display: flex; 
-      align-items: center; 
-      gap: 12px; 
-    }
-    
-    .brand-logo-badge { 
-      width: 40px; 
-      height: 40px; 
-      background: linear-gradient(135deg, #4f46e5, #06b6d4); 
-      border-radius: 10px; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      color: white; 
-      font-weight: 800; 
-      font-size: 1.1rem; 
-    }
+    .header { text-align: center; margin-bottom: 25px; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 15px auto; }
+    .brand-container { display: flex; align-items: center; gap: 12px; }
+    .brand-logo-badge { width: 40px; height: 40px; background: linear-gradient(135deg, #4f46e5, #06b6d4); border-radius: 10px; display: flex; justify-content: center; align-items: center; color: white; font-weight: 800; font-size: 1.1rem; }
 
     .brand-title { 
       font-size: 2rem; 
@@ -83,325 +56,147 @@
       animation: gradientShift 4s ease infinite; 
     }
 
-    @keyframes gradientShift { 
-      0% { background-position: 0% 50%; } 
-      50% { background-position: 100% 50%; } 
-      100% { background-position: 0% 50%; } 
-    }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-    .btn-theme-toggle, .btn-robot-toggle { 
-      background: var(--card-bg); 
-      border: 1px solid var(--border-color); 
-      color: var(--text-color); 
-      padding: 8px 14px; 
-      border-radius: 20px; 
-      cursor: pointer; 
-      font-size: 0.9rem; 
-      font-weight: 700; 
-    }
-    
-    .btn-robot-toggle.off { 
-      background: #ef4444; 
-      color: white; 
-      border-color: #b91c1c; 
-    }
-    
-    .select-styled { 
-      padding: 8px 12px; 
-      border-radius: 12px; 
-      border: 1px solid var(--border-color); 
-      background: var(--card-bg); 
-      color: var(--text-color); 
-      font-weight: 600; 
-      cursor: pointer; 
-    }
-    
-    .btn-profile { 
-      background: var(--accent-color); 
-      color: white; 
-      border: none; 
-      padding: 9px 18px; 
-      border-radius: 20px; 
-      cursor: pointer; 
-      font-weight: 600; 
-    }
+    .btn-theme-toggle, .btn-robot-toggle { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 14px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 700; }
+    .btn-robot-toggle.off { background: #ef4444; color: white; border-color: #b91c1c; }
+    .select-styled { padding: 8px 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); font-weight: 600; cursor: pointer; }
+    .btn-profile { background: var(--accent-color); color: white; border: none; padding: 9px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; }
 
-    .controls-section { 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      gap: 15px; 
-      margin-bottom: 25px; 
-      flex-wrap: wrap; 
-    }
-    
-    .controls-section input, .controls-section select { 
-      padding: 10px 14px; 
-      border-radius: 8px; 
-      border: 1px solid var(--border-color); 
-      background: var(--card-bg); 
-      color: var(--text-color); 
-      outline: none; 
-    }
-    
-    .btn-secondary { 
-      background: #e11d48; 
-      color: white; 
-      border: none; 
-      padding: 10px 18px; 
-      border-radius: 8px; 
-      cursor: pointer; 
-      font-weight: 600; 
-    }
+    .controls-section { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+    .controls-section input, .controls-section select { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); outline: none; }
+    .btn-secondary { background: #e11d48; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; }
 
-    .subscription-banner { 
-      background: linear-gradient(135deg, #4f46e5, #3730a3); 
-      color: white; 
-      text-align: center; 
-      padding: 25px; 
-      border-radius: 12px; 
-      max-width: 1200px; 
-      margin: 0 auto 25px auto; 
-    }
-    
-    .btn-subscribe-banner { 
-      margin-top: 15px; 
-      background: #f59e0b; 
-      color: #0f172a; 
-      border: none; 
-      padding: 10px 22px; 
-      border-radius: 8px; 
-      font-size: 0.95rem; 
-      font-weight: 700; 
-      cursor: pointer; 
-    }
+    .subscription-banner { background: linear-gradient(135deg, #4f46e5, #3730a3); color: white; text-align: center; padding: 25px; border-radius: 12px; max-width: 1200px; margin: 0 auto 25px auto; }
+    .btn-subscribe-banner { margin-top: 15px; background: #f59e0b; color: #0f172a; border: none; padding: 10px 22px; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
 
-    .countdown-section { 
-      background: var(--card-bg); 
-      border: 1px solid var(--border-color); 
-      border-radius: 12px; 
-      max-width: 1200px; 
-      margin: 0 auto 30px auto; 
-      padding: 18px 24px; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      flex-wrap: wrap; 
-      gap: 15px; 
-    }
-    
-    .timer-boxes { 
-      display: flex; 
-      gap: 10px; 
-    }
-    
-    .time-box { 
-      background: #0f172a; 
-      color: #38bdf8; 
-      padding: 8px 14px; 
-      border-radius: 8px; 
-      text-align: center; 
-      min-width: 60px; 
-    }
-    
-    .time-box span { 
-      display: block; 
-      font-size: 1.2rem; 
-      font-weight: 700; 
-    }
-    
-    .time-box small { 
-      font-size: 0.65rem; 
-      color: #94a3b8; 
-      text-transform: uppercase; 
-    }
+    .countdown-section { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; max-width: 1200px; margin: 0 auto 30px auto; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+    .timer-boxes { display: flex; gap: 10px; }
+    .time-box { background: #0f172a; color: #38bdf8; padding: 8px 14px; border-radius: 8px; text-align: center; min-width: 60px; }
+    .time-box span { display: block; font-size: 1.2rem; font-weight: 700; }
+    .time-box small { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; }
 
-    .events-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-      gap: 25px; 
-      max-width: 1200px; 
-      margin: 0 auto; 
-    }
-    
-    .event-card { 
-      background: var(--card-bg); 
-      border: 1px solid var(--border-color); 
-      border-radius: 12px; 
-      overflow: hidden; 
-      display: flex; 
-      flex-direction: column; 
-      position: relative; 
-    }
-    
-    .fav-btn { 
-      position: absolute; 
-      top: 12px; 
-      right: 12px; 
-      background: rgba(255, 255, 255, 0.9); 
-      border: 1px solid #cbd5e1; 
-      border-radius: 50%; 
-      width: 38px; 
-      height: 38px; 
-      cursor: pointer; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-    }
-    
-    .fav-btn.active { 
-      background: #ffe4e6; 
-      border-color: #fda4af; 
-    }
-    
-    .event-card-img-container { 
-      width: 100%; 
-      height: 180px; 
-      background: #f1f5f9; 
-      overflow: hidden; 
-    }
-    
-    .event-card img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-    }
-    
-    .event-info { 
-      padding: 20px; 
-    }
-    
-    .badge { 
-      background: #e0e7ff; 
-      color: #3730a3; 
-      padding: 4px 10px; 
-      border-radius: 6px; 
-      font-size: 0.75rem; 
-      font-weight: 700; 
-    }
-    
-    .event-title { 
-      margin: 12px 0 6px 0; 
-      font-size: 1.15rem; 
-      font-weight: 700; 
-    }
-    
-    .speaker-link, .location-link { 
-      color: var(--accent-color); 
-      font-weight: 700; 
-      cursor: pointer; 
-      text-decoration: underline; 
-    }
-    
-    .card-footer { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      margin-top: 18px; 
-    }
-    
-    .price { 
-      font-weight: 800; 
-      font-size: 1.15rem; 
-      color: #10b981; 
-    }
-    
-    .btn-details { 
-      background: var(--accent-color); 
-      color: white; 
-      border: none; 
-      padding: 9px 15px; 
-      border-radius: 6px; 
-      cursor: pointer; 
-      font-weight: 600; 
-    }
-    
-    .btn-qa-icon, .btn-calendar-icon { 
-      background: var(--card-bg); 
-      border: 1px solid var(--border-color); 
-      color: var(--text-color); 
-      padding: 8px 12px; 
-      border-radius: 6px; 
-      cursor: pointer; 
-    }
+    .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+    .event-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+    .fav-btn { position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #cbd5e1; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+    .fav-btn.active { background: #ffe4e6; border-color: #fda4af; }
+    .event-card-img-container { width: 100%; height: 180px; background: #f1f5f9; overflow: hidden; }
+    .event-card img { width: 100%; height: 100%; object-fit: cover; }
+    .event-info { padding: 20px; }
+    .badge { background: #e0e7ff; color: #3730a3; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; }
+    .event-title { margin: 12px 0 6px 0; font-size: 1.15rem; font-weight: 700; }
+    .speaker-link, .location-link { color: var(--accent-color); font-weight: 700; cursor: pointer; text-decoration: underline; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; }
+    .price { font-weight: 800; font-size: 1.15rem; color: #10b981; }
+    .btn-details { background: var(--accent-color); color: white; border: none; padding: 9px 15px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    .btn-qa-icon, .btn-calendar-icon { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 12px; border-radius: 6px; cursor: pointer; }
 
-    /* 🤖 ტობის ვიჯეტი */
+    /* ===================================================
+       🤖 TOBY CLEAN & ANIMATED CONTAINER (NO EXTRA PROPS)
+    =================================================== */
     .toby-widget-container {
       position: fixed;
-      bottom: 10px;
-      left: 20px;
+      bottom: 12px;
+      left: 50px;
       z-index: 9999;
       display: flex;
       flex-direction: column;
       align-items: center;
       user-select: none;
-      transition: left 4s ease-in-out, opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: auto;
+      transition: left 0.1s linear, bottom 0.1s linear, transform 0.3s ease, opacity 0.4s ease;
+      transform-origin: bottom center;
     }
 
-    .toby-widget-container.facing-left { transform: scaleX(-1); }
-    .toby-widget-container.facing-left .toby-speech-bubble { transform: scaleX(-1); }
+    .toby-widget-container.facing-left .toby-svg-wrapper { transform: scaleX(-1); }
+    .toby-widget-container.facing-left .toby-speech-bubble { transform: scaleX(1); }
     .toby-widget-container.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
+    /* 💬 SPEECH BUBBLE */
     .toby-speech-bubble {
-      background: rgba(15, 23, 42, 0.92);
+      background: rgba(15, 23, 42, 0.94);
       backdrop-filter: blur(8px);
       color: #38bdf8;
       border: 1.5px solid #38bdf8;
-      padding: 10px 14px;
-      border-radius: 14px;
+      padding: 8px 12px;
+      border-radius: 12px;
       font-size: 0.82rem;
       font-weight: 600;
       margin-bottom: 8px;
-      max-width: 220px;
+      max-width: 200px;
       opacity: 0;
       transform: translateY(8px);
       pointer-events: none;
       transition: opacity 0.3s ease, transform 0.3s ease;
       text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      white-space: normal;
+      word-break: break-word;
     }
-
     .toby-speech-bubble.active { opacity: 1; transform: translateY(0); }
 
+    /* 🎨 SVG GRAPHICS */
     .toby-svg-wrapper {
-      width: 90px;
-      height: 105px;
+      width: 80px;
+      height: 95px;
       cursor: pointer;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.2));
+      transition: transform 0.3s ease;
     }
 
-    .mode-walk .leg-left { animation: walkLegLeft 0.8s infinite alternate ease-in-out; }
-    .mode-walk .leg-right { animation: walkLegRight 0.8s infinite alternate ease-in-out; }
+    /* Antenna Light */
+    .antenna-light { animation: antennaPulse 2s infinite alternate ease-in-out; }
+    @keyframes antennaPulse { 0% { fill: #ec4899; filter: drop-shadow(0 0 2px #ec4899); } 100% { fill: #f43f5e; filter: drop-shadow(0 0 8px #f43f5e); } }
+
+    .toby-widget-container.state-idle .toby-svg-wrapper { animation: idleBob 3s infinite ease-in-out; }
+    @keyframes idleBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+    /* Walking Animation */
+    .toby-widget-container.state-walking .leg-left { animation: walkLegLeft 0.4s infinite alternate ease-in-out; }
+    .toby-widget-container.state-walking .leg-right { animation: walkLegRight 0.4s infinite alternate ease-in-out; }
+    .toby-widget-container.state-walking .arm-left { animation: walkArmLeft 0.4s infinite alternate ease-in-out; }
+    .toby-widget-container.state-walking .arm-right { animation: walkArmRight 0.4s infinite alternate ease-in-out; }
 
     @keyframes walkLegLeft { 0% { transform: rotate(-20deg); transform-origin: 85px 167px; } 100% { transform: rotate(20deg); transform-origin: 85px 167px; } }
-    @keyframes walkLegRight { 0% { transform: rotate(20deg); transform-origin: 113px 167px; } 100% { transform: rotate(-20deg); transform-origin: 113px 167px; } }
+    @keyframes walkLegRight { 0% { transform: rotate(20deg); transform-origin: 108px 167px; } 100% { transform: rotate(-20deg); transform-origin: 108px 167px; } }
+    @keyframes walkArmLeft { 0% { transform: rotate(15deg); transform-origin: 65px 115px; } 100% { transform: rotate(-15deg); transform-origin: 65px 115px; } }
+    @keyframes walkArmRight { 0% { transform: rotate(-15deg); transform-origin: 135px 115px; } 100% { transform: rotate(15deg); transform-origin: 135px 115px; } }
 
-    .mode-bike .leg-left { animation: pedalLeft 0.6s infinite linear; }
-    .mode-bike .leg-right { animation: pedalRight 0.6s infinite linear; }
-    .mode-bike .bike-wheel { animation: spinWheel 0.6s infinite linear; transform-origin: center; }
+    /* Coding / Laptop Overlay */
+    .laptop-item { display: none; }
+    .toby-widget-container.state-coding .laptop-item { display: block; }
+    .toby-widget-container.state-coding .arm-left, .toby-widget-container.state-coding .arm-right { animation: typeKey 0.15s infinite alternate; }
+    @keyframes typeKey { 0% { transform: translateY(0); } 100% { transform: translateY(3px); } }
 
-    @keyframes pedalLeft { 0% { transform: translateY(0); } 50% { transform: translateY(6px); } 100% { transform: translateY(0); } }
-    @keyframes pedalRight { 0% { transform: translateY(6px); } 50% { transform: translateY(0); } 100% { transform: translateY(6px); } }
-    @keyframes spinWheel { 100% { transform: rotate(360deg); } }
+    /* Repairing Wrench & Spark */
+    .wrench-item, .spark-item { display: none; }
+    .toby-widget-container.state-repairing .wrench-item, .toby-widget-container.state-repairing .spark-item { display: block; }
+    .toby-widget-container.state-repairing .arm-right { animation: fixWrench 0.3s infinite alternate; transform-origin: 135px 115px; }
+    @keyframes fixWrench { 0% { transform: rotate(0deg); } 100% { transform: rotate(-35deg); } }
 
-    .mode-planting .shovel-item { display: block !important; animation: digGround 1s infinite alternate ease-in-out; transform-origin: 140px 140px; }
-    .mode-planting .tree-grow-item { display: block !important; animation: growTree 3s forwards ease-out; transform-origin: 160px 195px; }
+    /* Sleeping */
+    .toby-widget-container.state-sleeping .robot-eye { display: none; }
+    .sleep-eyes { display: none; }
+    .toby-widget-container.state-sleeping .sleep-eyes { display: block; }
+    .toby-widget-container.state-sleeping .toby-svg-wrapper { transform: translateY(10px) scaleY(0.92); }
 
-    @keyframes digGround { 0% { transform: rotate(0deg); } 100% { transform: rotate(-25deg); } }
-    @keyframes growTree { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+    /* Charging Glow */
+    .toby-widget-container.state-charging .antenna-light { animation: chargeGlow 0.3s infinite alternate; }
+    @keyframes chargeGlow { 0% { fill: #f59e0b; filter: drop-shadow(0 0 2px #f59e0b); } 100% { fill: #10b981; filter: drop-shadow(0 0 12px #10b981); } }
 
-    .toby-widget-container.shocked { animation: shockAnim 0.1s infinite alternate; }
-    @keyframes shockAnim { 0% { transform: translate(3px, 3px) rotate(4deg); } 100% { transform: translate(-3px, -3px) rotate(-4deg); } }
-    .toby-widget-container.shocked .robot-eye { display: none; }
-    .toby-widget-container.shocked .shock-eyes { display: block !important; }
+    /* Surprised / Spin / Jump Actions */
+    .toby-widget-container.action-jump { animation: jumpAnim 0.5s ease; }
+    @keyframes jumpAnim { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-35px); } }
 
-    .shock-eyes, .scooter-item, .bike-item, .laptop-item, .shovel-item, .tree-grow-item, .spark-item { display: none; }
+    .toby-widget-container.action-spin .toby-svg-wrapper { animation: spinAnim 0.6s ease; }
+    @keyframes spinAnim { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    .mode-scooter .scooter-item { display: block !important; }
-    .mode-bike .bike-item { display: block !important; }
-    .mode-coding .laptop-item { display: block !important; }
-    .mode-fixing .spark-item { display: block !important; }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .toby-widget-container { transform: scale(0.8); }
+    }
 
+    /* Modals CSS */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.6); justify-content: center; align-items: center; z-index: 10000; }
     .modal-content { background-color: var(--modal-bg); color: var(--text-color); padding: 30px; border-radius: 12px; width: 90%; max-width: 480px; position: relative; max-height: 90vh; overflow-y: auto; }
     .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; }
@@ -524,73 +319,65 @@
 
   <main class="events-grid" id="events-grid"></main>
 
-  <div class="toby-widget-container mode-coding" id="toby-widget">
+  <!-- 🤖 ANIMATED TOBY WIDGET -->
+  <div class="toby-widget-container state-idle" id="toby-widget">
     <div class="toby-speech-bubble" id="toby-bubble">
-      <span id="toby-text-msg">💻 მშვიდად ვმუშაობ საიტის კოდზე...</span>
+      <span id="toby-text-msg">👋 სალამი! მე ტობი ვარ.</span>
     </div>
     
     <div class="toby-svg-wrapper" id="toby-btn">
       <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g class="scooter-item">
-          <rect x="20" y="195" width="160" height="8" rx="4" fill="#EC4899"/>
-          <circle cx="35" cy="210" r="10" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
-          <circle cx="165" cy="210" r="10" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
-          <line x1="150" y1="195" x2="140" y2="120" stroke="#64748B" stroke-width="6"/>
-          <line x1="125" y1="120" x2="155" y2="120" stroke="#0F172A" stroke-width="6"/>
-        </g>
-
-        <g class="bike-item">
-          <circle class="bike-wheel" cx="45" cy="200" r="18" fill="none" stroke="#38BDF8" stroke-width="4"/>
-          <circle class="bike-wheel" cx="155" cy="200" r="18" fill="none" stroke="#38BDF8" stroke-width="4"/>
-          <path d="M 45 200 L 95 200 L 125 150 L 70 150 Z" fill="none" stroke="#F59E0B" stroke-width="4"/>
-          <line x1="125" y1="150" x2="155" y2="200" stroke="#F59E0B" stroke-width="4"/>
-        </g>
-
+        
+        <!-- 💻 Laptop Overlay -->
         <g class="laptop-item">
           <rect x="50" y="145" width="100" height="12" rx="3" fill="#94A3B8"/>
           <path d="M 60 145 L 70 105 L 130 105 L 140 145 Z" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
         </g>
 
-        <g class="shovel-item">
-          <rect x="135" y="100" width="8" height="60" fill="#78350F" transform="rotate(-20 135 100)"/>
-          <path d="M 140 155 L 165 170 L 150 185 Z" fill="#64748B"/>
+        <!-- 🔧 Wrench Overlay -->
+        <g class="wrench-item">
+          <path d="M 145 110 L 175 90 C 180 85 188 93 182 98 L 155 120 Z" fill="#94A3B8" stroke="#64748B" stroke-width="2"/>
         </g>
 
-        <g class="tree-grow-item">
-          <rect x="155" y="150" width="10" height="45" fill="#78350F"/>
-          <circle cx="160" cy="135" r="22" fill="#10B981"/>
-        </g>
-
+        <!-- ⚡ Sparks Overlay -->
         <g class="spark-item">
-          <path d="M 10 180 L 30 160 L 20 200 L 40 170" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 160 100 L 175 85 L 168 115 L 185 95" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
         </g>
 
+        <!-- Antenna -->
         <line x1="100" y1="35" x2="100" y2="15" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="100" cy="10" r="8" fill="#EC4899"/>
+        <circle class="antenna-light" cx="100" cy="10" r="8" fill="#EC4899"/>
 
+        <!-- Head -->
         <rect x="55" y="32" width="90" height="65" rx="22" fill="#38BDF8" stroke="#0284C7" stroke-width="4"/>
         <rect x="42" y="52" width="14" height="24" rx="5" fill="#64748B"/>
         <rect x="144" y="52" width="14" height="24" rx="5" fill="#64748B"/>
         
+        <!-- Screen Face -->
         <rect x="68" y="42" width="64" height="45" rx="12" fill="#0F172A"/>
-        <circle class="robot-eye" cx="84" cy="60" r="8" fill="#38BDF8"/>
-        <circle class="robot-eye" cx="116" cy="60" r="8" fill="#38BDF8"/>
+        <circle class="robot-eye eye-left" cx="84" cy="60" r="8" fill="#38BDF8"/>
+        <circle class="robot-eye eye-right" cx="116" cy="60" r="8" fill="#38BDF8"/>
 
-        <g class="shock-eyes">
-          <path d="M 78 54 L 90 66 M 90 54 L 78 66" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
-          <path d="M 110 54 L 122 66 M 122 54 L 110 66" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
+        <!-- Sleeping Eyes -->
+        <g class="sleep-eyes">
+          <path d="M 76 62 Q 84 68 92 62" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M 108 62 Q 116 68 124 62" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
         </g>
 
+        <!-- Cheeks & Mouth -->
         <circle cx="76" cy="72" r="5" fill="#EC4899" opacity="0.6"/>
         <circle cx="124" cy="72" r="5" fill="#EC4899" opacity="0.6"/>
         <path d="M 88 74 Q 100 82 112 74" stroke="#10B981" stroke-width="3" stroke-linecap="round" fill="none"/>
 
+        <!-- Body -->
         <rect x="65" y="102" width="70" height="65" rx="16" fill="#6366F1" stroke="#4338CA" stroke-width="4"/>
         <circle cx="100" cy="132" r="10" fill="#38BDF8"/>
 
+        <!-- Arms -->
         <path class="arm-left" d="M 65 115 Q 45 125 40 140" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
         <path class="arm-right" d="M 135 115 Q 155 125 160 140" stroke="#64748B" stroke-width="8" stroke-linecap="round" fill="none"/>
 
+        <!-- Legs -->
         <g class="leg-left">
           <rect x="80" y="167" width="12" height="25" rx="4" fill="#64748B"/>
           <rect x="72" y="188" width="24" height="10" rx="4" fill="#0F172A"/>
@@ -603,6 +390,7 @@
     </div>
   </div>
 
+  <!-- Modals -->
   <div id="robot-chat-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="close-robot-chat">&times;</span>
@@ -745,7 +533,6 @@
 
     const eventsGrid = document.getElementById('events-grid');
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
-    const toggleTobyVisibilityBtn = document.getElementById('toggle-toby-visibility-btn');
     const bookingModal = document.getElementById('booking-modal');
     const ticketModal = document.getElementById('ticket-modal');
     const qaModal = document.getElementById('qa-modal');
@@ -829,7 +616,15 @@
     document.getElementById('category-filter').addEventListener('change', filterEvents);
     document.getElementById('format-filter').addEventListener('change', filterEvents);
     document.getElementById('sort-select').addEventListener('change', filterEvents);
-    document.getElementById('search-input').addEventListener('input', filterEvents);
+
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      filterEvents();
+      if (typeof TobyEngine !== 'undefined' && TobyEngine.isAlive) {
+        if (e.target.value.length === 1) TobyEngine.say("🔎 მეც ვეძებ...");
+        if (e.target.value.length > 3) TobyEngine.say("👀 ვიპოვეთ!");
+      }
+    });
+
     document.getElementById('currency-select').addEventListener('change', filterEvents);
 
     eventsGrid.addEventListener('click', (e) => {
@@ -854,6 +649,7 @@
         document.getElementById('google-map-iframe').src = `https://maps.google.com/maps?q=${queryLoc}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
         document.getElementById('google-map-external-link').href = `https://www.google.com/maps/search/?api=1&query=${queryLoc}`;
         mapModal.style.display = 'flex';
+        if (typeof TobyEngine !== 'undefined') TobyEngine.say("📍 აქ უნდა წავიდეთ.");
       }
       if (e.target.classList.contains('fav-btn')) {
         const id = Number(e.target.dataset.id);
@@ -871,7 +667,12 @@
       }
       if (e.target.classList.contains('btn-details')) {
         const eventId = Number(e.target.dataset.id); selectedEventForBooking = allEvents.find(ev => ev.id === eventId);
-        if (selectedEventForBooking) { document.getElementById('modal-event-title').textContent = `დაჯავშნა: ${selectedEventForBooking.title}`; renderSeats(); bookingModal.style.display = 'flex'; }
+        if (selectedEventForBooking) {
+          document.getElementById('modal-event-title').textContent = `დაჯავშნა: ${selectedEventForBooking.title}`;
+          renderSeats();
+          bookingModal.style.display = 'flex';
+          if (typeof TobyEngine !== 'undefined') TobyEngine.say("🎟️ ადგილს ვამოწმებ...");
+        }
       }
     });
 
@@ -902,7 +703,10 @@
       document.getElementById('ticket-id-code').textContent = `#${currentActiveTicket.id}`;
       const qrContent = encodeURIComponent(`TicketID: ${currentActiveTicket.id} | Event: ${currentActiveTicket.eventTitle} | Holder: ${currentActiveTicket.userName}`);
       document.getElementById('ticket-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrContent}`;
-      bookingModal.style.display = 'none'; ticketModal.style.display = 'flex'; renderMyTickets();
+      bookingModal.style.display = 'none';
+      ticketModal.style.display = 'flex';
+      renderMyTickets();
+      if (typeof TobyEngine !== 'undefined') TobyEngine.say("🎉 დაჯავშნა დასრულდა!");
     });
 
     function startCountdownTimer() {
@@ -939,102 +743,256 @@
       myTickets.forEach(tkt => { const item = document.createElement('div'); item.style.padding = '8px'; item.style.borderBottom = '1px solid #eee'; item.innerHTML = `<h4>${tkt.eventTitle}</h4><p>📅 ${tkt.eventDate} | 💺 ${tkt.seatNum}</p>`; container.appendChild(item); });
     }
 
-    /* 🤖 ტობის მოძრაობისა და ქცევის ლოგიკა */
-    const tobyWidget = document.getElementById('toby-widget');
-    const tobyBtn = document.getElementById('toby-btn');
-    const tobyBubble = document.getElementById('toby-bubble');
-    const tobyTextMsg = document.getElementById('toby-text-msg');
+    /* ===================================================
+       🤖 TOBY AUTONOMOUS ENGINE (SELF-CONTAINED ANIMATIONS)
+    =================================================== */
+    const TobyState = {
+      IDLE: 'idle',
+      WALKING: 'walking',
+      CODING: 'coding',
+      REPAIRING: 'repairing',
+      CHARGING: 'charging',
+      SLEEPING: 'sleeping'
+    };
 
-    let isTobyVisible = true;
-    let currentX = 50;
-    let bubbleTimeout = null;
+    const TobyEngine = {
+      isAlive: true,
+      currentState: TobyState.IDLE,
+      currentX: 50,
+      currentY: 12,
+      facingLeft: false,
+      stateTimeout: null,
+      bubbleTimeout: null,
+      lastInteractionTime: Date.now(),
 
-    const techFacts = [
-      "💡 იცოდი? პირველი კომპიუტერული მაუსი 1964 წელს ხისგან დამზადდა!",
-      "🚀 ყოველდღიურად მსოფლიოში 300 მილიარდზე მეტი ელ-ფოსტა იგზავნება!",
-      "☕ Python-ის სახელი გველს კი არა, ბრიტანულ კომედიურ შოუს უკავშირდება!",
-      "🤖 ტერმინი 'რობოტი' ჩეხური სიტყვიდან 'robota' მოდის.",
-      "🔒 პირველი კომპიუტერული ვირუსი 'Creeper' 1971 წელს შეიქმნა.",
-      "🌐 პირველი ვებსაიტი ინტერნეტში 1991 წელს გაეშვა!"
-    ];
+      widget: document.getElementById('toby-widget'),
+      btn: document.getElementById('toby-btn'),
+      bubble: document.getElementById('toby-bubble'),
+      textMsg: document.getElementById('toby-text-msg'),
+      eyeLeft: document.querySelector('.eye-left'),
+      eyeRight: document.querySelector('.eye-right'),
 
-    const activeModes = ['mode-walk', 'mode-scooter', 'mode-bike', 'mode-fixing', 'mode-planting'];
+      init() {
+        this.bindEvents();
+        this.startIdleChecker();
+        this.runAutonomousLifeCycle();
+      },
 
-    toggleTobyVisibilityBtn.addEventListener('click', () => {
-      isTobyVisible = !isTobyVisible;
-      if (isTobyVisible) {
-        tobyWidget.classList.remove('hidden');
-        toggleTobyVisibilityBtn.classList.remove('off');
-        toggleTobyVisibilityBtn.textContent = '🤖 Toby: ON';
-        showBubbleMessage("👋 სალამი! დავბრუნდი!");
-      } else {
-        tobyWidget.classList.add('hidden');
-        toggleTobyVisibilityBtn.classList.add('off');
-        toggleTobyVisibilityBtn.textContent = '🤖 Toby: OFF';
-      }
-      playBeepSound();
-    });
+      say(text, duration = 4000) {
+        if (!this.isAlive) return;
+        this.textMsg.textContent = text;
+        this.bubble.classList.add('active');
+        clearTimeout(this.bubbleTimeout);
+        this.bubbleTimeout = setTimeout(() => {
+          this.bubble.classList.remove('active');
+        }, duration);
+      },
 
-    function showBubbleMessage(text) {
-      if (!isTobyVisible) return;
-      tobyTextMsg.textContent = text;
-      tobyBubble.classList.add('active');
-      clearTimeout(bubbleTimeout);
-      bubbleTimeout = setTimeout(() => { tobyBubble.classList.remove('active'); }, 4000);
-    }
+      setState(newState) {
+        if (!this.isAlive) return;
+        Object.values(TobyState).forEach(s => this.widget.classList.remove(`state-${s}`));
+        this.currentState = newState;
+        this.widget.classList.add(`state-${newState}`);
+      },
 
-    function runTobyAutonomousLife() {
-      if (!isTobyVisible || tobyWidget.classList.contains('shocked')) {
-        setTimeout(runTobyAutonomousLife, 4000);
-        return;
-      }
+      setPos(x, y = 12, durationMs = 1000) {
+        this.widget.style.transition = `left ${durationMs}ms linear, bottom ${durationMs}ms linear`;
+        this.widget.style.left = `${x}px`;
+        this.widget.style.bottom = `${y}px`;
+        this.currentX = x;
+        this.currentY = y;
+      },
 
-      // 50% შანსი: იაროს / ისეირნოს ეკრანზე
-      const nextMode = activeModes[Math.floor(Math.random() * activeModes.length)];
-      tobyWidget.classList.remove('mode-walk', 'mode-scooter', 'mode-bike', 'mode-fixing', 'mode-planting', 'mode-coding');
-      tobyWidget.classList.add(nextMode);
-
-      const screenWidth = Math.max(300, window.innerWidth - 140);
-
-      if (nextMode === 'mode-walk' || nextMode === 'mode-scooter' || nextMode === 'mode-bike') {
-        const targetX = Math.floor(Math.random() * screenWidth);
-        if (targetX < currentX) { 
-          tobyWidget.classList.add('facing-left'); 
-        } else { 
-          tobyWidget.classList.remove('facing-left'); 
+      setDirection(toX) {
+        if (toX < this.currentX) {
+          this.facingLeft = true;
+          this.widget.classList.add('facing-left');
+        } else if (toX > this.currentX) {
+          this.facingLeft = false;
+          this.widget.classList.remove('facing-left');
         }
+      },
+
+      walkTo(targetX, targetY = 12, speedPxPerSec = 100, onComplete) {
+        this.setState(TobyState.WALKING);
+        this.setDirection(targetX);
+
+        const dist = Math.abs(targetX - this.currentX);
+        const durationSec = Math.max(0.5, dist / speedPxPerSec);
+        const durationMs = durationSec * 1000;
+
+        this.setPos(targetX, targetY, durationMs);
+
+        clearTimeout(this.stateTimeout);
+        this.stateTimeout = setTimeout(() => {
+          this.setState(TobyState.IDLE);
+          if (onComplete) onComplete();
+        }, durationMs);
+      },
+
+      // 1. COMPUTER WORK
+      startCoding() {
+        this.say("💻 ცოტა კოდზე ვიმუშავებ...");
+        this.setState(TobyState.CODING);
+        playBeepSound();
         
-        tobyWidget.style.left = targetX + 'px'; 
-        currentX = targetX;
-
-        const fact = techFacts[Math.floor(Math.random() * techFacts.length)];
-        showBubbleMessage(fact);
-
-        setTimeout(runTobyAutonomousLife, 8000); // ყოველ 8 წამში იცვლის ადგილს
-      } else if (nextMode === 'mode-fixing') {
-        showBubbleMessage("🛠️ მოიცა, საიტის ამ ნაწილს მოვაძრობ...");
         setTimeout(() => {
-          tobyWidget.classList.add('shocked');
-          showBubbleMessage("⚡⚡ BZZZT! უი, სადენს შევეხე! ⚡⚡");
-          playBeepSound();
+          this.say("⌨️ ყველაფერი კარგად მიდის!");
           setTimeout(() => {
-            tobyWidget.classList.remove('shocked');
-            showBubbleMessage("✅ უცებ აღვადგინე კოდი!");
-            setTimeout(runTobyAutonomousLife, 8000);
-          }, 2000);
-        }, 2000);
-      } else if (nextMode === 'mode-planting') {
-        showBubbleMessage("⛏️ ჯერ მიწას ამოვთხრი ნიჩბით...");
-        setTimeout(() => {
-          showBubbleMessage("🌱 ახლა კი პატარა ნერგს დავრგავ!");
-          setTimeout(runTobyAutonomousLife, 8000);
-        }, 2500);
-      }
-    }
+            this.say("✅ მზადაა!");
+            this.setState(TobyState.IDLE);
+            setTimeout(() => this.runAutonomousLifeCycle(), 2000);
+          }, 3000);
+        }, 3000);
+      },
 
-    tobyBtn.addEventListener('click', () => {
-      playBeepSound();
-      robotChatModal.style.display = 'flex';
+      // 2. REPAIR MODE
+      startRepairing() {
+        this.say("🔧 ამას მალე მოვაგვარებ!");
+        this.setState(TobyState.REPAIRING);
+        playBeepSound();
+
+        setTimeout(() => {
+          this.say("⚡ თითქმის შევაკეთე...");
+          setTimeout(() => {
+            this.say("🎉 იდეალურად მუშაობს!");
+            this.setState(TobyState.IDLE);
+            setTimeout(() => this.runAutonomousLifeCycle(), 2000);
+          }, 2500);
+        }, 2500);
+      },
+
+      // 3. CHARGING
+      startCharging() {
+        this.say("⚡ ენერგიას ვივსებ...");
+        this.setState(TobyState.CHARGING);
+        playBeepSound();
+
+        setTimeout(() => {
+          this.say("🔋 100% ენერგია!");
+          this.setState(TobyState.IDLE);
+          setTimeout(() => this.runAutonomousLifeCycle(), 2000);
+        }, 3500);
+      },
+
+      // 4. SLEEP MODE
+      startSleeping() {
+        this.setState(TobyState.SLEEPING);
+        this.say("😴 ცოტა დავიღალე... Zzz");
+      },
+
+      wakeUp() {
+        this.lastInteractionTime = Date.now();
+        if (this.currentState === TobyState.SLEEPING) {
+          this.setState(TobyState.IDLE);
+          this.say("👀 გაღვიძება! მზად ვარ!");
+          setTimeout(() => this.runAutonomousLifeCycle(), 2000);
+        }
+      },
+
+      runAutonomousLifeCycle() {
+        if (!this.isAlive || this.currentState === TobyState.SLEEPING) return;
+
+        const activities = [
+          () => {
+            const targetX = Math.random() * (window.innerWidth - 180) + 40;
+            this.say("🤖 ყველაფერი კონტროლშია!");
+            this.walkTo(targetX, 12, 90, () => setTimeout(() => this.runAutonomousLifeCycle(), 3000));
+          },
+          () => this.startCoding(),
+          () => this.startRepairing(),
+          () => this.startCharging()
+        ];
+
+        const nextChoice = activities[Math.floor(Math.random() * activities.length)];
+        nextChoice();
+      },
+
+      bindEvents() {
+        window.addEventListener('mousemove', (e) => {
+          this.wakeUp();
+          
+          if (!this.isAlive || this.currentState === TobyState.SLEEPING) return;
+
+          const widgetRect = this.widget.getBoundingClientRect();
+          const robotCenterX = widgetRect.left + 40;
+          const robotCenterY = widgetRect.top + 40;
+
+          const dx = (e.clientX - robotCenterX) / window.innerWidth;
+          const dy = (e.clientY - robotCenterY) / window.innerHeight;
+
+          const offsetX = Math.max(-3, Math.min(3, dx * 6));
+          const offsetY = Math.max(-3, Math.min(3, dy * 6));
+
+          if (this.eyeLeft && this.eyeRight) {
+            this.eyeLeft.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            this.eyeRight.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+          }
+
+          const distance = Math.hypot(e.clientX - robotCenterX, e.clientY - robotCenterY);
+          if (distance < 90 && Math.random() < 0.02 && this.currentState === TobyState.IDLE) {
+            this.say("👀 გხედავ!");
+          }
+        });
+
+        this.btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.wakeUp();
+          playBeepSound();
+
+          const reactions = ['jump', 'spin'];
+          const randomAction = reactions[Math.floor(Math.random() * reactions.length)];
+
+          this.widget.classList.add(`action-${randomAction}`);
+          setTimeout(() => this.widget.classList.remove(`action-${randomAction}`), 800);
+
+          const GeorgianPhrases = [
+            "👋 სალამი!",
+            "🤖 რით დაგეხმარო?",
+            "☕ პატარა შესვენება მჭირდება.",
+            "🎉 ყველაფერი შესანიშნავადაა!"
+          ];
+          this.say(GeorgianPhrases[Math.floor(Math.random() * GeorgianPhrases.length)]);
+
+          setTimeout(() => {
+            robotChatModal.style.display = 'flex';
+          }, 900);
+        });
+
+        document.getElementById('toggle-toby-visibility-btn').addEventListener('click', () => {
+          this.isAlive = !this.isAlive;
+          const toggleBtn = document.getElementById('toggle-toby-visibility-btn');
+          
+          if (this.isAlive) {
+            this.widget.classList.remove('hidden');
+            toggleBtn.classList.remove('off');
+            toggleBtn.textContent = '🤖 Toby: ON';
+            this.say("👋 სალამი! დავბრუნდი!");
+            this.runAutonomousLifeCycle();
+          } else {
+            this.widget.classList.add('hidden');
+            toggleBtn.classList.add('off');
+            toggleBtn.textContent = '🤖 Toby: OFF';
+            clearTimeout(this.stateTimeout);
+          }
+          playBeepSound();
+        });
+      },
+
+      startIdleChecker() {
+        setInterval(() => {
+          if (this.isAlive && Date.now() - this.lastInteractionTime > 30000 && this.currentState !== TobyState.SLEEPING) {
+            this.startSleeping();
+          }
+        }, 5000);
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      filterEvents();
+      startCountdownTimer();
+      renderMyTickets();
+      TobyEngine.init();
     });
 
     document.getElementById('robot-chat-form').onsubmit = (e) => {
@@ -1066,13 +1024,6 @@
         botMsg.textContent = reply; container.appendChild(botMsg); container.scrollTop = container.scrollHeight;
       }, 400);
     };
-
-    filterEvents();
-    startCountdownTimer();
-    renderMyTickets();
-
-    // ტობის ავტომატური მოძრაობის გაშვება (ყოველ 8 წამში)
-    setTimeout(runTobyAutonomousLife, 1000);
   </script>
 </body>
 </html>
